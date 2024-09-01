@@ -32,9 +32,9 @@ const IconList = () => {
                 <div>
                     {icons.length > 0 ? (
                         icons.map((icon, index) => {
-                            // مسیر آیکون‌ها را به صورت صحیح بسازید
+                            // حذف src/ از مسیر
                             const iconPath = icon.path.replace(/^src\//, '');
-                            const imageUrl = `http://localhost:3001${iconPath}`;
+                            const imageUrl = `http://localhost:3001/icons/${iconPath}`;
                             
                             return (
                                 <div key={index}>
