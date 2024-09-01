@@ -1,0 +1,8 @@
+.item
+{
+    background-color:var(--neutral-bg-1-default) ;
+
+    &:hover{
+        background-color:var(--neutral-bg-1-hover) ;
+    }
+}

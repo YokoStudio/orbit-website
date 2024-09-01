@@ -1,25 +1,25 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import IconList from './component/IconList';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <header>
+        <div> {/* icon-number */}
+            تعداد آیکون‌ها: 100 {/* این رو به طور نمونه گذاشتم */}
+        </div>
+        <div> {/* search */}
+            <input type="text" placeholder="جستجو..." />
+        </div>
+        
+    </header>
+
+    <div> {/* main-view */}
+        <IconList/> {/* نمایش دسته‌بندی‌ها */}
     </div>
+</div>
   );
 }
 
