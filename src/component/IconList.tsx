@@ -23,27 +23,36 @@ const IconList = () => {
 
     return (
         <div>
-            <h1>لیست آیکون‌ها</h1>
             {loading ? (
-                <p>در حال بارگذاری...</p>
+                <p>Loading...</p>
             ) : error ? (
                 <p>{error}</p>
             ) : (
-                <div>
+                <div className='list'>
                     {icons.length > 0 ? (
                         icons.map((icon, index) => {
                             // حذف src/ از مسیر
                             const iconPath = icon.path.replace(/^src\//, '');
                             const imageUrl = `http://localhost:3001/icons/${iconPath}`;
                             
+                            // حذف .svg از نام آیکون
+                            const iconName = icon.name.replace(/\.svg$/, '');
+
                             return (
-                                <div key={index}>
-                                    <img 
-                                        src={imageUrl} 
-                                        alt={icon.name} 
-                                    />
-                                    <p>{icon.name}</p>
-                                </div>
+                                <a 
+                                    href={imageUrl} 
+                                    download 
+                                    className='item' 
+                                    key={index}
+                                >
+                                    <div className='icon-view'>
+                                        <img 
+                                            src={imageUrl} 
+                                            alt={iconName} 
+                                        />
+                                        <p>{iconName}</p>
+                                    </div>
+                                </a>
                             );
                         })
                     ) : (

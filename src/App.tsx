@@ -5,7 +5,7 @@ import IconList from './component/IconList';
 
 function App() {
   return (
-    <div className="App">
+    <div>
     <header>
         <div> {/* icon-number */}
             تعداد آیکون‌ها: 100 {/* این رو به طور نمونه گذاشتم */}
@@ -24,3 +24,4 @@ function App() {
 }
 
 export default App;
+
