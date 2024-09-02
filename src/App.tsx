@@ -1,27 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
+// import React, { useState } from 'react';
+// import './App.css';
+// import IconList from './component/IconList/IconList';
+// import OrHeader from './component/OrHeader/OrHeader';
+// import OrSlider from './component/OrSlider/OrSlider';
+
+// function App() {
+//   const [searchTerm, setSearchTerm] = useState<string>('');
+
+//   const handleSearch = (term: string) => {
+//     setSearchTerm(term);
+//     // در اینجا می‌توانید نتایج جستجو را مدیریت کنید
+//   };
+
+//   return (
+//     <div>
+//       <div>
+//         <OrHeader onSearch={handleSearch} />{/* Header */}
+//       </div>
+//       <div>
+//         <OrSlider value={borderSize} onChange={handleSliderChange} />
+//       </div>
+//       <div> {/* main-view */}
+//         <IconList searchTerm={searchTerm} borderSize={borderSize} /> {/* نمایش دسته‌بندی‌ها */}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default App;
+import React, { useState } from 'react';
 import './App.css';
-import IconList from './component/IconList';
+import IconList from './component/IconList/IconList';
+import OrHeader from './component/OrHeader/OrHeader';
+import Slider from './component/OrSlider/OrSlider';
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [borderSize, setBorderSize] = useState<number>(1);
+
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+  };
+
+  const handleSliderChange = (value: number) => {
+    setBorderSize(value);
+  };
+
   return (
     <div>
-    <header>
-        <div> {/* icon-number */}
-            تعداد آیکون‌ها: 100 {/* این رو به طور نمونه گذاشتم */}
-        </div>
-        <div> {/* search */}
-            <input type="text" placeholder="جستجو..." />
-        </div>
-        
-    </header>
-
-    <div> {/* main-view */}
-        <IconList/> {/* نمایش دسته‌بندی‌ها */}
+      <OrHeader onSearch={handleSearch} />
+      <Slider value={borderSize} onChange={handleSliderChange} />
+      <IconList searchTerm={searchTerm} borderSize={borderSize} />
     </div>
-</div>
   );
 }
 
 export default App;
-
