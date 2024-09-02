@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './OrCheckboxFilter.scss';
+import OrButton from '../OrButton/OrButton';
 
 interface OrCheckboxFilterProps {
     folders: string[]; // اضافه کردن folders
@@ -27,7 +28,7 @@ const OrCheckboxFilter: React.FC<OrCheckboxFilterProps> = ({
 
     return (
         <div className='filter-container'>
-            <button onClick={handleReset} className='reset-button'>Reset</button>
+            <OrButton onClick={handleReset} variant='secondary' appearance='outline' text='reset'></OrButton>
             {folders.map(folder => (
                 <div key={folder} className='checkbox-container'>
                     <input

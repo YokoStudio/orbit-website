@@ -1,31 +1,38 @@
-.item
-{   
-    
-}
-.list {
-  width: 100%;
+@import '../../bace/color-light.scss';
+@import '../../bace/space.scss';
+@import '../../bace/radius.scss';
 
-    
-        a{
-            text-align: center;
-            vertical-align: middle;
-            background-color: white ;
-            border: black 1px solid;
-            border-radius: 16px;
-            margin: 4px;
-            padding: 24px;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
-            
+.list{
+    display: flex;
+    flex-wrap: wrap ;
+    gap: 16px;
+    flex: 1 1 100%;
+    padding: $space6;
 
-        
-            &:hover{
-                background-color: rgb(231, 231, 231) ;
-            }
-            
+    a {
+        flex: 1 1 100px;
+        text-align: center;
+        vertical-align: middle;
+        background-color: white ;
+        border: black 1px solid;
+        border-radius: 16px;
+        margin: 4px;
+        padding: 24px;
+        min-width: 50px;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+        height: 100px;
+    
+        &:hover{
+            background-color: rgb(231, 231, 231) ;
         }
+        
+      }
 }
 .icon-view{
-        
-    
+    img{
+        max-width: 100px;
+        height: 70px;
+    }
 }

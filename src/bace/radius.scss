@@ -1,10 +1,9 @@
-@import url(./_directory.scss);
-:root{
---radius0: var(--radius-0);
---radius0-5: var(--radius-0-125);
---radius1: var(--radius-0-25);
---radius2: var(--space-0-50);
---radius3: var(--radius-0-75);
---radius4: var(--radius-1);
---circular: var(--radius-6);
-}
+@import './_directory.scss';
+
+$radius1: $radius-0-25;
+$radius0-5: $radius-0-125;
+$radius0: $radius-0;
+$radius2: $space-0-50;
+$radius3: $radius-0-75;
+$radius4: $radius-1;
+$circular: $radius-6;

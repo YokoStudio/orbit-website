@@ -1,0 +1,158 @@
+@import '../../bace/color-light.scss';
+@import '../../bace/space.scss';
+@import '../../bace/radius.scss';
+
+.button 
+{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: $space2;
+    border-radius: $radius1;
+    transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+    height: fit-content;
+   
+}
+
+.primary{
+
+    &.fill{
+        background-color: $brand-bg-1-default;
+
+        &:hover{
+            background-color: $brand-bg-1-hover;
+        }
+
+        &.press{
+            background-color: $brand-bg-1-press;
+        }
+        
+        &.disable{
+            background-color: $brand-bg-1-disable;
+        }
+
+    }
+    
+    &.outline{
+        background-color: $brand-bg-subtle-1-default;
+        border: 1px solid $brand-border-1-default;
+
+        &:hover{
+            background-color: $brand-bg-subtle-1-hover;
+            border-color: $brand-border-1-hover;
+        }
+
+        &.press{
+            background-color: $brand-bg-subtle-1-press;
+            border-color: $brand-border-1-press;
+        }
+
+        &.disable{
+            background-color: $brand-bg-subtle-1-disable;
+            border-color: $brand-border-1-disable;
+        }
+
+    }
+    
+    &.ghost{
+        background-color: $brand-bg-subtle-1-default;
+        color: $brand-fg-1-default;
+
+        &:hover{
+            background-color: $brand-bg-subtle-1-hover;
+            color: $brand-fg-1-hover;
+        }
+        
+        &.press{
+            background-color: $brand-bg-subtle-1-press;
+            color: $brand-fg-1-press;
+        }
+
+        &.disable{
+            background-color: $brand-bg-subtle-1-disable;
+            color: $brand-fg-1-disable;
+        }
+    }
+}
+.secondary{
+    border: 0px;
+    &.fill{
+        background-color: $neutral-bg-10-default;
+        color: $neutral-fg-10-default;
+
+        &:hover{
+            background-color: $neutral-bg-10-hover;
+        }
+
+        &.press{
+            background-color: $neutral-bg-10-press;
+        }
+
+        &.disable{
+            background-color: $neutral-bg-10-disable;
+        }
+    }
+    
+    &.outline{
+        background-color: $neutral-bg-subtle-bold-1-default;
+        border: 1px solid $neutral-border-1-default;
+
+        &:hover{
+            background-color: $neutral-bg-subtle-bold-1-hover;
+            border-color: $neutral-border-1-hover;
+        }
+
+        &.press{
+            background-color: $neutral-bg-subtle-bold-1-press;
+            border-color: $neutral-border-1-press;
+        }
+
+        &.disable{
+            background-color: $neutral-bg-subtle-bold-1-disable;
+            border-color: $neutral-border-1-disable;
+        }
+    }
+    
+    &.ghost{
+        color: $neutral-fg-1-default;
+
+        &:hover{
+            color: $neutral-fg-1-hover;
+        }
+
+        &.press{
+            color: $neutral-fg-1-press;
+        }
+
+        &.disable{
+            color: $neutral-fg-1-disable;
+        }
+    }
+}
+
+
+
+.xs{
+   
+}
+
+.sm{
+
+} 
+
+.md{
+
+}
+
+.lg{
+    height: 52px;
+    padding-left: $space6;
+    padding-right: $space6;
+    padding-top: $space4;
+    padding-bottom: $space4;
+}
+
+.xl{
+
+}

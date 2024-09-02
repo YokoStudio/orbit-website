@@ -1,6 +1,6 @@
 import React, { ChangeEvent, ReactNode } from "react";
 import './OrHeader.scss';
-import OrButton from "../Button/OrButton";
+import OrButton from "../OrButton/OrButton";
 
 // تعریف نوع Props
 interface OrHeaderProps {
@@ -23,15 +23,19 @@ const OrHeader: React.FC<OrHeaderProps> = ({ children, onSearch }) => {
                 <h1>Icon Pack</h1> 
                 <p>1245 Icons</p>
             </div>
-            <div>
+            <div className="search-div">
+                <div className="search-box" >
                 <input 
+                    className="body1"
                     type="text" 
-                    placeholder="جستجو..." 
+                    placeholder="Search..." 
                     onChange={handleSearchChange} // متصل کردن تابع جستجو
                 />
+                </div>
             </div>
             {children && <div className="children-container">{children}</div>}
-            <OrButton text="test"/>
+            <OrButton variant='secondary' appearance="fill" size="lg" text="Get started"/>
+            <OrButton variant='secondary' appearance="outline" size="lg" text="Download all"/>
         </div>
     );
 };

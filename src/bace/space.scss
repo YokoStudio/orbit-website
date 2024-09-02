@@ -1,16 +1,15 @@
-@import url(./_directory.scss);
-:root{
---space0: var(--space-0);
---space0-5: var(--space-0-125);
---space1: var(--space-0-25);
---space2: var(--space-0-50);
---space3: var(--space-0-75);
---space4: var(--space-1);
---space6: var(--space-1-5);
---space8: var(--space-2);
---space10: var(--space-2-5);
---space12: var(--space-3);
---space16: var(--space-4);
---space20: var(--space-5);
---space24: var(--space-6);
-}
+@import './_directory.scss';
+
+$space0: $space-0;
+$space0-5: $space-0-125;
+$space1: $space-0-25;
+$space2: $space-0-50;
+$space3: $space-0-75;
+$space4: $space-1;
+$space6: $space-1-5;
+$space8: $space-2;
+$space10: $space-2-5;
+$space12: $space-3;
+$space16: $space-4;
+$space20: $space-5;
+$space24: $space-6;

@@ -1,4 +1,6 @@
 import React from "react";
+import './OrButton.scss';
+import '../../bace/type-style.scss';
 
 interface OrButtonProps { 
     text: string;
@@ -7,8 +9,7 @@ interface OrButtonProps {
     variant?: 'primary' | 'secondary' | 'tertiary';
     appearance?: 'fill' | 'outline' | 'ghost';
     icon?: React.ReactNode;
-    size?: 'xs' |'sm' |'md' | 'lg' | 'xl';
-
+    size?: 'xs' |'sm' |'md' | 'lg' | 'xl'; 
 }
 
 const OrButton: React.FC<OrButtonProps> = ({ 
@@ -20,7 +21,7 @@ const OrButton: React.FC<OrButtonProps> = ({
         icon, size = 'md' 
     }) => { 
         
-    const buttonClassName = `button-${variant} button-${appearance} button-${size}`;
+    const buttonClassName = `button ${variant} ${appearance} ${size} body1`;
 
     return (
         <button 

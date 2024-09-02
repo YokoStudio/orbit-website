@@ -1,34 +1,56 @@
 
-.list{
-    display: flex;
-    flex-wrap: wrap ;
-    gap: 16px;
-    flex: 1 1 100%;
+@import '../../bace/color-light.scss';
+@import '../../bace/radius.scss';
+@import '../../bace/space.scss';
 
-    a {
-        flex: 1 1 100px;
-        text-align: center;
-        vertical-align: middle;
-        background-color: white ;
-        border: black 1px solid;
-        border-radius: 16px;
-        margin: 4px;
-        padding: 24px;
-        min-width: 50px;
-        width: 100%;
-        cursor: pointer;
-        transition: background-color 0.3s ease-in-out;
-        height: 100px;
+.header{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+    flex-grow: 1;
+    gap: 16px;;
+    background-color: $neutral-bg-1-default;
+    border-bottom: 1px solid $neutral-border-7-default;
+    padding-top:$space6;
+    padding-bottom: $space6;
+    padding-left: $space8;
+    padding-right: $space8;
     
-        &:hover{
-            background-color: rgb(231, 231, 231) ;
-        }
-        
-      }
+    .search-div{
+        flex-grow: 1;
+        align-items: center;
+        display: flex;
+    }
+
 }
-.icon-view{
-    img{
-        max-width: 100px;
-        height: 70px;
+
+
+.search-box
+{
+    display: flex;
+    flex-direction: column;
+    background-color: $neutral-bg-1-default;
+    border: 1px solid $neutral-border-6-default;
+    padding: $space3 $space2;
+    width: 100%;
+    height: 38px;
+    color: $neutral-fg-6-default;
+    outline: none;
+    border-radius: $radius1;
+    cursor:text;
+
+    input{
+        flex-grow: 1;
+        padding: $space0-5 $space0;
+        border: 0px;
+
+        &:hover{
+
+            border: 0px solid transparent;
+        }
+
+        &:focus-visible{
+            outline: 0px solid transparent;
+        }
     }
 }
