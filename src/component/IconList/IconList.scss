@@ -5,10 +5,10 @@
 .list{
     display: flex;
     flex-wrap: wrap ;
-    gap: 16px;
+    gap: 8px;
     flex: 1 1 100%;
 
-    a {
+    a{
         flex: 1 1 100px;
         text-align: center;
         vertical-align: middle;
