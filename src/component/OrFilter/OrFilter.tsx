@@ -3,6 +3,7 @@ import OrSlider from '../OrSlider/OrSlider';
 import OrSwitch from '../OrSwitch/OrSwitch';
 import OrCheckboxFilter from '../OrCheckboxFilter/OrCheckboxFilter'; // اضافه کردن OrCheckboxFilter
 import './OrFilter.scss';
+import '../../bace/style.scss';
 
 // تعریف نوع Props
 interface OrFilterProps {
@@ -28,15 +29,25 @@ const OrFilter: React.FC<OrFilterProps> = ({
 }) => {
     return (
         <div className='or-filter'>
-            <OrSlider value={borderSize} onChange={onSliderChange} />
-            <OrSwitch checked={switchChecked} onChange={onSwitchChange} />
-            {/* فیلتر پوشه‌ها */}
+            <div>
+                <div>
+                    <img src='src/logo.png' alt='Logo' />
+                    <span className='h6-strong'>Customize</span>
+                </div> 
+                <div>
+                <OrSwitch checked={switchChecked} onChange={onSwitchChange} />
+                <OrSlider value={borderSize} onChange={onSliderChange} />
+                </div>
+            </div>
+            <div>
             <OrCheckboxFilter 
                 folders={folders}
                 selectedFolders={selectedFolders}
                 onFolderChange={onFolderChange}
                 onResetFilters={onResetFilters}
             />
+            </div>
+            
         </div>
     );
 };

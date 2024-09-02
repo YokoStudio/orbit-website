@@ -1,17 +1,30 @@
 @import '../../bace/style.scss';
 
+form{
+    flex-grow: 1;
+    display: flex;
+}
 .search-input{
+    background-color: $neutral-bg-1-default;
     flex-grow: 1;
     padding: $space0-5 $space0;
     border: 0px;
     height: 46px;
-
+    border: 1px solid black;
+    padding-left: 48px;
+    border-radius: $radius1;
+    transition: background-color 0.2s ease-in-out;
+    
     &:hover{
-
-        border: 0px solid transparent;
+        background-color: $neutral-bg-1-hover ;
     }
 
-    &:focus-visible{
-        outline: 0px solid transparent;
-    }
+    
+    
+}
+
+.input-icon{
+    position: absolute;
+    margin: 18px;
+    width: 16px;
 }

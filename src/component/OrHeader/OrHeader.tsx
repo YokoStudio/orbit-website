@@ -27,16 +27,7 @@ const OrHeader: React.FC<OrHeaderProps> = ({ children, onSearch }) => {
                 <span className="b1">1245 Icons</span>
             </div>
             <div className="search-div">
-                    <div className="search-box" >
-                    <img src={SearchIcon} alt="search" width="16px" height="16px"/>
-                    <input 
-                        className="body1"
-                        type="text" 
-                        placeholder="Search..." 
-                        onChange={handleSearchChange} // متصل کردن تابع جستجو
-                    />
-                    </div>
-                    {/* <OrSearchInput onChange={handleSearchChange} /> */}
+                    <OrSearchInput onChange={handleSearchChange} placeholder="Search..." size="lg" />
             </div>
             {children && <div className="children-container">{children}</div>}
             <OrButton variant='secondary' appearance="fill" size="lg" text="Get started"/>
