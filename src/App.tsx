@@ -3,6 +3,7 @@ import './App.css';
 import IconList from './component/IconList/IconList';
 import OrHeader from './component/OrHeader/OrHeader';
 import OrFilter from './component/OrFilter/OrFilter';
+import './style.scss'
 
 function App() {
     const [searchTerm, setSearchTerm] = useState<string>('');
@@ -32,7 +33,7 @@ function App() {
     };
 
     return (
-        <div>
+        <div className='main'>
             <OrFilter
                 borderSize={borderSize}
                 onSliderChange={handleSliderChange}
@@ -43,6 +44,7 @@ function App() {
                 onFolderChange={handleFolderChange}
                 onResetFilters={handleReset}
             />
+            <div className='view'>
             <OrHeader onSearch={handleSearch} />
             <IconList
                 searchTerm={searchTerm}
@@ -50,6 +52,8 @@ function App() {
                 switchChecked={switchChecked}
                 selectedFolders={selectedFolders} // ارسال پراپرتی جدید به IconList
             />
+            </div>
+            
         </div>
     );
 }

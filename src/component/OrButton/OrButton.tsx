@@ -21,7 +21,7 @@ const OrButton: React.FC<OrButtonProps> = ({
         icon, size = 'md' 
     }) => { 
         
-    const buttonClassName = `button ${variant} ${appearance} ${size} body1`;
+    const buttonClassName = `button ${variant} ${appearance} ${size} b1`;
 
     return (
         <button 

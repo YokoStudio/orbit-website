@@ -1,3 +1,12 @@
+@import '../../bace/style.scss';
+
 .or-filter {
+    background-color: $neutral-bg-1-default;
+    border-right: 1px solid $neutral-border-7-default;
+    width: 350px;
+    height: auto;
+    position: sticky;
+    top: 0px;
+    
     
 }

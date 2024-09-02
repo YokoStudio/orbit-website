@@ -1,0 +1,17 @@
+@import '../../bace/style.scss';
+
+.search-input{
+    flex-grow: 1;
+    padding: $space0-5 $space0;
+    border: 0px;
+    height: 46px;
+
+    &:hover{
+
+        border: 0px solid transparent;
+    }
+
+    &:focus-visible{
+        outline: 0px solid transparent;
+    }
+}

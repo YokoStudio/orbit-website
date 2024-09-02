@@ -1,16 +1,16 @@
-@import '../../bace/color-light.scss';
-@import '../../bace/space.scss';
-@import '../../bace/radius.scss';
+@import '../../bace/style.scss';
 
-.list{
+.icon-list{
+    padding: $space8;
     display: flex;
+
+}
+.item{
+    flex: 1 1 100px;
     flex-wrap: wrap ;
-    gap: 16px;
-    flex: 1 1 100%;
-    padding: $space6;
+    gap: $space3;
 
     a {
-        flex: 1 1 100px;
         text-align: center;
         vertical-align: middle;
         background-color: white ;
@@ -31,8 +31,8 @@
       }
 }
 .icon-view{
-    img{
-        max-width: 100px;
-        height: 70px;
-    }
+   
+        width: 40px;
+        height: 40px;
+    
 }

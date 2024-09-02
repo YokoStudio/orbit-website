@@ -1,7 +1,5 @@
 
-@import '../../bace/color-light.scss';
-@import '../../bace/radius.scss';
-@import '../../bace/space.scss';
+@import '../../bace/style.scss';
 
 .header{
    display: flex;
@@ -15,6 +13,8 @@
     padding-bottom: $space6;
     padding-left: $space8;
     padding-right: $space8;
+    position: sticky;
+    top: 0px;
     
     .search-div{
         flex-grow: 1;
@@ -24,25 +24,26 @@
 
 }
 
-
 .search-box
 {
     display: flex;
-    flex-direction: column;
     background-color: $neutral-bg-1-default;
     border: 1px solid $neutral-border-6-default;
     padding: $space3 $space2;
     width: 100%;
-    height: 38px;
+    height: 26px;
     color: $neutral-fg-6-default;
     outline: none;
     border-radius: $radius1;
     cursor:text;
+    align-items: center;
+    gap: $space2;
 
     input{
         flex-grow: 1;
         padding: $space0-5 $space0;
         border: 0px;
+        height: 46px;
 
         &:hover{
 
@@ -53,4 +54,30 @@
             outline: 0px solid transparent;
         }
     }
+}
+
+.icon-pack-title{
+    display: flex;
+    width: 112px;   
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: $space0;
+    
+
+    span{
+        &t3-strong{
+            color: $neutral-fg-1-default;
+        }
+        
+        &.b1{
+            color: $neutral-fg-4-default;
+        }
+        
+    }
+    
+   
+}
+.logo{
+    padding: $space0 $space4;
 }

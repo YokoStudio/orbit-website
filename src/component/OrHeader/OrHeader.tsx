@@ -1,6 +1,9 @@
 import React, { ChangeEvent, ReactNode } from "react";
 import './OrHeader.scss';
 import OrButton from "../OrButton/OrButton";
+import OrSearchInput from "../OrSearchInput/OrSearchInput";
+import Logo from '../../assets/logo.svg';
+import SearchIcon from '../../assets/icons/search.svg';
 
 // تعریف نوع Props
 interface OrHeaderProps {
@@ -16,22 +19,24 @@ const OrHeader: React.FC<OrHeaderProps> = ({ children, onSearch }) => {
 
     return (
         <div className='header'>
-            <div>
-                <img src="logo.png" alt="logo" />
+            <div className="logo">
+                <a href="#"><img src={Logo} alt="logo" width="63px" height="47px"/></a>
             </div>
-            <div> 
-                <h1>Icon Pack</h1> 
-                <p>1245 Icons</p>
+            <div className="icon-pack-title"> 
+                <span className="t1-strong">Icon Pack</span> 
+                <span className="b1">1245 Icons</span>
             </div>
             <div className="search-div">
-                <div className="search-box" >
-                <input 
-                    className="body1"
-                    type="text" 
-                    placeholder="Search..." 
-                    onChange={handleSearchChange} // متصل کردن تابع جستجو
-                />
-                </div>
+                    <div className="search-box" >
+                    <img src={SearchIcon} alt="search" width="16px" height="16px"/>
+                    <input 
+                        className="body1"
+                        type="text" 
+                        placeholder="Search..." 
+                        onChange={handleSearchChange} // متصل کردن تابع جستجو
+                    />
+                    </div>
+                    {/* <OrSearchInput onChange={handleSearchChange} /> */}
             </div>
             {children && <div className="children-container">{children}</div>}
             <OrButton variant='secondary' appearance="fill" size="lg" text="Get started"/>
