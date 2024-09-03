@@ -4,6 +4,8 @@ import OrSwitch from '../OrSwitch/OrSwitch';
 import OrCheckboxFilter from '../OrCheckboxFilter/OrCheckboxFilter'; // اضافه کردن OrCheckboxFilter
 import './OrFilter.scss';
 import '../../bace/style.scss';
+import TuneIcon from '../../assets/icons/tune.svg';
+import OrButton from '../OrButton/OrButton';
 
 // تعریف نوع Props
 interface OrFilterProps {
@@ -15,6 +17,8 @@ interface OrFilterProps {
     selectedFolders: string[];
     onFolderChange: (folders: string[]) => void;
     onResetFilters: () => void;
+    toggleFilter: () => void; 
+    isFilterVisible: boolean; 
 }
 
 const OrFilter: React.FC<OrFilterProps> = ({
@@ -25,21 +29,29 @@ const OrFilter: React.FC<OrFilterProps> = ({
     folders,
     selectedFolders,
     onFolderChange,
-    onResetFilters
+    onResetFilters,
+    toggleFilter,
+    isFilterVisible,
+
 }) => {
     return (
-        <div className='or-filter'>
-            <div>
-                <div>
-                    <img src='src/logo.png' alt='Logo' />
+        <div className='or-filter' id='my-filter'>
+              
+            <div className='filter-header'>
+                    <img src={TuneIcon} alt='Logo' width='32px' height='32px' />
                     <span className='h6-strong'>Customize</span>
+                    <OrButton 
+                        text={isFilterVisible ? "Hide Filter" : "Show Filter"}
+                        onClick={toggleFilter}
+                    />
                 </div> 
-                <div>
+            <div>
+                <div className='customize-section'>
                 <OrSwitch checked={switchChecked} onChange={onSwitchChange} />
                 <OrSlider value={borderSize} onChange={onSliderChange} />
                 </div>
             </div>
-            <div>
+            <div className='category-section'>
             <OrCheckboxFilter 
                 folders={folders}
                 selectedFolders={selectedFolders}

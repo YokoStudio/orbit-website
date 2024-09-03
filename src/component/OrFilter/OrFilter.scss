@@ -3,9 +3,39 @@
 .or-filter {
     background-color: $neutral-bg-1-default;
     border-right: 1px solid $neutral-border-7-default;
-    width: 350px;
+    width: 320px;
+    min-width: 320px;
     height: auto;
     position: sticky;
     top: 0px;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 600px){
+       position: absolute;
+       width: 100%;
+
+    }
+    
+}
+.filter-header{
+    display: flex;
+    position: sticky;
+    top: 0px;
+    align-items: center;
+    padding: $space4 $space6;
+    gap: $space1;
+    border-bottom: 1px solid $neutral-border-7-default;
+    background-color: $neutral-bg-1-default;
+    z-index: 1;
+}
+
+.customize-section{
+    padding: $space6;
+    border-bottom: solid 1px $neutral-border-7-default;
+}
+
+.category-section{
+    padding: $space6;
     
 }

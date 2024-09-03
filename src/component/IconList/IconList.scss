@@ -1,16 +1,27 @@
 @import '../../bace/style.scss';
 
-.icon-list{
+.icon-body{
     padding: $space8;
-    display: flex;
+    // display: flex;
 
 }
+.icon-list{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+
+    @media screen and (max-width: 600px){
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+}
+
 .item{
-    flex: 1 1 100px;
-    flex-wrap: wrap ;
-    gap: $space3;
+    display: flex;
+    flex-direction: column;
 
     a {
+
         text-align: center;
         vertical-align: middle;
         background-color: white ;
@@ -18,12 +29,10 @@
         border-radius: 16px;
         margin: 4px;
         padding: 24px;
-        min-width: 50px;
-        width: 100%;
+        height: 80px;
         cursor: pointer;
         transition: background-color 0.3s ease-in-out;
-        height: 100px;
-    
+        
         &:hover{
             background-color: rgb(231, 231, 231) ;
         }
@@ -32,7 +41,6 @@
 }
 .icon-view{
    
-        width: 40px;
-        height: 40px;
-    
+    width: 40px;
+    height: 40px;
 }

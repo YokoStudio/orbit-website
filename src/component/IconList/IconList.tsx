@@ -42,20 +42,20 @@ const IconList: React.FC<IconListProps> = ({ searchTerm, borderSize, switchCheck
         });
 
     return (
-        <div className="icon-list">
+        <div className="icon-body">
             {loading ? (
                 <p>در حال بارگذاری...</p>
             ) : error ? (
                 <p>{error}</p>
             ) : (
-                <div>
+                <div className='icon-list'>
                     {filteredIcons.length > 0 ? (
                         filteredIcons.map((icon, index) => {
                             const iconPath = icon.path.replace(/^src\//, '');
                             const imageUrl = `http://localhost:3001/icons${iconPath}`;
 
                             return (
-                                <div className='list' key={index}>
+                                <div className='item' key={index}>
                                     <a 
                                         href={imageUrl} 
                                         download

@@ -17,7 +17,7 @@ const OrSwitch: React.FC<OrSwitchProps> = ({ checked, onChange }) => {
                 />
                 <span className="slider-switch"></span>
             </label>
-            <span className="switch-label">{checked ? 'Fill' : 'Outline'}</span>
+            {/* <span className="switch-label">{checked ? 'Fill' : 'Outline'}</span> */}
         </div>
     );
 };

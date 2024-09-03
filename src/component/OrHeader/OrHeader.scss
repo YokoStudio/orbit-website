@@ -75,9 +75,28 @@
         }
         
     }
+    @media screen and (max-width: 600px){
+        display: none;
+
+    }
     
    
 }
 .logo{
     padding: $space0 $space4;
+
+    @media screen and (max-width: 600px){
+        display: none;
+
+    }
+}
+
+.header-action
+{
+    display:flex;
+    gap: 20px;
+    @media screen and (max-width: 600px){
+        display: none;
+
+    }
 }
