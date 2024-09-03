@@ -1,41 +1,3 @@
-// import React from "react";
-// import './OrSearchInput.scss'
-
-// interface OrSearchInputProps {
-//     onClick?: () => void;
-//     placeholder?: string;
-//     disabled?: boolean;
-//     size?: 'sm' | 'md' | 'lg';
-   
-// }
-
-// const OrSearchInput: React.FC<OrSearchInputProps> = ({ 
-//     onClick,
-//     // onChange,
-//     placeholder = 'enter your text',
-//     disabled = false,
-//     size = 'md',
-    
-
-// }) => {
-
-//     const OrSearchinputClassName = `input ${size}`;
-
-//     return (
-//         <input
-//         className={OrSearchinputClassName}
-//         onClick={onClick}
-//         disabled={disabled}
-//         placeholder={placeholder}
-//         // onChange={handleSearchChange}
-        
-
-//         />
-
-//     );
-// };
-
-// export default OrSearchInput;
 import React, { ChangeEvent } from "react";
 import './OrSearchInput.scss';
 import SearchIcon from '../../assets/icons/search.svg';
@@ -64,7 +26,7 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
         <input
             className={OrSearchinputClassName}
             onClick={onClick}
-            onChange={onChange}  // مدیریت تغییرات ورودی
+            onChange={onChange} 
             disabled={disabled}
             placeholder={placeholder}
         />

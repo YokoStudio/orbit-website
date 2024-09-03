@@ -1,6 +1,7 @@
 import React, { ChangeEvent, ReactNode }  from "react";
 import './OrSubHeader.scss';
 import OrButton from "../OrButton/OrButton";
+import Icon from "../../assets/Icon";
 
 
 interface OrSubHeaderProps {
@@ -17,11 +18,12 @@ const OrSubHeader: React.FC<OrSubHeaderProps> = ({
     return (
         <div className="sub-header">
             <OrButton
-            size="lg"
-            variant="primary"
+            size="md"
+            variant="secondary"
             appearance="outline"
-            text={isFilterVisible ? "Hide Filter" : "Show Filter"}
+            text="Filter"
             onClick={toggleFilter}
+            icon={<Icon.tune/>}
             />
         </div>
 

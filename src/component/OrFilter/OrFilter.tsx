@@ -51,7 +51,7 @@ const OrFilter: React.FC<OrFilterProps> = ({
                 <OrSlider value={borderSize} onChange={onSliderChange} />
                 </div>
             </div>
-            <div className='category-section'>
+            <div>
             <OrCheckboxFilter 
                 folders={folders}
                 selectedFolders={selectedFolders}
