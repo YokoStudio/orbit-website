@@ -1,14 +1,18 @@
+@import '../../bace/style.scss';
+
 .or-switch {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+   
+
 }
 
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 40px;
+    height: 20px;
 }
 
 .switch input {
@@ -24,25 +28,25 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: $neutral-bg-1-default;
+    border: 1px solid $neutral-border-2-default;
     transition: .4s;
     border-radius: 34px;
 }
 
-.slider:before {
+.slider-switch:before {
     position: absolute;
-    content: "";
     height: 26px;
     width: 26px;
     border-radius: 50%;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: rgb(160, 32, 32);
     transition: .4s;
 }
 
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #10e650;
 }
 
 input:checked + .slider:before {

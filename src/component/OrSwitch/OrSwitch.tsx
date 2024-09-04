@@ -9,6 +9,7 @@ interface OrSwitchProps {
 const OrSwitch: React.FC<OrSwitchProps> = ({ checked, onChange }) => {
     return (
         <div className="or-switch">
+            <span className='b1-string'> Fill </span>
             <label className="switch">
                 <input
                     type="checkbox"

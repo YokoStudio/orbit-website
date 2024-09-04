@@ -7,6 +7,7 @@ import '../../bace/style.scss';
 import TuneIcon from '../../assets/icons/tune.svg';
 import OrButton from '../OrButton/OrButton';
 
+
 // تعریف نوع Props
 interface OrFilterProps {
     borderSize: number;
@@ -51,6 +52,7 @@ const OrFilter: React.FC<OrFilterProps> = ({
                 <OrSlider value={borderSize} onChange={onSliderChange} />
                 </div>
             </div>
+    
             <div>
             <OrCheckboxFilter 
                 folders={folders}
@@ -59,6 +61,7 @@ const OrFilter: React.FC<OrFilterProps> = ({
                 onResetFilters={onResetFilters}
             />
             </div>
+            <div className='backdrop'></div>
             
         </div>
     );

@@ -1,201 +1,197 @@
 @import './_directory.scss';
 
-$brand-bg-1-default: $color-yoko-50;
-$brand-bg-1-hover: $color-yoko-40;
-$brand-bg-1-press: $color-yoko-30;
-$brand-bg-1-disable: $color-black-white-80;
-$neutral-bg-8-default: $color-black-white-20;
-$neutral-fg-10-default: $color-black-white-100;
-$neutral-bg-8-hover: $color-black-white-25;
-$neutral-bg-8-press: $color-black-white-30;
-$neutral-bg-8-disable: $color-black-white-75;
-$neutral-border-2-default: $color-black-white-40;
-$state-error-bg-1-default: $color-full-red-50;
-$neutral-fg-5-default: $color-black-white-40;
-$state-error-bg-1-hover: $color-full-red-40;
-$state-error-bg-1-press: $color-full-red-30;
-$state-error-bg-1-disable: $color-black-white-80;
-$neutral-bg-1-default: $color-black-white-100;
-$neutral-bg-1-hover: $color-black-white-96;
-$neutral-bg-1-press: $color-black-white-90;
-$neutral-bg-1-disable: $color-black-white-100;
-$neutral-fg-5-disable: $color-black-white-80;
-$neutral-fg-5-hover: $color-black-white-30;
-$neutral-fg-5-press: $color-black-white-20;
-$neutral-border-2-hover: $color-black-white-30;
-$neutral-border-2-press: $color-black-white-20;
-$neutral-border-2-disable: $color-black-white-80;
-$brand-fg-1-default: $color-yoko-50;
-$brand-fg-1-hover: $color-yoko-40;
-$brand-fg-1-press: $color-yoko-30;
-$brand-fg-1-disable: $color-black-white-80;
-$state-error-fg-1-default: $color-full-red-50;
-$state-error-fg-1-hover: $color-full-red-40;
-$state-error-fg-1-press: $color-full-red-30;
-$state-error-fg-1-disable: $color-black-white-80;
-$neutral-fg-2-default: $color-black-white-10;
-$neutral-fg-2-hover: $color-black-white-15;
-$neutral-fg-2-press: $color-black-white-20;
-$neutral-fg-2-disable: $color-black-white-80;
-$neutral-fg-6-default: $color-black-white-60;
-$neutral-border-6-default: $color-black-white-70;
-$neutral-border-9-default: $color-black-white-90;
-$brand-border-1-default: $color-yoko-50;
-$brand-border-1-hover: $color-yoko-40;
-$brand-border-1-press: $color-yoko-30;
-$brand-border-1-disable: $color-black-white-80;
-$neutral-bg-3-default: $color-black-white-96;
-$neutral-border-6-disable: $color-black-white-80;
-$neutral-border-10-default: $color-black-white-100;
-$neutral-bg-4-default: $color-black-white-90;
-$neutral-fg-6-hover: $color-black-white-50;
-$neutral-fg-6-press: $color-black-white-40;
-$neutral-fg-6-disable: $color-black-white-80;
-$state-warning-bg-1-default: $color-school-bus-yellow-50;
-$state-warning-bg-1-hover: $color-school-bus-yellow-45;
-$state-warning-bg-1-press: $color-school-bus-yellow-40;
-$state-warning-bg-1-disable: $color-black-white-80;
-$state-success-bg-1-default: $color-dark-pastel-green-60;
-$state-success-bg-1-hover: $color-dark-pastel-green-50;
-$state-success-bg-1-press: $color-dark-pastel-green-40;
-$state-success-bg-1-disable: $color-black-white-80;
-$state-warning-fg-1-default: $color-school-bus-yellow-50;
-$state-warning-fg-1-hover: $color-school-bus-yellow-45;
-$state-warning-fg-1-press: $color-school-bus-yellow-40;
-$state-warning-fg-1-disable: $color-black-white-80;
-$state-success-fg-1-default: $color-dark-pastel-green-60;
-$state-success-fg-1-hover: $color-dark-pastel-green-50;
-$state-success-fg-1-press: $color-dark-pastel-green-40;
-$state-success-fg-1-disable: $color-black-white-80;
-$neutral-bg-10-default: $color-black-white-0;
-$neutral-bg-subtle-bold-1-default: $color-black-white-subtle-dark-0;
-$neutral-bg-subtle-bold-1-hover: $color-black-white-subtle-dark-5;
-$neutral-bg-subtle-bold-1-press: $color-black-white-subtle-dark-10;
-$neutral-bg-subtle-bold-1-disable: $color-black-white-subtle-dark-0;
-$brand-bg-subtle-1-default: $color-yoko-subtle-0;
-$brand-bg-subtle-1-hover: $color-yoko-subtle-5;
-$brand-bg-subtle-1-press: $color-yoko-subtle-10;
-$brand-bg-subtle-1-disable: $color-yoko-subtle-0;
-$state-error-border-1-default: $color-full-red-50;
-$state-error-border-1-hover: $color-full-red-40;
-$state-error-border-1-press: $color-full-red-30;
-$brand-border-1-select: $color-yoko-25;
-$state-error-bg-subtle-default: $color-full-red-subtle-0;
-$state-error-bg-subtle-hover: $color-full-red-subtle-10;
-$state-error-bg-subtle-press: $color-full-red-subtle-15;
-$state-error-bg-subtle-disable: $color-full-red-subtle-0;
-$neutral-border-focus-dark: $color-black-white-0;
-$neutral-border-focus-light: $color-black-white-100;
-$neutral-bg-subtle-light-2-default: $color-black-white-subtle-light-5;
-$neutral-bg-10-hover: $color-black-white-10;
-$neutral-bg-10-press: $color-black-white-15;
-$neutral-bg-10-disable: $color-black-white-75;
-$neutral-fg-1-default: $color-black-white-0;
-$neutral-fg-1-hover: $color-black-white-10;
-$neutral-fg-1-press: $color-black-white-15;
-$neutral-fg-1-disable: $color-black-white-80;
-$brand-bg-subtle-2-default: $color-yoko-subtle-10;
-$neutral-bg-2-default: $color-black-white-98;
-$neutral-bg-subtle-bold-2-default: $color-black-white-subtle-dark-5;
-$neutral-bg-2-hover: $color-black-white-94;
-$neutral-bg-2-press: $color-black-white-90;
-$neutral-bg-2-disable: $color-black-white-96;
-$state-success-border-1-default: $color-dark-pastel-green-50;
-$state-success-border-1-hover: $color-dark-pastel-green-40;
-$state-success-border-1-press: $color-dark-pastel-green-30;
-$neutral-border-6-hover: $color-black-white-60;
-$neutral-border-6-press: $color-black-white-50;
-$neutral-fg-6-select: $color-black-white-35;
-$neutral-fg-8-default: $color-black-white-80;
-$neutral-fg-8-hover: $color-black-white-70;
-$neutral-fg-8-press: $color-black-white-60;
-$neutral-fg-8-disable: $color-black-white-100;
-$neutral-fg-10-hover: $color-black-white-90;
-$neutral-fg-10-press: $color-black-white-80;
-$neutral-fg-10-disable: $color-black-white-100;
-$neutral-fg-9-default: $color-black-white-90;
-$neutral-fg-9-hover: $color-black-white-80;
-$neutral-fg-9-press: $color-black-white-70;
-$neutral-fg-9-disable: $color-black-white-100;
-$neutral-border-1-default: $color-black-white-0;
-$neutral-border-7-default: $color-black-white-80;
-$neutral-border-3-default: $color-black-white-50;
-$neutral-border-3-hover: $color-black-white-40;
-$neutral-border-3-press: $color-black-white-30;
-$neutral-border-3-disable: $color-black-white-80;
-$neutral-border-1-hover: $color-black-white-10;
-$neutral-border-1-press: $color-black-white-20;
-$neutral-border-1-disable: $color-black-white-80;
-$neutral-border-10-hover: $color-black-white-90;
-$neutral-border-10-press: $color-black-white-80;
-$neutral-border-10-disable: $color-black-white-100;
-$status-orange-fg-1-default: $color-tomato-orange-50;
-$status-orange-fg-1-hover: $color-tomato-orange-45;
-$status-orange-fg-1-press: $color-tomato-orange-40;
-$status-orange-fg-1-disable: $color-black-white-80;
-$status-orange-bg-1-default: $color-tomato-orange-50;
-$status-orange-bg-1-hover: $color-tomato-orange-45;
-$status-orange-bg-1-press: $color-tomato-orange-40;
-$status-orange-bg-1-disable: $color-black-white-80;
-$status-purple-fg-1-default: $color-electric-indigo-50;
-$status-purple-fg-1-hover: $color-electric-indigo-45;
-$status-purple-fg-1-press: $color-electric-indigo-40;
-$status-purple-fg-1-disable: $color-black-white-80;
-$status-purple-bg-1-default: $color-electric-indigo-50;
-$status-purple-bg-1-hover: $color-electric-indigo-45;
-$status-purple-bg-1-press: $color-electric-indigo-40;
-$status-purple-bg-1-disable: $color-black-white-80;
-$status-orange-border-1-default: $color-tomato-orange-50;
-$status-orange-border-1-hover: $color-tomato-orange-45;
-$status-orange-border-1-press: $color-tomato-orange-40;
-$status-orange-border-1-disable: $color-black-white-80;
-$status-purple-border-1-default: $color-electric-indigo-50;
-$status-purple-border-1-hover: $color-electric-indigo-45;
-$status-purple-border-1-press: $color-electric-indigo-40;
-$status-purple-border-1-disable: $color-black-white-80;
-$state-info-bg-1-default: $color-yoko-50;
-$state-info-bg-1-hover: $color-yoko-40;
-$state-info-bg-1-press: $color-yoko-30;
-$neutral-border-8-default: $color-black-white-85;
-$neutral-fg-3-default: $color-black-white-20;
-$neutral-fg-3-hover: $color-black-white-25;
-$neutral-fg-3-press: $color-black-white-30;
-$neutral-fg-3-disable: $color-black-white-80;
-$neutral-fg-4-default: $color-black-white-40;
-$neutral-fg-4-hover: $color-black-white-50;
-$neutral-fg-4-press: $color-black-white-60;
-$neutral-fg-4-disable: $color-black-white-80;
-$neutral-bg-5-default: $color-black-white-80;
-$neutral-bg-5-hover: $color-black-white-75;
-$neutral-bg-5-press: $color-black-white-70;
-$neutral-bg-5-disable: $color-black-white-90;
-$neutral-bg-6-default: $color-black-white-70;
-$neutral-bg-6-hover: $color-black-white-65;
-$neutral-bg-6-press: $color-black-white-60;
-$neutral-bg-6-disable: $color-black-white-80;
-$neutral-border-9-hover: $color-black-white-85;
-$neutral-border-9-press: $color-black-white-75;
-$neutral-border-9-disable: $color-black-white-80;
-$neutral-bg-subtle-bold-2-hover: $color-black-white-subtle-dark-10;
-$neutral-bg-subtle-bold-2-press: $color-black-white-subtle-dark-15;
-$neutral-bg-subtle-bold-2-disable: $color-black-white-subtle-dark-0;
-$neutral-bg-subtle-light-2-hover: $color-black-white-subtle-light-10;
-$neutral-bg-subtle-light-2-press: $color-black-white-subtle-light-15;
-$neutral-bg-subtle-light-2-disable: $color-black-white-subtle-light-0;
-$neutral-border-7-hover: $color-black-white-70;
-$neutral-border-7-press: $color-black-white-60;
-$neutral-border-7-disable: $color-black-white-100;
-$neutral-bg-1-select: $color-black-white-85;
-$neutral-bg-2-select: $color-black-white-85;
-$neutral-border-8-hover: $color-black-white-75;
-$neutral-border-8-press: $color-black-white-65;
-$neutral-border-8-disable: $color-black-white-100;
-$neutral-bg-3-select: $color-black-white-80;
-$neutral-bg-3-disable: $color-black-white-90;
-$neutral-bg-3-hover: $color-black-white-92;
-$neutral-bg-3-press: $color-black-white-85;
+$brand-bg-1-default: $color-brand-50;
+$brand-bg-1-hover: $color-brand-40;
+$brand-bg-1-press: $color-brand-30;
+$brand-bg-1-disable: $color-neutral-80;
+$neutral-bg-8-default: $color-neutral-20;
+$neutral-fg-10-default: $color-neutral-100;
+$neutral-bg-8-hover: $color-neutral-25;
+$neutral-bg-8-press: $color-neutral-30;
+$neutral-bg-8-disable: $color-neutral-75;
+$neutral-border-2-default: $color-neutral-40;
+$state-error-bg-1-default: $color-red-50;
+$neutral-fg-5-default: $color-neutral-0;
+$state-error-bg-1-hover: $color-red-40;
+$state-error-bg-1-press: $color-red-30;
+$state-error-bg-1-disable: $color-neutral-80;
+$neutral-bg-1-default: $color-neutral-100;
+$neutral-bg-1-hover: $color-neutral-96;
+$neutral-bg-1-press: $color-neutral-90;
+$neutral-bg-1-disable: $color-neutral-100;
+$neutral-fg-5-disable: $color-neutral-80;
+$neutral-fg-5-hover: $color-neutral-30;
+$neutral-fg-5-press: $color-neutral-20;
+$neutral-border-2-hover: $color-neutral-30;
+$neutral-border-2-press: $color-neutral-20;
+$neutral-border-2-disable: $color-neutral-80;
+$brand-fg-1-default: $color-brand-50;
+$brand-fg-1-hover: $color-brand-40;
+$brand-fg-1-press: $color-brand-30;
+$brand-fg-1-disable: $color-neutral-80;
+$state-error-fg-1-default: $color-red-50;
+$state-error-fg-1-hover: $color-red-40;
+$state-error-fg-1-press: $color-red-30;
+$state-error-fg-1-disable: $color-neutral-80;
+$neutral-fg-2-default: $color-neutral-10;
+$neutral-fg-2-hover: $color-neutral-15;
+$neutral-fg-2-press: $color-neutral-20;
+$neutral-fg-2-disable: $color-neutral-80;
+$neutral-fg-6-default: $color-neutral-60;
+$neutral-border-6-default: $color-neutral-70;
+$neutral-border-9-default: $color-neutral-90;
+$brand-border-1-default: $color-brand-50;
+$brand-border-1-hover: $color-brand-40;
+$brand-border-1-press: $color-brand-30;
+$brand-border-1-disable: $color-neutral-80;
+$neutral-bg-3-default: $color-neutral-96;
+$neutral-border-6-disable: $color-neutral-80;
+$neutral-border-10-default: $color-neutral-100;
+$neutral-bg-4-default: $color-neutral-90;
+$neutral-fg-6-hover: $color-neutral-50;
+$neutral-fg-6-press: $color-neutral-40;
+$neutral-fg-6-disable: $color-neutral-80;
+
+$state-warning-bg-1-disable: $color-neutral-80;
+$state-success-bg-1-default: $color-green-60;
+$state-success-bg-1-hover: $color-green-50;
+$state-success-bg-1-press: $color-green-40;
+$state-success-bg-1-disable: $color-neutral-80;
+
+$state-warning-fg-1-disable: $color-neutral-80;
+$state-success-fg-1-default: $color-green-60;
+$state-success-fg-1-hover: $color-green-50;
+$state-success-fg-1-press: $color-green-40;
+$state-success-fg-1-disable: $color-neutral-80;
+$neutral-bg-10-default: $color-neutral-0;
+$neutral-bg-subtle-bold-1-default: $color-neutral-subtle-dark-0;
+$neutral-bg-subtle-bold-1-hover: $color-neutral-subtle-dark-5;
+$neutral-bg-subtle-bold-1-press: $color-neutral-subtle-dark-10;
+$neutral-bg-subtle-bold-1-disable: $color-neutral-subtle-dark-0;
+$brand-bg-subtle-1-default: $color-brand-subtle-0;
+$brand-bg-subtle-1-hover: $color-brand-subtle-5;
+$brand-bg-subtle-1-press: $color-brand-subtle-10;
+$brand-bg-subtle-1-disable: $color-brand-subtle-0;
+$state-error-border-1-default: $color-red-50;
+$state-error-border-1-hover: $color-red-40;
+$state-error-border-1-press: $color-red-30;
+$brand-border-1-select: $color-brand-25;
+$state-error-bg-subtle-default: $color-red-subtle-0;
+$state-error-bg-subtle-hover: $color-red-subtle-10;
+$state-error-bg-subtle-press: $color-red-subtle-15;
+$state-error-bg-subtle-disable: $color-red-subtle-0;
+$neutral-border-focus-dark: $color-neutral-0;
+$neutral-border-focus-light: $color-neutral-100;
+$neutral-bg-subtle-light-2-default: $color-neutral-subtle-light-5;
+$neutral-bg-10-hover: $color-neutral-10;
+$neutral-bg-10-press: $color-neutral-15;
+$neutral-bg-10-disable: $color-neutral-75;
+$neutral-fg-1-default: $color-neutral-0;
+$neutral-fg-1-hover: $color-neutral-10;
+$neutral-fg-1-press: $color-neutral-15;
+$neutral-fg-1-disable: $color-neutral-80;
+$brand-bg-subtle-2-default: $color-brand-subtle-10;
+$neutral-bg-2-default: $color-neutral-98;
+$neutral-bg-subtle-bold-2-default: $color-neutral-subtle-dark-5;
+$neutral-bg-2-hover: $color-neutral-94;
+$neutral-bg-2-press: $color-neutral-90;
+$neutral-bg-2-disable: $color-neutral-96;
+$state-success-border-1-default: $color-green-50;
+$state-success-border-1-hover: $color-green-40;
+$state-success-border-1-press: $color-green-30;
+$neutral-border-6-hover: $color-neutral-60;
+$neutral-border-6-press: $color-neutral-50;
+$neutral-fg-6-select: $color-neutral-35;
+$neutral-fg-8-default: $color-neutral-80;
+$neutral-fg-8-hover: $color-neutral-70;
+$neutral-fg-8-press: $color-neutral-60;
+$neutral-fg-8-disable: $color-neutral-100;
+$neutral-fg-10-hover: $color-neutral-90;
+$neutral-fg-10-press: $color-neutral-80;
+$neutral-fg-10-disable: $color-neutral-100;
+$neutral-fg-9-default: $color-neutral-90;
+$neutral-fg-9-hover: $color-neutral-80;
+$neutral-fg-9-press: $color-neutral-70;
+$neutral-fg-9-disable: $color-neutral-100;
+$neutral-border-1-default: $color-neutral-0;
+$neutral-border-7-default: $color-neutral-80;
+$neutral-border-3-default: $color-neutral-50;
+$neutral-border-3-hover: $color-neutral-40;
+$neutral-border-3-press: $color-neutral-30;
+$neutral-border-3-disable: $color-neutral-80;
+$neutral-border-1-hover: $color-neutral-10;
+$neutral-border-1-press: $color-neutral-20;
+$neutral-border-1-disable: $color-neutral-80;
+$neutral-border-10-hover: $color-neutral-90;
+$neutral-border-10-press: $color-neutral-80;
+$neutral-border-10-disable: $color-neutral-100;
+$status-orange-fg-1-default: $color-orange-50;
+$status-orange-fg-1-hover: $color-orange-45;
+$status-orange-fg-1-press: $color-orange-40;
+$status-orange-fg-1-disable: $color-neutral-80;
+$status-orange-bg-1-default: $color-orange-50;
+$status-orange-bg-1-hover: $color-orange-45;
+$status-orange-bg-1-press: $color-orange-40;
+$status-orange-bg-1-disable: $color-neutral-80;
+$status--purple-fg-1-default: $color-purple-50;
+$status--purple-fg-1-hover: $color-purple-45;
+$status--purple-fg-1-press: $color-purple-40;
+$status--purple-fg-1-disable: $color-neutral-80;
+$status--purple-bg-1-default: $color-purple-50;
+$status--purple-bg-1-hover: $color-purple-45;
+$status--purple-bg-1-press: $color-purple-40;
+$status--purple-bg-1-disable: $color-neutral-80;
+$status-orange-border-1-default: $color-orange-50;
+$status-orange-border-1-hover: $color-orange-45;
+$status-orange-border-1-press: $color-orange-40;
+$status-orange-border-1-disable: $color-neutral-80;
+$status--purple-border-1-default: $color-purple-50;
+$status--purple-border-1-hover: $color-purple-45;
+$status--purple-border-1-press: $color-purple-40;
+$status--purple-border-1-disable: $color-neutral-80;
+$state-info-bg-1-default: $color-brand-50;
+$state-info-bg-1-hover: $color-brand-40;
+$state-info-bg-1-press: $color-brand-30;
+$neutral-border-8-default: $color-neutral-85;
+$neutral-fg-3-default: $color-neutral-20;
+$neutral-fg-3-hover: $color-neutral-25;
+$neutral-fg-3-press: $color-neutral-30;
+$neutral-fg-3-disable: $color-neutral-80;
+$neutral-fg-4-default: $color-neutral-40;
+$neutral-fg-4-hover: $color-neutral-50;
+$neutral-fg-4-press: $color-neutral-60;
+$neutral-fg-4-disable: $color-neutral-80;
+$neutral-bg-5-default: $color-neutral-80;
+$neutral-bg-5-hover: $color-neutral-75;
+$neutral-bg-5-press: $color-neutral-70;
+$neutral-bg-5-disable: $color-neutral-90;
+$neutral-bg-6-default: $color-neutral-70;
+$neutral-bg-6-hover: $color-neutral-65;
+$neutral-bg-6-press: $color-neutral-60;
+$neutral-bg-6-disable: $color-neutral-80;
+$neutral-border-9-hover: $color-neutral-85;
+$neutral-border-9-press: $color-neutral-75;
+$neutral-border-9-disable: $color-neutral-80;
+$neutral-bg-subtle-bold-2-hover: $color-neutral-subtle-dark-10;
+$neutral-bg-subtle-bold-2-press: $color-neutral-subtle-dark-15;
+$neutral-bg-subtle-bold-2-disable: $color-neutral-subtle-dark-0;
+$neutral-bg-subtle-light-2-hover: $color-neutral-subtle-light-10;
+$neutral-bg-subtle-light-2-press: $color-neutral-subtle-light-15;
+$neutral-bg-subtle-light-2-disable: $color-neutral-subtle-light-0;
+$neutral-border-7-hover: $color-neutral-70;
+$neutral-border-7-press: $color-neutral-60;
+$neutral-border-7-disable: $color-neutral-100;
+$neutral-bg-1-select: $color-neutral-85;
+$neutral-bg-2-select: $color-neutral-85;
+$neutral-border-8-hover: $color-neutral-75;
+$neutral-border-8-press: $color-neutral-65;
+$neutral-border-8-disable: $color-neutral-100;
+$neutral-bg-3-select: $color-neutral-80;
+$neutral-bg-3-disable: $color-neutral-90;
+$neutral-bg-3-hover: $color-neutral-92;
+$neutral-bg-3-press: $color-neutral-85;
 $neutral-border-10-select: $brand-border-1-default;
-$brand-bg-1-select: $color-yoko-25;
+$brand-bg-1-select: $color-brand-25;
 $neutral-border-1-select: $brand-border-1-default;
 $neutral-border-2-select: $brand-border-1-default;
 $neutral-border-3-select: $brand-border-1-default;
@@ -203,77 +199,204 @@ $neutral-border-6-select: $brand-border-1-default;
 $neutral-border-7-select: $brand-border-1-default;
 $neutral-border-8-select: $brand-border-1-default;
 $neutral-border-9-select: $brand-border-1-default;
-$brand-bg-subtle-1-select: $color-yoko-subtle-15;
-$brand-bg-subtle-2-hover: $color-yoko-subtle-15;
-$neutral-bg-4-hover: $color-black-white-85;
-$neutral-bg-4-press: $color-black-white-80;
-$neutral-bg-4-select: $color-black-white-75;
-$neutral-bg-4-disable: $color-black-white-92;
-$brand-bg-subtle-2-press: $color-yoko-subtle-20;
-$brand-bg-subtle-2-select: $color-yoko-subtle-25;
-$brand-bg-subtle-2-disable: $color-yoko-subtle-0;
-$neutral-bg-5-select: $color-black-white-65;
-$brand-fg-1-select: $color-yoko-25;
-$neutral-bg-6-select: $color-black-white-55;
-$neutral-bg-8-select: $color-black-white-20;
-$neutral-bg-10-select: $color-black-white-25;
-$neutral-bg-subtle-bold-1-select: $color-black-white-subtle-dark-10;
-$neutral-bg-subtle-bold-2-select: $color-black-white-subtle-dark-20;
-$neutral-bg-subtle-light-2-select: $color-black-white-subtle-light-20;
-$neutral-fg-1-select: $color-black-white-20;
-$neutral-fg-10-select: $color-black-white-75;
-$neutral-fg-9-select: $color-black-white-65;
-$neutral-fg-8-select: $color-black-white-55;
-$neutral-fg-5-select: $color-black-white-15;
-$neutral-fg-4-select: $color-black-white-55;
-$neutral-fg-3-select: $color-black-white-35;
-$neutral-fg-2-select: $color-black-white-25;
-$state-warning-bg-1-select: $color-school-bus-yellow-35;
-$state-warning-fg-1-select: $color-school-bus-yellow-35;
-$state-error-bg-1-select: $color-full-red-25;
-$state-error-bg-subtle-select: $color-full-red-subtle-20;
-$state-error-fg-1-select: $color-full-red-25;
-$state-error-border-1-select: $color-full-red-25;
-$state-error-border-1-disable: $color-black-white-80;
-$state-success-bg-1-select: $color-dark-pastel-green-35;
-$state-success-fg-1-select: $color-dark-pastel-green-35;
-$state-success-border-1-select: $color-dark-pastel-green-25;
-$state-success-border-1-disable: $color-black-white-80;
-$state-info-bg-1-select: $color-yoko-25;
-$status-purple-fg-1-select: $color-electric-indigo-35;
-$status-purple-bg-1-select: $color-electric-indigo-35;
-$status-purple-border-1-select: $color-electric-indigo-35;
-$status-orange-fg-1-select: $color-tomato-orange-35;
-$status-orange-bg-1-select: $color-tomato-orange-35;
-$status-orange-border-1-select: $color-tomato-orange-35;
-$state-info-bg-1-disable: $color-black-white-80;
-$neutral-fg-on-color-light-default: $color-black-white-100;
-$neutral-fg-on-color-light-hover: $color-black-white-90;
-$neutral-fg-on-color-light-press: $color-black-white-80;
-$neutral-fg-on-color-light-select: $color-black-white-75;
-$neutral-fg-on-color-light-disable: $color-black-white-100;
-$neutral-fg-on-color-dark-default: $color-black-white-0;
-$neutral-fg-on-color-dark-hover: $color-black-white-10;
-$neutral-fg-on-color-dark-press: $color-black-white-15;
-$neutral-fg-on-color-dark-select: $color-black-white-20;
-$neutral-fg-on-color-dark-disable: $color-black-white-80;
-$neutral-bg-subtle-light-1-default: $color-black-white-subtle-light-0;
-$neutral-bg-subtle-light-1-hover: $color-black-white-subtle-light-5;
-$neutral-bg-subtle-light-1-press: $color-black-white-subtle-light-10;
-$neutral-bg-subtle-light-1-select: $color-black-white-subtle-light-15;
-$neutral-bg-subtle-light-1-disable: $color-black-white-subtle-light-0;
-$state-info-fg-1-default: $color-yoko-50;
-$state-info-fg-1-hover: $color-yoko-40;
-$state-info-fg-1-press: $color-yoko-30;
-$state-info-fg-1-select: $color-yoko-25;
-$state-info-fg-1-disable: $color-black-white-80;
-$state-info-border-1-default: $color-yoko-50;
-$state-info-border-1-hover: $color-yoko-40;
-$state-info-border-1-press: $color-yoko-30;
-$state-info-border-1-select: $color-yoko-25;
-$state-info-border-1-disable: $color-black-white-80;
-$state-warning-border-1-default: $color-school-bus-yellow-50;
-$state-warning-border-1-hover: $color-school-bus-yellow-45;
-$state-warning-border-1-press: $color-school-bus-yellow-40;
-$state-warning-border-1-select: $color-school-bus-yellow-35;
-$state-warning-border-1-disable: $color-black-white-80;
+$brand-bg-subtle-1-select: $color-brand-subtle-15;
+$brand-bg-subtle-2-hover: $color-brand-subtle-15;
+$neutral-bg-4-hover: $color-neutral-85;
+$neutral-bg-4-press: $color-neutral-80;
+$neutral-bg-4-select: $color-neutral-75;
+$neutral-bg-4-disable: $color-neutral-92;
+$brand-bg-subtle-2-press: $color-brand-subtle-20;
+$brand-bg-subtle-2-select: $color-brand-subtle-25;
+$brand-bg-subtle-2-disable: $color-brand-subtle-0;
+$neutral-bg-5-select: $color-neutral-65;
+$brand-fg-1-select: $color-brand-25;
+$neutral-bg-6-select: $color-neutral-55;
+$neutral-bg-8-select: $color-neutral-20;
+$neutral-bg-10-select: $color-neutral-25;
+$neutral-bg-subtle-bold-1-select: $color-neutral-subtle-dark-10;
+$neutral-bg-subtle-bold-2-select: $color-neutral-subtle-dark-20;
+$neutral-bg-subtle-light-2-select: $color-neutral-subtle-light-20;
+$neutral-fg-1-select: $color-neutral-20;
+$neutral-fg-10-select: $color-neutral-75;
+$neutral-fg-9-select: $color-neutral-65;
+$neutral-fg-8-select: $color-neutral-55;
+$neutral-fg-5-select: $color-neutral-15;
+$neutral-fg-4-select: $color-neutral-55;
+$neutral-fg-3-select: $color-neutral-35;
+$neutral-fg-2-select: $color-neutral-25;
+
+$state-error-bg-1-select: $color-red-25;
+$state-error-bg-subtle-select: $color-red-subtle-20;
+$state-error-fg-1-select: $color-red-25;
+$state-error-border-1-select: $color-red-25;
+$state-error-border-1-disable: $color-neutral-80;
+$state-success-bg-1-select: $color-green-35;
+$state-success-fg-1-select: $color-green-35;
+$state-success-border-1-select: $color-green-25;
+$state-success-border-1-disable: $color-neutral-80;
+$state-info-bg-1-select: $color-brand-25;
+$status--purple-fg-1-select: $color-purple-35;
+$status--purple-bg-1-select: $color-purple-35;
+$status--purple-border-1-select: $color-purple-35;
+$status-orange-fg-1-select: $color-orange-35;
+$status-orange-bg-1-select: $color-orange-35;
+$status-orange-border-1-select: $color-orange-35;
+$state-info-bg-1-disable: $color-neutral-80;
+$neutral-fg-on-color-light-default: $color-neutral-100;
+$neutral-fg-on-color-light-hover: $color-neutral-90;
+$neutral-fg-on-color-light-press: $color-neutral-80;
+$neutral-fg-on-color-light-select: $color-neutral-75;
+$neutral-fg-on-color-light-disable: $color-neutral-100;
+$neutral-fg-on-color-dark-default: $color-neutral-0;
+$neutral-fg-on-color-dark-hover: $color-neutral-10;
+$neutral-fg-on-color-dark-press: $color-neutral-15;
+$neutral-fg-on-color-dark-select: $color-neutral-20;
+$neutral-fg-on-color-dark-disable: $color-neutral-80;
+$neutral-bg-subtle-light-1-default: $color-neutral-subtle-light-0;
+$neutral-bg-subtle-light-1-hover: $color-neutral-subtle-light-5;
+$neutral-bg-subtle-light-1-press: $color-neutral-subtle-light-10;
+$neutral-bg-subtle-light-1-select: $color-neutral-subtle-light-15;
+$neutral-bg-subtle-light-1-disable: $color-neutral-subtle-light-0;
+$state-info-fg-1-default: $color-brand-50;
+$state-info-fg-1-hover: $color-brand-40;
+$state-info-fg-1-press: $color-brand-30;
+$state-info-fg-1-select: $color-brand-25;
+$state-info-fg-1-disable: $color-neutral-80;
+$state-info-border-1-default: $color-brand-50;
+$state-info-border-1-hover: $color-brand-40;
+$state-info-border-1-press: $color-brand-30;
+$state-info-border-1-select: $color-brand-25;
+$state-info-border-1-disable: $color-neutral-80;
+
+
+//yellow 
+
+    //background color
+
+        $state-warning-fg-1-default: $color-yellow-50;
+        $state-warning-fg-1-hover: $color-yellow-45;
+        $state-warning-fg-1-press: $color-yellow-40;
+        $state-warning-fg-1-select: $color-yellow-35;
+
+    //foreground color
+
+        $state-warning-bg-1-default: $color-yellow-50;
+        $state-warning-bg-1-hover: $color-yellow-45;
+        $state-warning-bg-1-press: $color-yellow-40;
+        $state-warning-bg-1-select: $color-yellow-35;
+
+    //border color
+
+    $state-warning-border-1-default: $color-yellow-50;
+    $state-warning-border-1-hover: $color-yellow-45;
+    $state-warning-border-1-press: $color-yellow-40;
+    $state-warning-border-1-select: $color-yellow-35;
+
+
+
+//brand
+
+    //foreground color
+
+        $state-brand-fg-1-default: $color-brand-50;
+        $state-brand-fg-1-hover: $color-brand-45;
+        $state-brand-fg-1-press: $color-brand-40;
+        $state-brand-fg-1-select: $color-brand-35;
+        $state-brand-fg-1-disable: $color-neutral-80;
+
+    //background color
+        $state-brand-bg-1-default: $color-brand-50;
+        $state-brand-bg-1-hover: $color-brand-45;
+        $state-brand-bg-1-press: $color-brand-40;
+        $state-brand-bg-1-select: $color-brand-35;
+        $state-brand-bg-1-disable: $color-neutral-80;
+
+    //border color
+
+        $state-brand-border-1-default: $color-brand-50;
+        $state-brand-border-1-hover: $color-brand-45;
+        $state-brand-border-1-press: $color-brand-40;
+        $state-brand-border-1-select: $color-brand-35;
+        $state-brand-border-1-disable: $color-neutral-80;
+
+
+//error
+
+    //foreground color
+
+        $state-error-fg-1-default: $color-red-50;
+        $state-error-fg-1-hover: $color-red-45;
+        $state-error-fg-1-press: $color-red-40;
+        $state-error-fg-1-select: $color-red-35;
+        $state-error-fg-1-disable: $color-neutral-80;
+
+    //background color
+    $state-error-bg-1-default: $color-red-50;
+        $state-error-bg-1-hover: $color-red-45;
+        $state-error-bg-1-press: $color-red-40;
+        $state-error-bg-1-select: $color-red-35;
+        $state-error-bg-1-disable: $color-neutral-80;
+
+    //border color
+
+        $state-error-border-1-default: $color-red-50;
+        $state-error-border-1-hover: $color-red-45;
+        $state-error-border-1-press: $color-red-40;
+        $state-error-border-1-select: $color-red-35;
+        $state-error-border-1-disable: $color-neutral-80;
+
+    //subtle
+        $error-bg-subtle-1-default: $color-red-subtle-0;
+        $error-bg-subtle-1-hover: $color-red-subtle-5;
+        $error-bg-subtle-1-press: $color-red-subtle-10;
+        $error-bg-subtle-1-select: $color-red-subtle-15;
+        $error-bg-subtle-1-disable: $color-red-subtle-0;
+
+//
+
+//neutral
+
+    //foreground color
+    
+        $neutral-fg-on-color-dark-default: $color-neutral-0;
+        $neutral-fg-on-color-dark-hover: $color-neutral-10;
+        $neutral-fg-on-color-dark-press: $color-neutral-15;
+        $neutral-fg-on-color-dark-select: $color-neutral-20;
+        $neutral-fg-on-color-dark-disable: $color-neutral-80;
+
+    //background color
+
+        //background subtle light color
+            $neutral-bg-subtle-light-1-default: $color-neutral-subtle-light-0;
+            $neutral-bg-subtle-light-1-hover: $color-neutral-subtle-light-5;
+            $neutral-bg-subtle-light-1-press: $color-neutral-subtle-light-10;
+            $neutral-bg-subtle-light-1-select: $color-neutral-subtle-light-15;
+            $neutral-bg-subtle-light-1-disable: $color-neutral-subtle-light-0;
+        
+        //background subtle dark color
+            $neutral-bg-subtle-dark-1-default: $color-neutral-subtle-light-0;
+            $neutral-bg-subtle-dark-1-hover: $color-neutral-subtle-light-5;
+            $neutral-bg-subtle-dark-1-press: $color-neutral-subtle-light-10;
+            $neutral-bg-subtle-dark-1-select: $color-neutral-subtle-light-15;
+            $neutral-bg-subtle-dark-1-disable: $color-neutral-subtle-light-0;
+
+    //foreground color
+            $neutral-fg-on-color-light-default: $color-neutral-100;
+            $neutral-fg-on-color-light-hover: $color-neutral-90;
+            $neutral-fg-on-color-light-press: $color-neutral-80;
+            $neutral-fg-on-color-light-select: $color-neutral-75;
+            $neutral-fg-on-color-light-disable: $color-neutral-100;
+       
+    //background color
+
+
+
+
+
+
+
+$state-warning-bg-1-disable: $color-neutral-80;
+
+
+
+$state-warning-border-1-disable: $color-neutral-80;
