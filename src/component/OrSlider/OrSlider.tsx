@@ -9,7 +9,7 @@ interface OrSliderProps {
 const OrSlider: React.FC<OrSliderProps> = ({ value, onChange }) => {
     return (
         <div className="slider-container">
-        <span className='b1'>Stroke</span>
+        <span className='b1-strong'>Stroke</span>
             <input
                 type="range"
                 min="0.5"

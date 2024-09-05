@@ -1,7 +1,10 @@
 @import '../../bace/style.scss';
 .slider-container {
    appearance: none;
-    width: 100%;
+   position: relative;
+    left: 0;
+    right: 0;
+
 }
 
 .slider {
@@ -10,6 +13,9 @@
     height: 4px;
     border-radius: $circular;
     background-color: $neutral-bg-4-default;
+    position: relative;
+    left: 0;
+    right: 0;
 
     &:hover{
         background-color: $neutral-bg-4-hover; 

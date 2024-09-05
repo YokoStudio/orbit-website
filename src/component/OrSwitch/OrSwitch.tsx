@@ -1,5 +1,5 @@
 import React from 'react';
-import './OrSwitch.scss'; // فایل استایل برای کامپوننت
+import './OrSwitch.scss';
 
 interface OrSwitchProps {
     checked: boolean;
@@ -9,7 +9,7 @@ interface OrSwitchProps {
 const OrSwitch: React.FC<OrSwitchProps> = ({ checked, onChange }) => {
     return (
         <div className="or-switch">
-            <span className='b1-string'> Fill </span>
+            <span className='b1-strong'> Fill </span>
             <label className="switch">
                 <input
                     type="checkbox"
@@ -18,7 +18,6 @@ const OrSwitch: React.FC<OrSwitchProps> = ({ checked, onChange }) => {
                 />
                 <span className="slider-switch"></span>
             </label>
-            {/* <span className="switch-label">{checked ? 'Fill' : 'Outline'}</span> */}
         </div>
     );
 };

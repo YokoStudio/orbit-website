@@ -84,7 +84,8 @@
     }
 }
 .secondary{
-    border: 0px;
+    border: 0px solid transparent;
+    
     &.fill{
         background-color: $neutral-bg-10-default;
         color: $neutral-fg-10-default;
@@ -123,18 +124,19 @@
     }
     
     &.ghost{
+        background-color: $neutral-bg-subtle-bold-1-default;
         color: $neutral-fg-1-default;
 
         &:hover{
-            color: $neutral-fg-1-hover;
+            background-color: $neutral-bg-subtle-bold-1-hover;
         }
 
         &.press{
-            color: $neutral-fg-1-press;
+            background-color: $neutral-bg-subtle-bold-1-press;
         }
 
         &.disable{
-            color: $neutral-fg-1-disable;
+            background-color: $neutral-bg-subtle-bold-1-disable;
         }
     }
 }
@@ -150,6 +152,11 @@
 }
 
 .sm{
+    height: 32px;
+    padding-left: $space2;
+    padding-right: $space2;
+    padding-top: $space1;
+    padding-bottom: $space1;
 
 } 
 

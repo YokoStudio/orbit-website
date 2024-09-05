@@ -5,7 +5,9 @@ import OrCheckboxFilter from '../OrCheckboxFilter/OrCheckboxFilter'; // اضاف
 import './OrFilter.scss';
 import '../../bace/style.scss';
 import TuneIcon from '../../assets/icons/tune.svg';
+import Icon from "../../assets/Icon";
 import OrButton from '../OrButton/OrButton';
+
 
 
 // تعریف نوع Props
@@ -39,11 +41,17 @@ const OrFilter: React.FC<OrFilterProps> = ({
         <div className='or-filter' id='my-filter'>
               
             <div className='filter-header'>
+                    <div>
                     <img src={TuneIcon} alt='Logo' width='32px' height='32px' />
                     <span className='h6-strong'>Customize</span>
+                    </div>
+                    
                     <OrButton 
-                        text={isFilterVisible ? "Hide Filter" : "Show Filter"}
                         onClick={toggleFilter}
+                        appearance='ghost'
+                        variant='secondary'
+                        icon={<Icon.cross/>}
+                        size='sm'
                     />
                 </div> 
             <div>
