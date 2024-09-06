@@ -21,7 +21,7 @@ const IconList: React.FC<IconListProps> = ({ searchTerm, borderSize, switchCheck
                 setLoading(false);
             })
             .catch(error => {
-                setError('خطا در دریافت آیکون‌ها');
+                setError('Error receiving icons');
                 setLoading(false);
             });
     }, []);
@@ -44,7 +44,7 @@ const IconList: React.FC<IconListProps> = ({ searchTerm, borderSize, switchCheck
     return (
         <div className="icon-body">
             {loading ? (
-                <p>در حال بارگذاری...</p>
+                <div><span>در حال بارگذاری...</span></div>
             ) : error ? (
                 <p>{error}</p>
             ) : (
@@ -79,7 +79,7 @@ const IconList: React.FC<IconListProps> = ({ searchTerm, borderSize, switchCheck
                             );
                         })
                     ) : (
-                        <p>هیچ آیکونی برای نمایش وجود ندارد.</p>
+                        <div><span>There are no icons to display.</span></div>
                     )}
                 </div>
             )}

@@ -12,12 +12,13 @@
 .category-section {
     display: flex;
     flex-direction: column;
+    gap: $space2;
 }
 
 .checkbox-container {
-    margin-bottom: 8px;
     border-radius: $space1;
-    gap: 4px;
+    display: flex;
+    
     
 }
 
@@ -50,9 +51,10 @@
 .container input ~ .checkmark{
     background-color: $neutral-bg-1-default;
     width: 100%;
-    padding: $space1;
+    padding: $space2 $space3;
     border-radius: $space1;
     pointer-events: fill;
+    cursor: pointer;
 
 }
 
@@ -62,7 +64,7 @@
 
 
 .container input:checked ~ .checkmark {
-    outline: solid 2px $brand-border-1-default;
+   outline: solid 2px $brand-border-1-default;
 }
 
 

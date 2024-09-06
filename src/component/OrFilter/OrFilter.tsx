@@ -38,39 +38,33 @@ const OrFilter: React.FC<OrFilterProps> = ({
 
 }) => {
     return (
-        <div className='or-filter' id='my-filter'>
-              
-            <div className='filter-header'>
+        <div className='or-filter'>
+            
+            <div className='filter-body'>
+                <div className='filter-header'> {/* header */}
                     <div>
-                    <img src={TuneIcon} alt='Logo' width='32px' height='32px' />
-                    <span className='h6-strong'>Customize</span>
+                        <img src={TuneIcon} alt='Logo' width='32px' height='32px' />
+                        <span className='h6-strong'>Customize</span>
                     </div>
-                    
-                    <OrButton 
-                        onClick={toggleFilter}
-                        appearance='ghost'
-                        variant='secondary'
-                        icon={<Icon.cross/>}
-                        size='sm'
-                    />
+                    <OrButton onClick={toggleFilter} appearance='ghost' variant='secondary' icon={<Icon.cross/>} size='sm'/>
                 </div> 
-            <div>
+                    
                 <div className='customize-section'>
-                <OrSwitch checked={switchChecked} onChange={onSwitchChange} />
-                <OrSlider value={borderSize} onChange={onSliderChange} />
+                    <OrSwitch checked={switchChecked} onChange={onSwitchChange} />
+                    <OrSlider value={borderSize} onChange={onSliderChange} />
+                </div>
+        
+                <div className='checkbox-section'>
+                    <OrCheckboxFilter  
+                        folders={folders}
+                        selectedFolders={selectedFolders}
+                        onFolderChange={onFolderChange}
+                        onResetFilters={onResetFilters}
+                    />
                 </div>
             </div>
-    
-            <div>
-            <OrCheckboxFilter 
-                folders={folders}
-                selectedFolders={selectedFolders}
-                onFolderChange={onFolderChange}
-                onResetFilters={onResetFilters}
-            />
-            </div>
-            <div className='backdrop'></div>
-            
+
+            <div className='backdrop'/>
         </div>
     );
 };

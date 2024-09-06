@@ -11,7 +11,7 @@ function App() {
     const [borderSize, setBorderSize] = useState<number>(1);
     const [switchChecked, setSwitchChecked] = useState<boolean>(false);
     const [selectedFolders, setSelectedFolders] = useState<string[]>([]);
-    const [folders, setFolders] = useState<string[]>(['Interface', 'Weather', 'this-test', 'alpha']); // باید با فولدرهای واقعی پر شود
+    const [folders, setFolders] = useState<string[]>(['Arrow','Devices','File + Documents','Interface', 'Weather',]); // باید با فولدرهای واقعی پر شود
     const [isFilterVisible, setIsFilterVisible] = useState<boolean>(true);
 
 

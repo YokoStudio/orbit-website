@@ -11,6 +11,7 @@ interface OrButtonProps {
     icon?: React.ReactNode;
     iconPosition?: 'left' | 'right';
     size?: 'xs' |'sm' |'md' | 'lg' | 'xl';
+    className?: string; 
 }
 
 const OrButton: React.FC<OrButtonProps> = ({ 
@@ -22,6 +23,7 @@ const OrButton: React.FC<OrButtonProps> = ({
         icon,
         iconPosition = 'left',  
         size = 'md',
+        className,
 
 
     }) => { 

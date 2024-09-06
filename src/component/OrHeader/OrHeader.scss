@@ -1,12 +1,11 @@
 
 @import '../../bace/style.scss';
 
-.header{
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-    flex-grow: 1;
-    gap: 16px;;
+.main-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: $space8 ;
     background-color: $neutral-bg-1-default;
     border-bottom: 1px solid $neutral-border-7-default;
     padding-top:$space6;
@@ -15,6 +14,7 @@
     padding-right: $space8;
     position: sticky;
     top: 0px;
+    height: 67px ;
     
     .search-div{
         flex-grow: 1;
@@ -75,28 +75,30 @@
         }
         
     }
-    @media screen and (max-width: 600px){
+    @media screen and (max-width: 1200px){
         display: none;
-
     }
-    
    
 }
 .logo{
     padding: $space0 $space4;
 
-    @media screen and (max-width: 600px){
-        display: none;
-
-    }
+   
 }
 
 .header-action
 {
     display:flex;
-    gap: 20px;
-    @media screen and (max-width: 600px){
+    gap: $space3;
+    @media screen and (max-width: 1200px){
         display: none;
+    }
+    
 
+}
+.mobile-actions
+{
+    @media screen and (min-width: 1200px){
+        display: none;
     }
 }
