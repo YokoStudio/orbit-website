@@ -17,18 +17,25 @@ const OrHeader: React.FC<OrHeaderProps> = ({
 }) => { 
     const [iconCount, setIconCount] = useState<number>(0);
 
-    // تابع برای خواندن تعداد آیکون‌ها از API
+    // تابع برای خواندن تعداد آیکون‌ها از bucket
     const fetchIconCount = async () => {
         try {
-            // دریافت تمام آیکون‌ها از API
-            const response = await axios.get('http://localhost:3001/api/icons'); 
-            
+            // دریافت لیست آیکون‌ها به صورت XML از bucket
+            const response = await axios.get('https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir?list-type=2');
+
+            // تبدیل XML به JSON
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(response.data, "application/xml");
+
+            // گرفتن تمام تگ‌های <Key> که نشان دهنده مسیر آیکون‌ها هستند
+            const keys = xmlDoc.getElementsByTagName("Key");
+
             // تعریف الگوی regex برای فیلتر کردن مسیرها
-            const regex = /^\/[^\/]+\/fill\/1\//;
+            const regex = /^Icons\/[^\/]+\/fill\/1\//;
 
             // فیلتر کردن آیکون‌هایی که با الگوی regex مطابقت دارند
-            const filteredIcons = response.data.filter((icon: { path: string }) => 
-                regex.test(icon.path)
+            const filteredIcons = Array.from(keys).filter((key: any) =>
+                regex.test(key.textContent)
             );
 
             // تنظیم تعداد آیکون‌های فیلتر شده
