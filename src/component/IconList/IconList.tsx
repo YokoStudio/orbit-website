@@ -93,7 +93,7 @@ const IconList: React.FC<IconListProps> = ({ searchTerm, borderSize, switchCheck
                             );
                         })
                     ) : (
-                        <div><span>There are no icons to display.</span></div>
+                        <div><span>Icon not found</span></div>
                     )}
                 </div>
             )}
