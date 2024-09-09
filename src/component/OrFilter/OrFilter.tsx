@@ -3,7 +3,7 @@ import OrSlider from '../OrSlider/OrSlider';
 import OrSwitch from '../OrSwitch/OrSwitch';
 import OrCheckboxFilter from '../OrCheckboxFilter/OrCheckboxFilter'; // اضافه کردن OrCheckboxFilter
 import './OrFilter.scss';
-import '../../bace/style.scss';
+import '../../base/style.scss';
 import TuneIcon from '../../assets/icons/tune.svg';
 import Icon from "../../assets/Icon";
 import OrButton from '../OrButton/OrButton';

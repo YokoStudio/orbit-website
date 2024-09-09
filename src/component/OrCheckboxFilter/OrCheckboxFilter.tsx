@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './OrCheckboxFilter.scss';
 import OrButton from '../OrButton/OrButton';
-import '../../bace/style.scss';
+import '../../base/style.scss';
 
 
 interface OrCheckboxFilterProps {

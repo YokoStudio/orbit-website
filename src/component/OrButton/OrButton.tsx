@@ -1,6 +1,6 @@
 import React from "react";
 import './OrButton.scss';
-import '../../bace/type-style.scss';
+import '../../base/type-style.scss';
 
 interface OrButtonProps { 
     text?: string;

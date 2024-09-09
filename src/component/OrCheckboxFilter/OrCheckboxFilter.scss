@@ -1,4 +1,4 @@
-@import '../../bace/style.scss';
+@import '../../base/style.scss';
 
 
 .container input { /* Hide the browser's default checkbox */
@@ -7,20 +7,18 @@
     cursor: pointer;
     height: 0;
     width: 0;
-  }
+    }
 
 .category-section {
     display: flex;
     flex-direction: column;
     gap: $space2;
-}
+    }
 
 .checkbox-container {
     border-radius: $space1;
     display: flex;
-    
-    
-}
+    }
 
 .category-list-title-box
 {   
@@ -29,10 +27,8 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: $space6;
-
-    
-}
+    margin-bottom: $space6;   
+    }
 
 .checkbox{
     width: 16px;
