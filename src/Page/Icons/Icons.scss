@@ -1,0 +1,25 @@
+.main
+{
+    display: flex;
+    flex-direction: row;
+ 
+}
+.view{
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} 
+
+.item
+{   
+    
+}
+
+.icon-view{
+    img{
+        max-width: 100px;
+        height: 70px;
+    }
+}

@@ -14,12 +14,19 @@
     padding-right: $space8;
     position: sticky;
     top: 0px;
-    height: 67px ;
-    
+    height: 116px ;
+    box-sizing: border-box;
+    width: 100%;
+
     .search-div{
         flex-grow: 1;
         align-items: center;
         display: flex;
+
+        @media screen and (max-width: 1200px){
+            display: none;
+        }
+    
     }
 
 }
@@ -38,6 +45,7 @@
     cursor:text;
     align-items: center;
     gap: $space2;
+
 
     input{
         flex-grow: 1;
@@ -76,7 +84,7 @@
         
     }
     @media screen and (max-width: 1200px){
-        display: none;
+        flex-grow: 1;
     }
    
 }

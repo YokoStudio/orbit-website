@@ -64,7 +64,7 @@ const OrHeader: React.FC<OrHeaderProps> = ({
                 <span className="b1">{iconCount} Icons</span> {/* نمایش تعداد آیکون‌ها */}
             </div>
             <div className="search-div">
-                <OrSearchInput onChange={handleSearchChange} placeholder="Search..." size="lg" />
+                <OrSearchInput onChange={handleSearchChange} placeholder="Search...." size="lg" />
             </div>
             {children && <div className="children-container">{children}</div>}
             <div className="header-action">

@@ -1,80 +1,36 @@
 import React, { useState } from 'react';
-import './App.css';
-import IconList from './component/IconList/IconList';
-import OrHeader from './component/OrHeader/OrHeader';
-import OrFilter from './component/OrFilter/OrFilter';
-import './style.scss'
-import OrSubHeader from './component/OrSubHeader/OrSubHeader';
+import './App.scss';
+import OrSidebar from './component/OrSidebar/OrSidebar';
+import Home from './Page/Home/Home'; 
+import Icons from './Page/Icons/Icons'; // فراخوانی کامپوننت جدید Icons
+import Changelog from './Page/Changelog/Changelog';
 
-function App() {
-    const [searchTerm, setSearchTerm] = useState<string>('');
-    const [borderSize, setBorderSize] = useState<number>(1);
-    const [switchChecked, setSwitchChecked] = useState<boolean>(false);
-    const [selectedFolders, setSelectedFolders] = useState<string[]>([]);
-    const [folders, setFolders] = useState<string[]>(['Arrow','Devices','File + Documents','Interface', 'Weather',]); // باید با فولدرهای واقعی پر شود
-    const [isFilterVisible, setIsFilterVisible] = useState<boolean>(true);
+const App: React.FC = () => {
+  const [activePage, setActivePage] = useState<string>('Icons'); // می‌توانید پیش‌فرض روی Icons تنظیم کنید
 
+  const renderPage = () => {
+    switch (activePage) {
+        case 'Home':
+            return <Home />;
 
-    const handleSearch = (term: string) => {
-        setSearchTerm(term);
-    };
+        case 'Icons':
+            return <Icons />;
 
-    const handleSliderChange = (value: number) => {
-        setBorderSize(value);
-    };
+        case 'Changelog':
+            return <Changelog />;
+      default:
+        return <Home />;
+    }
+  };
 
-    const handleSwitchChange = (checked: boolean) => {
-        setSwitchChecked(checked);
-    };
-
-    const handleFolderChange = (folders: string[]) => {
-        setSelectedFolders(folders);
-    };
-
-    const handleReset = () => {
-        setSelectedFolders([]);
-    };
-
-    const toggleFilter = () => {
-        setIsFilterVisible(prevState => !prevState);
-    };
-
-    return (
-        <div className='main'>
-            {isFilterVisible && (
-                <OrFilter
-                    borderSize={borderSize}
-                    onSliderChange={handleSliderChange}
-                    switchChecked={switchChecked}
-                    onSwitchChange={handleSwitchChange}
-                    folders={folders}
-                    selectedFolders={selectedFolders}
-                    onFolderChange={handleFolderChange}
-                    onResetFilters={handleReset}
-                    toggleFilter={toggleFilter}
-                    isFilterVisible={isFilterVisible}  
-                />
-            )}
-            <div className='view'>
-            <OrHeader 
-            onSearch={handleSearch}
-            />
-
-            <OrSubHeader
-            toggleFilter={toggleFilter}
-            isFilterVisible={isFilterVisible}
-            />
-            
-            <IconList
-                searchTerm={searchTerm}
-                borderSize={borderSize}
-                switchChecked={switchChecked}
-                selectedFolders={selectedFolders} // ارسال پراپرتی جدید به IconList
-            />
-            </div>
-            
-        </div>
-    );
-}
+  return (
+    <div className="app-container">
+      <OrSidebar setActivePage={setActivePage} activePage={activePage} /> {/* نوار کناری */}
+      <div className="main-content">
+        {renderPage()} {/* محتوای اصلی */}
+      </div>
+    </div>
+  );
+};
 
 export default App;
