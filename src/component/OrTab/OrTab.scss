@@ -1,0 +1,50 @@
+.or-tab {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+
+  &.segment-control {
+    /* استایل برای حالت سگمنت کنترل */
+  }
+
+  &.tabs {
+    border-bottom: 2px solid #ddd;
+  }
+}
+
+.tab-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+
+  &.active {
+    background-color: #007bff;
+    color: white;
+  }
+
+  &:hover {
+    background-color: #d0d0d0;
+  }
+
+  .tabs & {
+    background-color: transparent;
+    border-radius: 0;
+    padding: 10px 0;
+    border-bottom: 2px solid transparent;
+
+    &.active {
+      background-color: transparent;
+      border-bottom: 2px solid #007bff;
+      color: #007bff;
+    }
+
+    &:hover {
+      background-color: transparent;
+      color: #007bff;
+    }
+  }
+}

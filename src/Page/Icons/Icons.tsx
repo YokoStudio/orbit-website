@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import './Icons.scss'; // اگر نیاز به فایل CSS اختصاصی دارید
-import IconList from '../../component/IconList/IconList';
+import './Icons.scss'; 
+import ShapeIcon from '../../component/ShapeIcon/ShapeIcon';
+import StrokeIcon from '../../component/StrokeIcon/StrokeIcon';
 import OrHeader from '../../component/OrHeader/OrHeader';
 import OrFilter from '../../component/OrFilter/OrFilter';
 import '../../base/style.scss';
@@ -11,8 +12,9 @@ const Icons: React.FC = () => {
     const [borderSize, setBorderSize] = useState<number>(1);
     const [switchChecked, setSwitchChecked] = useState<boolean>(false);
     const [selectedFolders, setSelectedFolders] = useState<string[]>([]);
-    const [folders, setFolders] = useState<string[]>(['Arrow', 'Devices', 'File + Documents', 'Interface', 'Weather']); // باید با فولدرهای واقعی پر شود
+    const [folders, setFolders] = useState<string[]>(['Arrow', 'Devices', 'File + Documents', 'Interface', 'Weather']); 
     const [isFilterVisible, setIsFilterVisible] = useState<boolean>(true);
+    const [activeTab, setActiveTab] = useState<string>('Shape'); 
 
     const handleSearch = (term: string) => {
         setSearchTerm(term);
@@ -38,6 +40,10 @@ const Icons: React.FC = () => {
         setIsFilterVisible(prevState => !prevState);
     };
 
+    const handleTabChange = (tab: string) => {
+        setActiveTab(tab); // به روزرسانی تب فعال
+    };
+
     return (
         <div className='main'>
             {isFilterVisible && (
@@ -52,17 +58,31 @@ const Icons: React.FC = () => {
                     onResetFilters={handleReset}
                     toggleFilter={toggleFilter}
                     isFilterVisible={isFilterVisible}
+                    onTabChange={handleTabChange} // ارسال تابع تغییر تب
                 />
             )}
             <div className='view'>
                 <OrHeader onSearch={handleSearch} />
                 <OrSubHeader toggleFilter={toggleFilter} isFilterVisible={isFilterVisible} />
-                <IconList
-                    searchTerm={searchTerm}
-                    borderSize={borderSize}
-                    switchChecked={switchChecked}
-                    selectedFolders={selectedFolders} // ارسال پراپرتی جدید به IconList
-                />
+                
+                {activeTab === 'Stroke' && (
+                    <StrokeIcon 
+                        searchTerm={searchTerm}
+                        borderSize={borderSize}
+                        switchChecked={switchChecked}
+                        selectedFolders={selectedFolders}
+                    />
+                    )}
+
+                {activeTab === 'Shape' && (
+                    <ShapeIcon  
+                        searchTerm={searchTerm}
+                        borderSize={borderSize}
+                        switchChecked={switchChecked}
+                        selectedFolders={selectedFolders}
+                    />
+                    )}
+
             </div>
         </div>
     );

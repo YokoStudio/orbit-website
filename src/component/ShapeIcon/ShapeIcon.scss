@@ -1,0 +1,60 @@
+@import '../../base/style.scss';
+
+.icon-shape-body{
+    padding: $space8;
+    display: flex;
+    max-width: 1400px;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+.icon-list{
+    display: grid;
+    grid-template-columns: repeat(8, 2fr);
+    width: 100%;
+
+    @media screen and (max-width: 1200px){
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    @media screen and (max-width: 920px){
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media screen and (max-width: 480px){
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+}
+
+.item{
+    display: flex;
+    flex-direction: column;
+
+    a {
+
+        text-align: center;
+        vertical-align: middle;
+        background-color: white ;
+        border: $neutral-border-10-default 1px solid;
+        border-radius: 16px;
+        margin: 4px;
+        padding: 24px;
+        height: 80px;
+        cursor: pointer;
+        color: $neutral-fg-4-default;
+        text-decoration: none;
+        
+        
+        &:hover{
+            border: $neutral-border-10-default 1px solid;
+            background-color: $neutral-bg-1-hover;
+        }
+        
+      }
+}
+.icon-view{
+   
+    width: 40px;
+    height: 40px;
+}
