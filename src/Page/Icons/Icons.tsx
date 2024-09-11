@@ -61,14 +61,14 @@ const Icons: React.FC = () => {
                     onTabChange={handleTabChange} // ارسال تابع تغییر تب
                 />
             )}
-            <div className='view'>
-                <OrHeader onSearch={handleSearch} />
-                <OrSubHeader toggleFilter={toggleFilter} isFilterVisible={isFilterVisible} />
+            
+                <div className='view'>
+                    <OrHeader onSearch={handleSearch} />
+                    <OrSubHeader toggleFilter={toggleFilter} isFilterVisible={isFilterVisible} />
                 
                 {activeTab === 'Stroke' && (
                     <StrokeIcon 
                         searchTerm={searchTerm}
-                        borderSize={borderSize}
                         switchChecked={switchChecked}
                         selectedFolders={selectedFolders}
                     />
@@ -77,7 +77,6 @@ const Icons: React.FC = () => {
                 {activeTab === 'Shape' && (
                     <ShapeIcon  
                         searchTerm={searchTerm}
-                        borderSize={borderSize}
                         switchChecked={switchChecked}
                         selectedFolders={selectedFolders}
                     />

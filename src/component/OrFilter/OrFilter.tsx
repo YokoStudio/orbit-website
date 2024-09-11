@@ -40,26 +40,20 @@ const OrFilter: React.FC<OrFilterProps> = ({
     const [activeTab, setActiveTab] = useState<string>('Stroke'); // تب فعال
 
     // تب‌های موجود
-    const tabs = ['Shape', 'Stroke'];
+    const tabs = ['Stroke','Shape' ];
 
     const renderTabContent = () => {
         switch (activeTab) {
+            case 'Stroke':
+                return (
+                    <div className='customize-section'>
+                        <OrSlider value={borderSize} onChange={onSliderChange} />
+                    </div>
+                );
             case 'Shape':
                 return (
                     <div className='customize-section'>
                         <OrSwitch checked={switchChecked} onChange={onSwitchChange} />
-                        <OrSlider value={borderSize} onChange={onSliderChange} />
-                    </div>
-                );
-            case 'Stroke':
-                return (
-                    <div className='checkbox-section'>
-                        <OrCheckboxFilter  
-                            folders={folders}
-                            selectedFolders={selectedFolders}
-                            onFolderChange={onFolderChange}
-                            onResetFilters={onResetFilters}
-                        />
                     </div>
                 );
             default:
@@ -72,17 +66,15 @@ const OrFilter: React.FC<OrFilterProps> = ({
             <div className='filter-body'>
                 <div className='filter-header'> {/* header */}
                     <div>
-                        <img src={TuneIcon} alt='Logo' width='32px' height='32px' />
+                        <img src={TuneIcon} alt='Tune' width='32px' height='32px' />
                         <span className='h6-strong'>Customize</span>
                     </div>
                     <OrButton onClick={toggleFilter} appearance='ghost' variant='secondary' icon={<Icon.cross />} size='sm' />
-                </div> 
-
+                </div>
                 {/* کامپوننت OrTab برای نمایش تب‌ها */}
                 <OrTab 
                     tabs={tabs} 
                     onTabChange={(tab: string) => {
-                        console.log('Tab changed to:', tab); // برای بررسی تغییرات تب
                         setActiveTab(tab); // تب داخلی
                         onTabChange(tab);  // به‌روزرسانی تب در والد (Icons)
                     }} 
@@ -90,6 +82,12 @@ const OrFilter: React.FC<OrFilterProps> = ({
 
                 {/* محتوای تب فعال */}
                 {renderTabContent()}
+                <OrCheckboxFilter  
+                    folders={folders}
+                    selectedFolders={selectedFolders}
+                    onFolderChange={onFolderChange}
+                    onResetFilters={onResetFilters}
+                />
             </div>
 
             <div className='backdrop' />

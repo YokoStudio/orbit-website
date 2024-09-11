@@ -6,12 +6,11 @@ import { XMLParser } from 'fast-xml-parser'; // اضافه کردن این کت�
 
 interface StrokeIconProps {
     searchTerm: string;
-    borderSize: number;
     switchChecked: boolean;
     selectedFolders: string[];
 }
 
-const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, borderSize, switchChecked, selectedFolders }) => {
+const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, switchChecked, selectedFolders }) => {
     const [icons, setIcons] = useState<{ name: string; path: string }[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -48,7 +47,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, borderSize, switchC
         .filter(icon => icon.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
         .filter(icon => {
-            const iconFolder = icon.path.split('/')[1];
+            const iconFolder = icon.path.split('/')[2];
             return selectedFolders.length === 0 || selectedFolders.includes(iconFolder);
         });
 

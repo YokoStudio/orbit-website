@@ -6,12 +6,11 @@ import { XMLParser } from 'fast-xml-parser'; // اضافه کردن این کت�
 
 interface ShapeIconProps {
     searchTerm: string;
-    borderSize: number;
     switchChecked: boolean;
     selectedFolders: string[];
 }
 
-const ShapeIcon: React.FC<ShapeIconProps> = ({ searchTerm, borderSize, switchChecked, selectedFolders }) => {
+const ShapeIcon: React.FC<ShapeIconProps> = ({ searchTerm, switchChecked, selectedFolders }) => {
     const [icons, setIcons] = useState<{ name: string; path: string }[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -52,12 +51,12 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({ searchTerm, borderSize, switchChe
             return icon.path.includes(iconType);
         })
         .filter(icon => {
-            const iconFolder = icon.path.split('/')[1];
+            const iconFolder = icon.path.split('/')[2];
             return selectedFolders.length === 0 || selectedFolders.includes(iconFolder);
         });
 
     return (
-        <div className="icon-shape-body">
+        <div className="icon-body">
             {loading ? (
                 <div><span>Loading...</span></div>
             ) : error ? (
