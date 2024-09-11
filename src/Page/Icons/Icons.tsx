@@ -61,7 +61,7 @@ const Icons: React.FC = () => {
                     onTabChange={handleTabChange} // ارسال تابع تغییر تب
                 />
             )}
-            
+
                 <div className='view'>
                     <OrHeader onSearch={handleSearch} />
                     <OrSubHeader toggleFilter={toggleFilter} isFilterVisible={isFilterVisible} />

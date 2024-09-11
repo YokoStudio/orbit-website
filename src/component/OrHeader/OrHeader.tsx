@@ -31,7 +31,7 @@ const OrHeader: React.FC<OrHeaderProps> = ({
             const keys = xmlDoc.getElementsByTagName("Key");
 
             // تعریف الگوی regex برای فیلتر کردن مسیرها
-            const regex = /^Icons\/[^\/]+\/fill\/1\//;
+            const regex = /^Icons\/stroke\/[^\/]+\//;
 
             // فیلتر کردن آیکون‌هایی که با الگوی regex مطابقت دارند
             const filteredIcons = Array.from(keys).filter((key: any) =>

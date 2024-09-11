@@ -25,7 +25,7 @@ const App: React.FC = () => {
 
   return (
     <div className="app-container">
-      <OrSidebar setActivePage={setActivePage} activePage={activePage} /> {/* نوار کناری */}
+      <OrSidebar setActivePage={setActivePage} activePage={activePage} />
       <div className="main-content">
         {renderPage()} {/* محتوای اصلی */}
       </div>
