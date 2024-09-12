@@ -35,38 +35,60 @@
     width: 66px;
     align-items: center;
     gap: $space0-5;
+    cursor: pointer;
+
+        div{
+            &.icon-wrapper{
+                display: flex;
+                background-color: $neutral-bg-1-default;
+                width: 44px;
+                height: 44px;
+                justify-content: center;
+                align-items: center;
+                border-radius: $radius3 ;
+                transition: width 0.1s ease-in-out, background-color 0.2s ease-in-out;
+            }
+        }
+
+
+        &:hover{
+            div{
+                &.icon-wrapper{
+                    background-color: $neutral-bg-1-hover;
+                    width: 64px;
+                    height: 44px;
+                    transition: width 0.1s ease-in-out;
+                }
+            }
+        }
     
+        &:active{
+            div{
+                &.icon-wrapper{
+                    background-color: $neutral-bg-1-press; 
+                    transition: width 0.1s ease-in-out;
+                }
+            }
+        }
+
+        div{
+            &.icon-wrapper{
+                &.active{
+                    background-color: $neutral-bg-1-select;
+                    transition: width 0.1s ease-in-out;
+                }
+            }
+        }
+}
+        
+    
+    
+
     
     
  
 
-    .icon-wrapper{
-        background-color: $neutral-bg-1-default;
-        width: 44px;
-        height: 44px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: $radius3 ;
-        transition: background-color 0.2s ease-in-out;
-        cursor: pointer;
-        
-        &.active{
-            background-color: $neutral-bg-1-select;
-        }
-
-            &:hover{
-                background-color: $neutral-bg-1-hover;
-            }
     
-            &:active{
-                background-color: $neutral-bg-1-press;
-            }
-            
-
-          
-    }
-}
 
 
 

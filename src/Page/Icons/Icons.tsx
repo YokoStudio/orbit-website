@@ -10,10 +10,10 @@ import OrSubHeader from '../../component/OrSubHeader/OrSubHeader';
 const Icons: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [borderSize, setBorderSize] = useState<number>(1);
-    const [switchChecked, setSwitchChecked] = useState<boolean>(false);
+    const [switchChecked, setSwitchChecked] = useState<boolean>(true);
     const [selectedFolders, setSelectedFolders] = useState<string[]>([]);
-    const [folders, setFolders] = useState<string[]>(['Arrow', 'Devices', 'File + Documents', 'Interface', 'Weather']); 
-    const [isFilterVisible, setIsFilterVisible] = useState<boolean>(true);
+    const [folders, setFolders] = useState<string[]>(['Interface', 'Weather']); 
+    const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
     const [activeTab, setActiveTab] = useState<string>('Shape'); 
 
     const handleSearch = (term: string) => {
@@ -69,7 +69,6 @@ const Icons: React.FC = () => {
                 {activeTab === 'Stroke' && (
                     <StrokeIcon 
                         searchTerm={searchTerm}
-                        switchChecked={switchChecked}
                         selectedFolders={selectedFolders}
                     />
                     )}
