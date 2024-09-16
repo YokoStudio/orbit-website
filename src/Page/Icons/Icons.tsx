@@ -15,6 +15,7 @@ const Icons: React.FC = () => {
     const [folders, setFolders] = useState<string[]>(['Interface', 'Weather']); 
     const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
     const [activeTab, setActiveTab] = useState<string>('Shape'); 
+    const [iconColor, setIconColor] = useState<string>('#FF0000');
 
     const handleSearch = (term: string) => {
         setSearchTerm(term);
@@ -78,6 +79,7 @@ const Icons: React.FC = () => {
                         searchTerm={searchTerm}
                         switchChecked={switchChecked}
                         selectedFolders={selectedFolders}
+                        iconColor={iconColor}
                     />
                     )}
 

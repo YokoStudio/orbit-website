@@ -39,7 +39,12 @@
     gap: 8px;
 
     &:hover{
-        background-color: $neutral-bg-1-hover;    
+        background-color: $neutral-bg-1-hover;   
+        svg{
+            width: 48px;
+            height: 48px;
+            transition: width 0.2s, height 0.2s; 
+        } 
     }
     &:active{
         background-color: $neutral-bg-2-press;
@@ -53,7 +58,7 @@
 }
 .svg-shape-icon svg {
     path{
-        fill: $neutral-fg-1-default;
+      
         
     }
 
