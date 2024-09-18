@@ -9,10 +9,15 @@ interface ShapeIconProps {
   searchTerm: string;
   switchChecked: boolean;
   selectedFolders: string[];
-  iconColor: string; // اضافه کردن رنگ به Props
+  iconColor: string;
 }
 
-const ShapeIcon: React.FC<ShapeIconProps> = ({ searchTerm, switchChecked, selectedFolders, iconColor='#ffffff' }) => {
+const ShapeIcon: React.FC<ShapeIconProps> = ({
+  searchTerm,
+  switchChecked,
+  selectedFolders,
+  iconColor = '#e01515',
+}) => {
   const [icons, setIcons] = useState<{ name: string; path: string }[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -44,7 +49,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({ searchTerm, switchChecked, select
   useEffect(() => {
     const filtered = icons
       .filter((icon) => icon.name.toLowerCase().includes(searchTerm.toLowerCase()))
-      .filter(icon => {
+      .filter((icon) => {
         const iconType = switchChecked ? 'fill' : 'outline';
         return icon.path.includes(iconType);
       })
@@ -60,9 +65,9 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({ searchTerm, switchChecked, select
     try {
       const response = await axios.get(url);
       const svgData = response.data;
-      // اعمال رنگ به محتوای SVG
-      const coloredSvg = svgData.replace(/fill="[^"]*"/g, `fill="${iconColor}"`)
-                                .replace(/stroke="[^"]*"/g, `fill="${iconColor}"`);
+      const coloredSvg = svgData
+        .replace(/fill="[^"]*"/g, `fill="${iconColor}"`)
+        .replace(/stroke="[^"]*"/g, `fill="${iconColor}"`);
       setSvgContent((prev) => ({
         ...prev,
         [iconName]: coloredSvg,
@@ -71,6 +76,14 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({ searchTerm, switchChecked, select
       console.error('Error fetching SVG content:', error);
     }
   };
+
+  useEffect(() => {
+    // فراخوانی مجدد محتوای SVG برای هر آیکون فیلتر شده
+    filteredIcons.forEach((icon) => {
+      const imageUrl = `https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir/${icon.path}`;
+      fetchSvgContent(imageUrl, icon.name); // واکشی هر آیکون و به‌روزرسانی محتوای SVG
+    });
+  }, [filteredIcons, iconColor]); // هر بار که لیست آیکون‌های فیلتر شده یا رنگ تغییر کرد، اجرا شود
 
   const handleDownload = (iconName: string, svgData: string) => {
     const blob = new Blob([svgData], { type: 'image/svg+xml' });
@@ -95,25 +108,21 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({ searchTerm, switchChecked, select
         <div className="icon-list">
           {filteredIcons.length > 0 ? (
             filteredIcons.map((icon) => {
-              const imageUrl = `https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir/${icon.path}`;
-
-              // اگر محتوای SVG هنوز بارگذاری نشده بود، آن را بارگذاری کنید
-              fetchSvgContent(imageUrl, icon.name);
-
+              const svgData = svgContent[icon.name];
               return (
                 <div className="item" key={icon.path}>
-                  {svgContent[icon.name] ? (
-                    <div className='icon-wrapper'>
-                        <div
-                            className="svg-shape-icon"
-                            dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
-                            onClick={() => handleDownload(icon.name, svgContent[icon.name])}
-                        />
+                  {svgData ? (
+                    <div className="icon-wrapper">
+                      <div
+                        className="svg-shape-icon"
+                        dangerouslySetInnerHTML={{ __html: svgData }}
+                        onClick={() => handleDownload(icon.name, svgData)}
+                      />
                     </div>
                   ) : (
-                    <span className='skelton'>Loading SVG...</span>
+                    <span className="skelton">Loading SVG...</span>
                   )}
-                  <span className='b2'>{icon.name.replace('.svg', '')}</span>
+                  <span className="b2">{icon.name.replace('.svg', '')}</span>
                 </div>
               );
             })
