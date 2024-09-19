@@ -15,7 +15,9 @@ const Icons: React.FC = () => {
     const [folders, setFolders] = useState<string[]>(['Interface', 'Weather']); 
     const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
     const [activeTab, setActiveTab] = useState<string>('Shape'); 
-    const [iconColor, setIconColor] = useState<string>('#FF0000');
+
+    const [iconColor, setIconColor] = useState<string>('#e01515');
+
 
     const handleSearch = (term: string) => {
         setSearchTerm(term);
@@ -45,6 +47,12 @@ const Icons: React.FC = () => {
         setActiveTab(tab); // به روزرسانی تب فعال
     };
 
+    const handleColorChange = (color: string) => {
+        setIconColor(color); // به‌روزرسانی رنگ انتخاب شده
+        
+        console.log('Selected color:', color);
+      };
+
     return (
         <div className='main'>
             {isFilterVisible && (
@@ -60,6 +68,7 @@ const Icons: React.FC = () => {
                     toggleFilter={toggleFilter}
                     isFilterVisible={isFilterVisible}
                     onTabChange={handleTabChange} // ارسال تابع تغییر تب
+                    onchangeColor={handleColorChange} // ارسال تابع تغییر رنگ
                 />
             )}
 
