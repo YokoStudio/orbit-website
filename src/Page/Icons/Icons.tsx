@@ -97,7 +97,6 @@
 // };
 
 // export default Icons;
-
 import React, { useState } from 'react';
 import './Icons.scss'; 
 import ShapeIcon from '../../component/ShapeIcon/ShapeIcon';
@@ -115,8 +114,9 @@ const Icons: React.FC = () => {
     const [folders] = useState<string[]>(['Interface', 'Weather']); // ثابت نگه‌داشتن لیست پوشه‌ها
     const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
     const [activeTab, setActiveTab] = useState<string>('Shape');
-    const [iconColor, setIconColor] = useState<string>('#e01515');
-
+    const [iconColor, setIconColor] = useState<string>('#000000'); // رنگ اولیه آیکون
+    const [strokeColor, setStrokeColor] = useState<string>('#000000'); // رنگ ��دید ��یکون
+    const [strokeWidth, setStrokeWidth] = useState<number>(2);
 
     // جستجو
     const handleSearch = (term: string) => {
@@ -125,6 +125,7 @@ const Icons: React.FC = () => {
 
     // تغییر سایز حاشیه
     const handleSliderChange = (value: number) => {
+        setStrokeWidth(value);
         setBorderSize(value);
     };
 
@@ -156,7 +157,9 @@ const Icons: React.FC = () => {
     // تغییر رنگ آیکون
     const handleIconColorChange = (color: string) => {
         setIconColor(color);
-    };
+        setStrokeColor(color);
+        
+    }
 
     return (
         <div className='main'>
@@ -188,6 +191,9 @@ const Icons: React.FC = () => {
                     <StrokeIcon 
                         searchTerm={searchTerm}
                         selectedFolders={selectedFolders}
+                        strokeColor= {strokeColor}
+                        strokeWidth={strokeWidth}
+                       
                     />
                 )}
 

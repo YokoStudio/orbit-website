@@ -56,6 +56,7 @@ const OrFilter: React.FC<OrFilterProps> = ({
                 return (
                     <div className='customize-section'>
                         <OrSlider value={borderSize} onChange={onSliderChange} />
+                        <OrInput initialValue={changeColor} onColorChange={handleColorChange} />
                     </div>
                 );
             case 'Shape':

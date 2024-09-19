@@ -14,7 +14,7 @@ const OrSlider: React.FC<OrSliderProps> = ({ value, onChange }) => {
                 type="range"
                 min="0.5"
                 max="1.5"
-                step="0.5"
+                step="0.1"
                 value={value}
                 onChange={(e) => onChange(Number(e.target.value))}
                 className="slider" />
