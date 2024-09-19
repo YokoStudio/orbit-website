@@ -10,7 +10,7 @@ interface ShapeIconProps {
   searchTerm: string;
   switchChecked: boolean;
   selectedFolders: string[];
-  iconColor: (Value: string) => void;
+  iconColor: string;
 }
 
 const ShapeIcon: React.FC<ShapeIconProps> = ({

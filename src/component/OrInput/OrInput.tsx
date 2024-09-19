@@ -6,7 +6,7 @@ interface OrInputProps {
   onColorChange?: (color: string) => void; // تابع برای ارسال رنگ انتخاب‌شده به کامپوننت والد
 }
 
-const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ffffff', onColorChange }) => {
+const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChange }) => {
   const [color, setColor] = useState<string>(initialValue);
 
   // تابع برای هندل کردن تغییرات در ورودی رنگ به‌صورت متنی

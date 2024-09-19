@@ -24,7 +24,7 @@ interface OrFilterProps {
     isFilterVisible: boolean; 
     onTabChange: (activeTab: string) => void;
     changeColor: string;
-    onchangeColor: (color: string) => void; // تغییر نام به onchangeColor
+    onChangeColor: (color: string) => void; // ارسال رنگ به کامپوننت والد
 }
 
 const OrFilter: React.FC<OrFilterProps> = ({
@@ -40,16 +40,14 @@ const OrFilter: React.FC<OrFilterProps> = ({
     isFilterVisible,
     onTabChange,
     changeColor,
-    onchangeColor // تغییر نام به onchangeColor
+    onChangeColor
 }) => {
-    const [activeTab, setActiveTab] = useState<string>('Stroke'); // تب فعال
+    const [activeTab, setActiveTab] = useState<string>('Stroke'); 
 
-    // تابعی برای مدیریت تغییر رنگ
     const handleColorChange = (color: string) => {
-        onchangeColor(color); // ارسال رنگ به کامپوننت والد
+        onChangeColor(color); // ارسال رنگ به کامپوننت والد
     };
 
-    // تب‌های موجود
     const tabs = ['Stroke', 'Shape'];
 
     const renderTabContent = () => {
@@ -64,7 +62,7 @@ const OrFilter: React.FC<OrFilterProps> = ({
                 return (
                     <div className='customize-section'>
                         <OrSwitch checked={switchChecked} onChange={onSwitchChange} />
-                        <OrInput onColorChange={handleColorChange} /> {/* ارسال تابع تغییر رنگ به OrInput */}
+                        <OrInput initialValue={changeColor} onColorChange={handleColorChange} /> {/* ارسال رنگ به OrInput */}
                     </div>
                 );
             default:
