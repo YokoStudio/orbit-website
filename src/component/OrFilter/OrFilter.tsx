@@ -8,7 +8,6 @@ import TuneIcon from '../../assets/icons/tune.svg';
 import Icon from "../../assets/Icon";
 import OrButton from '../OrButton/OrButton';
 import OrTab from '../OrTab/Ortab'
-import OrInput from '../OrInput/OrInput';
 
 // تعریف نوع Props
 interface OrFilterProps {
@@ -23,7 +22,6 @@ interface OrFilterProps {
     toggleFilter: () => void;
     isFilterVisible: boolean; 
     onTabChange: (activeTab: string) => void;
-    onchangeColor: (color: string) => void;
 }
 
 const OrFilter: React.FC<OrFilterProps> = ({
@@ -38,13 +36,8 @@ const OrFilter: React.FC<OrFilterProps> = ({
     toggleFilter,
     isFilterVisible,
     onTabChange,
-    onchangeColor,
 }) => {
     const [activeTab, setActiveTab] = useState<string>('Stroke'); // تب فعال
-    const handleColorChange = (color: string) => {
-        console.log('Selected color:', color);
-      };
-    
 
     // تب‌های موجود
     const tabs = ['Stroke','Shape' ];
@@ -61,7 +54,6 @@ const OrFilter: React.FC<OrFilterProps> = ({
                 return (
                     <div className='customize-section'>
                         <OrSwitch checked={switchChecked} onChange={onSwitchChange} />
-                        <OrInput onColorChange={handleColorChange}/>
                     </div>
                 );
             default:

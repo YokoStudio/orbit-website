@@ -12,14 +12,7 @@ interface ShapeIconProps {
   iconColor: string;
 }
 
-
-const ShapeIcon: React.FC<ShapeIconProps> = ({
-  searchTerm,
-  switchChecked,
-  selectedFolders,
-  iconColor = '#e01515',
-}) => {
-
+const ShapeIcon: React.FC<ShapeIconProps> = ({ searchTerm, switchChecked, selectedFolders, iconColor = '#ffffff' }) => {
   const [icons, setIcons] = useState<{ name: string; path: string }[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -67,41 +60,31 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
     setFilteredIcons(filtered);
   }, [icons, searchTerm, switchChecked, selectedFolders]);
 
+  // Fetch SVG content for all filtered icons
+  useEffect(() => {
+    const fetchAllSvgContent = async () => {
+      for (const icon of filteredIcons) {
+        const imageUrl = `https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir/${icon.path}`;
+        try {
+          const response = await axios.get(imageUrl);
+          const svgData = response.data;
+          const coloredSvg = svgData
+            .replace(/fill="[^"]*"/g, `fill="${iconColor}"`)
+            .replace(/stroke="[^"]*"/g, `stroke="${iconColor}"`);
+          setSvgContent((prev) => ({
+            ...prev,
+            [icon.name]: coloredSvg,
+          }));
+        } catch (error) {
+          console.error('Error fetching SVG content:', error);
+        }
+      }
+    };
 
-  const fetchSvgContent = async (url: string, iconName: string) => {
-    try {
-      const response = await axios.get(url);
-      const svgData = response.data;
-      const coloredSvg = svgData
-        .replace(/fill="[^"]*"/g, `fill="${iconColor}"`)
-        .replace(/stroke="[^"]*"/g, `fill="${iconColor}"`);
-      setSvgContent((prev) => ({
-        ...prev,
-        [iconName]: coloredSvg,
-      }));
-    } catch (error) {
-      console.error('Error fetching SVG content:', error);
-
+    if (filteredIcons.length > 0) {
+      fetchAllSvgContent();
     }
   }, [filteredIcons, iconColor]);
-
-  useEffect(() => {
-    // فراخوانی مجدد محتوای SVG برای هر آیکون فیلتر شده
-    filteredIcons.forEach((icon) => {
-      const imageUrl = `https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir/${icon.path}`;
-      fetchSvgContent(imageUrl, icon.name); // واکشی هر آیکون و به‌روزرسانی محتوای SVG
-    });
-  }, [filteredIcons, iconColor]); // هر بار که لیست آیکون‌های فیلتر شده یا رنگ تغییر کرد، اجرا شود
-
-  const handleDownload = (iconName: string, svgData: string) => {
-    const blob = new Blob([svgData], { type: 'image/svg+xml' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = iconName;
-    link.click();
-    URL.revokeObjectURL(url);
-  };
 
   return (
     <div className="icon-shape-body">
@@ -115,28 +98,27 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
       ) : (
         <div className="icon-list">
           {filteredIcons.length > 0 ? (
-
-            filteredIcons.map((icon) => {
-              const svgData = svgContent[icon.name];
-              return (
-                <div className="item" key={icon.path}>
-                  {svgData ? (
-                    <div className="icon-wrapper">
-                      <div
-                        className="svg-shape-icon"
-                        dangerouslySetInnerHTML={{ __html: svgData }}
-                        onClick={() => handleDownload(icon.name, svgData)}
-                      />
-                    </div>
-                  ) : (
-                    <span className="skelton">Loading SVG...</span>
-                  )}
-                  <span className="b2">{icon.name.replace('.svg', '')}</span>
-                </div>
-              );
-            })
-
-
+            filteredIcons.map((icon) => (
+              <div className="item" key={icon.path}>
+                {svgContent[icon.name] ? (
+                  <div className="icon-wrapper">
+                    <div
+                      className="svg-shape-icon"
+                      dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
+                      onClick={() => {
+                        const link = document.createElement('a');
+                        link.href = `https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir/${icon.path}`;
+                        link.download = icon.name;
+                        link.click();
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <span className="skelton">Loading SVG...</span>
+                )}
+                <span className="b2">{icon.name.replace('.svg', '')}</span>
+              </div>
+            ))
           ) : (
             <div>
               <span>Icon not found</span>
