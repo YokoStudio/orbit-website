@@ -4,19 +4,20 @@ import axios from 'axios';
 import { XMLParser } from 'fast-xml-parser';
 import loadingG from '../../assets/loading.gif';
 import '../../base/type-style.scss';
+import { Value } from 'sass';
 
 interface ShapeIconProps {
   searchTerm: string;
   switchChecked: boolean;
   selectedFolders: string[];
-  iconColor: string;
+  iconColor: (Value: string) => void;
 }
 
 const ShapeIcon: React.FC<ShapeIconProps> = ({
   searchTerm,
   switchChecked,
   selectedFolders,
-  iconColor = '#e01515',
+  iconColor,
 }) => {
   const [icons, setIcons] = useState<{ name: string; path: string }[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
