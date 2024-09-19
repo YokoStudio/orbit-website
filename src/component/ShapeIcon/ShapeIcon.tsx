@@ -12,22 +12,27 @@ interface ShapeIconProps {
   iconColor: string;
 }
 
+
 const ShapeIcon: React.FC<ShapeIconProps> = ({
   searchTerm,
   switchChecked,
   selectedFolders,
   iconColor = '#e01515',
 }) => {
+
   const [icons, setIcons] = useState<{ name: string; path: string }[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [svgContent, setSvgContent] = useState<{ [key: string]: string }>({});
   const [filteredIcons, setFilteredIcons] = useState<{ name: string; path: string }[]>([]);
 
+  // Fetch icons from the server
   useEffect(() => {
     const fetchIcons = async () => {
       try {
-        const response = await axios.get('https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir?prefix=icons/shape&max-keys=1000');
+        const response = await axios.get(
+          'https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir?prefix=icons/shape&max-keys=1000'
+        );
         const parser = new XMLParser();
         const jsonData = parser.parse(response.data);
         const fetchedIcons = jsonData.ListBucketResult.Contents.map((item: any) => ({
@@ -46,6 +51,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
     fetchIcons();
   }, []);
 
+  // Filter icons based on search term, type (fill/outline), and selected folders
   useEffect(() => {
     const filtered = icons
       .filter((icon) => icon.name.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -61,6 +67,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
     setFilteredIcons(filtered);
   }, [icons, searchTerm, switchChecked, selectedFolders]);
 
+
   const fetchSvgContent = async (url: string, iconName: string) => {
     try {
       const response = await axios.get(url);
@@ -74,8 +81,9 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
       }));
     } catch (error) {
       console.error('Error fetching SVG content:', error);
+
     }
-  };
+  }, [filteredIcons, iconColor]);
 
   useEffect(() => {
     // فراخوانی مجدد محتوای SVG برای هر آیکون فیلتر شده
@@ -107,6 +115,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
       ) : (
         <div className="icon-list">
           {filteredIcons.length > 0 ? (
+
             filteredIcons.map((icon) => {
               const svgData = svgContent[icon.name];
               return (
@@ -126,6 +135,8 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                 </div>
               );
             })
+
+
           ) : (
             <div>
               <span>Icon not found</span>
