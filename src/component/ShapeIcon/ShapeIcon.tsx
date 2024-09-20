@@ -106,7 +106,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
       ) : error ? (
         <p>{error}</p>
       ) : (
-        <div className="icon-list">
+        <div className="shape-icon-list">
           {filteredIcons.length > 0 ? (
             filteredIcons.map((icon) => {
               const svgData = svgContent[icon.name];
@@ -123,7 +123,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                   ) : (
                     <span className="skelton">Loading SVG...</span>
                   )}
-                  <span className="b2">{icon.name.replace('.svg', '')}</span>
+                  <span className="b2 icon-name">{icon.name.replace('.svg', '')}</span>
                 </div>
               );
             })

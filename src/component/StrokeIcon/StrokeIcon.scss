@@ -1,7 +1,7 @@
 @import '../../base/style.scss';
 
 .icon-stroke-body{
-    padding: $space8;
+    padding: $space6;
     display: flex;
     max-width: 1400px;
     width: 100%;
@@ -23,6 +23,8 @@
 
     @media screen and (max-width: 480px){
         grid-template-columns: repeat(3, 1fr);
+        padding: 8px;
+        margin-bottom: 64px;
 
     }
 }
@@ -80,3 +82,6 @@
     }
   }
   
+  .icon-name{
+    text-align: center;
+}

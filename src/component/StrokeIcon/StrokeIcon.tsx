@@ -110,7 +110,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
                 ) : (
                   <span className="skelton">Loading SVG...</span>
                 )}
-                <p>{icon.name.replace('.svg', '')}</p>
+                <span className="b2 icon-name">{icon.name.replace('.svg', '')}</span>
               </div>
             ))
           ) : (

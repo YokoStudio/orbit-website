@@ -20,7 +20,7 @@ const OrTab: React.FC<OrTabProps> = ({ tabs, onTabChange, isSegmentControl = tru
       {tabs.map((tab) => (
         <button
           key={tab}
-          className={`b2 tab-button ${activeTab === tab ? 'active' : ''}`}
+          className={`b2-strong tab-button ${activeTab === tab ? 'active' : ''}`}
           onClick={() => handleTabClick(tab)}
         >
           {tab}

@@ -11,7 +11,7 @@
         background-color: $neutral-bg-1-default;
         border-top: 1px solid $neutral-border-7-default;
         overflow-x: hidden;
-        padding: $space4 $space2;
+        padding: $space1 $space0 $space0 $space2;
         gap: $space0-5;
         display: flex;
         flex-direction: row;
@@ -83,18 +83,6 @@
             }
         }
 }
-        
-    
-    
-
-    
-    
- 
-
-    
-
-
-
 
 .main-container {
     display: flex;

@@ -19,8 +19,8 @@ const OrSlider: React.FC<OrSliderProps> = ({ value, onChange }) => {
                 onChange={(e) => onChange(Number(e.target.value))}
                 className="slider" />
             <div className="labels">
-                <span>Light</span>
-                <span>Bold</span>
+                <span>Light (0.5)</span>
+                <span>Bold (1.5)</span>
             </div>
         </div>
     );

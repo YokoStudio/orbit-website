@@ -6,12 +6,17 @@
     max-width: 1400px;
     width: 100%;
     box-sizing: border-box;
+    
+    @media screen and (max-width: 480px){
+    padding: $space2;
+    }
 
 }
-.icon-list{
+.shape-icon-list{
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     width: 100%;
+    overflow: hidden;
 
     @media screen and (max-width: 1200px){
         grid-template-columns: repeat(5, 1fr);
@@ -22,7 +27,8 @@
     }
 
     @media screen and (max-width: 480px){
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        margin-bottom: 64px;
 
     }
 }
@@ -38,6 +44,11 @@
     cursor: pointer;
     gap: 8px;
     transition: background-color 0.3s; 
+
+    @media screen and (max-width: 480px){
+        padding: $space1;
+
+    }
 
     svg{
         width: 40px;
@@ -100,3 +111,6 @@
     }
   }
 
+.icon-name{
+    text-align: center;
+}
