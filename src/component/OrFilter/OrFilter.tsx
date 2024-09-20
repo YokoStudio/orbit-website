@@ -8,6 +8,7 @@ import TuneIcon from '../../assets/icons/tune.svg';
 import Icon from "../../assets/Icon";
 import OrButton from '../OrButton/OrButton';
 import OrTab from '../OrTab/Ortab'
+import OrInput from '../OrInput/OrInput';
 
 // تعریف نوع Props
 interface OrFilterProps {
