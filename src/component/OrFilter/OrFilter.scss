@@ -99,6 +99,9 @@
     overflow: auto;
     box-sizing: border-box;
     height: 100%;
+    z-index: 2;
+    position: relative;
+    background-color: $neutral-bg-1-default;
 
     
 }
