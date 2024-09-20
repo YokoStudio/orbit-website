@@ -4,10 +4,9 @@ import './OrInput.scss'; // در صورت نیاز به استایل‌ها
 interface OrInputProps {
   initialValue?: string; // مقدار اولیه ورودی رنگ
   onColorChange?: (color: string) => void; // تابع برای ارسال رنگ انتخاب‌شده به کامپوننت والد
-  label?: string;
 }
 
-const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChange, label }) => {
+const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChange }) => {
   const [color, setColor] = useState<string>(initialValue);
 
   // تابع برای هندل کردن تغییرات در ورودی رنگ به‌صورت متنی
@@ -30,14 +29,10 @@ const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChan
     }
   };
 
-
-
   return (
-    <div className='field-input'>
+    <div className="color-input">
       {/* ورودی متنی برای وارد کردن کد رنگ */}
-    <span className='b1-strong'>{label}</span>
-     <div className="color-input">
-     <input
+      <input
         type="text"
         value={color}
         onChange={handleTextChange}
@@ -52,7 +47,6 @@ const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChan
         onChange={handleColorChange}
         className="color-picker"
       />
-     </div>
     </div>
   );
 };
