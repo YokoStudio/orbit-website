@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import OrSlider from '../OrSlider/OrSlider';
 import OrSwitch from '../OrSwitch/OrSwitch';
-import OrCheckboxFilter from '../OrCheckboxFilter/OrCheckboxFilter'; // اضافه کردن OrCheckboxFilter
+import OrCheckboxFilter from '../OrCheckboxFilter/OrCheckboxFilter';
 import './OrFilter.scss';
 import '../../base/style.scss';
 import TuneIcon from '../../assets/icons/tune.svg';
@@ -22,6 +22,8 @@ interface OrFilterProps {
     toggleFilter: () => void;
     isFilterVisible: boolean; 
     onTabChange: (activeTab: string) => void;
+    changeColor: string;
+    onChangeColor: (color: string) => void; // ارسال رنگ به کامپوننت والد
 }
 
 const OrFilter: React.FC<OrFilterProps> = ({
@@ -36,11 +38,16 @@ const OrFilter: React.FC<OrFilterProps> = ({
     toggleFilter,
     isFilterVisible,
     onTabChange,
+    changeColor,
+    onChangeColor
 }) => {
-    const [activeTab, setActiveTab] = useState<string>('Stroke'); // تب فعال
+    const [activeTab, setActiveTab] = useState<string>('Stroke'); 
 
-    // تب‌های موجود
-    const tabs = ['Stroke','Shape' ];
+    const handleColorChange = (color: string) => {
+        onChangeColor(color); // ارسال رنگ به کامپوننت والد
+    };
+
+    const tabs = ['Stroke', 'Shape'];
 
     const renderTabContent = () => {
         switch (activeTab) {
@@ -48,12 +55,14 @@ const OrFilter: React.FC<OrFilterProps> = ({
                 return (
                     <div className='customize-section'>
                         <OrSlider value={borderSize} onChange={onSliderChange} />
+                        <OrInput initialValue={changeColor} onColorChange={handleColorChange} />
                     </div>
                 );
             case 'Shape':
                 return (
                     <div className='customize-section'>
                         <OrSwitch checked={switchChecked} onChange={onSwitchChange} />
+                        <OrInput initialValue={changeColor} onColorChange={handleColorChange} /> {/* ارسال رنگ به OrInput */}
                     </div>
                 );
             default:
@@ -64,23 +73,21 @@ const OrFilter: React.FC<OrFilterProps> = ({
     return (
         <div className='or-filter'>
             <div className='filter-body'>
-                <div className='filter-header'> {/* header */}
+                <div className='filter-header'>
                     <div>
                         <img src={TuneIcon} alt='Tune' width='32px' height='32px' />
                         <span className='h6-strong'>Customize</span>
                     </div>
                     <OrButton onClick={toggleFilter} appearance='ghost' variant='secondary' icon={<Icon.cross />} size='sm' />
                 </div>
-                {/* کامپوننت OrTab برای نمایش تب‌ها */}
                 <OrTab 
                     tabs={tabs} 
                     onTabChange={(tab: string) => {
-                        setActiveTab(tab); // تب داخلی
-                        onTabChange(tab);  // به‌روزرسانی تب در والد (Icons)
+                        setActiveTab(tab); // به روزرسانی تب داخلی
+                        onTabChange(tab); // به‌روزرسانی تب در والد (Icons)
                     }} 
                 />   
 
-                {/* محتوای تب فعال */}
                 {renderTabContent()}
                 <OrCheckboxFilter  
                     folders={folders}
