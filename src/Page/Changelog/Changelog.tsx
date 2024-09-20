@@ -4,7 +4,7 @@ import '../../base/type-style.scss';
 
 const Changelog: React.FC = () => {
   return (
-    <div className='ch angelog-page'>
+    <div className='changelog-page'>
       <span className='t2-strong'>Changelog</span>
       <span>Comming soon...</span>
     </div>

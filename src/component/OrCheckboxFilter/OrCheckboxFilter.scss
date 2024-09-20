@@ -9,6 +9,12 @@
     width: 0;
     }
 
+.category-section {
+    display: flex;
+    flex-direction: column;
+    gap: $space2;
+    }
+
 .checkbox-container {
     border-radius: $space1;
     display: flex;
