@@ -7,8 +7,8 @@ interface OrTabProps {
   isSegmentControl?: boolean; // آیا کامپوننت به‌صورت کنترل سگمنت رندر شود یا تب
 }
 
-const OrTab: React.FC<OrTabProps> = ({ tabs, onTabChange, isSegmentControl = true }) => {
-  const [activeTab, setActiveTab] = useState(tabs[1]);
+const OrTab: React.FC<OrTabProps> = ({ tabs, onTabChange, isSegmentControl = false }) => {
+  const [activeTab, setActiveTab] = useState(tabs[0]);
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -16,11 +16,11 @@ const OrTab: React.FC<OrTabProps> = ({ tabs, onTabChange, isSegmentControl = tru
   };
 
   return (
-    <div className={`b2 or-tab ${isSegmentControl ? 'segment-control' : 'tabs'}`}>
+    <div className={`or-tab ${isSegmentControl ? 'segment-control' : 'tabs'}`}>
       {tabs.map((tab) => (
         <button
           key={tab}
-          className={`b2 tab-button ${activeTab === tab ? 'active' : ''}`}
+          className={`tab-button ${activeTab === tab ? 'active' : ''}`}
           onClick={() => handleTabClick(tab)}
         >
           {tab}
