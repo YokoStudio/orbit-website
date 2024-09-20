@@ -1,10 +1,12 @@
 import React from 'react';
+import './Home.scss';
+import '../../base/type-style.scss';
 
 const Home: React.FC = () => {
   return (
-    <div>
-      <h1>Home Page</h1>
-      <p>Welcome to the home page!</p>
+    <div className='home-page'>
+      <span className='t2-strong'>Home Page</span>
+      <span>Comming soon...</span>
     </div>
   );
 };

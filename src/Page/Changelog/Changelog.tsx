@@ -1,10 +1,12 @@
 import React from 'react';
+import './Changelog.scss';
+import '../../base/type-style.scss';
 
 const Changelog: React.FC = () => {
   return (
-    <div>
-      <h1>Changelog</h1>
-      <p>Welcome to the Changelog page!</p>
+    <div className='changelog-page'>
+      <span className='t2-strong'>Changelog</span>
+      <span>Comming soon...</span>
     </div>
   );
 };
