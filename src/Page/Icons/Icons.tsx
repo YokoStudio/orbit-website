@@ -109,14 +109,14 @@ import OrSubHeader from '../../component/OrSubHeader/OrSubHeader';
 const Icons: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [borderSize, setBorderSize] = useState<number>(1);
-    const [switchChecked, setSwitchChecked] = useState<boolean>(false);
+    const [switchChecked, setSwitchChecked] = useState<boolean>(true);
     const [selectedFolders, setSelectedFolders] = useState<string[]>([]);
-    const [folders] = useState<string[]>(['Arrow','Interface','Weather']); // ثابت نگه‌داشتن لیست پوشه‌ها
+    const [folders] = useState<string[]>(['Interface', 'Weather']); // ثابت نگه‌داشتن لیست پوشه‌ها
     const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
     const [activeTab, setActiveTab] = useState<string>('Shape');
     const [iconColor, setIconColor] = useState<string>('#000000'); // رنگ اولیه آیکون
     const [strokeColor, setStrokeColor] = useState<string>('#000000'); // رنگ ��دید ��یکون
-    const [strokeWidth, setStrokeWidth] = useState<number>(1);
+    const [strokeWidth, setStrokeWidth] = useState<number>(2);
 
     // جستجو
     const handleSearch = (term: string) => {
