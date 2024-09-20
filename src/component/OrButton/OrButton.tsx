@@ -12,6 +12,8 @@ interface OrButtonProps {
     iconPosition?: 'left' | 'right';
     size?: 'xs' |'sm' |'md' | 'lg' | 'xl';
     className?: string; 
+    layout: 'icon' | 'text' | 'icon-text';
+
 }
 
 const OrButton: React.FC<OrButtonProps> = ({ 
@@ -24,11 +26,12 @@ const OrButton: React.FC<OrButtonProps> = ({
         iconPosition = 'left',  
         size = 'md',
         className,
+        layout,
 
 
     }) => { 
         
-    const buttonClassName = `button ${variant} ${appearance} ${size} b1`;
+    const buttonClassName = `button ${layout} ${variant} ${appearance} ${size} b1`;
 
     return (
         <button 
@@ -36,9 +39,11 @@ const OrButton: React.FC<OrButtonProps> = ({
             onClick={onClick} 
             disabled={disabled}
             >
-                {icon && iconPosition === 'left' && <span className='icon'>{icon}</span>}
+                <div className="div-button">
+                    {icon && iconPosition === 'left' && <span className='icon'>{icon}</span>}
                 {text}  {/* نمایش متن کнопка */}
                 {icon && iconPosition === 'right' && <span className='icon'>{icon}</span>}
+                </div>
             </button>
     );
 };

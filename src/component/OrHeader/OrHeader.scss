@@ -2,6 +2,13 @@
 @import '../../base/style.scss';
 
 .main-header{
+    width: 100%;
+    position: sticky;
+    top: 0px;
+}
+
+
+.desk-header {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -29,6 +36,11 @@
     
     }
 
+    @media screen and (max-width: 1200px){
+    padding: $space2 $space4;
+    height: auto ;
+    border-bottom: none;
+    }
 }
 
 .search-box
@@ -86,9 +98,13 @@
     @media screen and (max-width: 1200px){
         flex-grow: 1;
     }
+    @media screen and (max-width: 1200px){
+        align-items: center;
+    }
+   
    
 }
-.logo{
+.desk-logo{
     padding: $space0 $space4;
 
     @media screen and (max-width: 1200px){
@@ -96,6 +112,11 @@
     }
 
    
+}
+
+.mobile-logo
+{
+
 }
 
 .header-action
@@ -110,6 +131,16 @@
 }
 .mobile-actions
 {
+    @media screen and (min-width: 1200px){
+        display: none;
+    }
+}
+
+.search-div-mobile{
+    background-color: $neutral-bg-1-default;
+    padding: $space2 $space4;
+    border-bottom: 1px solid $neutral-border-7-default;
+
     @media screen and (min-width: 1200px){
         display: none;
     }

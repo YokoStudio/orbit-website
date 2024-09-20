@@ -56,7 +56,7 @@ const OrFilter: React.FC<OrFilterProps> = ({
                 return (
                     <div className='tab-body'>
                         <OrSlider value={borderSize} onChange={onSliderChange} />
-                        <OrInput label='color' initialValue={changeColor} onColorChange={handleColorChange} />
+                        <OrInput label='Color' initialValue={changeColor} onColorChange={handleColorChange} />
                     </div>
                 );
             case 'Shape':
@@ -78,19 +78,20 @@ const OrFilter: React.FC<OrFilterProps> = ({
                     <img src={TuneIcon} alt='Tune' width='32px' height='32px' />
                     <span className='h6-strong'>Customize</span>
                 </div>
-                <OrButton onClick={toggleFilter} appearance='ghost' variant='secondary' icon={<Icon.cross />} size='sm' />
+                <OrButton layout='icon' onClick={toggleFilter} appearance='ghost' variant='secondary' icon={<Icon.cross />} size='sm' />
             </div>
             <div className='filter-body'>
             <div className='customize-section'>
-                
+                <div>
+                <span className='b1-strong'>Mode</span>
                 <OrTab 
                     tabs={tabs} 
-                    
                     onTabChange={(tab: string) => {
                     setActiveTab(tab); // به روزرسانی تب داخلی
                     onTabChange(tab); // به‌روزرسانی تب در والد (Icons)
                     }} 
-                />   
+                />  
+                </div> 
 
                 {renderTabContent()}
                 

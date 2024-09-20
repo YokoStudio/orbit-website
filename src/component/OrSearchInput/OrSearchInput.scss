@@ -3,18 +3,26 @@
 form{
     flex-grow: 1;
     display: flex;
+    
 }
 .search-input{
     background-color: $neutral-bg-1-default;
+    outline: 1px solid $neutral-border-6-default  ;
     flex-grow: 1;
     padding: $space0-5 $space0;
     border: 0px;
     height: 46px;
-    border: 1px solid black;
     padding-left: 48px;
     border-radius: $radius1;
     transition: background-color 0.2s ease-in-out;
     
+    img {
+        background-color: red;
+        position: absolute;
+        margin: 18px;
+        width: 16px;
+    }
+
     &:hover{
         background-color: $neutral-bg-1-hover ;
     }
@@ -23,8 +31,29 @@ form{
     
 }
 
-.input-icon{
-    position: absolute;
-    margin: 18px;
-    width: 16px;
+.sm{
+    height: 32px; 
+
+    .input-icon{
+        position: absolute;
+        margin: 186px;
+        width: 16px;
+    }
+}
+
+.input-icon-{
+
+    &sm{
+        
+        position: absolute;
+        margin: 9px;
+        width: 20px;
+    }
+
+    &lg{
+    
+        position: absolute;
+        margin: 16px;
+        width: 20px;
+    }
 }

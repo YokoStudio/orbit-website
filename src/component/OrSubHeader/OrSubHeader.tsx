@@ -18,6 +18,7 @@ const OrSubHeader: React.FC<OrSubHeaderProps> = ({
     return (
         <div className="sub-header">
             <OrButton
+            layout="icon-text"
             size="md"
             variant="secondary"
             appearance="outline"

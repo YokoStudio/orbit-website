@@ -12,6 +12,7 @@
    padding: $space1;
    display: flex;
    gap: $space1;
+   margin-top: $space2;
   }
 
   &.tabs {
@@ -28,11 +29,13 @@
   border-radius: 5px;
   transition: background-color 0.3s ease;
   width: 100%;
+  color: $neutral-fg-1-default;
 
   &.active {
     background-color: $neutral-bg-1-default;
     color: $brand-fg-1-default;
     cursor: auto;
+   
   }
 
   &:hover {

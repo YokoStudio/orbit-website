@@ -5,6 +5,7 @@ import OrButton from "../OrButton/OrButton";
 import OrSearchInput from "../OrSearchInput/OrSearchInput";
 import Logo from '../../assets/logo.svg';
 import Icon from '../../assets/Icon';
+import YokoLogo from '../../assets/Sign-logo-04.jpg';
 
 interface OrHeaderProps {
     children?: ReactNode;
@@ -18,32 +19,60 @@ const OrHeader: React.FC<OrHeaderProps> = ({
     const [iconCount, setIconCount] = useState<number>(0);
 
     // تابع برای خواندن تعداد آیکون‌ها از bucket
+    // const fetchIconCount = async () => {
+    //     try {
+    //         // دریافت لیست آیکون‌ها به صورت XML از bucket
+    //         const response = await axios.get('https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir?list-type=2');
+
+    //         // تبدیل XML به JSON
+    //         const parser = new DOMParser();
+    //         const xmlDoc = parser.parseFromString(response.data, "application/xml");
+
+    //         // گرفتن تمام تگ‌های <Key> که نشان دهنده مسیر آیکون‌ها هستند
+    //         const keys = xmlDoc.getElementsByTagName("Key");
+
+    //         // تعریف الگوی regex برای فیلتر کردن مسیرها
+    //         const regex = /^Icons\/[^\/]+\/[^\/]+\/[^\/]+\/[^\/]+\//;
+
+
+    //         // فیلتر کردن آیکون‌هایی که با الگوی regex مطابقت دارند
+    //         const filteredIcons = Array.from(keys).filter((key: any) =>
+    //             regex.test(key.textContent)
+    //         );
+
+    //         // تنظیم تعداد آیکون‌های فیلتر شده
+    //         setIconCount(filteredIcons.length);
+    //     } catch (error) {
+    //         console.error('Error fetching icon count:', error);
+    //     }
+    // };
     const fetchIconCount = async () => {
         try {
             // دریافت لیست آیکون‌ها به صورت XML از bucket
             const response = await axios.get('https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir?list-type=2');
-
+    
             // تبدیل XML به JSON
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(response.data, "application/xml");
-
+    
             // گرفتن تمام تگ‌های <Key> که نشان دهنده مسیر آیکون‌ها هستند
             const keys = xmlDoc.getElementsByTagName("Key");
-
-            // تعریف الگوی regex برای فیلتر کردن مسیرها
-            const regex = /^Icons\/[^\/]+\/[^\/]+\//;
-
-            // فیلتر کردن آیکون‌هایی که با الگوی regex مطابقت دارند
-            const filteredIcons = Array.from(keys).filter((key: any) =>
-                regex.test(key.textContent)
-            );
-
+    
+            // فیلتر کردن آیکون‌هایی که با فرمت SVG هستند
+            const svgIcons = Array.from(keys).filter((key: Element) => {
+                const filePath = key.textContent || '';
+                return filePath.endsWith('.svg');  // فقط فایل‌های SVG
+            });
+    
             // تنظیم تعداد آیکون‌های فیلتر شده
-            setIconCount(filteredIcons.length);
+            setIconCount(svgIcons.length);
         } catch (error) {
             console.error('Error fetching icon count:', error);
         }
     };
+    
+    
+    
 
     // استفاده از useEffect برای فراخوانی تابع در هنگام بارگذاری کامپوننت
     useEffect(() => {
@@ -55,11 +84,16 @@ const OrHeader: React.FC<OrHeaderProps> = ({
     };
 
     return (
-        <div className='main-header'>
-            <div className="logo">
+        <div className="main-header">
+            <div className='desk-header'>
+            <div className="desk-logo">
                 <a href="#"><img src={Logo} alt="logo" width="63px" height="47px"/></a>
             </div>
+            <div className="mobile-logo">
+                <a href="#"><img src={YokoLogo} alt="logo" height="40px"/></a>
+            </div>
             <div className="icon-pack-title"> 
+
                 <span className="t1-strong">Icon Pack</span> 
                 <span className="b1">{iconCount} Icons</span> {/* نمایش تعداد آیکون‌ها */}
             </div>
@@ -69,10 +103,14 @@ const OrHeader: React.FC<OrHeaderProps> = ({
             {children && <div className="children-container">{children}</div>}
             <div className="header-action">
                 {/* <OrButton variant='secondary' appearance="fill" size="lg" text="Get Start"/> */}
-                <OrButton variant='secondary' appearance="outline" size="lg" text="Download all"/>
+                <OrButton layout="text" variant='secondary' appearance="outline" size="lg" text="Download all"/>
             </div>
             <div className="mobile-actions">
-                <OrButton variant='secondary' appearance="outline" size="lg" icon={<Icon.dwonload/>} />
+                <OrButton layout="icon" variant='secondary' appearance="outline" size="md" icon={<Icon.dwonload/>} />
+            </div>
+            </div>
+            <div className="search-div-mobile">
+                <OrSearchInput onChange={handleSearchChange} placeholder="Search...." size="sm" />
             </div>
         </div>
     );

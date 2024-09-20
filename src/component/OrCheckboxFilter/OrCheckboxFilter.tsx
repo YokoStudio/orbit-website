@@ -32,7 +32,7 @@ const OrCheckboxFilter: React.FC<OrCheckboxFilterProps> = ({
         <div className='category-section'>
             <div className='category-list-title-box'>
                 <span className='t2-strong'>Category</span>
-                <OrButton onClick={handleReset} variant='secondary' appearance='outline' text='Reset' size='xs'/>
+                <OrButton layout='text' onClick={handleReset} variant='secondary' appearance='outline' text='Reset' size='xs'/>
             </div>
             {folders.map(folder => (
                 <div key={folder} className='checkbox-container'>

@@ -19,17 +19,18 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
 }) => {
 
     const OrSearchinputClassName = `search-input ${size}`;
+    const imgsize = `input-icon-${size}`;
 
     return (
         <form>
-            <img className="input-icon" src={SearchIcon} ></img>
-        <input
-            className={OrSearchinputClassName}
-            onClick={onClick}
-            onChange={onChange} 
-            disabled={disabled}
-            placeholder={placeholder}
-        />
+            <img className={imgsize} src={SearchIcon} ></img>
+            <input
+                className={OrSearchinputClassName}
+                onClick={onClick}
+                onChange={onChange} 
+                disabled={disabled}
+                placeholder={placeholder}
+            />
         </form>
     );
 };

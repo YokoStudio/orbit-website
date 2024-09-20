@@ -10,4 +10,8 @@
     box-sizing: border-box;
     width: 100%;
 
+    @media screen and (max-width: 1200px){
+        padding: $space2 $space4;
+    }
+
 }
