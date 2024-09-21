@@ -40,7 +40,7 @@ const OrButton: React.FC<OrButtonProps> = ({
             disabled={disabled}
             >
                 <div className="div-button">
-                    {icon && iconPosition === 'left' && <span className='icon'>{icon}</span>}
+                {icon && iconPosition === 'left' && <span className='icon'>{icon}</span>}
                 {text}  {/* نمایش متن کнопка */}
                 {icon && iconPosition === 'right' && <span className='icon'>{icon}</span>}
                 </div>

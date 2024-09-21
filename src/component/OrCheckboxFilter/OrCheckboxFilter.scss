@@ -27,7 +27,7 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: $space6;   
+    margin-bottom: $space2;   
     }
 
 .checkbox{
@@ -37,14 +37,16 @@
     margin-left: 10px;
     border-radius: 50%;
     background-color: white;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
 }
 .container{ 
     width: 100%;
     display: flex;
     flex-direction: row;
-    display: flex;
+    gap: 8px;
     align-items: center;
+    cursor: pointer;
+    
 
 }
 .container input ~ .checkmark{
@@ -54,23 +56,32 @@
     border-radius: $space1;
     pointer-events: fill;
     cursor: pointer;
+    padding-left: 40px;
+    transition: background-color 0.2s ease-in-out;
 
-    
 
 }
 
 .container input:hover ~ .checkmark {
     background-color: $neutral-bg-1-hover;
+    transition: background-color 0.2s ease-in-out;
 }
 
 
 .container input:checked ~ .checkmark {
-    background-color: $brand-bg-subtle-1-select;
-//    outline: solid 2px $brand-border-1-default;
+
+   outline: solid 2px $brand-border-1-default;
+   transition: background-color 0.2s ease-in-out;
 
 }
 .plus{
     display: auto;
+    width: 24px;
+
+    path{
+        fill: $neutral-fg-4-default;
+    
+    }
 }
 .container input:checked ~ .plus {
 display: none;
@@ -78,12 +89,34 @@ display: none;
 
 .minus{
     display: none;
+    path{
+        fill: $neutral-fg-4-default;
+    
+    }
 }
 .container input:checked ~ .minus {
 display: block;
 }
 
+.icon-count{
+    color: #646464;
+    position: absolute;
+    right: 40px;
+}
+.folder-icon{
+    position: absolute;
+    left: 56px;
+}
+.section-title{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: $neutral-fg-6-default;
+}
+.divider
+{
+    border: 1px solid $neutral-border-9-default;
 
-
-
-  
+    width: 100%;
+    height: 0px;
+}
