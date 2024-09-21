@@ -123,7 +123,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                   ) : (
                     <span className="skelton">Loading SVG...</span>
                   )}
-                  <span className="b2 icon-name">{icon.name.replace('.svg', '')}</span>
+                  <span className="b1 icon-name">{icon.name.replace('.svg', '')}</span>
                 </div>
               );
             })

@@ -99,7 +99,8 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
             filteredIcons.map((icon, index) => (
               <div className="item" key={index}>
                 {svgContent[icon.name] ? (
-                  <div
+                  <div className="icon-wrapper">
+                    <div
                     className="svg-container"
                     dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
                     onClick={() => {
@@ -107,6 +108,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
                       downloadSvg(icon.name, svgContent[icon.name]);
                     }}
                   />
+                  </div>
                 ) : (
                   <span className="skelton">Loading SVG...</span>
                 )}
