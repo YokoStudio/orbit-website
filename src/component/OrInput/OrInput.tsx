@@ -41,7 +41,7 @@ const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChan
         type="text"
         value={color}
         onChange={handleTextChange}
-        className="text-input"
+        className="b1 text-input"
         placeholder="#FFFFFF"
       />
 

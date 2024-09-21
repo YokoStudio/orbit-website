@@ -18,7 +18,7 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
     size = 'md',
 }) => {
 
-    const OrSearchinputClassName = `search-input ${size}`;
+    const OrSearchinputClassName = `b1 search-input ${size}`;
     const imgsize = `input-icon-${size}`;
 
     return (

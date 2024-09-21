@@ -1,8 +1,39 @@
+@import '../../base/type-style.scss';
+@import '../../base/style.scss';
+
+
 .home-page{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     height: 100vh;
-    gap: 16px
+    overflow: hidden;
+    gap: 16px;
+    box-sizing: border-box;
+    padding: 64px;
+}
+
+.sharp-text{
+    color: $brand-fg-1-default;
+}
+.home-badge{
+    background-color: $brand-bg-1-default;
+    color: $neutral-fg-10-default;
+    position: relative;
+    bottom: -20px;
+    width: fit-content;
+    padding: 8px;
+    border-radius: 4px ;
+}
+.hero{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    height: fit-content;
+    width: fit-content;
+}
+.hero-logo{
+    position: relative;
+    left: -24px;
 }
