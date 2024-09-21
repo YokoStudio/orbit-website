@@ -111,7 +111,7 @@ const Icons: React.FC = () => {
     const [borderSize, setBorderSize] = useState<number>(1);
     const [switchChecked, setSwitchChecked] = useState<boolean>(false);
     const [selectedFolders, setSelectedFolders] = useState<string[]>([]);
-    const [folders] = useState<string[]>(['Arrow','Interface','Weather']); // ثابت نگه‌داشتن لیست پوشه‌ها
+    const [folders] = useState<string[]>(['Arrow','Devices','Interface','Media','Editor','Maps','Shape','Weather']); // ثابت نگه‌داشتن لیست پوشه‌ها
     const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
     const [activeTab, setActiveTab] = useState<string>('Shape');
     const [iconColor, setIconColor] = useState<string>('#000000'); // رنگ اولیه آیکون
