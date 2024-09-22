@@ -5,10 +5,11 @@ interface OrTabProps {
   tabs: string[]; // لیستی از نام تب‌ها
   onTabChange: (tab: string) => void; // تابعی که تب فعال را به والد منتقل می‌کند
   isSegmentControl?: boolean; // آیا کامپوننت به‌صورت کنترل سگمنت رندر شود یا تب
+  initialTab: string;
 }
 
-const OrTab: React.FC<OrTabProps> = ({ tabs, onTabChange, isSegmentControl = true }) => {
-  const [activeTab, setActiveTab] = useState(tabs[1]);
+const OrTab: React.FC<OrTabProps> = ({ tabs, onTabChange, isSegmentControl = true, initialTab }) => {
+  const [activeTab, setActiveTab] = useState(initialTab || tabs[1]);
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);

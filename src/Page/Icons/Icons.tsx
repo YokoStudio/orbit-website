@@ -179,6 +179,7 @@ const Icons: React.FC = () => {
                     onTabChange={handleTabChange} 
                     changeColor={iconColor}  // رنگ فعلی را ارسال می‌کنیم
                     onChangeColor={handleIconColorChange}  // تابع تغییر رنگ
+                    initialTab={activeTab}
                 />
             )}
 

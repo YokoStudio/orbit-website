@@ -25,6 +25,7 @@ interface OrFilterProps {
     onTabChange: (activeTab: string) => void;
     changeColor: string;
     onChangeColor: (color: string) => void; // ارسال رنگ به کامپوننت والد
+    initialTab: string
 }
 
 const OrFilter: React.FC<OrFilterProps> = ({
@@ -40,9 +41,10 @@ const OrFilter: React.FC<OrFilterProps> = ({
     isFilterVisible,
     onTabChange,
     changeColor,
-    onChangeColor
+    onChangeColor,
+    initialTab
 }) => {
-    const [activeTab, setActiveTab] = useState<string>('Shape'); 
+    const [activeTab, setActiveTab] = useState<string>(initialTab || 'Shape'); 
 
     const handleColorChange = (color: string) => {
         onChangeColor(color); // ارسال رنگ به کامپوننت والد
@@ -85,7 +87,8 @@ const OrFilter: React.FC<OrFilterProps> = ({
                 <div>
                 <span className='b1-strong'>Mode</span>
                 <OrTab 
-                    tabs={tabs} 
+                    tabs={tabs}
+                    initialTab={initialTab}
                     onTabChange={(tab: string) => {
                     setActiveTab(tab); // به روزرسانی تب داخلی
                     onTabChange(tab); // به‌روزرسانی تب در والد (Icons)
