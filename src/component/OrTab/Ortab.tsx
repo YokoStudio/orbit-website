@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './OrTab.scss';
 
 interface OrTabProps {
-  tabs: string[]; // لیستی از نام تب‌ها
-  onTabChange: (tab: string) => void; // تابعی که تب فعال را به والد منتقل می‌کند
-  isSegmentControl?: boolean; // آیا کامپوننت به‌صورت کنترل سگمنت رندر شود یا تب
+  tabs: string[]; 
+  onTabChange: (tab: string) => void;
+  isSegmentControl?: boolean; 
   initialTab: string;
 }
 

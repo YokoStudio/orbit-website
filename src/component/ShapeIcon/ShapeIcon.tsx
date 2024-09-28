@@ -4,7 +4,7 @@ import axios from 'axios';
 import { XMLParser } from 'fast-xml-parser';
 import loadingG from '../../assets/loading.gif';
 import '../../base/type-style.scss';
-import { Value } from 'sass';
+import Fuse from 'fuse.js';
 
 interface ShapeIconProps {
   searchTerm: string;
@@ -48,8 +48,30 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
   }, []);
 
   useEffect(() => {
-    const filtered = icons
-      .filter((icon) => icon.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    const fuse = new Fuse(icons, {
+      // isCaseSensitive: false,
+      // includeScore: false,
+      // shouldSort: true,
+      // includeMatches: false,
+      // findAllMatches: false,
+      // minMatchCharLength: 1,
+      // location: 0,
+      threshold: 0.3,
+      // distance: 100,
+      // useExtendedSearch: false,
+      // ignoreLocation: false,
+      // ignoreFieldNorm: false,
+      // fieldNormWeight: 1,
+      keys: ['name']
+    });
+    const result = fuse.search(searchTerm);
+    console.log('Filtered icons:', result);
+    const iconsToBeFiltered = searchTerm 
+      ? result.map(({item: {name, path}}) => ({ name, path  }))
+      : icons
+
+    const filtered = iconsToBeFiltered
+      // .filter((icon) => icon.name.toLowerCase().includes(searchTerm.toLowerCase()))
       .filter((icon) => {
         const iconType = switchChecked ? 'fill' : 'outline';
         return icon.path.includes(iconType);
