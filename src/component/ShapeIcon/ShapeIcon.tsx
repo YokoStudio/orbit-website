@@ -244,7 +244,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
       ? result.map(({ item }) => item)
       : icons;
 
-      console.log(result);
+
 
     const filtered = iconsToBeFiltered
       .filter((icon) => {
