@@ -191,7 +191,7 @@ const OrCheckboxFilter: React.FC<OrCheckboxFilterProps> = ({
                 if (filePath.endsWith('.svg')) {
                     folders.forEach(folder => {
                         // بررسی اینکه آیا فایل در فولدر خاصی هست یا نه
-                        const regex = new RegExp(`${folder}/`);
+                        const regex = new RegExp(`stroke/${folder}/`);
                         if (regex.test(filePath)) {
                             counts[folder] = (counts[folder] || 0) + 1;
                         }

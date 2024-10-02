@@ -66,9 +66,7 @@
     &:hover{
         background-color: $neutral-bg-1-hover;   
         svg{
-            width: 48px;
-            height: 48px;
-            transition: width 0.2s, height 0.2s; 
+       
 
             @media screen and (max-width: 480px){
                 width: 32px;
@@ -116,4 +114,17 @@
     text-align: center;
     color: $neutral-fg-4-default;
 
+}
+.flot-button{
+    position: relative;
+    top: 0px;
+    right: -10px;
+    display: flex;
+    width: 100%;
+    flex-direction: row-reverse;
+   
+    button{
+        position: absolute;
+        top: 0px;
+    }
 }

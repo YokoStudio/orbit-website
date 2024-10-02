@@ -169,6 +169,9 @@ import { XMLParser } from 'fast-xml-parser';
 import loadingG from '../../assets/loading.gif';
 import '../../base/type-style.scss';
 import Fuse from 'fuse.js';
+import OrLoadding from '../OrLoading/OrLoading'
+import OrButton from '../OrButton/OrButton';
+import Icon from '../../assets/Icon';
 
 interface ShapeIconProps {
   searchTerm: string;
@@ -194,6 +197,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [svgContent, setSvgContent] = useState<{ [key: string]: string }>({});
   const [filteredIcons, setFilteredIcons] = useState<Icon[]>([]);
+  const [copyMessages, setCopyMessages] = useState<{ [key: string]: string | null }>({}); // وضعیت برای پیام کپی
 
   useEffect(() => {
     const fetchIcons = async () => {
@@ -251,10 +255,13 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
         const iconType = switchChecked ? 'fill' : 'outline';
         return icon.path.includes(iconType);
       })
+      .filter((icon) => icon.name.toLowerCase().endsWith('.svg'))
       .filter((icon) => {
         const iconFolder = icon.path.split('/')[2];
         return selectedFolders.length === 0 || selectedFolders.includes(iconFolder);
-      });
+      })
+
+      .sort((a, b) => a.name.localeCompare(b.name));
 
     setFilteredIcons(filtered);
   }, [icons, searchTerm, switchChecked, selectedFolders]);
@@ -279,7 +286,10 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
     return name
       .replace('.svg', '')          // حذف پسوند .svg
       .replace(/-\d+$/, '')        // حذف عدد از انتهای نام (مثلاً -2 یا -3)
-      .replace(/-/g, ' ');          // جایگزینی - با فاصله
+      .replace(/-/g, ' ')          // جایگزینی - با فاصله
+      .split(' ')                  // تقسیم نام به کلمات
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // تبدیل حرف اول هر کلمه به بزرگ
+      .join(' ');                  // ترکیب مجدد کلمات با فاصله
   };
 
   useEffect(() => {
@@ -299,6 +309,25 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
     URL.revokeObjectURL(url);
   };
 
+  const copyToClipboard = (iconName: string, svgContent: string) => {
+    navigator.clipboard.writeText(svgContent).then(() => {
+      setCopyMessages((prev) => ({
+        ...prev,
+        [iconName]: 'Copied!!',
+      }));
+
+      setTimeout(() => {
+        setCopyMessages((prev) => ({
+          ...prev,
+          [iconName]: null,
+        }));
+      }, 2000); // پیام بعد از 2 ثانیه ناپدید می‌شود
+    }).catch((err) => {
+      console.error('Failed to copy SVG: ', err);
+    });
+  };
+  
+
   return (
     <div className="icon-shape-body">
       {loading ? (
@@ -314,7 +343,24 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
             filteredIcons.map((icon) => {
               const svgData = svgContent[icon.name];
               return (
-                <div className="item" key={icon.path}>
+                <div className="item" onClick={() => handleDownload(icon.name, svgData)}>
+                  <div className='flot-button'  >
+                  <OrButton
+                    variant='secondary'
+                    size='xs'
+                    icon={<Icon.copy/>}
+                    appearance = 'outline'
+                    layout='icon'
+                    onClick={() => {
+                      copyToClipboard(icon.name, svgContent[icon.name]);
+                    }}
+                  />
+                  {copyMessages[icon.name] && ( // پیام فقط برای آیکون انتخاب شده
+                  <div className="tooltip">
+                    {copyMessages[icon.name]}
+                  </div>
+                )}
+                  </div>
                   {svgData ? (
                     <div className="icon-wrapper">
                       <div
@@ -322,9 +368,11 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                         dangerouslySetInnerHTML={{ __html: svgData }}
                         onClick={() => handleDownload(icon.name, svgData)}
                       />
+                  
+                  
                     </div>
                   ) : (
-                    <span className="skelton">Loading SVG...</span>
+                    <span className="skelton"></span>
                   )}
                   <span className="b2 icon-name">{formatIconName(icon.name)}</span>
                 </div>

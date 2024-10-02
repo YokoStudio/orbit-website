@@ -1,3 +1,5 @@
+
+
 // import React, { useEffect, useState } from 'react';
 // import './StrokeIcon.scss';
 // import axios from 'axios';
@@ -5,6 +7,7 @@
 // import loadingG from '../../assets/loading.gif';
 // import OrInput from '../OrInput/OrInput';
 // import Fuse from 'fuse.js';
+// import OrButton from '../OrButton/OrButton';
 
 // interface StrokeIconProps {
 //   searchTerm: string;
@@ -20,7 +23,7 @@
 // }
 
 // const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, strokeColor, strokeWidth }) => {
-//   const [icons, setIcons] = useState<{ name: string; path: string }[]>([]);
+//   const [icons, setIcons] = useState<Icon[]>([]);
 //   const [loading, setLoading] = useState<boolean>(true);
 //   const [error, setError] = useState<string | null>(null);
 //   const [svgContent, setSvgContent] = useState<{ [key: string]: string }>({});
@@ -36,10 +39,8 @@
 //           path: item.Key,
 //         }));
 
-        
 //         // واکشی JSON برای نام‌های مشابه
 //         const jsonResponse = await axios.get(`https://orbit-website.s3.ir-thr-at1.arvanstorage.ir/IconList.json?t=${Date.now()}`);
-
 //         const similarNamesData = jsonResponse.data;
 
 //         // ترکیب اطلاعات JSON با آیکون‌ها
@@ -50,7 +51,8 @@
 //         });
 
 
-//         setIcons(StrokeIcon);
+
+//         setIcons(iconsWithSimilarNames); // استفاده از آیکون‌ها با نام‌های مشابه
 //         setLoading(false);
 //       } catch (error) {
 //         console.error('Error fetching icons:', error);
@@ -62,14 +64,12 @@
 //     fetchIcons();
 //   }, []);
 
-
-
+//   const [copyMessage, setCopyMessage] = useState<string | null>(null);
 //   // دریافت محتوای SVG به عنوان متن
 //   const fetchSvgContent = async (url: string, iconName: string) => {
 //     try {
 //       const response = await axios.get(url);
 //       let svgData = response.data;
-//       // تغییر رنگ لبه‌های SVG و عرض لبه‌ها با استفاده از مقادیر انتخابی
 //       const coloredSvg = svgData
 //         .replace(/stroke="[^"]*"/g, `stroke="${strokeColor}"`)
 //         .replace(/stroke-width="[^"]*"/g, `stroke-width="${strokeWidth}px"`);
@@ -82,15 +82,22 @@
 //     }
 //   };
 
+//   const formatIconName = (name: string) => {
+//     return name
+//       .replace('.svg', '')          // حذف پسوند .svg
+//       .replace(/-\d+$/, '')        // حذف عدد از انتهای نام (مثلاً -2 یا -3)
+//       .replace(/-/g, ' ')          // جایگزینی - با فاصله
+//       .split(' ')                  // تقسیم نام به کلمات
+//       .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // تبدیل حرف اول هر کلمه به بزرگ
+//       .join(' ');                  // ترکیب مجدد کلمات با فاصله
+//   };
 //   useEffect(() => {
-//     // بارگذاری مجدد محتوای SVGها با تغییر رنگ و عرض لبه
 //     icons.forEach(icon => {
 //       const imageUrl = `https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir/${icon.path}`;
 //       fetchSvgContent(imageUrl, icon.name);
 //     });
 //   }, [strokeColor, strokeWidth, icons]);
 
-//   // تابع دانلود SVG با رنگ و عرض لبه
 //   const downloadSvg = (iconName: string, svgContent: string) => {
 //     const blob = new Blob([svgContent], { type: 'image/svg+xml' });
 //     const url = URL.createObjectURL(blob);
@@ -100,28 +107,38 @@
 //     link.click();
 //     URL.revokeObjectURL(url); // برای آزادسازی حافظه
 //   };
-//   useEffect(() => {
-//     const fuse = new Fuse(icons, {
-//       threshold: 0.3,
-//       includeMatches: true,
-//       keys: ['name', 'similarNames'], // جستجو در نام و نام‌های مشابه
+
+//   // جستجو در آیکون‌ها با استفاده از Fuse.js
+//   const fuse = new Fuse(icons, {
+//     threshold: 0.3,
+//     includeMatches: true,
+//     keys: ['name', 'similarNames'], // جستجو در نام و نام‌های مشابه
+//   });
+//   const result = fuse.search(searchTerm);
+//   const filteredIcons = searchTerm
+//     ? result.map(({ item }) => item)
+//     : icons;
+
+//   // فیلتر کردن بر اساس پوشه‌های انتخابی
+//   const finalIcons = filteredIcons
+//   .filter((icon) => icon.name.toLowerCase().endsWith('.svg'))
+//   .filter((icon) => {
+//     const iconFolder = icon.path.split('/')[2];
+//     return selectedFolders.length === 0 || selectedFolders.includes(iconFolder);
+//   })
+//   .sort((a, b) => a.name.localeCompare(b.name)); 
+  
+//   const copyToClipboard = (svgContent: string) => {
+//     navigator.clipboard.writeText(svgContent).then(() => {
+//       setCopyMessage('SVG copied to clipboard');
+//       setTimeout(() => {
+//         setCopyMessage(null);
+//       }, 2000); // پیام بعد از 2 ثانیه ناپدید می‌شود
+//     }).catch((err) => {
+//       console.error('Failed to copy SVG: ', err);
 //     });
-//     const result = fuse.search(searchTerm);
-//     const iconsToBeFiltered = searchTerm
-//       ? result.map(({ item }) => item)
-//       : icons;
-// })
-     
-
-
-//   const filteredIcons = icons
-//     .filter((icon) => icon.name.toLowerCase().includes(searchTerm.toLowerCase()))
-
-
-//     .filter((icon) => {
-//       const iconFolder = icon.path.split('/')[2];
-//       return selectedFolders.length === 0 || selectedFolders.includes(iconFolder);
-//     });
+//   };
+  
 
 //   return (
 //     <div className="icon-stroke-body">
@@ -134,24 +151,39 @@
 //         <p>{error}</p>
 //       ) : (
 //         <div className="icon-list">
-//           {filteredIcons.length > 0 ? (
-//             filteredIcons.map((icon, index) => (
+//           {finalIcons.length > 0 ? (
+//             finalIcons.map((icon, index) => (
 //               <div className="item" key={index}>
+//                 <OrButton
+//                       variant='secondary'
+//                       appearance = 'outline'
+//                       layout='icon'
+//                       className='copy-flot-button'
+//                       onClick={() => {
+//                       copyToClipboard(svgContent[icon.name]);
+//                     }}
+//                   />
+//                   {copyMessage && (
+//   <div className="tooltip">
+//     {copyMessage}
+//   </div>
+// )}
+
 //                 {svgContent[icon.name] ? (
 //                   <div className="icon-wrapper">
 //                     <div
-//                     className="svg-container"
-//                     dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
-//                     onClick={() => {
-//                       // دانلود SVG با رنگ و عرض لبه
-//                       downloadSvg(icon.name, svgContent[icon.name]);
-//                     }}
-//                   />
+//                       className="svg-container"
+//                       dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
+//                       onClick={() => {
+//                         downloadSvg(icon.name, svgContent[icon.name]);
+//                       }}
+//                       />
+                      
 //                   </div>
 //                 ) : (
-//                   <span className="skelton">Loading SVG...</span>
+//                   <span className="skelton"></span>
 //                 )}
-//                 <span className="b2 icon-name">{icon.name.replace('.svg', '')}</span>
+//                 <span className="b2 icon-name">{formatIconName(icon.name)}</span>
 //               </div>
 //             ))
 //           ) : (
@@ -166,13 +198,12 @@
 // };
 
 // export default StrokeIcon;
-
 import React, { useEffect, useState } from 'react';
 import './StrokeIcon.scss';
 import axios from 'axios';
 import { XMLParser } from 'fast-xml-parser';
 import loadingG from '../../assets/loading.gif';
-import OrInput from '../OrInput/OrInput';
+import OrButton from '../OrButton/OrButton';
 import Fuse from 'fuse.js';
 
 interface StrokeIconProps {
@@ -193,6 +224,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [svgContent, setSvgContent] = useState<{ [key: string]: string }>({});
+  const [copyMessages, setCopyMessages] = useState<{ [key: string]: string | null }>({}); // وضعیت برای پیام کپی
 
   useEffect(() => {
     const fetchIcons = async () => {
@@ -249,7 +281,10 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
     return name
       .replace('.svg', '')          // حذف پسوند .svg
       .replace(/-\d+$/, '')        // حذف عدد از انتهای نام (مثلاً -2 یا -3)
-      .replace(/-/g, ' ');          // جایگزینی - با فاصله
+      .replace(/-/g, ' ')          // جایگزینی - با فاصله
+      .split(' ')                  // تقسیم نام به کلمات
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // تبدیل حرف اول هر کلمه به بزرگ
+      .join(' ');                  // ترکیب مجدد کلمات با فاصله
   };
 
   useEffect(() => {
@@ -281,11 +316,32 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
     : icons;
 
   // فیلتر کردن بر اساس پوشه‌های انتخابی
-  const finalIcons = filteredIcons.filter((icon) => {
-    const iconFolder = icon.path.split('/')[2];
-    return selectedFolders.length === 0 || selectedFolders.includes(iconFolder);
-  });
+  const finalIcons = filteredIcons
+    .filter((icon) => icon.name.toLowerCase().endsWith('.svg'))
+    .filter((icon) => {
+      const iconFolder = icon.path.split('/')[2];
+      return selectedFolders.length === 0 || selectedFolders.includes(iconFolder);
+    })
+    .sort((a, b) => a.name.localeCompare(b.name)); 
+  
+  const copyToClipboard = (iconName: string, svgContent: string) => {
+    navigator.clipboard.writeText(svgContent).then(() => {
+      setCopyMessages((prev) => ({
+        ...prev,
+        [iconName]: 'Copied!!',
+      }));
 
+      setTimeout(() => {
+        setCopyMessages((prev) => ({
+          ...prev,
+          [iconName]: null,
+        }));
+      }, 2000); // پیام بعد از 2 ثانیه ناپدید می‌شود
+    }).catch((err) => {
+      console.error('Failed to copy SVG: ', err);
+    });
+  };
+  
   return (
     <div className="icon-stroke-body">
       {loading ? (
@@ -299,7 +355,24 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
         <div className="icon-list">
           {finalIcons.length > 0 ? (
             finalIcons.map((icon, index) => (
-              <div className="item" key={index}>
+              <div className="item" onClick={() => {
+                downloadSvg(icon.name, svgContent[icon.name]);
+              }}>
+                <OrButton
+                  variant='secondary'
+                  appearance='outline'
+                  layout='icon'
+                  className='copy-flot-button'
+                  onClick={() => {
+                    copyToClipboard(icon.name, svgContent[icon.name]);
+                  }}
+                />
+                {copyMessages[icon.name] && ( // پیام فقط برای آیکون انتخاب شده
+                  <div className="tooltip">
+                    {copyMessages[icon.name]}
+                  </div>
+                )}
+
                 {svgContent[icon.name] ? (
                   <div className="icon-wrapper">
                     <div
@@ -311,7 +384,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
                     />
                   </div>
                 ) : (
-                  <span className="skelton">Loading SVG...</span>
+                  <span className="skelton"></span>
                 )}
                 <span className="b2 icon-name">{formatIconName(icon.name)}</span>
               </div>
