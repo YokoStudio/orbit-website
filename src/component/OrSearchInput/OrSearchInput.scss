@@ -32,7 +32,8 @@ form{
 }
 
 .sm{
-    height: 32px; 
+    height: 40px; 
+    box-sizing: border-box;
 
     .input-icon{
         position: absolute;

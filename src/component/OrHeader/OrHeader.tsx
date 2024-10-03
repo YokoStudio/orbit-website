@@ -131,13 +131,17 @@ import Modal from '../OrDownloadModal/OrDownloadModal'; // Import the Modal comp
 interface OrHeaderProps {
     children?: ReactNode;
     onSearch: (searchTerm: string) => void;
+    toggleFilter: () => void; 
+    isFilterVisible: boolean;
 }
 
 const OrHeader: React.FC<OrHeaderProps> = ({ 
     children, 
-    onSearch 
+    onSearch,
+    toggleFilter, 
+    isFilterVisible 
 }) => { 
-    const [iconCount, setIconCount] = useState<number>(0);
+    const [iconCount, setIconCount] = useState<number>(123);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // State for modal
 
     const fetchIconCount = async () => {
@@ -167,22 +171,17 @@ const OrHeader: React.FC<OrHeaderProps> = ({
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen); // Toggle modal open/close
     };
+    const iconCountNumber = `Search on ${iconCount} icons ...`;
 
     return (
         <div className="main-header">
             <div className='desk-header'>
-                <div className="desk-logo">
-                    <a href="#"><img src={Logo} alt="logo" width="63px" height="47px"/></a>
+                <div className="logo">
+                    <a href="#"><img src={Logo} alt="logo" /></a>
                 </div>
-                <div className="mobile-logo">
-                    <a href="#"><img src={YokoLogo} alt="logo" height="40px"/></a>
-                </div>
-                <div className="icon-pack-title"> 
-                    <span className="t1-strong">Icon Pack</span> 
-                    <span className="b1">{iconCount} Icons</span> {/* نمایش تعداد آیکون‌ها */}
-                </div>
+                
                 <div className="search-div">
-                    <OrSearchInput onChange={handleSearchChange} placeholder="Search...." size="lg" />
+                    <OrSearchInput onChange={handleSearchChange} placeholder={iconCountNumber} size="lg" />
                 </div>
                 {children && <div className="children-container">{children}</div>}
                 <div className="header-action">
@@ -196,11 +195,13 @@ const OrHeader: React.FC<OrHeaderProps> = ({
                     />
                 </div>
                 <div className="mobile-actions">
-                    <OrButton onClick={toggleModal} layout="icon" variant='secondary' appearance="outline" size="md" icon={<Icon.dwonload/>} />
+                   
                 </div>
             </div>
             <div className="search-div-mobile">
                 <OrSearchInput onChange={handleSearchChange} placeholder="Search...." size="sm" />
+                <OrButton layout="icon-text" size="md" variant="secondary" appearance="outline" text="Filter" onClick={toggleFilter} icon={<Icon.tune/>}/>
+                <OrButton onClick={toggleModal} layout="icon" variant='secondary' appearance="outline" size="md" icon={<Icon.dwonload/>} />
             </div>
 
             {/* Modal component */}

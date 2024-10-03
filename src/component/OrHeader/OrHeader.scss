@@ -104,11 +104,13 @@
    
    
 }
-.desk-logo{
+.logo{
     padding: $space0 $space4;
-
+    width: 63px;
+    height: 47px;
     @media screen and (max-width: 1200px){
-        display: none;
+        width: 56px;
+        height: 20px;  
     }
 
    
@@ -140,6 +142,9 @@
     background-color: $neutral-bg-1-default;
     padding: $space2 $space4;
     border-bottom: 1px solid $neutral-border-7-default;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
     @media screen and (min-width: 1200px){
         display: none;

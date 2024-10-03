@@ -10,7 +10,7 @@ import Logo from '../../assets/logo.svg'
 
 const Home: React.FC = () => {
 
-  const [iconCount, setIconCount] = useState<number>(0);
+  const [iconCount, setIconCount] = useState<number>(123);
 
   const fetchIconCount = async () => {
     try {

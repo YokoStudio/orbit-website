@@ -1,103 +1,4 @@
-// import React, { useState } from 'react';
-// import './Icons.scss'; 
-// import ShapeIcon from '../../component/ShapeIcon/ShapeIcon';
-// import StrokeIcon from '../../component/StrokeIcon/StrokeIcon';
-// import OrHeader from '../../component/OrHeader/OrHeader';
-// import OrFilter from '../../component/OrFilter/OrFilter';
-// import '../../base/style.scss';
-// import OrSubHeader from '../../component/OrSubHeader/OrSubHeader';
-
-// const Icons: React.FC = () => {
-//     const [searchTerm, setSearchTerm] = useState<string>('');
-//     const [borderSize, setBorderSize] = useState<number>(1);
-//     const [switchChecked, setSwitchChecked] = useState<boolean>(true);
-//     const [selectedFolders, setSelectedFolders] = useState<string[]>([]);
-//     const [folders, setFolders] = useState<string[]>(['Interface', 'Weather']); 
-//     const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
-//     const [activeTab, setActiveTab] = useState<string>('Shape'); 
-//     const [iconColor, setIconColor] = useState<string>('#e01515');
-//     const [changeColor, setChangeColor] = useState<string>('#e01515');
-
-//     const handleSearch = (term: string) => {
-//         setSearchTerm(term);
-//     };
-
-//     const handleSliderChange = (value: number) => {
-//         setBorderSize(value);
-//     };
-
-//     const handleSwitchChange = (checked: boolean) => {
-//         setSwitchChecked(checked);
-//     };
-
-//     const handleFolderChange = (folders: string[]) => {
-//         setSelectedFolders(folders);
-//     };
-
-//     const handleReset = () => {
-//         setSelectedFolders([]);
-//     };
-
-//     const toggleFilter = () => {
-//         setIsFilterVisible(prevState => !prevState);
-//     };
-
-//     const handleTabChange = (tab: string) => {
-//         setActiveTab(tab); // به روزرسانی تب فعال
-//     };
-
-    
-
-//     const handleIconColorChange = (color: string) => {
-//         setIconColor(color); // رنگ جدید را به حالت کامپوننت والد اعمال کنید
-//     };
-
-//     return (
-//         <div className='main'>
-//             {isFilterVisible && (
-//                 <OrFilter 
-//                 borderSize={1} 
-//                 onSliderChange={() => {}} 
-//                 switchChecked={true} 
-//                 onSwitchChange={() => {}} 
-//                 folders={['Interface', 'Weather']} 
-//                 selectedFolders={[]} 
-//                 onFolderChange={() => {}} 
-//                 onResetFilters={() => {}} 
-//                 toggleFilter={() => {}} 
-//                 isFilterVisible={true} 
-//                 onTabChange={() => {}} 
-//                 changeColor={iconColor}  // رنگ را به `OrFilter` ارسال کنید
-//                 onChangeColor={handleIconColorChange}  // تابع تغییر رنگ را به `OrFilter` ارسال کنید
-//             />
-//             )}
-
-//             <div className='view'>
-//                 <OrHeader onSearch={handleSearch} />
-//                 <OrSubHeader toggleFilter={toggleFilter} isFilterVisible={isFilterVisible} />
-
-//                 {activeTab === 'Stroke' && (
-//                     <StrokeIcon 
-//                         searchTerm={searchTerm}
-//                         selectedFolders={selectedFolders}
-//                     />
-//                 )}
-
-//                 {activeTab === 'Shape' && (
-//                     <ShapeIcon  
-//                         searchTerm={searchTerm}
-//                         switchChecked={switchChecked}
-//                         selectedFolders={selectedFolders}
-//                         iconColor={handleIconColorChange} // ارسال رنگ به ShapeIcon
-//                     />
-//                 )}
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Icons;
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Icons.scss'; 
 import ShapeIcon from '../../component/ShapeIcon/ShapeIcon';
 import StrokeIcon from '../../component/StrokeIcon/StrokeIcon';
@@ -111,59 +12,67 @@ const Icons: React.FC = () => {
     const [borderSize, setBorderSize] = useState<number>(1);
     const [switchChecked, setSwitchChecked] = useState<boolean>(false);
     const [selectedFolders, setSelectedFolders] = useState<string[]>([]);
-    const [folders] = useState<string[]>(['Arrow','Devices','Interface','Media','Editor','Maps','Shape','Weather']); // ثابت نگه‌داشتن لیست پوشه‌ها
+    const [folders] = useState<string[]>(['Arrow', 'Devices', 'Interface', 'Media', 'Editor', 'Maps', 'Shape', 'Weather']); 
     const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
     const [activeTab, setActiveTab] = useState<string>('Shape');
-    const [iconColor, setIconColor] = useState<string>('#000000'); // رنگ اولیه آیکون
-    const [strokeColor, setStrokeColor] = useState<string>('#000000'); // رنگ ��دید ��یکون
+    const [iconColor, setIconColor] = useState<string>('#000000');
+    const [strokeColor, setStrokeColor] = useState<string>('#000000');
     const [strokeWidth, setStrokeWidth] = useState<number>(1);
 
-    // جستجو
+    // تابع تشخیص سایز صفحه برای تنظیم مقدار اولیه فیلتر
+    const handleResize = () => {
+        if (window.innerWidth < 768) {
+            setIsFilterVisible(false);  // موبایل
+        } else {
+            setIsFilterVisible(true);   // دسکتاپ
+        }
+    };
+
+    // اعمال مقدار اولیه و گوش دادن به تغییر اندازه صفحه
+    useEffect(() => {
+        handleResize();  // اعمال اولیه
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     const handleSearch = (term: string) => {
         setSearchTerm(term);
     };
 
-    // تغییر سایز حاشیه
     const handleSliderChange = (value: number) => {
         setStrokeWidth(value);
         setBorderSize(value);
     };
 
-    // تغییر وضعیت سوییچ
     const handleSwitchChange = (checked: boolean) => {
         setSwitchChecked(checked);
     };
 
-    // تغییر پوشه‌های انتخاب‌شده
     const handleFolderChange = (folders: string[]) => {
         setSelectedFolders(folders);
     };
 
-    // بازنشانی فیلترها
     const handleReset = () => {
         setSelectedFolders([]);
     };
 
-    // نمایش یا پنهان کردن فیلتر
     const toggleFilter = () => {
         setIsFilterVisible(prevState => !prevState);
     };
 
-    // تغییر تب فعال
     const handleTabChange = (tab: string) => {
         setActiveTab(tab);
     };
 
-    // تغییر رنگ آیکون
     const handleIconColorChange = (color: string) => {
         setIconColor(color);
         setStrokeColor(color);
-        
-    }
+    };
 
     return (
         <div className='main'>
-            {/* نمایش فیلتر فقط در صورت true بودن isFilterVisible */}
             {isFilterVisible && (
                 <OrFilter 
                     borderSize={borderSize} 
@@ -177,24 +86,26 @@ const Icons: React.FC = () => {
                     toggleFilter={toggleFilter} 
                     isFilterVisible={isFilterVisible} 
                     onTabChange={handleTabChange} 
-                    changeColor={iconColor}  // رنگ فعلی را ارسال می‌کنیم
-                    onChangeColor={handleIconColorChange}  // تابع تغییر رنگ
+                    changeColor={iconColor}  
+                    onChangeColor={handleIconColorChange}  
                     initialTab={activeTab}
                 />
             )}
 
             <div className='view'>
-                <OrHeader onSearch={handleSearch} />
+                <OrHeader 
+                onSearch={handleSearch}
+                toggleFilter={toggleFilter}
+                isFilterVisible={isFilterVisible}
+                 />
                 <OrSubHeader toggleFilter={toggleFilter} isFilterVisible={isFilterVisible} />
 
-                {/* نمایش آیکون‌ها بر اساس تب فعال */}
                 {activeTab === 'Stroke' && (
                     <StrokeIcon 
                         searchTerm={searchTerm}
                         selectedFolders={selectedFolders}
                         strokeColor= {strokeColor}
                         strokeWidth={strokeWidth}
-                       
                     />
                 )}
 
@@ -203,7 +114,7 @@ const Icons: React.FC = () => {
                         searchTerm={searchTerm}
                         switchChecked={switchChecked}
                         selectedFolders={selectedFolders}
-                        iconColor={iconColor}  // ارسال مقدار رنگ به ShapeIcon
+                        iconColor={iconColor}  
                     />
                 )}
             </div>
