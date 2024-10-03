@@ -201,7 +201,7 @@ const OrHeader: React.FC<OrHeaderProps> = ({
             <div className="search-div-mobile">
                 <OrSearchInput onChange={handleSearchChange} placeholder="Search...." size="sm" />
                 <OrButton layout="icon-text" size="md" variant="secondary" appearance="outline" text="Filter" onClick={toggleFilter} icon={<Icon.tune/>}/>
-                <OrButton onClick={toggleModal} layout="icon" variant='secondary' appearance="outline" size="md" icon={<Icon.dwonload/>} />
+                <OrButton onClick={toggleModal} layout="icon" variant='secondary' appearance="outline" size="md" icon={<Icon.download/>} />
             </div>
 
             {/* Modal component */}

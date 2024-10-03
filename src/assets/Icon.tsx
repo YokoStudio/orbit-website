@@ -11,7 +11,7 @@ const Icon = {
     search: SearchIcon,
     tune: TuneIcon,
     cross: CrossIcon,
-    dwonload: DonlowadIcon,
+    download: DonlowadIcon,
     home: HomeIcon,
     copy: CopyIcon
 };
