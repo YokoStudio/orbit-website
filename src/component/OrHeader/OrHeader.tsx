@@ -1,132 +1,10 @@
-// import React, { useEffect, useState, ChangeEvent, ReactNode } from "react";
-// import axios from 'axios';
-// import './OrHeader.scss';
-// import OrButton from "../OrButton/OrButton";
-// import OrSearchInput from "../OrSearchInput/OrSearchInput";
-// import Logo from '../../assets/logo.svg';
-// import Icon from '../../assets/Icon';
-// import YokoLogo from '../../assets/Sign-logo-04.jpg';
-
-// interface OrHeaderProps {
-//     children?: ReactNode;
-//     onSearch: (searchTerm: string) => void;
-// }
-
-// const OrHeader: React.FC<OrHeaderProps> = ({ 
-//     children, 
-//     onSearch 
-// }) => { 
-//     const [iconCount, setIconCount] = useState<number>(0);
-
-//     // تابع برای خواندن تعداد آیکون‌ها از bucket
-//     // const fetchIconCount = async () => {
-//     //     try {
-//     //         // دریافت لیست آیکون‌ها به صورت XML از bucket
-//     //         const response = await axios.get('https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir?list-type=2');
-
-//     //         // تبدیل XML به JSON
-//     //         const parser = new DOMParser();
-//     //         const xmlDoc = parser.parseFromString(response.data, "application/xml");
-
-//     //         // گرفتن تمام تگ‌های <Key> که نشان دهنده مسیر آیکون‌ها هستند
-//     //         const keys = xmlDoc.getElementsByTagName("Key");
-
-//     //         // تعریف الگوی regex برای فیلتر کردن مسیرها
-//     //         const regex = /^Icons\/[^\/]+\/[^\/]+\/[^\/]+\/[^\/]+\//;
-
-
-//     //         // فیلتر کردن آیکون‌هایی که با الگوی regex مطابقت دارند
-//     //         const filteredIcons = Array.from(keys).filter((key: any) =>
-//     //             regex.test(key.textContent)
-//     //         );
-
-//     //         // تنظیم تعداد آیکون‌های فیلتر شده
-//     //         setIconCount(filteredIcons.length);
-//     //     } catch (error) {
-//     //         console.error('Error fetching icon count:', error);
-//     //     }
-//     // };
-//     const fetchIconCount = async () => {
-//         try {
-//             // دریافت لیست آیکون‌ها به صورت XML از bucket
-//             const response = await axios.get('https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir?list-type=2');
-    
-//             // تبدیل XML به JSON
-//             const parser = new DOMParser();
-//             const xmlDoc = parser.parseFromString(response.data, "application/xml");
-    
-//             // گرفتن تمام تگ‌های <Key> که نشان دهنده مسیر آیکون‌ها هستند
-//             const keys = xmlDoc.getElementsByTagName("Key");
-    
-//             // فیلتر کردن آیکون‌هایی که با فرمت SVG هستند
-//             const svgIcons = Array.from(keys).filter((key: Element) => {
-//                 const filePath = key.textContent || '';
-//                 return filePath.endsWith('.svg');  // فقط فایل‌های SVG
-//             });
-    
-//             // تنظیم تعداد آیکون‌های فیلتر شده
-//             setIconCount(svgIcons.length);
-//         } catch (error) {
-//             console.error('Error fetching icon count:', error);
-//         }
-//     };
-    
-    
-    
-
-//     // استفاده از useEffect برای فراخوانی تابع در هنگام بارگذاری کامپوننت
-//     useEffect(() => {
-//         fetchIconCount();
-//     }, []);
-
-//     const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-//         onSearch(event.target.value);
-//     };
-
-//     return (
-//         <div className="main-header">
-//             <div className='desk-header'>
-//             <div className="desk-logo">
-//                 <a href="#"><img src={Logo} alt="logo" width="63px" height="47px"/></a>
-//             </div>
-//             <div className="mobile-logo">
-//                 <a href="#"><img src={YokoLogo} alt="logo" height="40px"/></a>
-//             </div>
-//             <div className="icon-pack-title"> 
-
-//                 <span className="t1-strong">Icon Pack</span> 
-//                 <span className="b1">{iconCount} Icons</span> {/* نمایش تعداد آیکون‌ها */}
-//             </div>
-//             <div className="search-div">
-//                 <OrSearchInput onChange={handleSearchChange} placeholder="Search...." size="lg" />
-//             </div>
-//             {children && <div className="children-container">{children}</div>}
-//             <div className="header-action">
-//                 {/* <OrButton variant='secondary' appearance="fill" size="lg" text="Get Start"/> */}
-//                 <OrButton layout="text" variant='secondary' appearance="outline" size="lg" text="Download all"/>
-//             </div>
-//             <div className="mobile-actions">
-//                 <OrButton layout="icon" variant='secondary' appearance="outline" size="md" icon={<Icon.dwonload/>} />
-//             </div>
-//             </div>
-//             <div className="search-div-mobile">
-//                 <OrSearchInput onChange={handleSearchChange} placeholder="Search...." size="sm" />
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default OrHeader;
-
 import React, { useEffect, useState, ChangeEvent, ReactNode } from "react";
 import axios from 'axios';
 import './OrHeader.scss';
 import OrButton from "../OrButton/OrButton";
 import OrSearchInput from "../OrSearchInput/OrSearchInput";
-import Logo from '../../assets/logo.svg';
 import Icon from '../../assets/Icon';
-import YokoLogo from '../../assets/Sign-logo-04.jpg';
-import Modal from '../OrDownloadModal/OrDownloadModal'; // Import the Modal component
+import Modal from '../OrDownloadModal/OrDownloadModal';
 
 interface OrHeaderProps {
     children?: ReactNode;
@@ -177,7 +55,12 @@ const OrHeader: React.FC<OrHeaderProps> = ({
         <div className="main-header">
             <div className='desk-header'>
                 <div className="logo">
-                    <a href="#"><img src={Logo} alt="logo" /></a>
+                    <a href="#">
+                        <svg width="125" height="34" viewBox="0 0 98 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M71.0033 5.52406C71.0033 2.84954 73.1447 0.681722 75.7866 0.681722C78.4286 0.681722 80.57 2.84954 80.57 5.52406C80.57 8.19858 78.4286 10.3664 75.7866 10.3664C73.1447 10.3664 71.0033 8.19858 71.0033 5.52406ZM80.57 27.7988V17.1457L76.7433 12.3033H71.0033V27.7988H80.57ZM97.79 12.3033V8.42947H94.92V4.47967L91.0933 0.69257L85.3533 0.680176V8.42792H82.4833V16.1757L85.3533 15.2072V20.3238C85.3533 20.3238 85.3533 27.7973 90.1366 27.7973H97.79V18.1126H94.92V13.0285L97.79 12.3018V12.3033ZM38.4766 6.49253V0.694121L33.6933 0.681722L28.91 4.55559V27.7988H38.4766V20.0511L44.2166 14.2403V4.55559H41.3283L38.4766 6.49253ZM26.9966 14.2403C26.9966 6.75286 20.9995 0.681722 13.6033 0.681722C6.20711 0.681722 0.209961 6.75286 0.209961 14.2403C0.209961 21.7277 6.20711 27.7988 13.6033 27.7988C20.9995 27.7988 26.9966 21.7277 26.9966 14.2403ZM57.6207 4.55559C57.1278 4.55559 56.6426 4.59123 56.1665 4.65166V0.681722H46.1407V16.1772C46.1407 22.5954 51.2807 27.7988 57.6207 27.7988C63.9607 27.7988 69.1007 22.5954 69.1007 16.1772C69.1007 9.75898 63.9607 4.55559 57.6207 4.55559Z" fill="#2B2B2B"/>
+                        </svg>
+                    </a>
+                    <span className="c1">v1.0</span>
                 </div>
                 
                 <div className="search-div">
@@ -186,11 +69,21 @@ const OrHeader: React.FC<OrHeaderProps> = ({
                 {children && <div className="children-container">{children}</div>}
                 <div className="header-action">
                     <OrButton 
-                        layout="text" 
+                        layout="icon-text" 
+                        variant='secondary' 
+                        appearance="outline" 
+                        size="lg" 
+                        text="Filter"
+                        icon={<Icon.tune/>}
+                        onClick={toggleFilter} // Open modal on click
+                    />
+                    <OrButton 
+                        layout="icon-text" 
                         variant='secondary' 
                         appearance="outline" 
                         size="lg" 
                         text="Download all"
+                        icon={<Icon.download/>}
                         onClick={toggleModal} // Open modal on click
                     />
                 </div>
@@ -199,7 +92,7 @@ const OrHeader: React.FC<OrHeaderProps> = ({
                 </div>
             </div>
             <div className="search-div-mobile">
-                <OrSearchInput onChange={handleSearchChange} placeholder="Search...." size="sm" />
+                <OrSearchInput onChange={handleSearchChange} placeholder={iconCountNumber} size="sm" />
                 <OrButton layout="icon-text" size="md" variant="secondary" appearance="outline" text="Filter" onClick={toggleFilter} icon={<Icon.tune/>}/>
                 <OrButton onClick={toggleModal} layout="icon" variant='secondary' appearance="outline" size="md" icon={<Icon.download/>} />
             </div>

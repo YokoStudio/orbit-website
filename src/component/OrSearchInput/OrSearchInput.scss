@@ -58,3 +58,47 @@ form{
         width: 20px;
     }
 }
+
+/* OrSearchInput.scss */
+
+/* کانتینر برای ورودی جستجو */
+.search-container {
+    position: relative; /* برای موقعیت‌دهی منوی دراپ‌داون */
+    z-index: 2;
+    width: 100%;
+}
+
+/* استایل ورودی جستجو */
+
+
+/* استایل منوی دراپ‌داون */
+.suggestion-list {
+    position: absolute; /* موقعیت‌یابی مطلق */
+    top: 100%; /* قرارگیری زیر ورودی */
+    left: 0;
+    right: 0;
+    background-color: #fff; /* پس‌زمینه سفید */
+    border: 1px solid #ccc; /* مرز منو */
+    border-radius: 4px; /* گوشه‌های گرد */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* سایه */
+    z-index: 1000; /* قرار دادن در بالای سایر عناصر */
+    max-height: 200px; /* حداکثر ارتفاع */
+    overflow-y: auto; /* قابلیت اسکرول برای محتوا */
+    margin-top: 5px; /* فاصله از ورودی */
+}
+
+/* استایل برای هر مورد پیشنهاد */
+.suggestion-item {
+    padding: 10px; /* فضای داخلی */
+    cursor: pointer; /* نشانگر دست */
+    transition: background-color 0.2s; /* انیمیشن تغییر رنگ پس‌زمینه */
+}
+
+/* تغییر رنگ پس‌زمینه هنگام هاور */
+.suggestion-item:hover {
+    background-color: #f0f0f0; /* رنگ پس‌زمینه روشن */
+}
+.suggestion-item.selected {
+    background-color: #e0e0e0; /* رنگ پس‌زمینه انتخاب‌شده */
+    font-weight: bold; /* بولد کردن متن */
+}

@@ -21,7 +21,7 @@ const Icons: React.FC = () => {
 
     // تابع تشخیص سایز صفحه برای تنظیم مقدار اولیه فیلتر
     const handleResize = () => {
-        if (window.innerWidth < 768) {
+        if (window.innerWidth < 1200) {
             setIsFilterVisible(false);  // موبایل
         } else {
             setIsFilterVisible(true);   // دسکتاپ
@@ -98,7 +98,7 @@ const Icons: React.FC = () => {
                 toggleFilter={toggleFilter}
                 isFilterVisible={isFilterVisible}
                  />
-                <OrSubHeader toggleFilter={toggleFilter} isFilterVisible={isFilterVisible} />
+                {/* <OrSubHeader toggleFilter={toggleFilter} isFilterVisible={isFilterVisible} /> */}
 
                 {activeTab === 'Stroke' && (
                     <StrokeIcon 

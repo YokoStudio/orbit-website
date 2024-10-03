@@ -5,6 +5,8 @@ import { ReactComponent as CrossIcon } from './icons/cross.svg';
 import { ReactComponent as DonlowadIcon} from './icons/download.svg';
 import { ReactComponent as HomeIcon} from './icons/home-3.svg';
 import { ReactComponent as CopyIcon} from './icons/copy.svg';
+import { ReactComponent as TrashIcon} from './icons/trash-2.svg';
+
 
 
 const Icon = {
@@ -13,7 +15,8 @@ const Icon = {
     cross: CrossIcon,
     download: DonlowadIcon,
     home: HomeIcon,
-    copy: CopyIcon
+    copy: CopyIcon,
+    trash: TrashIcon,
 };
 
 export default Icon;

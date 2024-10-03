@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import tinycolor from 'tinycolor2'; // tinycolor2 برای مدیریت رنگ‌ها
 import './OrInput.scss';
+import OrButton from '../OrButton/OrButton';
 
 interface OrInputProps {
   initialValue?: string;
@@ -9,7 +10,7 @@ interface OrInputProps {
   maxRecentColors?: number;
 }
 
-const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChange, label, maxRecentColors = 5 }) => {
+const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChange, label, maxRecentColors = 3 }) => {
   const [color, setColor] = useState<string>(initialValue);
   const [inputValue, setInputValue] = useState<string>(initialValue); // برای نگه‌داری مقدار ورودی بدون اعتبارسنجی فوری
   const [recentColors, setRecentColors] = useState<string[]>([]);
@@ -87,7 +88,7 @@ const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChan
 
   return (
     <div className='field-input'>
-      <span className='b1-strong'>{label}</span>
+      <span className='b1-strong field-label'>{label}</span>
       <div className="color-input">
         {/* ورودی متنی بدون محدودیت تایپ */}
         <input
@@ -106,22 +107,29 @@ const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChan
           onChange={handleColorChange}
           className="color-picker"
         />
+        
+      <div className='undo-div'>
+        <OrButton
+          layout='text'
+          variant='secondary'
+          appearance='outline'
+          text='undo'
+          onClick={handleUndo}
+          disabled={!previousColor}
+          size='xs'
+        />
+      </div>
       </div>
 
-      {/* دکمه undo */}
-      <button
-        onClick={handleUndo}
-        disabled={!previousColor}
-        className="undo-btn"
-      >
-        Undo
-      </button>
+
 
       {/* نمایش رنگ‌های اخیر */}
       <div className="recent-colors">
-        {recentColors.length > 0 && <span>Recent Colors:</span>}
+        {recentColors.length > 0 && <span className='b1 recent-label'>Recent Colors</span>}
+        <div>
         {recentColors.map((recentColor) => (
           <button
+
             key={recentColor}
             style={{ backgroundColor: recentColor }}
             className={`recent-color-btn ${recentColor === color ? 'active' : ''}`}
@@ -129,6 +137,7 @@ const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChan
             title={recentColor}
           />
         ))}
+        </div>
       </div>
     </div>
   );

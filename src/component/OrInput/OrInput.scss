@@ -6,13 +6,16 @@
     flex-direction: column;
 
     span{
-        background-color: $neutral-bg-1-default;
-        width: fit-content;
-        margin-left: 8px;
-        margin-bottom: -8px;
-        z-index: 2;
-        padding: $space0 $space0-5 ;
+       
     }
+}
+.field-label{
+    background-color: $neutral-bg-1-default;
+    width: fit-content;
+    margin-left: 8px;
+    margin-bottom: -8px;
+    z-index: 2;
+    padding: $space0 $space0-5 ;
 }
 
 .color-input{
@@ -68,4 +71,24 @@
     border: none;
     padding: 0px;
     margin: 0px;
+  }
+
+  .undo-div{
+    position: absolute;
+    right: 72px;
+
+  }
+  .recent-colors{
+    margin-top: 8px;
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .recent-color-btn{
+    height: 16px;
+    width: 16px;
+    margin-left: 4px;
+    
+    border: solid 0px ;
+    border-radius: $circular;
   }

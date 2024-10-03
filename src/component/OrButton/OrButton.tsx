@@ -6,13 +6,14 @@ interface OrButtonProps {
     text?: string;
     onClick?: () => void;
     disabled?: boolean;
-    variant?: 'primary' | 'secondary' | 'tertiary';
+    variant?: 'primary' | 'secondary' | 'error';
     appearance?: 'fill' | 'outline' | 'ghost';
     icon?: React.ReactNode;
     iconPosition?: 'left' | 'right';
     size?: 'xs' |'sm' |'md' | 'lg' | 'xl';
     className?: string; 
     layout: 'icon' | 'text' | 'icon-text';
+    fill?: boolean;
 
 }
 
@@ -27,11 +28,12 @@ const OrButton: React.FC<OrButtonProps> = ({
         size = 'md',
         className,
         layout,
+        fill="false",
 
 
     }) => { 
         
-    const buttonClassName = `button ${layout} ${variant} ${appearance} ${size} b1`;
+    const buttonClassName = `button ${layout} ${variant} ${appearance} ${size} ${fill} b1`;
 
     return (
         <button 

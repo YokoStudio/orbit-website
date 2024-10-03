@@ -4,7 +4,7 @@
     min-width: 320px;
     display: flex;
     flex-direction: column;
-    z-index: 999;
+    z-index: 800;
     position: sticky;
     top: 0;
     border-right: 1px solid $neutral-border-7-default;
@@ -13,7 +13,7 @@
     overflow: hidden;
 
 
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 1200px){
         position: fixed;
     }
 
@@ -85,7 +85,7 @@
 }
 .backdrop{
      z-index: 1;
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 1200px){
         position: fixed;
         top: 0;
         left: 0;

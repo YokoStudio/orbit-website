@@ -2,8 +2,7 @@
 
 .sub-header
 {
-    position: sticky;
-    top: 116px;
+
     background-color: $neutral-bg-1-default;
     border-bottom: 1px solid $neutral-border-7-default;
     padding: $space2 $space6;
@@ -13,8 +12,7 @@
     @media screen and (max-width: 1200px){
         display: none;
         padding: $space2 $space4;
-        position: sticky;
-       top: 113px;
+       
     }
 
 }

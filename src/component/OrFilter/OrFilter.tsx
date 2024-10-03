@@ -110,7 +110,9 @@ const OrFilter: React.FC<OrFilterProps> = ({
             </div>
             </div>
 
-            <div className='backdrop' />
+            <div className='backdrop'
+            onClick={toggleFilter}
+             />
         </div>
     );
 };

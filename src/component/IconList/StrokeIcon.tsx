@@ -173,6 +173,8 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
     setSelectedIcons(selectedIcons.filter((i) => i !== icon));
   };
 
+  const downloadText = `Download ( ${selectedIcons.length} ) Icons`;
+
   return (
     <div className="icon-body">
       {loading ? (
@@ -183,7 +185,8 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
       ) : error ? (
         <p>{error}</p>
       ) : (
-        <div className="icon-list">
+        <div className='icon-list-main'>
+          <div className="icon-list">
           {finalIcons.length > 0 ? (
             finalIcons.map((icon) => (
               <div 
@@ -196,21 +199,13 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
                     <div
                       className="svg-container"
                       dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
-                      onClick={() => {
-                        downloadSvg(icon.name, svgContent[icon.name]);
-                      }}
+                      
                     />
                   </div>
                 ) : (
                   <span className="skelton"></span>
                 )}
                 <span className="b2 icon-name">{formatIconName(icon.name)}</span>
-                <OrButton
-                  variant='secondary'
-                  appearance='outline'
-                  layout='icon'
-                  
-                />
                 {copyMessages[icon.name] && (
                   <div className="tooltip">
                     {copyMessages[icon.name]}
@@ -224,11 +219,13 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
             </div>
           )}
         </div>
+        </div>
       )}
+      
       {selectedIcons.length > 0 && (
         <div className="side-panel">
           <div className='filter-header'>
-            <h3>Selected Icons</h3>
+            <h3>({selectedIcons.length}) Selected</h3> {/* تعداد آیکون‌های انتخاب شده */}
             <OrButton
               layout='icon'
               appearance='outline'
@@ -237,66 +234,71 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
               onClick={() => { setSelectedIcons([]); }}
             />
           </div>
-
-          {selectedIcons.map((icon) => (
-            <div className='side-panel-body' key={icon.name}>
-              <div>
-                <div
-                  className="sidepabel-svg-container"
-                  dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
-                />
-                <span>{formatIconName(icon.name)}</span>
-                <OrButton
-                  variant='secondary'
-                  appearance='outline'
-                  layout='icon'
-                  icon={<Icon.cross />}
-                  onClick={() => removeSelectedIcon(icon)} // دکمه حذف آیکون
-                />
+          <div className='side-panel-body'>
+            {selectedIcons.map((icon) => (
+              <div className='side-panel-item' key={icon.name}>
+                <div className='side-panel-item-body'>
+                  <div
+                    className="sidepabel-svg-container"
+                    dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
+                  />
+                  <span>{formatIconName(icon.name)}</span>
+                  <OrButton
+                    variant='secondary'
+                    appearance='outline'
+                    size='sm'
+                    layout='icon'
+                    icon={<Icon.trash />}
+                    onClick={() => removeSelectedIcon(icon)} // دکمه حذف آیکون
+                  />
+                </div>
               </div>
-            </div>
-          ))}
-          {selectedIcons.length === 1 && (
-            <div>
-              <h4>SVG Code:</h4>
-              <div className="svg-code-box">
-                <pre>
-                  <code>
-                    {svgContent[selectedIcons[0].name]}
-                  </code>
-                </pre>
+            ))}
+            {selectedIcons.length === 1 && (
+              <div className='svg-code'>
+                
+                <div className='single-download-box'>
+                  <OrButton
+                    layout='icon-text'
+                    appearance='fill'
+                    variant='secondary'
+                    icon={<Icon.download />}
+                    text='Download'
+                    onClick={() => downloadSvg(selectedIcons[0].name, svgContent[selectedIcons[0].name])}
+                  />
+                  <OrButton
+                    layout='icon-text'
+                    appearance='outline'
+                    variant='secondary'
+                    icon={<Icon.copy />}
+                    text='copy'
+                    onClick={() => copyToClipboard(selectedIcons[0].name, svgContent[selectedIcons[0].name])}
+                  />
+                </div>
+                <h4>SVG Code:</h4>
+                <div className="svg-code-box">
+                  <pre>
+                    <code>
+                      {svgContent[selectedIcons[0].name]}
+                    </code>
+                  </pre>
+                </div>
               </div>
-              
-              <div>
-                <OrButton
-                  layout='icon-text'
-                  appearance='outline'
-                  variant='secondary'
-                  icon={<Icon.download />}
-                  text='Download'
-                  onClick={() => downloadSvg(selectedIcons[0].name, svgContent[selectedIcons[0].name])}
-                />
-                <OrButton
-                  layout='icon'
-                  appearance='outline'
-                  variant='secondary'
-                  icon={<Icon.copy />}
-                  onClick={() => copyToClipboard(selectedIcons[0].name, svgContent[selectedIcons[0].name])}
-                />
-              </div>
-            </div>
-          )}
+            )}
+            
+          </div>
           {selectedIcons.length > 1 && (
-            <OrButton
+            <div className='dowload-button-box'>
+              <OrButton
               layout='icon-text'
-              appearance='outline'
-              variant='secondary'
+              appearance='fill'
+              variant='primary'
               icon={<Icon.download />}
-              text='Download Selected'
+              text={downloadText}
               onClick={downloadSelectedIcons}
             />
+            </div>
           )}
-         
         </div>
       )}
     </div>

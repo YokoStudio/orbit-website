@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; // در بالای سایر عناصر قرار بگیرد
+    z-index: 999; // در بالای سایر عناصر قرار بگیرد
   }
   
   .modal-content {
