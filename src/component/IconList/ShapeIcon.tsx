@@ -79,7 +79,8 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
       .filter((icon) => {
         const iconFolder = icon.path.split('/')[2];
         return selectedFolders.length === 0 || selectedFolders.includes(iconFolder);
-      });
+      })
+      .sort((a, b) => a.name.localeCompare(b.name)); 
 
     setFilteredIcons(filtered);
   }, [icons, searchTerm, switchChecked, selectedFolders]);
@@ -88,12 +89,15 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
     try {
       const response = await axios.get(url);
       const svgData = response.data;
-      const coloredSvg = svgData
-        .replace(/fill="[^"]*"/g, `fill="${iconColor}"`)
-        .replace(/stroke="[^"]*"/g, `stroke="${iconColor}"`);
+
+      // تغییر fill و stroke به currentColor
+      const svgWithCurrentColor = svgData
+        .replace(/fill="[^"]*"/g, `fill="currentColor"`)
+        .replace(/stroke="[^"]*"/g, `stroke="currentColor"`);
+
       setSvgContent((prev) => ({
         ...prev,
-        [iconName]: coloredSvg,
+        [iconName]: svgWithCurrentColor,
       }));
     } catch (error) {
       console.error('Error fetching SVG content:', error);
@@ -105,25 +109,19 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
       const imageUrl = `https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir/${icon.path}`;
       fetchSvgContent(imageUrl, icon.name);
     });
-  }, [filteredIcons, iconColor]);
+  }, [filteredIcons]);
 
   const toggleIconSelection = (icon: Icon) => {
-    // بررسی اینکه آیا آیکون قبلاً انتخاب شده است یا نه
     if (selectedIcons.some(selectedIcon => selectedIcon.name === icon.name)) {
-      // اگر انتخاب شده باشد، حذف شود
       const updatedSelectedIcons = selectedIcons.filter(selectedIcon => selectedIcon.name !== icon.name);
       setSelectedIcons(updatedSelectedIcons);
 
-      // اگر هیچ آیکونی انتخاب نشده باشد، ساید پنل بسته شود
       if (updatedSelectedIcons.length === 0) {
         setIsSidePanelOpen(false);
       }
     } else {
-      // اگر انتخاب نشده باشد، به لیست انتخاب‌شده‌ها اضافه شود
       const updatedSelectedIcons = [...selectedIcons, icon];
       setSelectedIcons(updatedSelectedIcons);
-      
-      // ساید پنل در صورت انتخاب اولین آیکون باز شود
       setIsSidePanelOpen(true);
     }
   };
@@ -142,7 +140,6 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
     const updatedIcons = selectedIcons.filter(icon => icon.name !== iconName);
     setSelectedIcons(updatedIcons);
 
-    // بستن ساید پنل در صورت عدم وجود آیکون انتخاب‌شده
     if (updatedIcons.length === 0) {
       setIsSidePanelOpen(false);
     }
@@ -152,8 +149,12 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
     const zip = new JSZip();
 
     for (const icon of selectedIcons) {
-      const svg = svgContent[icon.name];
+      let svg = svgContent[icon.name];
       if (svg) {
+        // تغییر رنگ در زمان دانلود
+        svg = svg
+          .replace(/fill="currentColor"/g, `fill="${iconColor}"`)
+          .replace(/stroke="currentColor"/g, `stroke="${iconColor}"`);
         zip.file(icon.name, svg);
       }
     }
@@ -186,7 +187,10 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
   const downloadText = `Download ( ${selectedIcons.length} ) Icons`;
 
   const downloadSingleIcon = (icon: Icon) => {
-    const svg = svgContent[icon.name];
+    let svg = svgContent[icon.name];
+    svg = svg
+      .replace(/fill="currentColor"/g, `fill="${iconColor}"`)
+      .replace(/stroke="currentColor"/g, `stroke="${iconColor}"`);
     const blob = new Blob([svg], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -219,10 +223,13 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                     className={`item ${isSelected ? 'selected' : ''}`} 
                     key={icon.path} 
                     onClick={() => toggleIconSelection(icon)}
+                    // تنظیم رنگ از طریق CSS
+                    
                   >
                     {svgData ? (
                       <div className="icon-wrapper">
                         <div
+                        style={{ color: iconColor }}
                           className="svg-shape-icon"
                           dangerouslySetInnerHTML={{ __html: svgData }}
                         />
@@ -243,11 +250,10 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
         </div>
       )}
 
-
-{selectedIcons.length > 0 && (
+      {selectedIcons.length > 0 && (
         <div className="side-panel">
           <div className='filter-header'>
-            <h3>({selectedIcons.length}) Selected</h3> {/* تعداد آیکون‌های انتخاب شده */}
+            <h3>({selectedIcons.length}) Selected</h3>
             <OrButton
               layout='icon'
               appearance='outline'
@@ -262,6 +268,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                 <div className='side-panel-item-body'>
                   <div
                     className="sidepabel-svg-container"
+                    style={{ color: iconColor }} // اعمال رنگ CSS برای آیکون‌های انتخابی
                     dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
                   />
                   <span>{formatIconName(icon.name)}</span>
@@ -278,7 +285,6 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
             ))}
             {selectedIcons.length === 1 && (
               <div className='svg-code'>
-                
                 <div className='single-download-box'>
                   <OrButton
                     layout='icon-text'
@@ -307,18 +313,17 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                 </div>
               </div>
             )}
-            
           </div>
           {selectedIcons.length > 1 && (
             <div className='dowload-button-box'>
               <OrButton
-              layout='icon-text'
-              appearance='fill'
-              variant='primary'
-              icon={<Icon.download />}
-              text={downloadText}
-              onClick={downloadSelectedIconsAsZip}
-            />
+                layout='icon-text'
+                appearance='fill'
+                variant='primary'
+                icon={<Icon.download />}
+                text={downloadText}
+                onClick={downloadSelectedIconsAsZip}
+              />
             </div>
           )}
         </div>
