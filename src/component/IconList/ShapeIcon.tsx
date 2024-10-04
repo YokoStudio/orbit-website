@@ -250,84 +250,103 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
         </div>
       )}
 
-      {selectedIcons.length > 0 && (
-        <div className="side-panel">
-          <div className='filter-header'>
-            <h3>({selectedIcons.length}) Selected</h3>
-            <OrButton
-              layout='icon'
-              appearance='outline'
-              variant='secondary'
-              icon={<Icon.cross />}
-              onClick={() => { setSelectedIcons([]); }}
-            />
-          </div>
-          <div className='side-panel-body'>
-            {selectedIcons.map((icon) => (
-              <div className='side-panel-item' key={icon.name}>
-                <div className='side-panel-item-body'>
-                  <div
-                    className="sidepabel-svg-container"
-                    style={{ color: iconColor }} // اعمال رنگ CSS برای آیکون‌های انتخابی
-                    dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
-                  />
-                  <span>{formatIconName(icon.name)}</span>
-                  <OrButton
-                    variant='secondary'
-                    appearance='outline'
-                    size='sm'
-                    layout='icon'
-                    icon={<Icon.trash />}
-                    onClick={() => removeSelectedIcon(icon.name)}
-                  />
-                </div>
+          {selectedIcons.length > 0 && (
+            <div className="side-panel">
+              <div className='filter-header'>
+                <h3>({selectedIcons.length}) Selected</h3>
+                <OrButton
+                  layout='icon'
+                  appearance='outline'
+                  variant='secondary'
+                  icon={<Icon.cross />}
+                  onClick={() => { setSelectedIcons([]); }}
+                />
               </div>
-            ))}
-            {selectedIcons.length === 1 && (
-              <div className='svg-code'>
-                <div className='single-download-box'>
+              
+              <div className='side-panel-body'>
+                {selectedIcons.length === 1 ? (
+                  <div className='svg-code'>
+                    <div className='single-download-box'>
+                      <OrButton
+                        layout='icon-text'
+                        appearance='fill'
+                        variant='secondary'
+                        icon={<Icon.download />}
+                        text='Download'
+                        onClick={() => downloadSingleIcon(selectedIcons[0])}
+                      />
+                      <OrButton
+                        layout='icon-text'
+                        appearance='outline'
+                        variant='secondary'
+                        icon={<Icon.copy />}
+                        text='copy'
+                        onClick={handleCopySvg}
+                      />
+                    </div>
+
+                    <h4>SVG Preview:</h4>
+                    <div className="svg-preview-box" style={{ textAlign: 'center' }}>
+                      {/* نمایش کامل و بزرگ SVG */}
+                      <div
+                        className="svg-preview"
+                        dangerouslySetInnerHTML={{ __html: svgContent[selectedIcons[0].name] }}
+                        style={{
+                          color: iconColor, // استفاده از رنگ انتخابی
+                        }}
+                      />
+                    </div>
+
+                    <h4>SVG Code:</h4>
+                    {/* نمایش کد SVG */}
+                    <div className="svg-code-box">
+                      <pre>
+                        <code>
+                          {svgContent[selectedIcons[0].name]}
+                        </code>
+                      </pre>
+                    </div>
+                  </div>
+                ) : (
+                  // نمایش لیست آیکون‌ها زمانی که بیشتر از یک آیکون انتخاب‌شده
+                  selectedIcons.map((icon) => (
+                    <div className='side-panel-item' key={icon.name}>
+                      <div className='side-panel-item-body'>
+                        <div
+                          className="sidepabel-svg-container"
+                          style={{ color: iconColor }} // اعمال رنگ CSS برای آیکون‌های انتخابی
+                          dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
+                        />
+                        <span>{formatIconName(icon.name)}</span>
+                        <OrButton
+                          variant='secondary'
+                          appearance='outline'
+                          size='sm'
+                          layout='icon'
+                          icon={<Icon.trash />}
+                          onClick={() => removeSelectedIcon(icon.name)}
+                        />
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+
+              {selectedIcons.length > 1 && (
+                <div className='dowload-button-box'>
                   <OrButton
                     layout='icon-text'
                     appearance='fill'
-                    variant='secondary'
+                    variant='primary'
                     icon={<Icon.download />}
-                    text='Download'
-                    onClick={() => downloadSingleIcon(selectedIcons[0])}
-                  />
-                  <OrButton
-                    layout='icon-text'
-                    appearance='outline'
-                    variant='secondary'
-                    icon={<Icon.copy />}
-                    text='copy'
-                    onClick={handleCopySvg}
+                    text={downloadText}
+                    onClick={downloadSelectedIconsAsZip}
                   />
                 </div>
-                <h4>SVG Code:</h4>
-                <div className="svg-code-box">
-                  <pre>
-                    <code>
-                      {svgContent[selectedIcons[0].name]}
-                    </code>
-                  </pre>
-                </div>
-              </div>
-            )}
-          </div>
-          {selectedIcons.length > 1 && (
-            <div className='dowload-button-box'>
-              <OrButton
-                layout='icon-text'
-                appearance='fill'
-                variant='primary'
-                icon={<Icon.download />}
-                text={downloadText}
-                onClick={downloadSelectedIconsAsZip}
-              />
+              )}
             </div>
           )}
-        </div>
-      )}
+
     </div>
   );
 };
