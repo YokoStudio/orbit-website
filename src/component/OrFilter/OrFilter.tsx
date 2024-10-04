@@ -9,6 +9,7 @@ import Icon from "../../assets/Icon";
 import OrButton from '../OrButton/OrButton';
 import OrTab from '../OrTab/Ortab'
 import OrInput from '../OrInput/OrInput';
+import OrMenu from '../OrMenu/OrMenu';
 
 // تعریف نوع Props
 interface OrFilterProps {
@@ -45,7 +46,7 @@ const OrFilter: React.FC<OrFilterProps> = ({
     initialTab
 }) => {
     const [activeTab, setActiveTab] = useState<string>(initialTab || 'Shape'); 
-
+    const [itemMenu] = useState<string[]>(['Arrow', 'Devices', 'Interface', 'Media', 'Editor', 'Maps', 'Shape', 'Weather']); 
     const handleColorChange = (color: string) => {
         onChangeColor(color); // ارسال رنگ به کامپوننت والد
     };
