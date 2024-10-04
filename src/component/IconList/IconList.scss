@@ -58,8 +58,18 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-width: 100%;
-    height: 220px;
+   
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+.error-state{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 // .svg-container svg {

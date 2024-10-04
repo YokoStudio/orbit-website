@@ -6,6 +6,8 @@ import OrHeader from '../../component/OrHeader/OrHeader';
 import OrFilter from '../../component/OrFilter/OrFilter';
 import '../../base/style.scss';
 import OrSubHeader from '../../component/OrSubHeader/OrSubHeader';
+import Modal from '../../component/OrDownloadModal/OrModal';
+import OrButton from '../../component/OrButton/OrButton';
 
 const Icons: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
@@ -18,6 +20,16 @@ const Icons: React.FC = () => {
     const [iconColor, setIconColor] = useState<string>('#000000');
     const [strokeColor, setStrokeColor] = useState<string>('#000000');
     const [strokeWidth, setStrokeWidth] = useState<number>(1);
+    const [isModalVisible, setisModalVisible] = useState<boolean>(false);
+
+
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // State for modal
+
+
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen); // Toggle modal open/close
+    };
+
 
     // تابع تشخیص سایز صفحه برای تنظیم مقدار اولیه فیلتر
     const handleResize = () => {
@@ -62,6 +74,12 @@ const Icons: React.FC = () => {
         setIsFilterVisible(prevState => !prevState);
     };
 
+    const SwitchModal = () => {
+        setisModalVisible(prevState => !prevState);
+    };
+
+
+
     const handleTabChange = (tab: string) => {
         setActiveTab(tab);
     };
@@ -70,6 +88,8 @@ const Icons: React.FC = () => {
         setIconColor(color);
         setStrokeColor(color);
     };
+
+    
 
     return (
         <div className='main'>
@@ -97,8 +117,67 @@ const Icons: React.FC = () => {
                 onSearch={handleSearch}
                 toggleFilter={toggleFilter}
                 isFilterVisible={isFilterVisible}
+                switchModal={SwitchModal}
+                isModalrVisible={isModalVisible}
+              
                  />
-                {/* <OrSubHeader toggleFilter={toggleFilter} isFilterVisible={isFilterVisible} /> */}
+
+                <Modal
+                isOpen={isModalVisible}
+                onClose={SwitchModal}
+                title='Dowload'
+                >  
+
+                    <div className='download-box'>
+                        <div>
+                            <span>
+                                Figma file
+                            </span>
+                        </div>
+
+                        <OrButton
+                            appearance='outline'
+                            variant='secondary'
+                            layout='text'
+                            text='Download'
+                            onClick={SwitchModal}
+                        />
+                    </div>
+
+                    <div className='download-box'>
+                        <div>
+                            <span>
+                                Figma comunity
+                            </span>
+                        </div>
+
+                        <OrButton
+                            appearance='outline'
+                            variant='secondary'
+                            layout='text'
+                            text='Download'
+                            onClick={SwitchModal}
+                        />
+                    </div>
+
+                    <div className='download-box'>
+                        <div>
+                            <span>
+                                .zip
+                            </span>
+                        </div>
+
+                        <OrButton
+                            appearance='outline'
+                            variant='secondary'
+                            layout='text'
+                            text='Download'
+                            onClick={SwitchModal}
+                        />
+                    </div>
+                   
+                 </Modal>
+            
 
                 {activeTab === 'Stroke' && (
                     <StrokeIcon 

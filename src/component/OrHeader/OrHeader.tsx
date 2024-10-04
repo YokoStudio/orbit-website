@@ -4,20 +4,25 @@ import './OrHeader.scss';
 import OrButton from "../OrButton/OrButton";
 import OrSearchInput from "../OrSearchInput/OrSearchInput";
 import Icon from '../../assets/Icon';
-import Modal from '../OrDownloadModal/OrDownloadModal';
+import Modal from '../OrDownloadModal/OrModal';
 
 interface OrHeaderProps {
     children?: ReactNode;
     onSearch: (searchTerm: string) => void;
     toggleFilter: () => void; 
     isFilterVisible: boolean;
+    switchModal?: () => void;
+    isModalrVisible: boolean
 }
 
 const OrHeader: React.FC<OrHeaderProps> = ({ 
     children, 
     onSearch,
     toggleFilter, 
-    isFilterVisible 
+    isFilterVisible, 
+    switchModal,
+    isModalrVisible
+
 }) => { 
     const [iconCount, setIconCount] = useState<number>(123);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // State for modal
@@ -48,6 +53,7 @@ const OrHeader: React.FC<OrHeaderProps> = ({
 
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen); // Toggle modal open/close
+
     };
     const iconCountNumber = `Search on ${iconCount} icons ...`;
 
@@ -84,7 +90,7 @@ const OrHeader: React.FC<OrHeaderProps> = ({
                         size="lg" 
                         text="Download all"
                         icon={<Icon.download/>}
-                        onClick={toggleModal} // Open modal on click
+                        onClick={switchModal} // Open modal on click
                     />
                 </div>
                 <div className="mobile-actions">
@@ -94,16 +100,13 @@ const OrHeader: React.FC<OrHeaderProps> = ({
             <div className="search-div-mobile">
                 <OrSearchInput onChange={handleSearchChange} placeholder={iconCountNumber} size="sm" />
                 <OrButton layout="icon-text" size="md" variant="secondary" appearance="outline" text="Filter" onClick={toggleFilter} icon={<Icon.tune/>}/>
-                <OrButton onClick={toggleModal} layout="icon" variant='secondary' appearance="outline" size="md" icon={<Icon.download/>} />
+                <OrButton onClick={switchModal} layout="icon" variant='secondary' appearance="outline" size="md" icon={<Icon.download/>} />
             </div>
 
             {/* Modal component */}
-            <Modal isOpen={isModalOpen} onClose={toggleModal}>
-                <h2>Download Icons</h2>
-                <p>Are you sure you want to download all icons?</p>
-                <button onClick={toggleModal}>Close</button> {/* Close button */}
-            </Modal>
+            
         </div>
+
     );
 };
 

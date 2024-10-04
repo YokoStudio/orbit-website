@@ -1,3 +1,5 @@
+@import '../../base/style.scss';
+
 .main
 {
     display: flex;
@@ -24,4 +26,19 @@
         max-width: 100px;
         height: 70px;
     }
+}
+
+.download-box{
+    display: flex;
+    flex-direction: row;
+    padding: $space4;
+    border: 1px solid $neutral-border-7-default;
+    border-radius: $radius2;
+    gap: $space3;
+    align-items: center;
+
+    div{
+        width: 100%;
+    }
+
 }
