@@ -197,8 +197,8 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
     <div className="icon-body">
       {loading ? (
         <div className="loading">
-          <img src={loadingG} alt="logo" width="128px" height="128px" />
-          <span>Loading...</span>
+          <img src={loadingG} alt="logo" width="160px" height="160px" />
+          <span className='t1-strong'>Loading...</span>
         </div>
       ) : error ? (
         <p>{error}</p>
