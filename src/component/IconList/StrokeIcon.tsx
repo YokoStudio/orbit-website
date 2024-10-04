@@ -264,6 +264,22 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
       {/* نمایش متفاوت برای حالت انتخاب یک آیکون */}
       {selectedIcons.length === 1 ? (
         <div className='svg-code'>
+          
+
+          <div className="svg-preview-box" style={{ textAlign: 'center' }}>
+            {/* نمایش بزرگ SVG */}
+            <div
+              className="svg-preview"
+              dangerouslySetInnerHTML={{ __html: svgContent[selectedIcons[0].name] }}
+              style={{
+                color: strokeColor,
+                strokeWidth: strokeWidth,
+              }}
+            />
+            <div className="icon-name">
+            {formatIconName(selectedIcons[0].name)} {/* فرمت نام آیکون برای نمایش زیبا */}
+          </div>
+          </div>
           <div className='single-download-box'>
             <OrButton
               layout='icon-text'
@@ -282,20 +298,6 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
               onClick={() => copyToClipboard(selectedIcons[0].name, svgContent[selectedIcons[0].name])}
             />
           </div>
-
-          <h4>SVG Preview:</h4>
-          <div className="svg-preview-box" style={{ textAlign: 'center' }}>
-            {/* نمایش بزرگ SVG */}
-            <div
-              className="svg-preview"
-              dangerouslySetInnerHTML={{ __html: svgContent[selectedIcons[0].name] }}
-              style={{
-                color: strokeColor,
-                strokeWidth: strokeWidth,
-              }}
-            />
-          </div>
-
           <h4>SVG Code:</h4>
           {/* نمایش کد SVG */}
           <div className="svg-code-box">

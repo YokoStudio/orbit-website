@@ -266,6 +266,20 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
               <div className='side-panel-body'>
                 {selectedIcons.length === 1 ? (
                   <div className='svg-code'>
+
+                    <div className="svg-preview-box" style={{ textAlign: 'center' }} >
+                      {/* نمایش کامل و بزرگ SVG */}
+                      <div
+                        className="svg-preview"
+                        dangerouslySetInnerHTML={{ __html: svgContent[selectedIcons[0].name] }}
+                        style={{
+                          color: iconColor, // استفاده از رنگ انتخابی
+                        }}
+                      />
+                      <div className="icon-name">
+                      {formatIconName(selectedIcons[0].name)} {/* فرمت نام آیکون برای نمایش زیبا */}
+                    </div>
+                    </div>
                     <div className='single-download-box'>
                       <OrButton
                         layout='icon-text'
@@ -282,18 +296,6 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                         icon={<Icon.copy />}
                         text='copy'
                         onClick={handleCopySvg}
-                      />
-                    </div>
-
-                    <h4>SVG Preview:</h4>
-                    <div className="svg-preview-box" style={{ textAlign: 'center' }}>
-                      {/* نمایش کامل و بزرگ SVG */}
-                      <div
-                        className="svg-preview"
-                        dangerouslySetInnerHTML={{ __html: svgContent[selectedIcons[0].name] }}
-                        style={{
-                          color: iconColor, // استفاده از رنگ انتخابی
-                        }}
                       />
                     </div>
 
