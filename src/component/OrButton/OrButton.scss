@@ -6,9 +6,11 @@
     transition: background-color 0.3s ease-in-out;
     cursor: pointer;
     height: fit-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: fit-content;
+
+    &.fill-block{
+        width: 100vh;
+    }
 
 }
 .div-button{

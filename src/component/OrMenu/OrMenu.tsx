@@ -15,8 +15,7 @@ const OrMenu: React.FunctionComponent<OrMenu> = ( {
     handleToggle,
     
   }) => {
-
-    
+      
   return(
     <div>
         <div className={`menu ${isOpen? 'open' : ''}`} >

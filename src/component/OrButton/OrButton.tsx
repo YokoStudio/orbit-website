@@ -9,11 +9,10 @@ interface OrButtonProps {
     variant?: 'primary' | 'secondary' | 'error';
     appearance?: 'fill' | 'outline' | 'ghost';
     icon?: React.ReactNode;
-    iconPosition?: 'left' | 'right';
     size?: 'xs' |'sm' |'md' | 'lg' | 'xl';
     className?: string; 
-    layout: 'icon' | 'text' | 'icon-text';
-    fill?: boolean;
+    layout?: 'icon' | 'text' | 'icon-text';
+    fillBlock?: boolean;
 
 }
 
@@ -24,16 +23,15 @@ const OrButton: React.FC<OrButtonProps> = ({
         variant = 'primary',
         appearance = 'fill',
         icon,
-        iconPosition = 'left',  
         size = 'md',
         className,
-        layout,
-        fill="false",
+        layout = 'text',
+        fillBlock=false,
 
 
     }) => { 
         
-    const buttonClassName = `button ${layout} ${variant} ${appearance} ${size} ${fill} b1`;
+    const buttonClassName = `button ${layout} ${variant} ${appearance} ${size} ${fillBlock? 'fill-block' : ''} b1`;
 
     return (
         <button 
@@ -42,9 +40,8 @@ const OrButton: React.FC<OrButtonProps> = ({
             disabled={disabled}
             >
                 <div className="div-button">
-                {icon && iconPosition === 'left' && <span className='icon'>{icon}</span>}
-                {text}  {/* نمایش متن کнопка */}
-                {icon && iconPosition === 'right' && <span className='icon'>{icon}</span>}
+                <span className='icon'>{icon}</span>
+                {text}
                 </div>
             </button>
     );

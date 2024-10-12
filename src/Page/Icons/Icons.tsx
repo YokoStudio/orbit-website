@@ -21,6 +21,7 @@ const Icons: React.FC = () => {
     const [strokeColor, setStrokeColor] = useState<string>('#000000');
     const [strokeWidth, setStrokeWidth] = useState<number>(1);
     const [isModalVisible, setisModalVisible] = useState<boolean>(false);
+    const [isFilterOpen, setisFilterOpen] = useState<boolean>(false);
 
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // State for modal
@@ -119,6 +120,7 @@ const Icons: React.FC = () => {
                 isFilterVisible={isFilterVisible}
                 switchModal={SwitchModal}
                 isModalrVisible={isModalVisible}
+                filterOpen={isFilterVisible}
               
                  />
 

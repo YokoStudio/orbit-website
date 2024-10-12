@@ -1,0 +1,33 @@
+@import '../../base/style.scss';
+
+.logs {
+    width: 100%;
+    background-color: $neutral-bg-1-default;
+    transition: height 0.3s ease-in-out;
+    z-index: 5;
+    border-radius: 20px;
+    padding: 0px;
+    box-sizing: border-box;
+
+  }
+
+  .logs-item{
+    border: 1px solid $neutral-border-7-default;
+    padding: $space4;
+    border-radius: $radius3;
+  }
+
+  .logs-version{
+    background-color: $brand-bg-1-default;
+    color: $neutral-fg-10-default;
+    padding: $space1;
+    border-radius: $radius2;
+  }
+  
+
+  .logs-list-item{
+
+    padding: 0px 16px;
+    margin: 0px;
+    color: $neutral-fg-4-default;
+  }

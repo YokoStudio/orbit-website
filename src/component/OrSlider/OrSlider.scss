@@ -76,7 +76,7 @@
 
 .tooltip {
     position: absolute;
-    bottom: 68px; // فاصله از نوار لغزنده
+    right: 8px; // فاصله از نوار لغزنده
     transform: translateX(-50%); // مرکز کردن تولتیپ
     background-color: $neutral-bg-10-default; // رنگ پس‌زمینه تولتیپ
     color: rgb(255, 255, 255); // رنگ متن

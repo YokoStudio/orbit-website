@@ -237,7 +237,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                     ) : (
                       <span className="skelton"></span>
                     )}
-                    <span className="b1 icon-name">{formatIconName(icon.name)}</span>
+                    <span className="c1-strong icon-name">{formatIconName(icon.name)}</span>
                   </div>
                 );
               })
@@ -267,7 +267,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                 {selectedIcons.length === 1 ? (
                   <div className='svg-code'>
 
-                    <div className="svg-preview-box" style={{ textAlign: 'center' }} >
+                    <div className="svg-preview-box" >
                       {/* نمایش کامل و بزرگ SVG */}
                       <div
                         className="svg-preview"
@@ -276,7 +276,14 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                           color: iconColor, // استفاده از رنگ انتخابی
                         }}
                       />
-                      <div className="icon-name">
+                      {/* <div>
+
+                        {iconColor}
+
+
+                      </div> */}
+
+                      <div className="t1-strong icon-sidepanel-name">
                       {formatIconName(selectedIcons[0].name)} {/* فرمت نام آیکون برای نمایش زیبا */}
                     </div>
                     </div>
@@ -286,20 +293,22 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                         appearance='fill'
                         variant='secondary'
                         icon={<Icon.download />}
-                        text='Download'
+                       
+                        text='SVG'
                         onClick={() => downloadSingleIcon(selectedIcons[0])}
                       />
                       <OrButton
                         layout='icon-text'
                         appearance='outline'
+                        text='Copy'
                         variant='secondary'
                         icon={<Icon.copy />}
-                        text='copy'
+                        
                         onClick={handleCopySvg}
                       />
                     </div>
 
-                    <h4>SVG Code:</h4>
+                    <span className='b2'>SVG Code</span>
                     {/* نمایش کد SVG */}
                     <div className="svg-code-box">
                       <pre>

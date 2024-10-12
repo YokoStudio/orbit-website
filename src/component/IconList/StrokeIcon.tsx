@@ -230,7 +230,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
               ) : (
                 <span className="skelton"></span>
               )}
-                <span className="b2 icon-name">{formatIconName(icon.name)}</span>
+                <span className=" c1-strong icon-name">{formatIconName(icon.name)}</span>
                 {copyMessages[icon.name] && (
                   <div className="tooltip">
                     {copyMessages[icon.name]}
@@ -250,7 +250,9 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
       {selectedIcons.length > 0 && (
   <div className="side-panel">
     <div className='filter-header'>
+
       <h3>({selectedIcons.length}) Selected</h3> 
+
       <OrButton
         layout='icon'
         appearance='outline'
@@ -266,7 +268,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
         <div className='svg-code'>
           
 
-          <div className="svg-preview-box" style={{ textAlign: 'center' }}>
+          <div className="svg-preview-box" >
             {/* نمایش بزرگ SVG */}
             <div
               className="svg-preview"
@@ -276,7 +278,15 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
                 strokeWidth: strokeWidth,
               }}
             />
-            <div className="icon-name">
+            {/* <div>
+
+            <div>Stroke color: {strokeColor}</div>
+            <div>Stroke width: {strokeWidth}</div>
+
+
+
+           </div> */}
+            <div className="b2-strong icon-name">
             {formatIconName(selectedIcons[0].name)} {/* فرمت نام آیکون برای نمایش زیبا */}
           </div>
           </div>
@@ -284,28 +294,28 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
             <OrButton
               layout='icon-text'
               appearance='fill'
-              variant='secondary'
+              variant='primary'
               icon={<Icon.download />}
-              text='Download'
+              text='SVG'
               onClick={() => downloadSvg(selectedIcons[0].name, svgContent[selectedIcons[0].name])}
             />
             <OrButton
               layout='icon-text'
+              text='Copy'
               appearance='outline'
               variant='secondary'
               icon={<Icon.copy />}
-              text='Copy'
               onClick={() => copyToClipboard(selectedIcons[0].name, svgContent[selectedIcons[0].name])}
             />
           </div>
-          <h4>SVG Code:</h4>
+          <span className='t1-strong icon-sidepanel-name'>SVG:</span>
           {/* نمایش کد SVG */}
           <div className="svg-code-box">
-            <pre>
-              <code>
+            
+              <code className='b2'>
                 {svgContent[selectedIcons[0].name]}
               </code>
-            </pre>
+            
           </div>
         </div>
       ) : (
