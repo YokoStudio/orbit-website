@@ -4,20 +4,29 @@
     width: 100%;
     background-color: $neutral-bg-1-default;
     transition: height 0.3s ease-in-out;
-    z-index: 5;
     border-radius: 20px;
     padding: 0px;
     box-sizing: border-box;
+    // gap: $space4;
+    display: flex;
+    flex-direction: column;
 
+   
   }
 
   .logs-item{
     display: flex;
     flex-direction: row;
-    border: 1px solid $neutral-border-7-default;
-    padding: $space4;
-    border-radius: $radius3;
+    border-bottom: 1px solid $neutral-border-7-default;
+    padding: $space4 $space0;
     gap: $space6;
+
+    @media screen and (max-width: 600px){
+      flex-direction: column;
+      padding: $space4 $space4;
+      gap: $space2;
+   }
+
   }
 
   .logs-version{
@@ -25,6 +34,11 @@
     color: $neutral-fg-10-default;
     padding: $space0 $space2;
     border-radius: $circular;
+
+    @media screen and (max-width: 600px){
+      width: fit-content;
+   }
+
   }
   
 
@@ -38,6 +52,13 @@
   .logs-header{
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 600px){
+      flex-direction: row;
+      justify-content: space-between;
+
+   }
+
   }
   
   .logs-type{
@@ -45,6 +66,7 @@
     color: $neutral-fg-2-default;
     padding: $space0 $space2;
     border-radius: $circular;
+    width: fit-content;
   }
 
   .logs-list{

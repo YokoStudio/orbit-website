@@ -31,7 +31,7 @@ const OrButton: React.FC<OrButtonProps> = ({
 
     }) => { 
         
-    const buttonClassName = `button ${layout} ${variant} ${appearance} ${size} ${fillBlock? 'fill-block' : ''} b1`;
+    const buttonClassName = `button ${layout} ${variant} ${appearance} ${size} ${fillBlock? 'fill-block' : ''} ${size === 'xs' ? 'c1' : 'b1'}`;
 
     return (
         <button 
@@ -40,7 +40,7 @@ const OrButton: React.FC<OrButtonProps> = ({
             disabled={disabled}
             >
                 <div className="div-button">
-                <span className='icon'>{icon}</span>
+                {icon  && <span className='icon'>{icon}</span>}
                 {text}
                 </div>
             </button>

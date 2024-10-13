@@ -227,18 +227,26 @@
     
     &.ghost{
         background-color: $error-bg-subtle-1-default;
-        color: $neutral-fg-1-default;
+        color: $state-error-fg-1-default;
+        .icon{
+            svg{
+                path{
+                    fill:  $state-error-fg-1-default;
+                }
+            }   
+        
+       }
 
         &:hover{
-            background-color: $neutral-bg-subtle-bold-1-hover;
+            background-color: $error-bg-subtle-1-hover;
         }
 
         &.press{
-            background-color: $neutral-bg-subtle-bold-1-press;
+            background-color: $error-bg-subtle-1-press;
         }
 
         &.disable{
-            background-color: $neutral-bg-subtle-bold-1-disable;
+            background-color: $error-bg-subtle-1-disable;
         }
     }
 

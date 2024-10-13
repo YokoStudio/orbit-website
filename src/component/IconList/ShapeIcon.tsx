@@ -175,14 +175,41 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
     setIsSidePanelOpen(false);
   };
 
-  const handleCopySvg = () => {
-    if (selectedIcons.length === 1) {
-      const svg = svgContent[selectedIcons[0].name];
+  // const handleCopySvg = () => {
+  //   if (selectedIcons.length === 1) {
+  //     const svg = svgContent[selectedIcons[0].name];
+  //     navigator.clipboard.writeText(svg).then(() => {
+  //       alert('کد SVG کپی شد!');
+  //     });
+  //   }
+  // };
+
+  const CopyButton: React.FC<{ svg: string }> = ({ svg }) => {
+    const [buttonText, setButtonText] = useState('Copy');
+  
+    const handleCopySvg = () => {
       navigator.clipboard.writeText(svg).then(() => {
-        alert('کد SVG کپی شد!');
+        setButtonText('Copied');
+  
+        // بازگرداندن متن به 'Copy' بعد از دو ثانیه
+        setTimeout(() => {
+          setButtonText('Copy');
+        }, 2000);
       });
-    }
+    };
+  
+    return (
+      <OrButton
+        layout='icon-text'
+        appearance='outline'
+        text={buttonText} // استفاده از متن ذخیره‌شده در state
+        variant='secondary'
+        icon={<Icon.copy />}
+        onClick={handleCopySvg}
+      />
+    );
   };
+  
 
   const downloadText = `Download ( ${selectedIcons.length} ) Icons`;
 
@@ -256,7 +283,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                 <h3>({selectedIcons.length}) Selected</h3>
                 <OrButton
                   layout='icon'
-                  appearance='outline'
+                  appearance='ghost'
                   variant='secondary'
                   icon={<Icon.cross />}
                   onClick={() => { setSelectedIcons([]); }}
@@ -291,21 +318,14 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                       <OrButton
                         layout='icon-text'
                         appearance='fill'
-                        variant='secondary'
+                        variant='primary'
                         icon={<Icon.download />}
                        
                         text='SVG'
                         onClick={() => downloadSingleIcon(selectedIcons[0])}
                       />
-                      <OrButton
-                        layout='icon-text'
-                        appearance='outline'
-                        text='Copy'
-                        variant='secondary'
-                        icon={<Icon.copy />}
-                        
-                        onClick={handleCopySvg}
-                      />
+                      <CopyButton svg={svgContent[selectedIcons[0].name]} />
+
                     </div>
 
                     <span className='b2'>SVG Code</span>
@@ -330,8 +350,8 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                         />
                         <span>{formatIconName(icon.name)}</span>
                         <OrButton
-                          variant='secondary'
-                          appearance='outline'
+                          variant='error'
+                          appearance='ghost'
                           size='sm'
                           layout='icon'
                           icon={<Icon.trash />}

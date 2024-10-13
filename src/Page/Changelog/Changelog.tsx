@@ -10,16 +10,15 @@ const Changelog: React.FC = () => {
   const [itemLogs] = useState(changelogData);
 
   return (
-    <div className='changelog-page main-content'>
+    <div className='changelog-page main-container'>
+     <div className='content-container'>
       <p className='t1-strong'>Changelogs</p>
-      <div className=''>
-
-        <OrLogs
-        itemLogs={itemLogs}
-         /> 
-
-      </div>
-      
+        <div className=''>
+          <OrLogs
+          itemLogs={itemLogs}
+          /> 
+        </div>
+     </div>
     </div>
   );
 };
