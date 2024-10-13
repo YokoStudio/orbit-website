@@ -3,7 +3,7 @@ export const changelogData = [
     date: '2024-10-08',
     version: '1.0.0',
     changes: [
-      { text: ['Initial release of the application'], type: 'added' },
+      { text: ['Initial release of the application'], type: 'Added' },
     ],
   },
   {
@@ -16,21 +16,21 @@ export const changelogData = [
           'Bug fixes and performance improvements'
           
         ],
-        type: 'fixed',
+        type: 'Fixed',
       },
       { 
         text: [
           'Added new feature for user authentication', 
         ],
 
-        type: 'added' },
+        type: 'Added' },
     ],
   },
   {
     date: '2024-10-10',
     version: '1.0.2',
     changes: [
-      { text: ['Updated UI for better user experience'], type: 'updated' },
+      { text: ['Updated UI for better user experience'], type: 'Changed' },
     ],
   },
 ];

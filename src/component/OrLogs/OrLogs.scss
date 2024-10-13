@@ -12,16 +12,19 @@
   }
 
   .logs-item{
+    display: flex;
+    flex-direction: row;
     border: 1px solid $neutral-border-7-default;
     padding: $space4;
     border-radius: $radius3;
+    gap: $space6;
   }
 
   .logs-version{
     background-color: $brand-bg-1-default;
     color: $neutral-fg-10-default;
-    padding: $space1;
-    border-radius: $radius2;
+    padding: $space0 $space2;
+    border-radius: $circular;
   }
   
 
@@ -30,4 +33,28 @@
     padding: 0px 16px;
     margin: 0px;
     color: $neutral-fg-4-default;
+    
+  }
+  .logs-header{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .logs-type{
+    background-color: $neutral-bg-3-default;
+    color: $neutral-fg-2-default;
+    padding: $space0 $space2;
+    border-radius: $circular;
+  }
+
+  .logs-list{
+    display: flex;
+    flex-direction: column;
+    gap: $space1;
+  }
+
+  .changes-list{
+    display: flex;
+    flex-direction: column;
+    gap: $space6;
   }

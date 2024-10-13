@@ -27,3 +27,12 @@
         height: 70px;
     }
 }
+
+.main-content{
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    align-items: center;
+}
