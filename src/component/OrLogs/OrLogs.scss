@@ -19,7 +19,7 @@
     flex-direction: row;
     border-bottom: 1px solid $neutral-border-7-default;
     padding: $space4 $space0;
-    gap: $space6;
+    gap: $space8;
 
     @media screen and (max-width: 600px){
       flex-direction: column;
@@ -46,14 +46,16 @@
 
     padding: 0px 16px;
     margin: 0px;
-    color: $neutral-fg-4-default;
+    color: $neutral-fg-1-default;
     
   }
   .logs-header{
     display: flex;
     flex-direction: column;
+    width: 120px;
 
     @media screen and (max-width: 600px){
+      width: 100%;
       flex-direction: row;
       justify-content: space-between;
 

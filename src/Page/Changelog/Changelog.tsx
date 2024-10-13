@@ -12,7 +12,7 @@ const Changelog: React.FC = () => {
   return (
     <div className='changelog-page main-container'>
      <div className='content-container'>
-      <p className='t1-strong'>Changelogs</p>
+      <p className='h6-strong'>Changelogs</p>
         <div className=''>
           <OrLogs
           itemLogs={itemLogs}

@@ -5,7 +5,7 @@
 
         
         width: 100%;
-        position: fixed;
+        // position: fixed;
         justify-content: center;
         align-items: center;
         background-color: $neutral-bg-1-default;
@@ -19,6 +19,7 @@
         margin: 0;
         box-sizing: border-box;
         bottom: 0; 
+        
       
 
         @media screen and (min-width: 780px){

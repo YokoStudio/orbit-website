@@ -3,35 +3,31 @@ import './OrMenu.scss'
 
 
 interface OrMenu {
-    itemMenu: {name: string; link: string }[];
+    itemMenu: {name: string; link: string; icon: React.ReactNode }[];
     isOpen?: boolean;
     handleToggle?: () => void 
 
 }
 
-const OrMenu: React.FunctionComponent<OrMenu> = ( {
-    itemMenu,
-    isOpen=true,
-    handleToggle,
-    
-  }) => {
-      
-  return(
+const OrMenu: React.FunctionComponent<OrMenu> = ({
+  itemMenu,
+  isOpen = true,
+  handleToggle,
+}) => {
+  return (
     <div>
-        <div className={`menu ${isOpen? 'open' : ''}`} >
-      <h1>menu</h1>
-      <button onClick={handleToggle}>Toggle Menu</button>
-      <ul>
-         {itemMenu.map((item, index) =>( 
-            <li key={index}>
-            <a href={item.link}>{item.name}</a>  
-            </li>
-         ))}
-      </ul>
-    </div>
-    <div className={` ${isOpen? 'backdrop' : ''}`}
-    onClick={handleToggle}>
-    </div>
+      <div className={`menu ${isOpen ? 'open' : ''}`}>
+        <div className="menu-body">
+          {itemMenu.map((item, index) => (
+            <div className="b2-strong menu-item" key={index}>
+              {/* آیکون به عنوان JSX رندر شود */}
+              {item.icon && <span className="menu-icon">{item.icon}</span>}
+              <a href={item.link}>{item.name}</a>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className={`${isOpen ? 'backdrop' : ''}`} onClick={handleToggle}></div>
     </div>
   );
 };

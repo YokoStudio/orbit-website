@@ -6,6 +6,7 @@ import Icons from './Page/Icons/Icons'; // فراخوانی کامپوننت ج�
 import Changelog from './Page/Changelog/Changelog';
 import OrNavigationbar from './component/OrNavigationbar/OrNavigationbar';
 import OrMenu from './component/OrMenu/OrMenu';
+import Icon from './assets/Icon';
 
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState<string>('Icons'); // می‌توانید پیش‌فرض روی Icons تنظیم کنید
@@ -13,12 +14,19 @@ const App: React.FC = () => {
 
   const listMenu = [
     {
-      name: 'Eanlami',
-      link: 'https://eanlami.com'
+      name: 'Instagram',
+      link: 'https://yoko.studio',
+      icon: <Icon.cross/>
   },
   {
-      name: 'Yoko',
-      link: 'https://yoko.studio'
+      name: 'Twitter',
+      link: 'https://yoko.studio',
+      icon: <Icon.cross/>
+  },
+  {
+      name: 'Linkedin',
+      link: 'https://yoko.studio',
+      icon: <Icon.cross/>
   }
 
   ]
@@ -49,7 +57,7 @@ const App: React.FC = () => {
       <OrSidebar setActivePage={setActivePage} activePage={activePage} />
       <OrNavigationbar setActivePage={setActivePage} activePage={activePage} handleMenuToggle={handleMenuToggle}/>
       <div className="main-content">
-     <OrMenu
+      <OrMenu
               itemMenu={listMenu}
               isOpen={menuOpen}
               handleToggle={handleMenuToggle}

@@ -51,21 +51,54 @@ const OrHeader: React.FC<OrHeaderProps> = ({
         switch (filterOpen) {
             case true:
                 return (
-                    <div>
-                        <OrButton 
+                    <div>   
+                    <div className="header-filter-action">
+                    <OrButton 
+                    layout="icon-text" 
+                    variant='secondary' 
+                    appearance="outline" 
+                    size="lg" 
+                    text="Filter"
+                    icon={<Icon.cross/>}
+                    onClick={toggleFilter} // Open modal on click
+                    />
+                    <OrButton 
                         layout="icon-text" 
                         variant='secondary' 
                         appearance="outline" 
                         size="lg" 
-                        text="Filter"
-                        icon={<Icon.cross/>}
-                        onClick={toggleFilter} // Open modal on click
+                        text="Download all"
+                        icon={<Icon.download/>}
+                        onClick={switchModal} // Open modal on click
                     />
+                    </div>
+
+                    <div className="mobile-actions">
+                    <OrButton 
+                    layout="icon-text" 
+                    variant='secondary' 
+                    appearance="outline" 
+                    size="md" 
+                    text="Filter"
+                    icon={<Icon.cross/>}
+                    onClick={toggleFilter} // Open modal on click
+                    />
+                    <OrButton 
+                        layout="icon" 
+                        variant='secondary' 
+                        appearance="outline" 
+                        size="md" 
+                        icon={<Icon.download/>}
+                        onClick={switchModal} // Open modal on click
+                    />
+                    </div>
+
                     </div>
                 );
             case false:
                 return (
                     <div>   
+                        <div className="header-filter-action">
                         <OrButton 
                         layout="icon-text" 
                         variant='secondary' 
@@ -74,7 +107,38 @@ const OrHeader: React.FC<OrHeaderProps> = ({
                         text="Filter"
                         icon={<Icon.tune/>}
                         onClick={toggleFilter} // Open modal on click
+                         />
+                         <OrButton 
+                        layout="icon-text" 
+                        variant='secondary' 
+                        appearance="outline" 
+                        size="lg" 
+                        text="Download all"
+                        icon={<Icon.download/>}
+                        onClick={switchModal} // Open modal on click
                     />
+                        </div>
+                        
+                        <div className="mobile-actions">
+                        <OrButton 
+                        layout="icon-text" 
+                        variant='secondary' 
+                        appearance="fill" 
+                        size="md" 
+                        text="Filter"
+                        icon={<Icon.tune/>}
+                        onClick={toggleFilter} // Open modal on click
+                         />
+                         <OrButton 
+                        layout="icon" 
+                        variant='secondary' 
+                        appearance="outline" 
+                        size="md" 
+                        icon={<Icon.download/>}
+                        onClick={switchModal} // Open modal on click
+                    />
+                        </div>
+                        
                     </div>
                 );
             default:
@@ -119,26 +183,14 @@ const OrHeader: React.FC<OrHeaderProps> = ({
 
                     {initialFilter()}
 
-                    <OrButton 
-                        layout="icon-text" 
-                        variant='secondary' 
-                        appearance="outline" 
-                        size="lg" 
-                        text="Download all"
-                        icon={<Icon.download/>}
-                        onClick={switchModal} // Open modal on click
-                    />
                 </div>
-                <div className="mobile-actions">
-                   
-                </div>
+                
             </div>
             <div className="search-div-mobile">
                 <OrSearchInput onChange={handleSearchChange} placeholder={iconCountNumber} size="sm" />
-                <OrButton layout="icon-text" size="md" variant="secondary" appearance="outline" text="Filter" onClick={toggleFilter} icon={<Icon.tune/>}/>
 
-                {initialFilter()}
-                <OrButton onClick={switchModal} layout="icon" variant='secondary' appearance="outline" size="md" icon={<Icon.download/>} />
+                {/* {initialFilter()}
+                <OrButton onClick={switchModal} layout="icon" variant='secondary' appearance="outline" size="md" icon={<Icon.download/>} /> */}
             </div>
 
             {/* Modal component */}

@@ -11,6 +11,8 @@
     transition: background-color 0.3s ease-in-out;
     height: 100vh;
     overflow: hidden;
+    background-color: $neutral-bg-1-default;
+   
 
 
     @media screen and (max-width: 1200px){
@@ -29,6 +31,11 @@
     height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
+    z-index: 5;
+    background: $neutral-bg-1-default;
+    
+    
+
     
 }
 
@@ -36,7 +43,6 @@
     background: $neutral-bg-1-default;
     padding: 24px;
     gap: 24px;
-   
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid $neutral-border-7-default;
@@ -82,22 +88,29 @@
    
 }
 .backdrop{
-     z-index: 1;
+    background-color: #00000000;
+    transition: background-color 0.3s ease-in-out;
+
     @media screen and (max-width: 1200px){
         position: fixed;
+        z-index: 1;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: #00000075;
+        transition: background-color 0.3s ease-in-out;
+        
     }
+
+    
 }
 
 .OrCheckboxFilter-body{
     overflow: auto;
     box-sizing: border-box;
     height: 100%;
-    z-index: 2;
+    z-index: 4;
     position: relative;
     background-color: $neutral-bg-1-default;
 

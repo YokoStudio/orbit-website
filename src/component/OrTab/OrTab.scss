@@ -7,7 +7,7 @@
   justify-content: space-around;
 
   &.segment-control {
-   background-color: $neutral-bg-3-default;
+   background-color: $neutral-bg-4-default;
    border-radius: $radius2;
    padding: $space1;
    display: flex;
@@ -23,7 +23,7 @@
 .tab-button {
   padding: $space1;
   border: none;
-  background-color: $neutral-bg-3-default;
+  background-color: $neutral-bg-4-default;
   cursor: pointer;
   font-size: 16px;
   border-radius: 5px;
@@ -39,7 +39,7 @@
   }
 
   &:hover {
-    background-color: $neutral-bg-1-hover;
+    background-color: $neutral-bg-4-hover;
   }
 
   .tabs & {

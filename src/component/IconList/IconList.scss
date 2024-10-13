@@ -36,7 +36,13 @@
 
     @media screen and (max-width: 480px){
         grid-template-columns: repeat(auto-fill, 80px);
+        
         }
+
+        @media screen and (max-width: 780px){
+                padding-bottom: 220px;
+     
+         }
 }
 
 .icon-view{

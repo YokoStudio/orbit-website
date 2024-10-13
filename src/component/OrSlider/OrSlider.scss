@@ -76,7 +76,7 @@
 
 .tooltip {
     position: absolute;
-    right: 8px; // فاصله از نوار لغزنده
+    top: -8px; // فاصله از نوار لغزنده
     transform: translateX(-50%); // مرکز کردن تولتیپ
     background-color: $neutral-bg-10-default; // رنگ پس‌زمینه تولتیپ
     color: rgb(255, 255, 255); // رنگ متن
@@ -85,5 +85,6 @@
     white-space: nowrap; // جلوگیری از شکسته شدن متن
     z-index: 10; // قرار دادن تولتیپ در بالای سایر عناصر
     transition: opacity 0.3s; // افکت نرمی برای نمایان شدن و ناپدید شدن
+    width: fit-content;
 }
 

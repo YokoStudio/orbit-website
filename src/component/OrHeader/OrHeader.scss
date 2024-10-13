@@ -9,6 +9,7 @@
 
 
 .desk-header {
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -24,6 +25,7 @@
     height: 116px ;
     box-sizing: border-box;
     width: 100%;
+    justify-content: space-between;
 
     .search-div{
         flex-grow: 1;
@@ -42,7 +44,6 @@
     height: auto ;
     border-bottom: none;
     height: 64px ;
-    justify-content: center;
 
     }
 }
@@ -143,14 +144,17 @@
 {
     display:flex;
     gap: $space3;
-    @media screen and (max-width: 1200px){
-        display: none;
-    }
+    // @media screen and (max-width: 1200px){
+    //     display: none;
+    // }
     
 
 }
 .mobile-actions
-{
+{ 
+    display: flex;
+    gap: $space2;
+
     @media screen and (min-width: 1200px){
         display: none;
     }
@@ -167,4 +171,15 @@
     @media screen and (min-width: 1200px){
         display: none;
     }
+}
+
+.header-filter-action{
+    display:flex;
+    gap: $space3;
+    
+    @media screen and (max-width: 1200px){
+        display: none;
+    }
+    
+
 }
