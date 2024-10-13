@@ -175,14 +175,41 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
     setIsSidePanelOpen(false);
   };
 
-  const handleCopySvg = () => {
-    if (selectedIcons.length === 1) {
-      const svg = svgContent[selectedIcons[0].name];
+  // const handleCopySvg = () => {
+  //   if (selectedIcons.length === 1) {
+  //     const svg = svgContent[selectedIcons[0].name];
+  //     navigator.clipboard.writeText(svg).then(() => {
+  //       alert('کد SVG کپی شد!');
+  //     });
+  //   }
+  // };
+
+  const CopyButton: React.FC<{ svg: string }> = ({ svg }) => {
+    const [buttonText, setButtonText] = useState('Copy');
+  
+    const handleCopySvg = () => {
       navigator.clipboard.writeText(svg).then(() => {
-        alert('کد SVG کپی شد!');
+        setButtonText('Copied');
+  
+        // بازگرداندن متن به 'Copy' بعد از دو ثانیه
+        setTimeout(() => {
+          setButtonText('Copy');
+        }, 2000);
       });
-    }
+    };
+  
+    return (
+      <OrButton
+        layout='icon-text'
+        appearance='outline'
+        text={buttonText} // استفاده از متن ذخیره‌شده در state
+        variant='secondary'
+        icon={<Icon.copy />}
+        onClick={handleCopySvg}
+      />
+    );
   };
+  
 
   const downloadText = `Download ( ${selectedIcons.length} ) Icons`;
 
@@ -237,7 +264,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                     ) : (
                       <span className="skelton"></span>
                     )}
-                    <span className="b1 icon-name">{formatIconName(icon.name)}</span>
+                    <span className="c1-strong icon-name">{formatIconName(icon.name)}</span>
                   </div>
                 );
               })
@@ -256,7 +283,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                 <h3>({selectedIcons.length}) Selected</h3>
                 <OrButton
                   layout='icon'
-                  appearance='outline'
+                  appearance='ghost'
                   variant='secondary'
                   icon={<Icon.cross />}
                   onClick={() => { setSelectedIcons([]); }}
@@ -267,7 +294,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                 {selectedIcons.length === 1 ? (
                   <div className='svg-code'>
 
-                    <div className="svg-preview-box" style={{ textAlign: 'center' }} >
+                    <div className="svg-preview-box" >
                       {/* نمایش کامل و بزرگ SVG */}
                       <div
                         className="svg-preview"
@@ -276,7 +303,14 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                           color: iconColor, // استفاده از رنگ انتخابی
                         }}
                       />
-                      <div className="icon-name">
+                      {/* <div>
+
+                        {iconColor}
+
+
+                      </div> */}
+
+                      <div className="t1-strong icon-sidepanel-name">
                       {formatIconName(selectedIcons[0].name)} {/* فرمت نام آیکون برای نمایش زیبا */}
                     </div>
                     </div>
@@ -284,22 +318,17 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                       <OrButton
                         layout='icon-text'
                         appearance='fill'
-                        variant='secondary'
+                        variant='primary'
                         icon={<Icon.download />}
-                        text='Download'
+                       
+                        text='SVG'
                         onClick={() => downloadSingleIcon(selectedIcons[0])}
                       />
-                      <OrButton
-                        layout='icon-text'
-                        appearance='outline'
-                        variant='secondary'
-                        icon={<Icon.copy />}
-                        text='copy'
-                        onClick={handleCopySvg}
-                      />
+                      <CopyButton svg={svgContent[selectedIcons[0].name]} />
+
                     </div>
 
-                    <h4>SVG Code:</h4>
+                    <span className='b2'>SVG Code</span>
                     {/* نمایش کد SVG */}
                     <div className="svg-code-box">
                       <pre>
@@ -321,8 +350,8 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                         />
                         <span>{formatIconName(icon.name)}</span>
                         <OrButton
-                          variant='secondary'
-                          appearance='outline'
+                          variant='error'
+                          appearance='ghost'
                           size='sm'
                           layout='icon'
                           icon={<Icon.trash />}

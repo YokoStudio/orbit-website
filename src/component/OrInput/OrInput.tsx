@@ -14,7 +14,6 @@ const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChan
   const [color, setColor] = useState<string>(initialValue);
   const [inputValue, setInputValue] = useState<string>(initialValue); // برای نگه‌داری مقدار ورودی بدون اعتبارسنجی فوری
   const [recentColors, setRecentColors] = useState<string[]>([]);
-  const [previousColor, setPreviousColor] = useState<string | null>(null); // نگه‌داری رنگ قبلی برای undo
 
   // افزودن رنگ به لیست رنگ‌های اخیر
   const addRecentColor = (newColor: string) => {
@@ -33,7 +32,6 @@ const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChan
   const validateAndApplyColor = () => {
     if (tinycolor(inputValue).isValid()) {
       const validColor = tinycolor(inputValue).toHexString(); // تبدیل رنگ به فرمت هگزادسیمال
-      setPreviousColor(color); // ذخیره رنگ قبلی
       setColor(validColor); // تنظیم رنگ معتبر
       if (onColorChange) {
         onColorChange(validColor);
@@ -55,7 +53,6 @@ const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChan
   // هندل کردن تغییرات در ورودی color picker
   const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setPreviousColor(color); // ذخیره رنگ قبلی
     setColor(value); // به‌روزرسانی رنگ
     setInputValue(value); // به‌روزرسانی ورودی متنی با رنگ جدید
     if (onColorChange) {
@@ -64,21 +61,18 @@ const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChan
     addRecentColor(value);
   };
 
-  // بازگشت به رنگ قبلی (undo)
-  const handleUndo = () => {
-    if (previousColor) {
-      setColor(previousColor);
-      setInputValue(previousColor);
-      if (onColorChange) {
-        onColorChange(previousColor);
-      }
-      setPreviousColor(null);
+  // ریست کردن رنگ به مشکی
+  const handleReset = () => {
+    const defaultColor = '#000000'; // رنگ مشکی
+    setColor(defaultColor);
+    setInputValue(defaultColor);
+    if (onColorChange) {
+      onColorChange(defaultColor);
     }
   };
 
   // انتخاب رنگ از رنگ‌های اخیر
   const handleRecentColorClick = (recentColor: string) => {
-    setPreviousColor(color); // ذخیره رنگ فعلی قبل از تغییر
     setColor(recentColor);
     setInputValue(recentColor);
     if (onColorChange) {
@@ -108,14 +102,13 @@ const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChan
           className="color-picker"
         />
         
-      <div className='undo-div'>
+      <div className='reset-div'>
         <OrButton
           layout='text'
           variant='secondary'
           appearance='outline'
-          text='undo'
-          onClick={handleUndo}
-          disabled={!previousColor}
+          text='Reset' // تغییر متن دکمه به 'Reset'
+          onClick={handleReset}
           size='xs'
         />
       </div>

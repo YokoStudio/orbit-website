@@ -13,6 +13,7 @@ interface OrHeaderProps {
     isFilterVisible: boolean;
     switchModal?: () => void;
     isModalrVisible: boolean
+    filterOpen: boolean;
 }
 
 const OrHeader: React.FC<OrHeaderProps> = ({ 
@@ -21,11 +22,13 @@ const OrHeader: React.FC<OrHeaderProps> = ({
     toggleFilter, 
     isFilterVisible, 
     switchModal,
-    isModalrVisible
+    isModalrVisible,
+    filterOpen
 
 }) => { 
     const [iconCount, setIconCount] = useState<number>(123);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // State for modal
+    const [isFilterOpen, setIsFilterOpen] = useState<boolean>(true); // State for filter
 
     const fetchIconCount = async () => {
         try {
@@ -43,6 +46,43 @@ const OrHeader: React.FC<OrHeaderProps> = ({
         }
     };
 
+    const initialFilter = () => {
+
+        switch (filterOpen) {
+            case true:
+                return (
+                    <div>
+                        <OrButton 
+                        layout="icon-text" 
+                        variant='secondary' 
+                        appearance="outline" 
+                        size="lg" 
+                        text="Filter"
+                        icon={<Icon.cross/>}
+                        onClick={toggleFilter} // Open modal on click
+                    />
+                    </div>
+                );
+            case false:
+                return (
+                    <div>   
+                        <OrButton 
+                        layout="icon-text" 
+                        variant='secondary' 
+                        appearance="fill" 
+                        size="lg" 
+                        text="Filter"
+                        icon={<Icon.tune/>}
+                        onClick={toggleFilter} // Open modal on click
+                    />
+                    </div>
+                );
+            default:
+                return null;
+        }
+
+    };
+
     useEffect(() => {
         fetchIconCount();
     }, []);
@@ -55,6 +95,7 @@ const OrHeader: React.FC<OrHeaderProps> = ({
         setIsModalOpen(!isModalOpen); // Toggle modal open/close
 
     };
+    
     const iconCountNumber = `Search on ${iconCount} icons ...`;
 
     return (
@@ -74,15 +115,10 @@ const OrHeader: React.FC<OrHeaderProps> = ({
                 </div>
                 {children && <div className="children-container">{children}</div>}
                 <div className="header-action">
-                    <OrButton 
-                        layout="icon-text" 
-                        variant='secondary' 
-                        appearance="outline" 
-                        size="lg" 
-                        text="Filter"
-                        icon={<Icon.tune/>}
-                        onClick={toggleFilter} // Open modal on click
-                    />
+                    
+
+                    {initialFilter()}
+
                     <OrButton 
                         layout="icon-text" 
                         variant='secondary' 
@@ -100,6 +136,8 @@ const OrHeader: React.FC<OrHeaderProps> = ({
             <div className="search-div-mobile">
                 <OrSearchInput onChange={handleSearchChange} placeholder={iconCountNumber} size="sm" />
                 <OrButton layout="icon-text" size="md" variant="secondary" appearance="outline" text="Filter" onClick={toggleFilter} icon={<Icon.tune/>}/>
+
+                {initialFilter()}
                 <OrButton onClick={switchModal} layout="icon" variant='secondary' appearance="outline" size="md" icon={<Icon.download/>} />
             </div>
 

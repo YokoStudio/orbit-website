@@ -154,30 +154,64 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
     })
     .sort((a, b) => a.name.localeCompare(b.name)); 
 
-    const copyToClipboard = (iconName: string, svgContent: string) => {
-      let svg = svgContent;
+    // const copyToClipboard = (iconName: string, svgContent: string) => {
+    //   let svg = svgContent;
     
-      // تنظیم مقدار stroke و stroke-width قبل از کپی
-      svg = svg
-        .replace(/stroke="currentColor"/g, `stroke="${strokeColor}"`)
-        .replace(/stroke-width="currentWidth"/g, `stroke-width="${strokeWidth}px"`);
+    //   // تنظیم مقدار stroke و stroke-width قبل از کپی
+    //   svg = svg
+    //     .replace(/stroke="currentColor"/g, `stroke="${strokeColor}"`)
+    //     .replace(/stroke-width="currentWidth"/g, `stroke-width="${strokeWidth}px"`);
     
-      navigator.clipboard.writeText(svg).then(() => {
-        setCopyMessages((prev) => ({
-          ...prev,
-          [iconName]: 'Copied!!',
-        }));
+    //   navigator.clipboard.writeText(svg).then(() => {
+    //     setCopyMessages((prev) => ({
+    //       ...prev,
+    //       [iconName]: 'Copied!!',
+    //     }));
     
-        setTimeout(() => {
-          setCopyMessages((prev) => ({
-            ...prev,
-            [iconName]: null,
-          }));
-        }, 2000);
-      }).catch((err) => {
-        console.error('Failed to copy SVG: ', err);
-      });
+    //     setTimeout(() => {
+    //       setCopyMessages((prev) => ({
+    //         ...prev,
+    //         [iconName]: null,
+    //       }));
+    //     }, 2000);
+    //   }).catch((err) => {
+    //     console.error('Failed to copy SVG: ', err);
+    //   });
+    // };
+
+    const CopyButton: React.FC<{ svg: string, strokeColor: string, strokeWidth: number }> = ({ svg, strokeColor, strokeWidth }) => {
+      const [buttonText, setButtonText] = useState('Copy');
+    
+      const handleCopySvg = () => {
+       
+        let svgContentLocal = svg
+          .replace(/stroke="currentColor"/g, `stroke="${strokeColor}"`)
+          .replace(/stroke-width="currentWidth"/g, `stroke-width="${strokeWidth}px"`);
+    
+     
+        navigator.clipboard.writeText(svgContentLocal).then(() => {
+          setButtonText('Copied');
+    
+          
+          setTimeout(() => {
+            setButtonText('Copy');
+          }, 2000);
+        });
+      };
+    
+      return (
+        <OrButton
+          layout='icon-text'
+          appearance='outline'
+          text={buttonText}
+          variant='secondary'
+          icon={<Icon.copy />}
+          onClick={handleCopySvg}
+        />
+      );
     };
+
+
 
   const toggleSelectIcon = (icon: Icon) => {
     if (selectedIcons.includes(icon)) {
@@ -230,7 +264,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
               ) : (
                 <span className="skelton"></span>
               )}
-                <span className="b2 icon-name">{formatIconName(icon.name)}</span>
+                <span className=" c1-strong icon-name">{formatIconName(icon.name)}</span>
                 {copyMessages[icon.name] && (
                   <div className="tooltip">
                     {copyMessages[icon.name]}
@@ -250,10 +284,12 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
       {selectedIcons.length > 0 && (
   <div className="side-panel">
     <div className='filter-header'>
+
       <h3>({selectedIcons.length}) Selected</h3> 
+
       <OrButton
         layout='icon'
-        appearance='outline'
+        appearance='ghost'
         variant='secondary'
         icon={<Icon.cross />}
         onClick={() => { setSelectedIcons([]); }}
@@ -266,7 +302,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
         <div className='svg-code'>
           
 
-          <div className="svg-preview-box" style={{ textAlign: 'center' }}>
+          <div className="svg-preview-box" >
             {/* نمایش بزرگ SVG */}
             <div
               className="svg-preview"
@@ -276,7 +312,15 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
                 strokeWidth: strokeWidth,
               }}
             />
-            <div className="icon-name">
+            {/* <div>
+
+            <div>Stroke color: {strokeColor}</div>
+            <div>Stroke width: {strokeWidth}</div>
+
+
+
+           </div> */}
+            <div className="b2-strong icon-name">
             {formatIconName(selectedIcons[0].name)} {/* فرمت نام آیکون برای نمایش زیبا */}
           </div>
           </div>
@@ -284,28 +328,34 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
             <OrButton
               layout='icon-text'
               appearance='fill'
-              variant='secondary'
+              variant='primary'
               icon={<Icon.download />}
-              text='Download'
+              text='SVG'
               onClick={() => downloadSvg(selectedIcons[0].name, svgContent[selectedIcons[0].name])}
             />
-            <OrButton
+            {/* <OrButton
               layout='icon-text'
+              text='Copy'
               appearance='outline'
               variant='secondary'
               icon={<Icon.copy />}
-              text='Copy'
               onClick={() => copyToClipboard(selectedIcons[0].name, svgContent[selectedIcons[0].name])}
-            />
+            /> */}
+             <CopyButton 
+                svg={svgContent[selectedIcons[0].name]} 
+                strokeColor={strokeColor}  
+                strokeWidth={strokeWidth}         
+              />
+
           </div>
-          <h4>SVG Code:</h4>
+          <span className='t1-strong icon-sidepanel-name'>SVG:</span>
           {/* نمایش کد SVG */}
           <div className="svg-code-box">
-            <pre>
-              <code>
+            
+              <code className='b2'>
                 {svgContent[selectedIcons[0].name]}
               </code>
-            </pre>
+            
           </div>
         </div>
       ) : (
@@ -323,8 +373,8 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
               />
               <span>{formatIconName(icon.name)}</span>
               <OrButton
-                variant='secondary'
-                appearance='outline'
+                variant='error'
+                appearance='ghost'
                 size='sm'
                 layout='icon'
                 icon={<Icon.trash />}

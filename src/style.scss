@@ -4,6 +4,8 @@
 
 }
 
+@import './base/style.scss';
+
 .main
 {
     display: flex;
@@ -26,4 +28,32 @@
         max-width: 100px;
         height: 70px;
     }
+}
+
+
+.main-container{
+   width: 100%;
+    display: flex;
+    justify-content: center; 
+}
+
+.content-container{
+    max-width: 1400px;  
+  
+    height: fit-content;
+    padding: $space6;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    justify-content: center;
+    gap: 8px;
+    overflow: hidden;
+
+    @media screen and (max-width: 600px){
+        padding: $space4;
+  
+     }
+
+
 }
