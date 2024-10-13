@@ -100,12 +100,14 @@ display: block;
 
 .icon-count{
     color: #646464;
-    position: absolute;
-    right: 40px;
+     position: absolute;
+    right: 16px;
+    top: -12px;
 }
 .folder-icon{
     position: absolute;
-    left: 56px;
+    left: 12px;
+    top: -12px;
 }
 .section-title{
     display: flex;
@@ -119,4 +121,9 @@ display: block;
 
     width: 100%;
     height: 0px;
+}
+
+.rel-box{
+    position: relative;
+    width: 0px;
 }

@@ -95,22 +95,24 @@ const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChan
           placeholder="#FFFFFF"
         />
         {/* ورودی color picker */}
-        <input
-          type="color"
-          value={color} // مقدار همگام‌شده با color picker
-          onChange={handleColorChange}
-          className="color-picker"
-        />
-        
-      <div className='reset-div'>
-        <OrButton
-          layout='text'
-          variant='secondary'
-          appearance='outline'
-          text='Reset' // تغییر متن دکمه به 'Reset'
-          onClick={handleReset}
-          size='xs'
-        />
+       <div className='input-action'>
+          <input
+              type="color"
+              value={color} // مقدار همگام‌شده با color picker
+              onChange={handleColorChange}
+              className="color-picker"
+            />
+            
+          <div className='reset-div'>
+            <OrButton
+              layout='text'
+              variant='secondary'
+              appearance='outline'
+              text='Reset' // تغییر متن دکمه به 'Reset'
+              onClick={handleReset}
+              size='xs'
+            />
+        </div>
       </div>
       </div>
 

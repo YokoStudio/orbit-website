@@ -15,6 +15,7 @@
 
     @media screen and (max-width: 1200px){
         position: fixed;
+        left: 0px;
     }
 
     @media screen and (max-width: 600px){
@@ -26,16 +27,13 @@
 }
 .filter-body{
     height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
     
 }
 
 .customize-section{
-    z-index: 2;
     background: $neutral-bg-1-default;
-   
-    position: sticky;
-    top: 0;
-    overflow-y: auto;
     padding: 24px;
     gap: 24px;
    

@@ -101,14 +101,14 @@ const OrFilter: React.FC<OrFilterProps> = ({
                 
             </div>
 
-            <div className='OrCheckboxFilter-body'>
+           
                 <OrCheckboxFilter  
                     folders={folders}
                     selectedFolders={selectedFolders}
                     onFolderChange={onFolderChange}
                     onResetFilters={onResetFilters}
                 />
-            </div>
+          
             </div>
 
             <div className='backdrop'

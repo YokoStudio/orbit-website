@@ -45,7 +45,7 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    position: absolute;
+    position: relative;
     right: 32px;
     width: 28px;
     height: 32px;
@@ -75,7 +75,8 @@
 
   .reset-div{
     position: absolute;
-    right: 72px;
+    right: 36px;
+    top: 4px;
 
   }
   .recent-colors{
@@ -91,4 +92,10 @@
     
     border: solid 0px ;
     border-radius: $circular;
+  }
+
+  .input-action{
+    position: relative;
+    width: 0px;
+
   }
