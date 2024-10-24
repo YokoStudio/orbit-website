@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './Icons.scss'; 
 import ShapeIcon from '../../component/IconList/ShapeIcon';
 import StrokeIcon from '../../component/IconList/StrokeIcon';
-import OrHeader from '../../component/OrHeader/OrHeader';
+import OrIconHeader from '../../component/OrIconHeader/OrIconHeader';
 import OrFilter from '../../component/OrFilter/OrFilter';
 import '../../base/style.scss';
-import OrSubHeader from '../../component/OrSubHeader/OrSubHeader';
 import Modal from '../../component/OrDownloadModal/OrModal';
 import OrButton from '../../component/OrButton/OrButton';
 
@@ -114,7 +113,7 @@ const Icons: React.FC = () => {
             )}
 
             <div className='view'>
-                <OrHeader 
+                <OrIconHeader 
                 onSearch={handleSearch}
                 toggleFilter={toggleFilter}
                 isFilterVisible={isFilterVisible}

@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid $neutral-border-7-default;
-    padding: $space4 $space0;
+    padding: $space4 $space4;
     gap: $space8;
 
     @media screen and (max-width: 600px){

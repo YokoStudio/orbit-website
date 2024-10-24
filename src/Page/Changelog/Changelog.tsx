@@ -4,6 +4,8 @@ import '../../style.scss'
 import '../../base/type-style.scss';
 import OrLogs from '../../component/OrLogs/OrLogs'
 import { changelogData } from './changelogData'
+import OrHeader from '../../component/OrHeader/OrHeader';
+
 
 const Changelog: React.FC = () => {
 
@@ -11,9 +13,15 @@ const Changelog: React.FC = () => {
 
   return (
     <div className='changelog-page main-container'>
+      <OrHeader>
+        
+        <p className='h6-strong'>Changelogs</p>
+  
+      </OrHeader>
      <div className='content-container'>
-      <p className='h6-strong'>Changelogs</p>
-        <div className=''>
+      
+      {/* <p className='h6-strong'>Changelogs</p> */}
+        <div className='scroll-list'>
           <OrLogs
           itemLogs={itemLogs}
           /> 
