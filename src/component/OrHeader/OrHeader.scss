@@ -17,6 +17,8 @@
 
 }
 .or-header{
+    position: sticky;
+    top: 0px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -24,7 +26,7 @@
     height: 116px;
     box-sizing: border-box;
     border-bottom: 1px solid $neutral-border-7-default;
-
+    background-color: $neutral-bg-1-default;
 }
 
 .or-header-body{
@@ -32,8 +34,6 @@
     display: flex;
     padding: 24px 32px;
     align-items: center;
-
-
    
 }
 
@@ -44,6 +44,8 @@
     display: flex;
     align-items: center;
     gap: 4px;
+    border-right: 1px solid #000;
+    margin-right: 24px;
 
   
 

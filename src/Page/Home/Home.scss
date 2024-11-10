@@ -28,12 +28,44 @@
 }
 .hero{
     display: flex;
-    flex-direction: column;
-    align-items: end;
-    height: fit-content;
-    width: fit-content;
+    flex-direction: row;
+    align-items: center;
+    height: 80vh;
+    min-height: 640px;
+    gap: 64px;
+    max-width: 1400px;
+  
+
+    @media screen and (max-width: 600px){
+        flex-direction: column;
+     
+     }
 }
 .hero-logo{
     position: relative;
     left: -24px;
 }
+
+
+.hero-loop{
+    height: 420px;
+
+    @media screen and (max-width: 600px){
+        height: fit-content;
+        width: 100%;
+     
+     }
+ 
+}
+
+.hero-action{
+    margin-top: 24px;
+    display: flex;
+    gap: 16px;
+}
+.hero-title{
+    display: flex;
+    flex-direction: column;
+}
+
+

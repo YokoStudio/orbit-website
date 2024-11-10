@@ -322,5 +322,16 @@
 }
 
 .xl{
+    height: 68px;
+
+    &.icon{
+       
+    }
+    &.text{
+        padding: $space6 $space8 ;
+    }
+    &.icon-text{
+        padding: $space6 $space8 $space6 $space6;
+    }
 
 }

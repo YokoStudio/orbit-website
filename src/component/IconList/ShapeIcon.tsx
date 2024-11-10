@@ -188,8 +188,15 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
     const [buttonText, setButtonText] = useState('Copy');
   
     const handleCopySvg = () => {
-      navigator.clipboard.writeText(svg).then(() => {
+
+      
+      let svgContentLocal = svg
+      .replace(/fill="currentColor"/g, `fill="${iconColor}"`)
+
+      navigator.clipboard.writeText(svgContentLocal).then(() => {
         setButtonText('Copied');
+
+
   
         // بازگرداندن متن به 'Copy' بعد از دو ثانیه
         setTimeout(() => {

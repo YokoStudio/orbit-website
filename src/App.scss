@@ -1,7 +1,7 @@
 .app-container{
     display: flex;
     flex-direction: row;
-    overflow: hidden;
+    // overflow: hidden;
     height: 100vh;
 
 
@@ -14,8 +14,7 @@
 }
 .main-content{
     width: 100%;
-    overflow: hidden;
-    height: 100vh;
+    overflow: auto;
 
 
 }
