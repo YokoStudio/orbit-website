@@ -61,7 +61,7 @@ useEffect(() => {
       </div>
      </div> */}
       <OrHeader>
-        tset
+        Yoko
       </OrHeader>
       <div className="hero ">
         <img src={heroLoop} className="hero-loop"/>
@@ -77,7 +77,7 @@ useEffect(() => {
 
 
       </div>
-      afagfaga<br></br>safafafagfaga<br></br>safafafagfaga<br></br>safafafagfaga<br></br>safaf
+  
 
       
     </div>

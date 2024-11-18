@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState, useMemo } from "react";
 import './OrSearchInput.scss';
 import SearchIcon from '../../assets/icons/search.svg';
 import axios from 'axios';
@@ -11,88 +11,114 @@ interface OrSearchInputProps {
     size?: 'sm' | 'md' | 'lg';
 }
 
-const OrSearchInput: React.FC<OrSearchInputProps> = ({ 
+const OrSearchInput: React.FC<OrSearchInputProps> = ({
     onClick,
     onChange,
-    placeholder = 'enter your text',
+    placeholder = 'Enter your text',
     disabled = false,
     size = 'md',
 }) => {
     const [inputValue, setInputValue] = useState('');
     const [showSuggestions, setShowSuggestions] = useState(false);
-    const [suggestions, setSuggestions] = useState<string[]>([]); // لیست پیشنهادات
-    const [selectedIndex, setSelectedIndex] = useState<number | null>(null); // ایندکس انتخاب‌شده
-    const suggestionRefs = useRef<(HTMLDivElement | null)[]>([]); // رفرنس برای هر پیشنهاد
+    const [suggestions, setSuggestions] = useState<string[]>([]); 
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null); 
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const suggestionRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const inputRef = useRef<HTMLInputElement | null>(null); // برای نگهداری مرجع به ورودی
 
     useEffect(() => {
         const fetchSuggestions = async () => {
+            setIsLoading(true);
+            setError(null);
+
             try {
                 const response = await axios.get('https://orbit-website.s3.ir-thr-at1.arvanstorage.ir/IconList.json');
                 const jsonSuggestions = response.data;
 
-                // استخراج تمام کلیدها و مقادیر
                 const allSuggestions: string[] = [];
                 Object.keys(jsonSuggestions).forEach(key => {
-                    allSuggestions.push(key); // اضافه کردن کلید
-                    allSuggestions.push(...jsonSuggestions[key]); // اضافه کردن مقادیر
+                    allSuggestions.push(key);
+                    allSuggestions.push(...jsonSuggestions[key]);
                 });
 
-                // فرمت‌دهی به پیشنهادات
-                const formattedSuggestions = allSuggestions.map(suggestion => {
-                    // حذف اعداد آخر، جایگزینی خط فاصله با فاصله و بزرگ‌نویسی حرف اول
-                    const formatted = suggestion
-                        .replace(/-\d+$/, '') // حذف اعداد آخر
-                        .replace(/-/g, ' ') // جایگزینی خط فاصله با فاصله
-                        .replace(/\b\w/g, char => char.toUpperCase()); // بزرگ‌نویسی حرف اول
+                const formattedSuggestions = allSuggestions.map(suggestion => 
+                    suggestion
+                        .replace(/-\d+$/, '') 
+                        .replace(/-/g, ' ')
+                        .replace(/\b\w/g, char => char.toUpperCase())
+                );
 
-                    return formatted;
-                });
-
-                // حذف پیشنهادات تکراری
                 const uniqueSuggestions = Array.from(new Set(formattedSuggestions));
-
                 setSuggestions(uniqueSuggestions);
-            } catch (error) {
-                console.error('Error fetching suggestions:', error);
+            } catch (err) {
+                setError('Failed to load suggestions. Please try again later.');
+            } finally {
+                setIsLoading(false);
             }
         };
 
         fetchSuggestions();
     }, []);
 
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === '/' && !disabled) { // اگر اسلش فشار داده شد
+                event.preventDefault();
+                inputRef.current?.focus(); // فوکوس کردن روی ورودی
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [disabled]);
+
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setInputValue(value);
-        setShowSuggestions(value.length > 0); // نمایش پیشنهادات اگر ورودی بیشتر از صفر باشد
-        setSelectedIndex(null); // ریست کردن ایندکس انتخاب‌شده
-        if (onChange) onChange(event); // به روز رسانی والد
+        setShowSuggestions(value.length > 0);
+        setSelectedIndex(null);
+        if (onChange) onChange(event);
     };
+
+    const filteredSuggestions = useMemo(() => 
+        suggestions.filter(suggestion => 
+            suggestion.toLowerCase().includes(inputValue.toLowerCase())
+        ),
+        [suggestions, inputValue]
+    );
 
     const handleSuggestionClick = (suggestion: string) => {
         setInputValue(suggestion);
-        setShowSuggestions(false); // پنهان کردن پیشنهادات
+        setShowSuggestions(false);
+
+        if (onChange) {
+            const fakeEvent = {
+                target: { value: suggestion },
+            } as ChangeEvent<HTMLInputElement>;
+            onChange(fakeEvent);
+        }
     };
 
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            event.preventDefault(); // جلوگیری از رفرش صفحه
-            if (selectedIndex !== null) {
-                setInputValue(suggestions[selectedIndex]);
+            event.preventDefault();
+            if (selectedIndex !== null && filteredSuggestions[selectedIndex]) {
+                handleSuggestionClick(filteredSuggestions[selectedIndex]);
             }
-            setShowSuggestions(false); // پنهان کردن پیشنهادات
         } else if (event.key === 'ArrowDown') {
             event.preventDefault();
             setSelectedIndex(prevIndex => {
-                const nextIndex = (prevIndex === null || prevIndex === suggestions.length - 1) ? 0 : prevIndex + 1;
-                // اسکرول کردن به سمت پیشنهاد انتخاب‌شده
+                const nextIndex = (prevIndex === null || prevIndex === filteredSuggestions.length - 1) ? 0 : prevIndex + 1;
                 suggestionRefs.current[nextIndex]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 return nextIndex;
             });
         } else if (event.key === 'ArrowUp') {
             event.preventDefault();
             setSelectedIndex(prevIndex => {
-                const prevIndexValue = (prevIndex === null || prevIndex === 0) ? suggestions.length - 1 : prevIndex - 1;
-                // اسکرول کردن به سمت پیشنهاد انتخاب‌شده
+                const prevIndexValue = (prevIndex === null || prevIndex === 0) ? filteredSuggestions.length - 1 : prevIndex - 1;
                 suggestionRefs.current[prevIndexValue]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 return prevIndexValue;
             });
@@ -100,7 +126,7 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault(); // جلوگیری از رفرش صفحه
+        event.preventDefault();
     };
 
     return (
@@ -108,31 +134,34 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
             <form onSubmit={handleSubmit}>
                 <img className={`input-icon-${size}`} src={SearchIcon} alt="search icon" />
                 <input
+                    ref={inputRef} // مرجع ورودی برای استفاده از فوکوس
                     className={`b1 search-input ${size}`}
                     value={inputValue}
                     onClick={onClick}
-                    onChange={handleInputChange} 
-                    onKeyDown={handleKeyPress} // مدیریت فشار کلید
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyPress}
                     disabled={disabled}
                     placeholder={placeholder}
                 />
             </form>
-            {showSuggestions && (
+            {isLoading && <div className="loading-message">Loading suggestions...</div>}
+            {error && <div className="error-message">{error}</div>}
+            {showSuggestions && !isLoading && !error && (
                 <div className="suggestion-list">
-                    {suggestions
-                        .filter(suggestion => 
-                            suggestion.toLowerCase().includes(inputValue.toLowerCase())
-                        ) // فیلتر کردن پیشنهادات بر اساس ورودی
-                        .map((suggestion, index) => (
-                            <div 
-                                key={index} 
+                    {filteredSuggestions.length > 0 ? (
+                        filteredSuggestions.slice(0, 10).map((suggestion, index) => (
+                            <div
+                                key={suggestion}
                                 className={`suggestion-item ${selectedIndex === index ? 'selected' : ''}`} 
-                                onClick={() => handleSuggestionClick(suggestion)} // مدیریت کلیک روی پیشنهاد
-                                ref={el => suggestionRefs.current[index] = el} // رفرنس برای هر پیشنهاد
+                                onClick={() => handleSuggestionClick(suggestion)} 
+                                ref={el => suggestionRefs.current[index] = el}
                             >
                                 {suggestion}
                             </div>
-                        ))}
+                        ))
+                    ) : (
+                        <div className="no-suggestions">No results found.</div>
+                    )}
                 </div>
             )}
         </div>
