@@ -11,7 +11,7 @@
     overflow: hidden;
     gap: 16px;
     box-sizing: border-box;
-    padding: 64px;
+   
 }
 
 .sharp-text{
@@ -34,10 +34,14 @@
     min-height: 640px;
     gap: 64px;
     max-width: 1400px;
+    padding: 32px;
+    box-sizing: border-box;
   
 
-    @media screen and (max-width: 600px){
+    @media screen and (max-width: 780px){
         flex-direction: column;
+        height: fit-content;
+        padding-bottom: 120px;
      
      }
 }
@@ -50,9 +54,10 @@
 .hero-loop{
     height: 420px;
 
-    @media screen and (max-width: 600px){
-        height: fit-content;
+    @media screen and (max-width: 400px){
+        height: auto;
         width: 100%;
+        box-sizing: border-box;
      
      }
  
@@ -66,6 +71,15 @@
 .hero-title{
     display: flex;
     flex-direction: column;
+   
 }
+.hero-head{
+    @extend  .h1-strong;
 
+    @media screen and (max-width: 400px){
+        @extend .h4-strong;
+     
+     }
+
+}
 

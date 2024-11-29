@@ -67,7 +67,7 @@ useEffect(() => {
         <img src={heroLoop} className="hero-loop"/>
 
         <div className="hero-title">
-          <span className="h1-strong">This is SLogan,<br></br>Good For Present.</span>
+          <span className="hero-head">This is SLogan,<br></br>Good For Present.</span>
           <span>A high-quality selection of free icons. Your new alternative to Noun Project, Flaticon, and all Figma resources. Available in SVG, Font, React, React Native, Flutter, Figma and Framer.</span>
           <div className="hero-action">
             <OrButton layout="icon-text" appearance="fill" size="xl" text="Get start" icon={<Icon.tune/>} />
@@ -79,7 +79,6 @@ useEffect(() => {
       </div>
   
 
-      
     </div>
   );
 };
