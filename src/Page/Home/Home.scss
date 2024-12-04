@@ -27,17 +27,24 @@
     border-radius: 4px ;
 }
 .hero{
+    padding: 24px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 80vh;
+    height: 100vh;
     min-height: 640px;
     gap: 64px;
     max-width: 1400px;
-  
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
 
-    @media screen and (max-width: 600px){
+    @media screen and (max-width: 780px){
         flex-direction: column;
+        margin-bottom: 89px;
+        gap: 16px;
+        align-items: start;
+
      
      }
 }
@@ -48,9 +55,9 @@
 
 
 .hero-loop{
-    height: 420px;
+    height: 280px;
 
-    @media screen and (max-width: 600px){
+    @media screen and (max-width: 780px){
         height: fit-content;
         width: 100%;
      

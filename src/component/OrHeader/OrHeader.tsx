@@ -24,7 +24,9 @@ const OrHeader: React.FC<OrHeaderProps> = ({
                     </a>
                     <span className="c1">v1.0</span>
                 </div>
-              {children}
+                
+                {children}
+             
             </div>
             
             

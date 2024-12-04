@@ -35,12 +35,11 @@
 
 .main-container{
     width: 100%;
-    height: fit-content;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center; 
-    align-items: center;
-    overflow: hidden;
+   align-items: center;
+    overflow: auto;
 }
 
 .content-container{

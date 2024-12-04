@@ -14,7 +14,7 @@ const App: React.FC = () => {
 
   const listMenu = [
     {
-      name: 'Instagram',
+      name: 'contact us',
       link: 'https://yoko.studio',
       icon: <Icon.cross/>
   },

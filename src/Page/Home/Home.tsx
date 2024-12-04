@@ -61,17 +61,17 @@ useEffect(() => {
       </div>
      </div> */}
       <OrHeader>
-        Yoko
+        
       </OrHeader>
       <div className="hero ">
         <img src={heroLoop} className="hero-loop"/>
 
         <div className="hero-title">
-          <span className="h1-strong">This is SLogan,<br></br>Good For Present.</span>
+          <span className="h4-strong">This is SLogan</span>
           <span>A high-quality selection of free icons. Your new alternative to Noun Project, Flaticon, and all Figma resources. Available in SVG, Font, React, React Native, Flutter, Figma and Framer.</span>
           <div className="hero-action">
-            <OrButton layout="icon-text" appearance="fill" size="xl" text="Get start" icon={<Icon.tune/>} />
-            <OrButton layout="text" size="xl" appearance="outline" variant="secondary"  text="Learn more" />
+            <OrButton layout="icon-text" appearance="fill" size="lg" text="Get start" icon={<Icon.tune/>} />
+            <OrButton layout="text" size="lg" appearance="outline" variant="secondary"  text="Learn more" />
           </div>
         </div>
 

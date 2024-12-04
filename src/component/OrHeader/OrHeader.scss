@@ -27,6 +27,7 @@
     box-sizing: border-box;
     border-bottom: 1px solid $neutral-border-7-default;
     background-color: $neutral-bg-1-default;
+    height: 116px;
 }
 
 .or-header-body{
@@ -34,6 +35,10 @@
     display: flex;
     padding: 24px 32px;
     align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 116px;
+
    
 }
 
@@ -44,7 +49,7 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    border-right: 1px solid #000;
+  
     margin-right: 24px;
 
   
@@ -60,4 +65,22 @@
     }
 
    
+}
+.header-actions{
+    display: flex;
+    gap: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;  
+   
+
+    :hover{
+        color: #000000;
+    }
+
+    a{
+        color: #4f4f4f;
+        text-decoration: none;
+    }
+    
 }
