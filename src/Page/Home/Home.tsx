@@ -67,7 +67,7 @@ useEffect(() => {
         <img src={heroLoop} className="hero-loop"/>
 
         <div className="hero-title">
-          <span className="hero-head">This is SLogan,<br></br>Good For Present.</span>
+          <span className="hero-head h4-strong">This is SLogan</span>
           <span>A high-quality selection of free icons. Your new alternative to Noun Project, Flaticon, and all Figma resources. Available in SVG, Font, React, React Native, Flutter, Figma and Framer.</span>
           <div className="hero-action">
             <OrButton layout="icon-text" appearance="fill" size="lg" text="Get start" icon={<Icon.tune/>} />
