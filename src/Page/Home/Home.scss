@@ -72,13 +72,4 @@
     flex-direction: column;
    
 }
-.hero-head{
-    @extend  .h1-strong;
-
-    @media screen and (max-width: 400px){
-        @extend .h4-strong;
-     
-     }
-
-}
 
