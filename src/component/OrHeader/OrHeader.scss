@@ -28,6 +28,11 @@
     border-bottom: 1px solid $neutral-border-7-default;
     background-color: $neutral-bg-1-default;
     height: 116px;
+
+    @media screen and (max-width: 1200px){
+       height: 80px;
+    }
+
 }
 
 .or-header-body{
@@ -39,19 +44,20 @@
     overflow: hidden;
     height: 116px;
 
+    @media screen and (max-width: 1200px){
+        padding: 8px 8px;
+     }
    
 }
 
 .logo{
     padding: $space0 $space0;
-    width: 180px;
+    width: 150px;
     height: 20px;
     display: flex;
     align-items: center;
     gap: 4px;
-  
     margin-right: 24px;
-
   
 
     span{

@@ -28,19 +28,19 @@
 }
 .hero{
     padding: 24px;
+    height: 100vh;
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 100vh;
-    min-height: 640px;
+    justify-content: center;
     gap: 64px;
     max-width: 1400px;
     box-sizing: border-box;
-    overflow-y: auto;
-    overflow-x: hidden;
 
     @media screen and (max-width: 780px){
         flex-direction: column;
+         gap: 8px;
+         
      
      }
 }

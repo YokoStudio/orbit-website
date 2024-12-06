@@ -46,8 +46,9 @@ useEffect(() => {
 }, []);
 
   return (
-    <div className='main-container'>
-     {/* <div>
+    <div className='changelog-page main-container'>
+        
+           {/* <div>
      <div className="hero">
       <span className="h6 home-badge">v1.0.0</span>
       <img className="hero-logo" width='240px' src={Logo}></img>
@@ -62,23 +63,24 @@ useEffect(() => {
      </div> */}
       <OrHeader>
         
-      </OrHeader>
-      <div className="hero ">
-        <img src={heroLoop} className="hero-loop"/>
-
-        <div className="hero-title">
-          <span className="hero-head h4-strong">This is SLogan</span>
-          <span>A high-quality selection of free icons. Your new alternative to Noun Project, Flaticon, and all Figma resources. Available in SVG, Font, React, React Native, Flutter, Figma and Framer.</span>
-          <div className="hero-action">
-            <OrButton layout="icon-text" appearance="fill" size="lg" text="Get start" icon={<Icon.tune/>} />
-            <OrButton layout="text" size="lg" appearance="outline" variant="secondary"  text="Learn more" />
-          </div>
-        </div>
-
-
-      </div>
+        </OrHeader>
+        <div className="content-container hero ">
+          <img src={heroLoop} className="hero-loop"/>
   
-
+          <div className="hero-title">
+            <span className="hero-head h4-strong">This is SLogan</span>
+            <span>A high-quality selection of free icons. Your new alternative to Noun Project, Flaticon, and all Figma resources. Available in SVG, Font, React, React Native, Flutter, Figma and Framer.</span>
+            <div className="hero-action">
+              <OrButton layout="icon-text" appearance="fill" size="lg" text="Get start" icon={<Icon.tune/>} />
+              <OrButton layout="text" size="lg" appearance="outline" variant="secondary"  text="Learn more" />
+            </div>
+          </div>
+  
+  
+        </div>
+    
+  
+      
     </div>
   );
 };
