@@ -43,6 +43,8 @@
 }
 
 .content-container{
+    display: flex;
+    justify-content: start;
     max-width: 1400px;  
     padding: $space6;
     width: 100%;
@@ -55,8 +57,10 @@
     }
 
     @media screen and (max-width: 600px){
-       
         margin-bottom: 89px;
+        margin-top: 0px;
+        
+        
    
 
   

@@ -3,7 +3,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import "./OrSidebar.scss";
 
 
-const OrSidebar: React.FC = () => {
+interface OrSidebarProps {
+    handleMenuToggle: () => void; // تعریف نوع پراپرتی handleMenuToggle
+  }
+
+  const OrSidebar: React.FC<OrSidebarProps> = ({handleMenuToggle  }) => {
+
     const location = useLocation();
     const navigate = useNavigate();
   
@@ -122,6 +127,19 @@ const OrSidebar: React.FC = () => {
           </div>
           <span className="b2">About</span>
         </button>
+        <button  className='sidebar-button' id='navigation-more-button' onClick={() => handleMenuToggle()}>
+          <div className={`icon-wrapper`} >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.25 3C10.25 2.0335 11.0335 1.25 12 1.25C12.9665 1.25 13.75 2.0335 13.75 3C13.75 3.9665 12.9665 4.75 12 4.75C11.0335 4.75 10.25 3.9665 10.25 3ZM12 2.75C11.8619 2.75 11.75 2.86193 11.75 3C11.75 3.13807 11.8619 3.25 12 3.25C12.1381 3.25 12.25 3.13807 12.25 3C12.25 2.86193 12.1381 2.75 12 2.75Z" fill="black"/>
+               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.25 21C10.25 20.0335 11.0335 19.25 12 19.25C12.9665 19.25 13.75 20.0335 13.75 21C13.75 21.9665 12.9665 22.75 12 22.75C11.0335 22.75 10.25 21.9665 10.25 21ZM12 20.75C11.8619 20.75 11.75 20.8619 11.75 21C11.75 21.1381 11.8619 21.25 12 21.25C12.1381 21.25 12.25 21.1381 12.25 21C12.25 20.8619 12.1381 20.75 12 20.75Z" fill="black"/>
+             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 10.25C11.0335 10.25 10.25 11.0335 10.25 12C10.25 12.9665 11.0335 13.75 12 13.75C12.9665 13.75 13.75 12.9665 13.75 12C13.75 11.0335 12.9665 10.25 12 10.25ZM11.75 12C11.75 11.8619 11.8619 11.75 12 11.75C12.1381 11.75 12.25 11.8619 12.25 12C12.25 12.1381 12.1381 12.25 12 12.25C11.8619 12.25 11.75 12.1381 11.75 12Z" fill="black"/>
+            </svg>
+
+           </div>
+           <span className='b2'>
+                More
+             </span>
+       </button>
       </div>
 
       <div className="sidebar-main-content">
@@ -137,7 +155,20 @@ const OrSidebar: React.FC = () => {
               Contact
             </span>
         </button>
-        <a href='https://yoko.studio'> <img /></a>
+
+        <button className={`sidebar-button`}>
+            <div className='icon-wrapper'>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.9987 5L7.99532 15V19H11.9967L22 9V5H17.9987Z" fill="black"/>
+                    <path d="M6.00172 5.00691L2.00031 9.00699L6.00172 13.0071L10.0031 9.00699L6.00172 5.00691Z" fill="black"/>
+                </svg>
+            </div>
+            
+            <span className='b2.strong'>
+              Yoko
+            </span>
+        </button>
+       
        
 
         

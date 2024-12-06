@@ -128,11 +128,15 @@ const App: React.FC = () => {
     }
   };
 
+
   return (
     <Router>
     <div className="app-container">
-      <OrSidebar />
-      {/* <OrNavigationbar handleMenuToggle={handleMenuToggle} /> */}
+      <OrSidebar 
+      handleMenuToggle={handleMenuToggle}
+      
+      />
+      {/* <OrNavigationbar/> */}
       <div className="main-content">
         <OrMenu itemMenu={listMenu} isOpen={menuOpen} handleToggle={handleMenuToggle} />
         <Routes>

@@ -22,8 +22,19 @@
       
 
         @media screen and (max-width: 780px){
-            display: none;
-     
+        height: 100px ;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        background-color: $neutral-bg-1-default;
+        border-top: 1px solid $neutral-border-7-default;
+        overflow-x: hidden;
+        padding: $space1 $space2 $space0 $space2;
+        gap: $space0-5;
+        display: flex;
+        flex-direction: row;
+        overflow:hidden;
+        bottom: 0; 
          }
 }
 
@@ -36,6 +47,7 @@
     align-items: center;
     gap: $space0-5;
     cursor: pointer;
+
 
         div{
             &.icon-wrapper{
@@ -108,6 +120,10 @@
     flex-direction: column;
     gap: 4px;
 
+    @media screen and (max-width: 780px){
+        display: none;
+    }
+
 }
 
 .sidebar-poduct-content{
@@ -115,4 +131,21 @@
     flex-direction: column;
     gap: 4px;
     flex-grow: 1;
+
+    @media screen and (max-width: 780px){
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+        flex-grow: 1;
+        justify-content: space-around
+    }
+}
+#navigation-more-button{
+
+    visibility: hidden;
+
+    @media screen and (max-width: 780px){
+        visibility:visible;
+    }
+   
 }

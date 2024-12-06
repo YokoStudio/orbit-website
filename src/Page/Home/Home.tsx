@@ -62,9 +62,9 @@ useEffect(() => {
       </div>
      </div> */}
       <OrHeader>
-        
-        </OrHeader>
-        <div className="content-container hero ">
+        <p className='h6-strong'>Home</p>
+      </OrHeader>
+        <div className="content-container hero">
           <img src={heroLoop} className="hero-loop"/>
   
           <div className="hero-title">
