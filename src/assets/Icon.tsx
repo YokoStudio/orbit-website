@@ -6,6 +6,7 @@ import { ReactComponent as DonlowadIcon} from './icons/download.svg';
 import { ReactComponent as HomeIcon} from './icons/home-3.svg';
 import { ReactComponent as CopyIcon} from './icons/copy.svg';
 import { ReactComponent as TrashIcon} from './icons/trash-2.svg';
+import { ReactComponent as EternalLinkIcon} from './icons/external-link.svg';
 
 
 
@@ -17,6 +18,7 @@ const Icon = {
     home: HomeIcon,
     copy: CopyIcon,
     trash: TrashIcon,
+    externalLink: EternalLinkIcon,
 };
 
 export default Icon;
