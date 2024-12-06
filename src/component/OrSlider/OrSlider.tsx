@@ -26,8 +26,8 @@ const OrSlider: React.FC<OrSliderProps> = ({ value, onChange }) => {
 
     return (
         <div className="slider-container">
-            <span className='b1-strong'>Stroke</span>
-            <div className="tooltip" style={{ display: showTooltip ? 'block' : 'none', left: `${(value - 0.5) / (1.5 - 0.5) * 100}%` }}>
+            <span className='b1-strong'>Stroke (PX)</span>
+            <div className="tooltip b1-strong" style={{ display: showTooltip ? 'block' : 'none', left: `${(value - 0.5) / (1.5 - 0.5) * 100}%` }}>
                 {value}
             </div>
             <input
@@ -45,8 +45,8 @@ const OrSlider: React.FC<OrSliderProps> = ({ value, onChange }) => {
                 onMouseLeave={handleMouseLeave}
                 className="slider" />
             <div className="labels">
-                <span>Light (0.5)</span>
-                <span>Bold (1.5)</span>
+                <span className='b1'>Light</span>
+                <span className='b1'>Bold</span>
             </div>
         </div>
     );

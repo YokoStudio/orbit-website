@@ -7,7 +7,8 @@ import OrFilter from '../../component/OrFilter/OrFilter';
 import '../../base/style.scss';
 import Modal from '../../component/OrDownloadModal/OrModal';
 import OrButton from '../../component/OrButton/OrButton';
-
+import figmaIcon from '../../assets/modalIcon/Figma.png'
+import Icon from '../../assets/Icon';
 const Icons: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [borderSize, setBorderSize] = useState<number>(1);
@@ -127,52 +128,115 @@ const Icons: React.FC = () => {
                 isOpen={isModalVisible}
                 onClose={SwitchModal}
                 title='Dowload'
+                dis='test'
                 >  
-
-                    <div className='download-box'>
-                        <div>
-                            <span>
-                                Figma file
-                            </span>
+                <div className='download-box'>
+                        <div className='box-wrapper'>
+                            <div className='modal-item-icon'>
+                                <img src={figmaIcon}/>
+                            </div>
+                                <div className='title-wrapper'>
+                                    <span className='b1-strong'>
+                                        Figma comunity
+                                    </span>
+                                    <span className='b1'>
+                                        dis
+                                    </span>
+                                </div>
                         </div>
 
                         <OrButton
                             appearance='outline'
                             variant='secondary'
-                            layout='text'
-                            text='Download'
+                            layout='icon-text'
+                            icon={<Icon.externalLink/>}
+                            text='Open'
                             onClick={SwitchModal}
                         />
                     </div>
 
                     <div className='download-box'>
-                        <div>
-                            <span>
-                                Figma comunity
-                            </span>
+                        <div className='box-wrapper'>
+                            <div className='modal-item-icon'>
+                                <img src={figmaIcon}/>
+                            </div>
+                                <div className='title-wrapper'>
+                                    <span className='b1-strong'>
+                                        Figma File
+                                    </span>
+                                    <span className='b1'>
+                                        dis
+                                    </span>
+                                </div>
                         </div>
 
                         <OrButton
                             appearance='outline'
                             variant='secondary'
-                            layout='text'
+                            layout='icon-text'
                             text='Download'
+                            icon={<Icon.download/>}
                             onClick={SwitchModal}
                         />
                     </div>
 
                     <div className='download-box'>
-                        <div>
-                            <span>
-                                .zip
-                            </span>
+                        <div className='box-wrapper'>
+                            <div className='modal-item-icon'>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 12C3.72386 12 3.5 12.2239 3.5 12.5C3.5 12.7761 3.72386 13 4 13H5.19098L3.55279 16.2764C3.47529 16.4314 3.48357 16.6155 3.57468 16.7629C3.66578 16.9103 3.82671 17 4 17H6C6.27614 17 6.5 16.7761 6.5 16.5C6.5 16.2239 6.27614 16 6 16H4.80902L6.44721 12.7236C6.52471 12.5686 6.51643 12.3845 6.42533 12.2371C6.33422 12.0897 6.17329 12 6 12H4Z" fill="black"/>
+                                <path d="M8.5 12.5C8.5 12.2239 8.27614 12 8 12C7.72386 12 7.5 12.2239 7.5 12.5V16.5C7.5 16.7761 7.72386 17 8 17C8.27614 17 8.5 16.7761 8.5 16.5V12.5Z" fill="black"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10 12C9.72386 12 9.5 12.2239 9.5 12.5V16.5C9.5 16.7761 9.72386 17 10 17C10.2761 17 10.5 16.7761 10.5 16.5V15.5H11.5C12.3284 15.5 13 14.8284 13 14V13.5C13 12.6716 12.3284 12 11.5 12H10ZM11.5 14.5H10.5V13H11.5C11.7761 13 12 13.2239 12 13.5V14C12 14.2761 11.7761 14.5 11.5 14.5Z" fill="black"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 1.25C4.98122 1.25 3.75 2.48122 3.75 4V9.25H3.5C1.98122 9.25 0.75 10.4812 0.75 12V17C0.75 18.5188 1.98122 19.75 3.5 19.75H3.75V20C3.75 21.5188 4.98122 22.75 6.5 22.75H17.5C19.0188 22.75 20.25 21.5188 20.25 20V7.70156C20.25 7.64451 20.2482 7.58762 20.2447 7.53096C20.2482 7.48427 20.25 7.43711 20.25 7.38953C20.25 6.96707 20.1062 6.55719 19.8423 6.22731L16.3898 1.91169C16.0552 1.49346 15.5487 1.25 15.0131 1.25C14.9415 1.25 14.8709 1.25427 14.8015 1.26257C14.7146 1.25423 14.6269 1.25 14.5388 1.25H6.5ZM18.7333 7.49816C18.6987 7.28831 18.6109 7.08957 18.4768 6.92162L18.4761 6.92069L15.5148 3.21913C15.3478 3.01055 15.1199 2.86279 14.8674 2.79397C14.7966 2.84112 14.75 2.92166 14.75 3.01309V6.5C14.75 7.19036 15.3096 7.75 16 7.75H18.3895C18.5508 7.75 18.6873 7.64416 18.7333 7.49816ZM13.25 3.01309C13.25 2.92368 13.2567 2.83583 13.2695 2.75H6.5C5.80964 2.75 5.25 3.30964 5.25 4V9.25H13C14.5188 9.25 15.75 10.4812 15.75 12V17C15.75 18.5188 14.5188 19.75 13 19.75H5.25V20C5.25 20.6904 5.80964 21.25 6.5 21.25H17.5C18.1904 21.25 18.75 20.6904 18.75 20V9.2151C18.6334 9.238 18.5129 9.25 18.3895 9.25H16C14.4812 9.25 13.25 8.01878 13.25 6.5V3.01309ZM2.25 12C2.25 11.3096 2.80964 10.75 3.5 10.75H13C13.6904 10.75 14.25 11.3096 14.25 12V17C14.25 17.6904 13.6904 18.25 13 18.25H3.5C2.80964 18.25 2.25 17.6904 2.25 17V12Z" fill="black"/>
+                            </svg>
+
+                            </div>
+                                <div className='title-wrapper'>
+                                    <span className='b1-strong'>
+                                        Zip file
+                                    </span>
+                                    <span className='b1'>
+                                        dis
+                                    </span>
+                                </div>
                         </div>
 
                         <OrButton
                             appearance='outline'
                             variant='secondary'
-                            layout='text'
+                            layout='icon-text'
                             text='Download'
+                            icon={<Icon.download/>}
+                            onClick={SwitchModal}
+                        />
+                    </div>
+                    <div className='download-box'>
+                        <div className='box-wrapper'>
+                            <div className='modal-item-icon'>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 12C3.72386 12 3.5 12.2239 3.5 12.5C3.5 12.7761 3.72386 13 4 13H5.19098L3.55279 16.2764C3.47529 16.4314 3.48357 16.6155 3.57468 16.7629C3.66578 16.9103 3.82671 17 4 17H6C6.27614 17 6.5 16.7761 6.5 16.5C6.5 16.2239 6.27614 16 6 16H4.80902L6.44721 12.7236C6.52471 12.5686 6.51643 12.3845 6.42533 12.2371C6.33422 12.0897 6.17329 12 6 12H4Z" fill="black"/>
+                                <path d="M8.5 12.5C8.5 12.2239 8.27614 12 8 12C7.72386 12 7.5 12.2239 7.5 12.5V16.5C7.5 16.7761 7.72386 17 8 17C8.27614 17 8.5 16.7761 8.5 16.5V12.5Z" fill="black"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10 12C9.72386 12 9.5 12.2239 9.5 12.5V16.5C9.5 16.7761 9.72386 17 10 17C10.2761 17 10.5 16.7761 10.5 16.5V15.5H11.5C12.3284 15.5 13 14.8284 13 14V13.5C13 12.6716 12.3284 12 11.5 12H10ZM11.5 14.5H10.5V13H11.5C11.7761 13 12 13.2239 12 13.5V14C12 14.2761 11.7761 14.5 11.5 14.5Z" fill="black"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 1.25C4.98122 1.25 3.75 2.48122 3.75 4V9.25H3.5C1.98122 9.25 0.75 10.4812 0.75 12V17C0.75 18.5188 1.98122 19.75 3.5 19.75H3.75V20C3.75 21.5188 4.98122 22.75 6.5 22.75H17.5C19.0188 22.75 20.25 21.5188 20.25 20V7.70156C20.25 7.64451 20.2482 7.58762 20.2447 7.53096C20.2482 7.48427 20.25 7.43711 20.25 7.38953C20.25 6.96707 20.1062 6.55719 19.8423 6.22731L16.3898 1.91169C16.0552 1.49346 15.5487 1.25 15.0131 1.25C14.9415 1.25 14.8709 1.25427 14.8015 1.26257C14.7146 1.25423 14.6269 1.25 14.5388 1.25H6.5ZM18.7333 7.49816C18.6987 7.28831 18.6109 7.08957 18.4768 6.92162L18.4761 6.92069L15.5148 3.21913C15.3478 3.01055 15.1199 2.86279 14.8674 2.79397C14.7966 2.84112 14.75 2.92166 14.75 3.01309V6.5C14.75 7.19036 15.3096 7.75 16 7.75H18.3895C18.5508 7.75 18.6873 7.64416 18.7333 7.49816ZM13.25 3.01309C13.25 2.92368 13.2567 2.83583 13.2695 2.75H6.5C5.80964 2.75 5.25 3.30964 5.25 4V9.25H13C14.5188 9.25 15.75 10.4812 15.75 12V17C15.75 18.5188 14.5188 19.75 13 19.75H5.25V20C5.25 20.6904 5.80964 21.25 6.5 21.25H17.5C18.1904 21.25 18.75 20.6904 18.75 20V9.2151C18.6334 9.238 18.5129 9.25 18.3895 9.25H16C14.4812 9.25 13.25 8.01878 13.25 6.5V3.01309ZM2.25 12C2.25 11.3096 2.80964 10.75 3.5 10.75H13C13.6904 10.75 14.25 11.3096 14.25 12V17C14.25 17.6904 13.6904 18.25 13 18.25H3.5C2.80964 18.25 2.25 17.6904 2.25 17V12Z" fill="black"/>
+                            </svg>
+
+                            </div>
+                                <div className='title-wrapper'>
+                                    <span className='b1-strong'>
+                                        Font icon
+                                    </span>
+                                    <span className='b1'>
+                                        dis
+                                    </span>
+                                </div>
+                        </div>
+
+                        <OrButton
+                            appearance='outline'
+                            variant='secondary'
+                            layout='icon-text'
+                            text='Download'
+                            icon={<Icon.download/>}
                             onClick={SwitchModal}
                         />
                     </div>

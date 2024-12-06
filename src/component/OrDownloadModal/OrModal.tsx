@@ -6,6 +6,7 @@ import Icon from '../../assets/Icon';
 
 interface ModalProps {
   title?: string;
+  dis?: string;
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode; 
@@ -13,9 +14,10 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ 
   title,
+  dis,
   isOpen,
   onClose,
-  children 
+  children
 
 }) => {
   if (!isOpen) return null; 
@@ -24,10 +26,16 @@ const Modal: React.FC<ModalProps> = ({
     <div className="modal-overlay" onClick={onClose}>
 
       <div className='modal-body' onClick={(e) => e.stopPropagation()}>
-        <div className='t1-strong modal-title'>
-          <span>
+        <div className='modal-title'>
+          <div className='modal-title-wrapper'>
+          <span className='t1-strong'>
             {title}
           </span>
+          <span className='b1'>
+            {dis}
+          </span>
+
+          </div>
 
           <OrButton
           layout='icon'

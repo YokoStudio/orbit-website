@@ -18,6 +18,8 @@
   border-radius: $radius2;
   overflow: hidden;
   min-width: 400px;
+  max-height: 100vh;
+  overflow: hidden;
 
   @media screen and (max-width: 400px){
     position: fixed;
@@ -49,7 +51,13 @@
   background-color: $neutral-bg-1-default;
   color: $neutral-fg-1-default;
   padding: $space6;
+  overflow: auto;
+  height: 100%;
   
 }
   
-  
+.modal-title-wrapper{
+  display: flex;
+  gap: $space0;
+  flex-direction: column;
+}
