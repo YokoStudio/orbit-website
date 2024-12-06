@@ -64,8 +64,8 @@ const OrIconHeader: React.FC<OrIconHeaderProps> = ({
                     />
                     <OrButton 
                         layout="icon-text" 
-                        variant='secondary' 
-                        appearance="outline" 
+                        variant='primary' 
+                        appearance="fill" 
                         size="lg" 
                         text="Download all"
                         icon={<Icon.download/>}
@@ -75,13 +75,13 @@ const OrIconHeader: React.FC<OrIconHeaderProps> = ({
 
                     <div className="mobile-actions">
                     <OrButton 
-                    layout="icon-text" 
-                    variant='secondary' 
-                    appearance="outline" 
-                    size="md" 
-                    text="Filter"
-                    icon={<Icon.cross/>}
-                    onClick={toggleFilter} // Open modal on click
+                        layout="icon-text" 
+                        variant='secondary' 
+                        appearance="outline" 
+                        size="md" 
+                        text="Filter"
+                        icon={<Icon.cross/>}
+                        onClick={toggleFilter} // Open modal on click
                     />
                     <OrButton 
                         layout="icon" 
@@ -110,8 +110,8 @@ const OrIconHeader: React.FC<OrIconHeaderProps> = ({
                          />
                          <OrButton 
                         layout="icon-text" 
-                        variant='secondary' 
-                        appearance="outline" 
+                        variant='primary' 
+                        appearance="fill" 
                         size="lg" 
                         text="Download all"
                         icon={<Icon.download/>}
@@ -131,8 +131,8 @@ const OrIconHeader: React.FC<OrIconHeaderProps> = ({
                          />
                          <OrButton 
                         layout="icon" 
-                        variant='secondary' 
-                        appearance="outline" 
+                        variant='primary' 
+                        appearance="fill" 
                         size="md" 
                         icon={<Icon.download/>}
                         onClick={switchModal} // Open modal on click

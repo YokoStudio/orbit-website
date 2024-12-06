@@ -99,7 +99,10 @@ const App: React.FC = () => {
   {
       name: 'Yoko.Studio',
       link: 'https://yoko.studio',
-      icon: <Icon.cross/>
+      icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.9987 5L7.99532 15V19H11.9967L22 9V5H17.9987Z" fill="black"/>
+              <path d="M6.00172 5.00691L2.00031 9.00699L6.00172 13.0071L10.0031 9.00699L6.00172 5.00691Z" fill="black"/>
+            </svg>
   }
 
   ]
