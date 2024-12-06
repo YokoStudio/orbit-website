@@ -4,6 +4,7 @@ import OrSidebar from './component/OrSidebar/OrSidebar';
 import Home from './Page/Home/Home'; 
 import Icons from './Page/Icons/Icons'; // فراخوانی کامپوننت جدید Icons
 import Changelog from './Page/Changelog/Changelog';
+import About from './Page/About/About';
 import OrNavigationbar from './component/OrNavigationbar/OrNavigationbar';
 import OrMenu from './component/OrMenu/OrMenu';
 import Icon from './assets/Icon';
@@ -45,6 +46,9 @@ const App: React.FC = () => {
 
         case 'Changelog':
             return <Changelog />;
+      
+        case 'About':
+            return <About />;
 
 
       default:

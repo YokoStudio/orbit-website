@@ -127,13 +127,19 @@ const Icons: React.FC = () => {
                 <Modal
                 isOpen={isModalVisible}
                 onClose={SwitchModal}
-                title='Dowload'
-                dis='test'
+                title='Download resource '
+                dis='This is caption'
                 >  
                 <div className='download-box'>
                         <div className='box-wrapper'>
                             <div className='modal-item-icon'>
-                                <img src={figmaIcon}/>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.5 22C10.432 22 12 20.5067 12 18.6667V15.3333H8.5C6.568 15.3333 5 16.8267 5 18.6667C5 20.5067 6.568 22 8.5 22Z" fill="#0ACF83"/>
+                                    <path d="M5 12C5 10.16 6.568 8.66667 8.5 8.66667H12V15.3333H8.5C6.568 15.3333 5 13.84 5 12Z" fill="#A259FF"/>
+                                    <path d="M5 5.33333C5 3.49333 6.568 2 8.5 2H12V8.66667H8.5C6.568 8.66667 5 7.17333 5 5.33333Z" fill="#F24E1E"/>
+                                    <path d="M12 2H15.5C17.432 2 19 3.49333 19 5.33333C19 7.17333 17.432 8.66667 15.5 8.66667H12V2Z" fill="#FF7262"/>
+                                    <path d="M19 12C19 13.84 17.432 15.3333 15.5 15.3333C13.568 15.3333 12 13.84 12 12C12 10.16 13.568 8.66667 15.5 8.66667C17.432 8.66667 19 10.16 19 12Z" fill="#1ABCFE"/>
+                                </svg>
                             </div>
                                 <div className='title-wrapper'>
                                     <span className='b1-strong'>
@@ -158,7 +164,13 @@ const Icons: React.FC = () => {
                     <div className='download-box'>
                         <div className='box-wrapper'>
                             <div className='modal-item-icon'>
-                                <img src={figmaIcon}/>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.5 22C10.432 22 12 20.5067 12 18.6667V15.3333H8.5C6.568 15.3333 5 16.8267 5 18.6667C5 20.5067 6.568 22 8.5 22Z" fill="#0ACF83"/>
+                                    <path d="M5 12C5 10.16 6.568 8.66667 8.5 8.66667H12V15.3333H8.5C6.568 15.3333 5 13.84 5 12Z" fill="#A259FF"/>
+                                    <path d="M5 5.33333C5 3.49333 6.568 2 8.5 2H12V8.66667H8.5C6.568 8.66667 5 7.17333 5 5.33333Z" fill="#F24E1E"/>
+                                    <path d="M12 2H15.5C17.432 2 19 3.49333 19 5.33333C19 7.17333 17.432 8.66667 15.5 8.66667H12V2Z" fill="#FF7262"/>
+                                    <path d="M19 12C19 13.84 17.432 15.3333 15.5 15.3333C13.568 15.3333 12 13.84 12 12C12 10.16 13.568 8.66667 15.5 8.66667C17.432 8.66667 19 10.16 19 12Z" fill="#1ABCFE"/>
+                                </svg>
                             </div>
                                 <div className='title-wrapper'>
                                     <span className='b1-strong'>
