@@ -79,7 +79,7 @@ import Home from './Page/Home/Home';
 import Icons from './Page/Icons/Icons'; // فراخوانی کامپوننت جدید Icons
 import Changelog from './Page/Changelog/Changelog';
 import About from './Page/About/About';
-import OrNavigationbar from './component/OrNavigationbar/OrNavigationbar';
+
 import OrMenu from './component/OrMenu/OrMenu';
 import Icon from './assets/Icon';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
@@ -136,7 +136,6 @@ const App: React.FC = () => {
       handleMenuToggle={handleMenuToggle}
       
       />
-      {/* <OrNavigationbar/> */}
       <div className="main-content">
         <OrMenu itemMenu={listMenu} isOpen={menuOpen} handleToggle={handleMenuToggle} />
         <Routes>
