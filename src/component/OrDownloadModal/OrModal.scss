@@ -52,7 +52,7 @@
   color: $neutral-fg-1-default;
   padding: $space6;
   overflow: auto;
-  height: 100%;
+  max-height: calc(100vh - 180px); // 210px = 160px (header) + 50px (title)
   
 }
   
