@@ -144,7 +144,8 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
                     placeholder={placeholder}
                 />
             </form>
-            {isLoading && <div className="loading-message">Loading suggestions...</div>}
+            
+            {isLoading && <div className="loading-message"></div>}
             {error && <div className="error-message">{error}</div>}
             {showSuggestions && !isLoading && !error && (
                 <div className="suggestion-list">

@@ -287,14 +287,30 @@
 .svg-code{
 
     padding: $space6;
+    overflow: hidden;
 }
 .svg-code-box{
-    border: 1px solid $neutral-border-7-default;
-    border-radius: $radius2;
-    overflow-y: auto;
-    padding: $space2;
-    background-color: $neutral-bg-3-default;
+
+    width: 100%;
    
+
+    box-sizing: border-box;
+
+    textarea{
+        height: 240px;
+        min-width: 100%;
+        max-width: 100%;
+        max-height: 320px;
+        min-height: 80px;
+
+        box-sizing: border-box;
+        width: 100%;
+        border: 1px solid $neutral-border-7-default;
+        border-radius: $radius2;
+        overflow-y: auto;
+        padding: $space3;
+        background-color: $neutral-bg-3-default;  
+    }
 }
 .single-download-box{
     display: flex;

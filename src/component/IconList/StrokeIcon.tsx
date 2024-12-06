@@ -351,15 +351,15 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
           <span className='t1-strong icon-sidepanel-name'>SVG:</span>
           {/* نمایش کد SVG */}
           <div className="svg-code-box">
-            
-              <code className='b2'>
-                {svgContent[selectedIcons[0].name]}
-              </code>
-            
+              <textarea
+                
+                value={svgContent[selectedIcons[0].name]}
+                readOnly
+                onClick={(e) => (e.currentTarget as HTMLTextAreaElement).select()} // انتخاب کل متن هنگام کلیک
+              />
           </div>
         </div>
       ) : (
-        // نمایش لیست آیکون‌ها برای دو یا بیشتر انتخاب‌شده
         selectedIcons.map((icon) => (
           <div className='side-panel-item' key={icon.name}>
             <div className='side-panel-item-body'>

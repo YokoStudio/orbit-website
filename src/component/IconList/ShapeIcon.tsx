@@ -338,11 +338,11 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                     <span className='b2'>SVG Code</span>
                     {/* نمایش کد SVG */}
                     <div className="svg-code-box">
-                      <pre>
-                        <code>
-                          {svgContent[selectedIcons[0].name]}
-                        </code>
-                      </pre>
+                      <textarea
+                        value={svgContent[selectedIcons[0].name]}
+                        readOnly
+                        onClick={(e) => (e.currentTarget as HTMLTextAreaElement).select()} // انتخاب کل متن هنگام کلیک
+                      />
                     </div>
                   </div>
                 ) : (

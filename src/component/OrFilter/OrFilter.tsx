@@ -51,7 +51,7 @@ const OrFilter: React.FC<OrFilterProps> = ({
         onChangeColor(color); // ارسال رنگ به کامپوننت والد
     };
 
-    const tabs = ['Stroke', 'Shape'];
+    const tabs = ['Shape', 'Stroke'];
 
     const renderTabContent = () => {
         switch (activeTab) {

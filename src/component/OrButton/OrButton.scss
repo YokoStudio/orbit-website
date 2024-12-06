@@ -6,6 +6,7 @@
     transition: background-color 0.3s ease-in-out;
     cursor: pointer;
     height: fit-content;
+    min-width: fit-content;
     width: fit-content;
 
     &.fill-block{
@@ -19,10 +20,12 @@
     justify-content: center;
     align-items: center;
     gap: $space2;
+ 
 
     span{
         width: 20px;
         height: 20px;
+
 
         svg{
             width: 100%;

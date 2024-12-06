@@ -31,8 +31,7 @@
         border-radius: 34px;
 
         &:hover{
-            background: $neutral-bg-1-hover;
-           
+            background: $neutral-bg-1-hover;   
         }
 
         &:before {
@@ -42,7 +41,7 @@
             width: 12px;
             left: 4px; // جابه‌جایی اولیه handle
             bottom: 4px;
-            background-color: $neutral-fg-5-default;
+            background-color: #646464; 
             border-radius: 50%;
             transition: 0.4s;
         }
