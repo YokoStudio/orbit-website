@@ -34,8 +34,8 @@
     align-items: center;
     justify-content: center;
     gap: 64px;
-    max-width: 1400px;
     box-sizing: border-box;
+ 
 
     @media screen and (max-width: 780px){
         flex-direction: column;
@@ -46,8 +46,14 @@
      }
 }
 .hero-logo{
-    position: relative;
-    left: -24px;
+   width: 420px;
+
+   @media screen and (max-width: 600px){
+
+    width: 100%;
+ 
+    
+ }
 }
 
 
@@ -71,6 +77,14 @@
 .hero-title{
     display: flex;
     flex-direction: column;
-   
-}
+    max-width: 1140px;  
+    justify-content: center;
 
+    @media screen and (max-width: 600px){
+
+        width: 100%;
+        overflow: hidden;
+        
+     }
+
+}
