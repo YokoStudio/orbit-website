@@ -370,7 +370,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
                   strokeWidth: strokeWidth,
                 }}
               />
-              <span>{formatIconName(icon.name)}</span>
+              <span className='b2'>{formatIconName(icon.name)}</span>
               <OrButton
                 variant='error'
                 appearance='ghost'

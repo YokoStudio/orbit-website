@@ -360,7 +360,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                           style={{ color: iconColor }} // اعمال رنگ CSS برای آیکون‌های انتخابی
                           dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
                         />
-                        <span>{formatIconName(icon.name)}</span>
+                        <span className='b2'>{formatIconName(icon.name)}</span>
                         <OrButton
                           variant='error'
                           appearance='ghost'
