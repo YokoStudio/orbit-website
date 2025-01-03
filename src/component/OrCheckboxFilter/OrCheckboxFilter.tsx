@@ -38,7 +38,7 @@ const OrCheckboxFilter: React.FC<OrCheckboxFilterProps> = ({
 
     const fetchIconCounts = async () => {
         try {
-            const response = await axios.get('https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir?list-type=2');
+            const response = await axios.get('https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir/');
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(response.data, "application/xml");
             const keys = xmlDoc.getElementsByTagName("Key");
@@ -51,7 +51,7 @@ const OrCheckboxFilter: React.FC<OrCheckboxFilterProps> = ({
                 if (filePath.endsWith('.svg')) {
                     folders.forEach(folder => {
                         // بررسی اینکه آیا فایل در فولدر خاصی هست یا نه
-                        const regex = new RegExp(`stroke/${folder}/`);
+                        const regex = new RegExp(`shape/${folder}/fill/`);
                         if (regex.test(filePath)) {
                             counts[folder] = (counts[folder] || 0) + 1;
                         }
