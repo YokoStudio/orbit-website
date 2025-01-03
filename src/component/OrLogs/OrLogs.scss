@@ -10,6 +10,8 @@
     // gap: $space4;
     display: flex;
     flex-direction: column;
+    position: relative;
+    top: -24px;
 
    
   }
@@ -17,22 +19,22 @@
   .logs-item{
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid $neutral-border-7-default;
-    padding: $space4 $space4;
-    gap: $space8;
+
+    gap: $space2;
 
     @media screen and (max-width: 600px){
       flex-direction: column;
-      padding: $space4 $space4;
+     
       gap: $space2;
    }
 
   }
+  .logs-version-date{
+    color: $neutral-fg-4-default;
+  }
 
   .logs-version{
-    background-color: $brand-bg-1-default;
-    color: $neutral-fg-10-default;
-    padding: $space0 $space2;
+    color: $neutral-fg-5-default;
     border-radius: $circular;
 
     @media screen and (max-width: 600px){
@@ -53,16 +55,25 @@
     display: flex;
     flex-direction: column;
     width: 120px;
+    padding-top: 24px;
 
     @media screen and (max-width: 600px){
-      width: 100%;
-      flex-direction: row;
-      justify-content: space-between;
-
+      display: none;
    }
 
+
   }
-  
+  .logs-header-mobile{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 4px;
+    padding-left: 32px;
+
+    @media screen and (min-width: 600px){
+      display: none;
+   }
+  }
+    
   .logs-type{
     background-color: $neutral-bg-3-default;
     color: $neutral-fg-2-default;
@@ -72,13 +83,31 @@
   }
 
   .logs-list{
+   
     display: flex;
     flex-direction: column;
     gap: $space1;
+    padding-left: 32px;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 
   .changes-list{
     display: flex;
     flex-direction: column;
-    gap: $space6;
+    padding: 8px 0px;
+     border-left: 3px solid $neutral-border-7-default;
+
+     
+
+  }
+  .title-dot{
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    border: 4px solid $brand-bg-1-default;
+    position: relative;
+    left: -10px;
+    top: 24px;
+    border-radius: 50px;
   }

@@ -19,13 +19,20 @@ const OrMenu: React.FunctionComponent<OrMenu> = ({
         {itemLogs.map((item, index) => (
           <div className="logs-item" key={index}>
             <div className='logs-header'>
-              <span className="b2-strong">{item.date}</span>
-              <span className="b2 logs-version">{item.version}</span>
+              <span className="b2-strong logs-version-date">{item.date}</span>
+              <span className="c1 logs-version">{item.version}</span>
             </div>
             <div className="changes-list">
+              <div className='title-dot'></div>
+              <div className='logs-header-mobile'>
+                    <span className="b2-strong logs-version-date">{item.date}</span>
+                    <span className="c1 logs-version">{item.version}</span>
+                  </div>
               {item.changes.map((change, idx) => (
                 <div key={idx} className="logs-list">
+                 
                   <span className="b2 logs-type">{change.type}</span>
+                  
                   {Array.isArray(change.text) ? (
                     <ul className='logs-list-item'>
                       {change.text.map((textItem, textIdx) => (

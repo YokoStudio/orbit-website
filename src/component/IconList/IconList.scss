@@ -92,8 +92,7 @@
   
   .icon-sidepanel-name{
     text-align: left;
-    padding: $space4 $space0;
-    
+ 
 }
 
 .skelton{
@@ -284,10 +283,12 @@
     }
 }
 
-.svg-code{
-
+.icon-preview{
+    display: flex;
+    flex-direction: column;
     padding: $space6;
     overflow: hidden;
+    gap: 16px;
 }
 .svg-code-box{
 
@@ -315,7 +316,7 @@
 .single-download-box{
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 4px;
 
     button{
         width: 100%;
@@ -337,7 +338,7 @@
     justify-content: center;
     align-items: center;
     background-color: $neutral-bg-4-default;
-    border-radius: $radius3;
+    border-radius: $radius1;
 
     svg{
         width: 64px;
@@ -348,4 +349,16 @@
 .icon-name{
     text-align: center;
     color: rgb(119, 119, 119);
+}
+
+.svg-box{
+    flex-direction: column;
+    display: flex;
+    gap: 4px;
+}
+
+.svg-preview-box{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }

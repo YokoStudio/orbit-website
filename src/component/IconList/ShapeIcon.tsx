@@ -287,7 +287,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
           {selectedIcons.length > 0 && (
             <div className="side-panel">
               <div className='filter-header'>
-                <h3>({selectedIcons.length}) Selected</h3>
+                <span className='b2-strong'>({selectedIcons.length}) Selected</span>
                 <OrButton
                   layout='icon'
                   appearance='ghost'
@@ -299,10 +299,13 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
               
               <div className='side-panel-body'>
                 {selectedIcons.length === 1 ? (
-                  <div className='svg-code'>
+                  <div className='icon-preview'>
 
                     <div className="svg-preview-box" >
                       {/* نمایش کامل و بزرگ SVG */}
+                      <div className="t1-strong icon-sidepanel-name">
+                      {formatIconName(selectedIcons[0].name)} {/* فرمت نام آیکون برای نمایش زیبا */}
+                    </div>
                       <div
                         className="svg-preview"
                         dangerouslySetInnerHTML={{ __html: svgContent[selectedIcons[0].name] }}
@@ -317,10 +320,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
 
                       </div> */}
 
-                      <div className="t1-strong icon-sidepanel-name">
-                      {formatIconName(selectedIcons[0].name)} {/* فرمت نام آیکون برای نمایش زیبا */}
-                    </div>
-                    </div>
+                    
                     <div className='single-download-box'>
                       <OrButton
                         layout='icon-text'
@@ -334,16 +334,21 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                       <CopyButton svg={svgContent[selectedIcons[0].name]} />
 
                     </div>
+                    </div>
+                    
 
-                    <span className='b2'>SVG Code</span>
-                    {/* نمایش کد SVG */}
-                    <div className="svg-code-box">
+                    <div className='svg-box'>
+                      <span className='b2'>SVG Code</span>
+                     
+                       <div className="svg-code-box">
                       <textarea
+                        className='b2'
                         value={svgContent[selectedIcons[0].name]}
                         readOnly
                         onClick={(e) => (e.currentTarget as HTMLTextAreaElement).select()} // انتخاب کل متن هنگام کلیک
                       />
                     </div>
+                      </div>
                   </div>
                 ) : (
                   // نمایش لیست آیکون‌ها زمانی که بیشتر از یک آیکون انتخاب‌شده

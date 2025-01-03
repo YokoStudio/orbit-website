@@ -285,7 +285,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
   <div className="side-panel">
     <div className='filter-header'>
 
-      <h3>({selectedIcons.length}) Selected</h3> 
+      <span className='b2-strong'>({selectedIcons.length}) Selected</span> 
 
       <OrButton
         layout='icon'
@@ -299,10 +299,13 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
     <div className='side-panel-body'>
       {/* نمایش متفاوت برای حالت انتخاب یک آیکون */}
       {selectedIcons.length === 1 ? (
-        <div className='svg-code'>
+        <div className='icon-preview'>
           
 
           <div className="svg-preview-box" >
+          <div className="b1-strong icon-sidepanel-name">
+            {formatIconName(selectedIcons[0].name)} {/* فرمت نام آیکون برای نمایش زیبا */}
+          </div>
             {/* نمایش بزرگ SVG */}
             <div
               className="svg-preview"
@@ -312,19 +315,11 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
                 strokeWidth: strokeWidth,
               }}
             />
-            {/* <div>
-
-            <div>Stroke color: {strokeColor}</div>
-            <div>Stroke width: {strokeWidth}</div>
-
-
-
-           </div> */}
-            <div className="b2-strong icon-name">
-            {formatIconName(selectedIcons[0].name)} {/* فرمت نام آیکون برای نمایش زیبا */}
-          </div>
-          </div>
-          <div className='single-download-box'>
+                  {/* <div>
+                    <div>Stroke color: {strokeColor}</div>
+                    <div>Stroke width: {strokeWidth}</div>
+                </div> */}
+           <div className='single-download-box'>
             <OrButton
               layout='icon-text'
               appearance='fill'
@@ -348,15 +343,19 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
               />
 
           </div>
-          <span className='t1-strong icon-sidepanel-name'>SVG:</span>
-          {/* نمایش کد SVG */}
-          <div className="svg-code-box">
-              <textarea
-                
-                value={svgContent[selectedIcons[0].name]}
-                readOnly
-                onClick={(e) => (e.currentTarget as HTMLTextAreaElement).select()} // انتخاب کل متن هنگام کلیک
-              />
+          </div>
+          
+          <div className='svg-box'>
+            <span className='b2'>SVG Code:</span>
+            {/* نمایش کد SVG */}
+            <div className="svg-code-box">
+                <textarea
+                  
+                  value={svgContent[selectedIcons[0].name]}
+                  readOnly
+                  onClick={(e) => (e.currentTarget as HTMLTextAreaElement).select()} // انتخاب کل متن هنگام کلیک
+                />
+            </div>
           </div>
         </div>
       ) : (
