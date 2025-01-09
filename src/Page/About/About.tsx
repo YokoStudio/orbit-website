@@ -26,13 +26,13 @@ const About: React.FC = () => {
           Our icons are meticulously crafted for clarity, consistency, and scalability, supporting a wide range of design projects, from mobile apps to enterprise solutions. With a focus on versatility, our library spans various categories, ensuring you find the perfect visual representation for your ideas.  
           </p>
           <span className='h5-strong'>Why Choose Orbit?</span>
-          <p>
+          <p className='b2'>
             Impeccable Quality: Every icon undergoes rigorous quality checks to ensure top-tier performance and visual harmony. Tailored Custom Icons: Get custom icons designed specifically to meet your project’s unique needs. Time-Saving Solutions: Instantly enhance your designs with a comprehensive, ready-to-use icon library. Unparalleled Versatility: Seamlessly integrate icons into web, mobile, and desktop applications for consistent visual experiences.
           </p>
-          <p>
+          <p className='b2'>
           In addition, you can leverage Yoko Space Design System, which integrates seamlessly with Orbit Icons to provide a unified and cohesive design experience.
           </p>
-          <p>
+          <p className='b2'>
           Together, Orbit Icons and Space empower designers and developers to craft innovative, user-centric solutions with speed, simplicity, and consistency.
           </p>
           

@@ -151,7 +151,7 @@ interface OrSidebarProps {
             </svg>
 
             </div>
-            <span className='b2.strong'>
+            <span className='b2 icon-button-label'>
               Contact
             </span>
         </button>
@@ -164,7 +164,7 @@ interface OrSidebarProps {
                 </svg>
             </div>
             
-            <span className='b2.strong'>
+            <span className='b2 icon-button-label'>
               Yoko
             </span>
         </button>

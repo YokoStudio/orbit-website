@@ -185,7 +185,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
   // };
 
   const CopyButton: React.FC<{ svg: string }> = ({ svg }) => {
-    const [buttonText, setButtonText] = useState('Copy');
+    const [buttonText, setButtonText] = useState('Copy SVG');
   
     const handleCopySvg = () => {
 
@@ -338,7 +338,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                     
 
                     <div className='svg-box'>
-                      <span className='b2'>SVG Code</span>
+                      {/* <span className='b2'>SVG Code</span>
                      
                        <div className="svg-code-box">
                       <textarea
@@ -347,7 +347,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                         readOnly
                         onClick={(e) => (e.currentTarget as HTMLTextAreaElement).select()} // انتخاب کل متن هنگام کلیک
                       />
-                    </div>
+                    </div> */}
                       </div>
                   </div>
                 ) : (

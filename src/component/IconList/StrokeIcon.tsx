@@ -180,7 +180,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
     // };
 
     const CopyButton: React.FC<{ svg: string, strokeColor: string, strokeWidth: number }> = ({ svg, strokeColor, strokeWidth }) => {
-      const [buttonText, setButtonText] = useState('Copy');
+      const [buttonText, setButtonText] = useState('Copy SVG');
     
       const handleCopySvg = () => {
        
@@ -346,16 +346,16 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
           </div>
           
           <div className='svg-box'>
-            <span className='b2'>SVG Code:</span>
+            {/* <span className='b2'>SVG Code:</span> */}
             {/* نمایش کد SVG */}
-            <div className="svg-code-box">
+            {/* <div className="svg-code-box">
                 <textarea
                   
                   value={svgContent[selectedIcons[0].name]}
                   readOnly
                   onClick={(e) => (e.currentTarget as HTMLTextAreaElement).select()} // انتخاب کل متن هنگام کلیک
                 />
-            </div>
+            </div> */}
           </div>
         </div>
       ) : (

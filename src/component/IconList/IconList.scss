@@ -315,8 +315,8 @@
 }
 .single-download-box{
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    flex-direction: row;
+    gap: 8px;
 
     button{
         width: 100%;
