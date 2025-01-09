@@ -54,7 +54,7 @@ interface OrSidebarProps {
               </svg>
             )}
           </div>
-          <span className="b2">Home</span>
+          <span className="b2 icon-button-label">Home</span>
         </button>
 
         <button 
@@ -79,7 +79,7 @@ interface OrSidebarProps {
                 </svg>
             )}
           </div>
-          <span className="b2">Icons</span>
+          <span className="b2 icon-button-label">Icons</span>
         </button>
 
         <button 
@@ -102,7 +102,7 @@ interface OrSidebarProps {
                 </svg>
             )}
           </div>
-          <span className="b2">Changelog</span>
+          <span className="b2 icon-button-label">Changelog</span>
         </button>
 
         <button 
@@ -125,7 +125,7 @@ interface OrSidebarProps {
                 </svg>
             )}
           </div>
-          <span className="b2">About</span>
+          <span className="b2 icon-button-label">About</span>
         </button>
         <button  className='sidebar-button' id='navigation-more-button' onClick={() => handleMenuToggle()}>
           <div className={`icon-wrapper`} >
