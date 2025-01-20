@@ -78,8 +78,8 @@ const OrFilter: React.FC<OrFilterProps> = ({
         <div className='or-filter'>
             <div className='filter-header'>
                 <div>
-                    <img src={TuneIcon} alt='Tune' width='32px' height='32px' />
-                    <span className='h6-strong'>Customize</span>
+                    <img src={TuneIcon} alt='Tune' width='24px' height='24px' />
+                    <span className='t2-strong'>Customize</span>
                 </div>
                 <OrButton layout='icon' onClick={toggleFilter} appearance='ghost' variant='secondary' icon={<Icon.cross />} size='sm' />
             </div>

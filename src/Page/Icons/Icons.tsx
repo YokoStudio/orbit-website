@@ -127,10 +127,10 @@ const Icons: React.FC = () => {
                 <Modal
                 isOpen={isModalVisible}
                 onClose={SwitchModal}
-                title='Download resource '
-                dis='This is caption'
+                title='Download'
+                dis='Choose your preferred version.'
                 >  
-                <div className='download-box'>
+                {/* <div className='download-box'>
                         <div className='box-wrapper'>
                             <div className='modal-item-icon'>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -251,6 +251,21 @@ const Icons: React.FC = () => {
                             icon={<Icon.download/>}
                             onClick={SwitchModal}
                         />
+                    </div> */}
+                    <div className='download-box'>
+                        <div className='box-wrapper'>
+                            
+                                <div className='title-wrapper'>
+                                    <span className='b1-strong'>
+                                    In the beta version, it is not possible to download all icons.
+                                    </span>
+                                    <span className='b1'>
+                                    We'll be back in the original version.
+                                    </span>
+                                </div>
+                        </div>
+
+                        
                     </div>
                    
                  </Modal>
