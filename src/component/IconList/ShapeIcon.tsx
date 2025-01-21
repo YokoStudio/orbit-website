@@ -8,6 +8,7 @@ import Fuse from 'fuse.js';
 import JSZip from 'jszip'; // import JSZip
 import OrButton from '../OrButton/OrButton';
 import Icon from '../../assets/Icon';
+import ill from '../../assets/404.png'
 
 interface ShapeIconProps {
   searchTerm: string;
@@ -276,9 +277,12 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                 );
               })
             ) : (
+              <div className='not-found'>
               <div>
-                <span>Icon not found</span>
+                <img src={ill}  width="240px"></img>
               </div>
+              <span className='b2-strong'>Icon not found</span>
+            </div>
             )}
           </div>
         </div>
