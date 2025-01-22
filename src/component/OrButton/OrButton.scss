@@ -41,6 +41,7 @@
         border: 0px solid transparent;
         color: $neutral-fg-10-default;
         fill: $neutral-fg-10-default;
+        transition: background-color 0.3s ease-in-out;
        .icon{
             svg{
                 path{
@@ -52,6 +53,7 @@
 
         &:hover{
             background-color: $brand-bg-1-hover;
+            transition: background-color 0.3s ease-in-out;
         }
 
         &.press{

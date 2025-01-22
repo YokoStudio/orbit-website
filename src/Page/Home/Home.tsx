@@ -7,7 +7,7 @@ import heroLoop from '../../assets/Hero loop.gif'
 import OrButton from "../../component/OrButton/OrButton";
 import Icon from '../../assets/Icon';
 import OrHeader from "../../component/OrHeader/OrHeader";
-
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
@@ -15,7 +15,7 @@ import OrHeader from "../../component/OrHeader/OrHeader";
 const Home: React.FC = () => {
 
   const [iconCount, setIconCount] = useState<number>(123);
-
+  const navigate = useNavigate();
   const fetchIconCount = async () => {
     try {
         // دریافت لیست آیکون‌ها به صورت XML از bucket
@@ -72,8 +72,8 @@ useEffect(() => {
             <span className="hero-head h5-strong">Simplify Your Designs with the Power of Orbit Icons.</span>
             <span>Empower your creativity with meticulously crafted icons designed to enhance clarity, consistency, and visual impact.</span>
             <div className="hero-action">
-              <OrButton layout="icon-text" appearance="fill" size="lg" text="Get start" icon={<Icon.tune/>} />
-              <OrButton layout="text" size="lg" appearance="outline" variant="secondary"  text="Learn more" />
+              <OrButton layout="text" appearance="fill" size="lg" text="Get start"  className="home-btn" onClick={() => navigate('/icons')}/>
+              
             </div>
           </div>
   

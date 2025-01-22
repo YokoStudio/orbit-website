@@ -3,3 +3,19 @@
 @import './space.scss';
 @import './type-style.scss';
 
+
+:root{
+    input,
+    textarea,
+    button,
+    select,
+    a 
+    div
+    {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+}
+body{
+    overflow: hidden;
+}

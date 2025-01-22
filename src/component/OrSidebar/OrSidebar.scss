@@ -48,6 +48,7 @@
     gap: $space0-5;
     cursor: pointer;
 
+    
 
         div{
             &.icon-wrapper{
@@ -59,27 +60,31 @@
                 align-items: center;
                 border-radius: $radius3 ;
                 transition: width 0.1s ease-in-out, background-color 0.2s ease-in-out;
+                }
             }
-        }
+        
 
 
         &:hover{
+
             div{
                 &.icon-wrapper{
                     background-color: $neutral-bg-1-hover;
-                 
                     height: 44px;
                     transition: width 0.1s ease-in-out;
                 }
             }
         }
     
+
         &:active{
             div{
                 &.icon-wrapper{
                     width: 64px;
+                    
                     background-color: $neutral-bg-1-press; 
                     transition: width 0.1s ease-in-out;
+                    -webkit-tap-highlight-color: transparent;
                 }
             }
         }
@@ -88,16 +93,16 @@
             &.icon-wrapper{
                 &.active{
                     width: 64px;
+                    
                     background-color: $neutral-bg-1-select;
                     transition: width 0.1s ease-in-out;
+                    -webkit-tap-highlight-color: transparent;
                 }
             }
         }
-}
-        
-    
-    
 
+    
+    }
     
     
  
@@ -152,3 +157,4 @@
 .icon-button-label{
     color: $neutral-fg-1-default
 }
+

@@ -88,3 +88,17 @@
      }
 
 }
+.home-btn{
+     
+    transition: width 0.5s ease, border-radius 0.5s ease, height 0.5s ease !important;
+    width:107px  !important;
+    height: 52px ;
+    &:hover{
+        width: 200px !important;
+        transition:  width 0.5s ease, border-radius 0.5s ease, height 0.5s ease !important;
+        border-radius: 100px;
+        height: 72px ;
+   
+    }
+   
+}
