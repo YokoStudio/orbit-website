@@ -327,7 +327,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
             <OrButton
               layout='icon-text'
               appearance='fill'
-              variant='primary'
+              variant='secondary'
               icon={<Icon.download />}
               text='SVG'
               onClick={() => downloadSvg(selectedIcons[0].name, svgContent[selectedIcons[0].name])}
@@ -394,7 +394,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
         <OrButton
           layout='icon-text'
           appearance='fill'
-          variant='primary'
+          variant='secondary'
           icon={<Icon.download />}
           text={downloadText}
           onClick={downloadSelectedIcons}

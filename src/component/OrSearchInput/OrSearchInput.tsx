@@ -202,6 +202,416 @@
 // export default OrSearchInput;
 
 
+// import React, { ChangeEvent, useEffect, useRef, useState, useMemo } from "react";
+// import './OrSearchInput.scss';
+// import SearchIcon from '../../assets/icons/search.svg';
+// import axios from 'axios';
+// import OrButton from "../OrButton/OrButton";
+// import Icon from '../../assets/Icon';
+
+// interface OrSearchInputProps {
+//     onClick?: () => void;
+//     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+//     placeholder?: string;
+//     disabled?: boolean;
+//     size?: 'sm' | 'md' | 'lg';
+// }
+
+// const OrSearchInput: React.FC<OrSearchInputProps> = ({
+//     onClick,
+//     onChange,
+//     placeholder = 'Enter your text',
+//     disabled = false,
+//     size = 'md',
+// }) => {
+//     const [inputValue, setInputValue] = useState('');
+//     const [showSuggestions, setShowSuggestions] = useState(false);
+//     const [suggestions, setSuggestions] = useState<{ [key: string]: string[] }>({});
+//     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+//     const [isLoading, setIsLoading] = useState(false);
+//     const [error, setError] = useState<string | null>(null);
+//     const suggestionRefs = useRef<(HTMLDivElement | null)[]>([]);
+//     const inputRef = useRef<HTMLInputElement | null>(null);
+
+//     // Fetch suggestions from API
+//     useEffect(() => {
+//         const fetchSuggestions = async () => {
+//             setIsLoading(true);
+//             setError(null);
+
+//             try {
+//                 const response = await axios.get('https://orbit-website.s3.ir-thr-at1.arvanstorage.ir/IconList.json');
+//                 const jsonSuggestions = response.data;
+
+//                 const groupedSuggestions: { [key: string]: string[] } = {};
+
+//                 Object.keys(jsonSuggestions).forEach(key => {
+//                     groupedSuggestions[key] = jsonSuggestions[key];
+//                 });
+
+//                 setSuggestions(groupedSuggestions);
+//             } catch (err) {
+//                 setError('Failed to load suggestions. Please try again later.');
+//             } finally {
+//                 setIsLoading(false);
+//             }
+//         };
+
+//         fetchSuggestions();
+//     }, []);
+
+//     // Filtered suggestions based on input value for both key and value
+//     const filteredSuggestions = useMemo(() => {
+//         const lowerCaseInput = inputValue.toLowerCase();
+//         const matchingSuggestions: { key: string; value: string }[] = [];
+
+//         Object.entries(suggestions).forEach(([key, values]) => {
+//             // Search within key
+//             if (key.toLowerCase().includes(lowerCaseInput)) {
+//                 values.forEach(value => {
+//                     matchingSuggestions.push({ key, value });
+//                 });
+//             }
+
+//             // Search within values
+//             values.forEach(value => {
+//                 if (value.toLowerCase().includes(lowerCaseInput)) {
+//                     matchingSuggestions.push({ key, value });
+//                 }
+//             });
+//         });
+
+//         return matchingSuggestions;
+//     }, [suggestions, inputValue]);
+
+//     // Handle input value change
+//     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+//         const value = event.target.value.toLowerCase();
+//         setInputValue(value);
+//         setShowSuggestions(value.length > 0);
+//         setSelectedIndex(null);
+
+//         if (onChange) {
+//             const fakeEvent = {
+//                 target: { value },
+//             } as ChangeEvent<HTMLInputElement>;
+//             onChange(fakeEvent);
+//         }
+//     };
+
+//     // Handle suggestion click
+//     const handleSuggestionClick = (key: string, value: string) => {
+//         setInputValue(value);
+//         setShowSuggestions(false);
+
+//         if (onChange) {
+//             const fakeEvent = {
+//                 target: { value },
+//             } as ChangeEvent<HTMLInputElement>;
+//             onChange(fakeEvent);
+//         }
+//     };
+
+//     // Handle clear input
+//     const handleClearInput = () => {
+//         setInputValue('');
+//         setShowSuggestions(false);
+//         setSelectedIndex(null);
+//         if (onChange) {
+//             const fakeEvent = {
+//                 target: { value: '' },
+//             } as ChangeEvent<HTMLInputElement>;
+//             onChange(fakeEvent);
+//         }
+//     };
+
+//     // Handle keyboard navigation
+//     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+//         if (event.key === 'Enter') {
+//             event.preventDefault();
+//             if (selectedIndex !== null && filteredSuggestions[selectedIndex]) {
+//                 const { key, value } = filteredSuggestions[selectedIndex!];
+//                 handleSuggestionClick(key, value); // send both key and value
+//             }
+//         } else if (event.key === 'ArrowDown') {
+//             event.preventDefault();
+//             setSelectedIndex(prevIndex => {
+//                 const nextIndex = (prevIndex === null || prevIndex === filteredSuggestions.length - 1) ? 0 : prevIndex + 1;
+//                 suggestionRefs.current[nextIndex]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+//                 return nextIndex;
+//             });
+//         } else if (event.key === 'ArrowUp') {
+//             event.preventDefault();
+//             setSelectedIndex(prevIndex => {
+//                 const prevIndexValue = (prevIndex === null || prevIndex === 0) ? filteredSuggestions.length - 1 : prevIndex - 1;
+//                 suggestionRefs.current[prevIndexValue]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+//                 return prevIndexValue;
+//             });
+//         }
+//     };
+
+//     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+//         event.preventDefault();
+//     };
+
+//     return (
+//         <div className="search-container">
+//             <form onSubmit={handleSubmit}>
+//                 <img className={`input-icon-${size}`} src={SearchIcon} alt="search icon" />
+//                 <input
+//                     ref={inputRef}
+//                     className={`b1 search-input ${size}`}
+//                     value={inputValue}
+//                     onClick={onClick}
+//                     onChange={handleInputChange}
+//                     onKeyDown={handleKeyPress}
+//                     disabled={disabled}
+//                     placeholder={placeholder}
+//                 />
+//                 {inputValue && (
+//                     <div className="clear-btn">
+//                         <OrButton 
+//                             layout="icon" 
+//                             variant='secondary' 
+//                             appearance="ghost" 
+//                             size="md" 
+//                             icon={<Icon.cross />}
+//                             onClick={handleClearInput}
+//                         />
+//                     </div>
+//                 )}
+//             </form>
+
+//             {isLoading && <div className="loading-message"></div>}
+//             {error && <div className="error-message">{error}</div>}
+//             {showSuggestions && !isLoading && !error && (
+//                 <div className="suggestion-list">
+//                     {filteredSuggestions.length > 0 ? (
+//                         filteredSuggestions.slice(0, 5).map(({ key, value }, index) => (
+//                             <div
+//                                 key={key + value} // unique key-value pair for each item
+//                                 className={`suggestion-item ${selectedIndex === index ? 'selected' : ''}`} 
+//                                 onClick={() => handleSuggestionClick(key, value)} 
+//                                 ref={el => suggestionRefs.current[index] = el}
+//                             >
+//                                 {key} - {value} {/* Display key and value */}
+//                             </div>
+//                         ))
+//                     ) : (
+//                         <div className="b2-strong no-suggestions">No results found.</div>
+//                     )}
+//                 </div>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default OrSearchInput;
+// import React, { ChangeEvent, useEffect, useRef, useState, useMemo } from "react";
+// import './OrSearchInput.scss';
+// import SearchIcon from '../../assets/icons/search.svg';
+// import axios from 'axios';
+// import OrButton from "../OrButton/OrButton";
+// import Icon from '../../assets/Icon';
+
+// interface OrSearchInputProps {
+//     onClick?: () => void;
+//     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+//     placeholder?: string;
+//     disabled?: boolean;
+//     size?: 'sm' | 'md' | 'lg';
+// }
+
+// const OrSearchInput: React.FC<OrSearchInputProps> = ({
+//     onClick,
+//     onChange,
+//     placeholder = 'Enter your text',
+//     disabled = false,
+//     size = 'md',
+// }) => {
+//     const [inputValue, setInputValue] = useState('');
+//     const [showSuggestions, setShowSuggestions] = useState(false);
+//     const [suggestions, setSuggestions] = useState<{ [key: string]: string[] }>({});
+//     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+//     const [isLoading, setIsLoading] = useState(false);
+//     const [error, setError] = useState<string | null>(null);
+//     const suggestionRefs = useRef<(HTMLDivElement | null)[]>([]);
+//     const inputRef = useRef<HTMLInputElement | null>(null);
+
+//     // Fetch suggestions from API
+//     useEffect(() => {
+//         const fetchSuggestions = async () => {
+//             setIsLoading(true);
+//             setError(null);
+
+//             try {
+//                 const response = await axios.get('https://orbit-website.s3.ir-thr-at1.arvanstorage.ir/IconList.json');
+//                 const jsonSuggestions = response.data;
+
+//                 const groupedSuggestions: { [key: string]: string[] } = {};
+
+//                 Object.keys(jsonSuggestions).forEach(key => {
+//                     groupedSuggestions[key] = jsonSuggestions[key];
+//                 });
+
+//                 setSuggestions(groupedSuggestions);
+//             } catch (err) {
+//                 setError('Failed to load suggestions. Please try again later.');
+//             } finally {
+//                 setIsLoading(false);
+//             }
+//         };
+
+//         fetchSuggestions();
+//     }, []);
+
+//     // Filtered suggestions based on input value for both key and value
+//     const filteredSuggestions = useMemo(() => {
+//         const lowerCaseInput = inputValue.toLowerCase(); // تبدیل ورودی به حروف کوچک
+//         const matchingSuggestions: string[] = []; // تغییر آرایه به یک آرایه از رشته‌ها (key ها و value ها)
+
+//         Object.entries(suggestions).forEach(([key, values]) => {
+//             // جستجو در کلید
+//             if (key.toLowerCase().includes(lowerCaseInput)) {
+//                 matchingSuggestions.push(key); // اگر key مشابه ورودی بود، اون رو اضافه می‌کنیم
+//             }
+
+//             // جستجو در مقادیر
+//             values.forEach(value => {
+//                 if (value.toLowerCase().includes(lowerCaseInput)) {
+//                     matchingSuggestions.push(value); // اگر value مشابه ورودی بود، اون رو اضافه می‌کنیم
+//                 }
+//             });
+//         });
+
+//         return matchingSuggestions;
+//     }, [suggestions, inputValue]);
+
+//     // Handle input value change
+//     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+//         const value = event.target.value.toLowerCase();
+//         setInputValue(value);
+//         setShowSuggestions(value.length > 0);
+//         setSelectedIndex(null);
+
+//         if (onChange) {
+//             const fakeEvent = {
+//                 target: { value },
+//             } as ChangeEvent<HTMLInputElement>;
+//             onChange(fakeEvent);
+//         }
+//     };
+
+//     // Handle suggestion click
+//     const handleSuggestionClick = (value: string) => {
+//         setInputValue(value);
+//         setShowSuggestions(false);
+    
+//         if (onChange) {
+//             const fakeEvent = {
+//                 target: { value },
+//             } as ChangeEvent<HTMLInputElement>;
+//             onChange(fakeEvent);
+//         }
+//     };
+
+//     // Handle clear input
+//     const handleClearInput = () => {
+//         setInputValue('');
+//         setShowSuggestions(false);
+//         setSelectedIndex(null);
+//         if (onChange) {
+//             const fakeEvent = {
+//                 target: { value: '' },
+//             } as ChangeEvent<HTMLInputElement>;
+//             onChange(fakeEvent);
+//         }
+//     };
+
+//     // Handle keyboard navigation
+//     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+//         if (event.key === 'Enter') {
+//             event.preventDefault();
+//             if (selectedIndex !== null && filteredSuggestions[selectedIndex]) {
+//                 const value = filteredSuggestions[selectedIndex!]; // فقط value رو می‌گیریم
+//                 handleSuggestionClick(value); // فقط value رو ارسال می‌کنیم
+//             }
+//         } else if (event.key === 'ArrowDown') {
+//             event.preventDefault();
+//             setSelectedIndex(prevIndex => {
+//                 const nextIndex = (prevIndex === null || prevIndex === filteredSuggestions.length - 1) ? 0 : prevIndex + 1;
+//                 suggestionRefs.current[nextIndex]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+//                 return nextIndex;
+//             });
+//         } else if (event.key === 'ArrowUp') {
+//             event.preventDefault();
+//             setSelectedIndex(prevIndex => {
+//                 const prevIndexValue = (prevIndex === null || prevIndex === 0) ? filteredSuggestions.length - 1 : prevIndex - 1;
+//                 suggestionRefs.current[prevIndexValue]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+//                 return prevIndexValue;
+//             });
+//         }
+//     };
+
+//     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+//         event.preventDefault();
+//     };
+
+//     return (
+//         <div className="search-container">
+//             <form onSubmit={handleSubmit}>
+//                 <img className={`input-icon-${size}`} src={SearchIcon} alt="search icon" />
+//                 <input
+//                     ref={inputRef}
+//                     className={`b1 search-input ${size}`}
+//                     value={inputValue}
+//                     onClick={onClick}
+//                     onChange={handleInputChange}
+//                     onKeyDown={handleKeyPress}
+//                     disabled={disabled}
+//                     placeholder={placeholder}
+//                 />
+//                 {inputValue && (
+//                     <div className="clear-btn">
+//                         <OrButton 
+//                             layout="icon" 
+//                             variant='secondary' 
+//                             appearance="ghost" 
+//                             size="md" 
+//                             icon={<Icon.cross />}
+//                             onClick={handleClearInput}
+//                         />
+//                     </div>
+//                 )}
+//             </form>
+
+//             {isLoading && <div className="loading-message"></div>}
+//             {error && <div className="error-message">{error}</div>}
+//             {showSuggestions && !isLoading && !error && (
+//                 <div className="suggestion-list">
+//                     {filteredSuggestions.length > 0 ? (
+//                         filteredSuggestions.slice(0, 5).map((value, index) => (
+//                             <div
+//                                 key={value} // فقط از value استفاده می‌کنیم
+//                                 className={`suggestion-item ${selectedIndex === index ? 'selected' : ''}`} 
+//                                 onClick={() => handleSuggestionClick(value)} // فقط value رو ارسال می‌کنیم
+//                                 ref={el => suggestionRefs.current[index] = el}
+//                             >
+//                                 {value} {/* نمایش فقط value */}
+//                             </div>
+//                         ))
+//                     ) : (
+//                         <div className="b2-strong no-suggestions">No results found.</div>
+//                     )}
+//                 </div>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default OrSearchInput;
+
+
 import React, { ChangeEvent, useEffect, useRef, useState, useMemo } from "react";
 import './OrSearchInput.scss';
 import SearchIcon from '../../assets/icons/search.svg';
@@ -233,6 +643,7 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
     const suggestionRefs = useRef<(HTMLDivElement | null)[]>([]);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
+    // Fetch suggestions from API
     useEffect(() => {
         const fetchSuggestions = async () => {
             setIsLoading(true);
@@ -259,31 +670,35 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
         fetchSuggestions();
     }, []);
 
-    // const filteredSuggestions = useMemo(() => {
-    //     const lowerCaseInput = inputValue.toLowerCase();
-    //     return Object.keys(suggestions).reduce<string[]>((acc, group) => {
-    //         const groupSuggestions = suggestions[group].filter(suggestion =>
-    //             suggestion.toLowerCase().includes(lowerCaseInput)
-    //         );
-    //         return [...acc, ...groupSuggestions];
-    //     }, []);
-    // }, [suggestions, inputValue]);
+    // Filtered suggestions based on input value for both key and value
     const filteredSuggestions = useMemo(() => {
         const lowerCaseInput = inputValue.toLowerCase();
-        const matchingKeys: string[] = [];
-    
+        const matchingSuggestions: string[] = [];
+
+        // Search based on key
         Object.entries(suggestions).forEach(([key, values]) => {
-            const isMatch = values.some(value => value.toLowerCase().includes(lowerCaseInput));
-            if (isMatch) {
-                matchingKeys.push(key);
+            if (key.toLowerCase().includes(lowerCaseInput)) {
+                matchingSuggestions.push(key); // Add key if it matches the input value
             }
         });
-    
-        return matchingKeys;
+
+        // If no match found in keys, find matching value
+        if (matchingSuggestions.length === 0) {
+            Object.entries(suggestions).forEach(([key, values]) => {
+                values.forEach(value => {
+                    if (value.toLowerCase().includes(lowerCaseInput)) {
+                        matchingSuggestions.push(value); // Add value if it matches the input value
+                    }
+                });
+            });
+        }
+
+        return matchingSuggestions;
     }, [suggestions, inputValue]);
 
+    // Handle input value change
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value.toLowerCase();
+        const value = event.target.value;
         setInputValue(value);
         setShowSuggestions(value.length > 0);
         setSelectedIndex(null);
@@ -296,6 +711,20 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
         }
     };
 
+    // Handle suggestion click
+    const handleSuggestionClick = (value: string) => {
+        setInputValue(value);
+        setShowSuggestions(false);
+    
+        if (onChange) {
+            const fakeEvent = {
+                target: { value },
+            } as ChangeEvent<HTMLInputElement>;
+            onChange(fakeEvent);
+        }
+    };
+
+    // Handle clear input
     const handleClearInput = () => {
         setInputValue('');
         setShowSuggestions(false);
@@ -308,23 +737,13 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
         }
     };
 
-    const handleSuggestionClick = (suggestion: string) => {
-        setInputValue(suggestion);
-        setShowSuggestions(false);
-
-        if (onChange) {
-            const fakeEvent = {
-                target: { value: suggestion },
-            } as ChangeEvent<HTMLInputElement>;
-            onChange(fakeEvent);
-        }
-    };
-
+    // Handle keyboard navigation
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             event.preventDefault();
             if (selectedIndex !== null && filteredSuggestions[selectedIndex]) {
-                handleSuggestionClick(filteredSuggestions[selectedIndex]);
+                const value = filteredSuggestions[selectedIndex!];
+                handleSuggestionClick(value);
             }
         } else if (event.key === 'ArrowDown') {
             event.preventDefault();
@@ -375,26 +794,26 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
                 )}
             </form>
 
-            {isLoading && <div className="loading-message"></div>}
+            {/* {isLoading && <div className="loading-message"></div>}
             {error && <div className="error-message">{error}</div>}
             {showSuggestions && !isLoading && !error && (
                 <div className="suggestion-list">
                     {filteredSuggestions.length > 0 ? (
-                        filteredSuggestions.slice(0, 10).map((suggestion, index) => (
+                        filteredSuggestions.slice(0, 5).map((value, index) => (
                             <div
-                                key={suggestion}
+                                key={value}
                                 className={`suggestion-item ${selectedIndex === index ? 'selected' : ''}`} 
-                                onClick={() => handleSuggestionClick(suggestion)} 
+                                onClick={() => handleSuggestionClick(value)}
                                 ref={el => suggestionRefs.current[index] = el}
                             >
-                                {suggestion}
+                                {value}
                             </div>
                         ))
                     ) : (
                         <div className="b2-strong no-suggestions">No results found.</div>
                     )}
                 </div>
-            )}
+            )} */}
         </div>
     );
 };

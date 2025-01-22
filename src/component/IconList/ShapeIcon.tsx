@@ -329,7 +329,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                       <OrButton
                         layout='icon-text'
                         appearance='fill'
-                        variant='primary'
+                        variant='secondary'
                         icon={<Icon.download />}
                        
                         text='SVG'
@@ -384,7 +384,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                   <OrButton
                     layout='icon-text'
                     appearance='fill'
-                    variant='primary'
+                    variant='secondary'
                     icon={<Icon.download />}
                     text={downloadText}
                     onClick={downloadSelectedIconsAsZip}
