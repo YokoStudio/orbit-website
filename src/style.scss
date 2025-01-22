@@ -44,7 +44,7 @@
 
 .content-container{
     display: flex;
-    max-width: 1000px;  
+   justify-content: center;
     padding: $space6;
     width: 100%;
     overflow: auto;
