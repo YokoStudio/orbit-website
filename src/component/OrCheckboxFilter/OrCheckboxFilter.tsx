@@ -79,7 +79,8 @@ const OrCheckboxFilter: React.FC<OrCheckboxFilterProps> = ({
             {/* اگر فولدرهای چک شده وجود دارند، عنوان Selected را نمایش بده */}
             {checkedFolders.length > 0 && <div className='b2 section-title'>Selected<hr className='divider'/></div>}
             {checkedFolders.map(folder => {
-                const catIcon = `https://s3.ir-thr-at1.arvanstorage.ir/orbit-website/folderIcon/${folder}.svg`;
+                const catIcon = `https://orbit-beta.s3.ir-thr-at1.arvanstorage.ir/folderIcon/${folder}.svg`;
+                
                 return (
                     <div key={folder} className='checkbox-container'>
                         <label className='container'>
@@ -109,7 +110,7 @@ const OrCheckboxFilter: React.FC<OrCheckboxFilterProps> = ({
             {/* اگر فولدرهای چک نشده وجود دارند، عنوان Unselected را نمایش بده */}
             {uncheckedFolders.length > 0 && <div className='b2 section-title'>Unselected<hr className='divider'/></div>}
             {uncheckedFolders.map(folder => {
-                const catIcon = `https://s3.ir-thr-at1.arvanstorage.ir/orbit-website/folderIcon/${folder}.svg`;
+                const catIcon = `https://orbit-beta.s3.ir-thr-at1.arvanstorage.ir/folderIcon/${folder}.svg`;
                 return (
                     <div key={folder} className='checkbox-container'>
                         <label className='container'>
