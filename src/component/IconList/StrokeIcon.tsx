@@ -41,7 +41,7 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
           path: item.Key,
         }));
 
-        const jsonResponse = await axios.get(`https://orbit-website.s3.ir-thr-at1.arvanstorage.ir/IconList.json?t=${Date.now()}`);
+        const jsonResponse = await axios.get(`https://orbit-beta.s3.ir-thr-at1.arvanstorage.ir/IconList.json?t=${Date.now()}`);
         const similarNamesData = jsonResponse.data;
 
         const iconsWithSimilarNames = StrokeIcon.map((icon: Icon) => {
