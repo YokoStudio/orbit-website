@@ -36,6 +36,32 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
   const [filteredIcons, setFilteredIcons] = useState<Icon[]>([]);
   const [isSidePanelOpen, setIsSidePanelOpen] = useState<boolean>(false);
   const [selectedIcons, setSelectedIcons] = useState<Icon[]>([]);
+  const [suggestions, setSuggestions] = useState<{ [key: string]: string[] }>({});
+
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+      setError(null);
+
+      try {
+        const response = await axios.get('https://orbit-beta.s3.ir-thr-at1.arvanstorage.ir/IconList.json');
+        const jsonSuggestions = response.data;
+
+        const groupedSuggestions: { [key: string]: string[] } = {};
+
+        Object.keys(jsonSuggestions).forEach(key => {
+          groupedSuggestions[key] = jsonSuggestions[key];
+        });
+
+        // console.log(groupedSuggestions);
+        setSuggestions(groupedSuggestions);
+      } catch (err) {
+        setError('Failed to load suggestions. Please try again later.');
+      } finally {
+      }
+    };
+
+    fetchSuggestions();
+  }, []);
 
   useEffect(() => {
     const fetchIcons = async () => {
@@ -62,9 +88,14 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
   }, []);
 
   useEffect(() => {
-    const fuse = new Fuse(icons, {
+    const iconsWithSimilarNames = icons.map((icon: Icon) => ({
+        suggestionList: suggestions[icon.name.replace('.svg', '')] || [],
+        ...icon,
+      }));
+
+    const fuse = new Fuse(iconsWithSimilarNames, {
       threshold: 0.3,
-      keys: ['name'],
+      keys: ['name', 'suggestionList'],
     });
     const result = fuse.search(searchTerm);
     const iconsToBeFiltered = searchTerm
@@ -81,7 +112,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
         const iconFolder = icon.path.split('/')[2];
         return selectedFolders.length === 0 || selectedFolders.includes(iconFolder);
       })
-      .sort((a, b) => a.name.localeCompare(b.name)); 
+      .sort((a, b) => a.name.localeCompare(b.name));
 
     setFilteredIcons(filtered);
   }, [icons, searchTerm, switchChecked, selectedFolders]);
@@ -176,21 +207,12 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
     setIsSidePanelOpen(false);
   };
 
-  // const handleCopySvg = () => {
-  //   if (selectedIcons.length === 1) {
-  //     const svg = svgContent[selectedIcons[0].name];
-  //     navigator.clipboard.writeText(svg).then(() => {
-  //       alert('کد SVG کپی شد!');
-  //     });
-  //   }
-  // };
-
   const CopyButton: React.FC<{ svg: string }> = ({ svg }) => {
     const [buttonText, setButtonText] = useState('Copy SVG');
-  
+
     const handleCopySvg = () => {
 
-      
+
       let svgContentLocal = svg
       .replace(/fill="currentColor"/g, `fill="${iconColor}"`)
 
@@ -198,14 +220,14 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
         setButtonText('Copied');
 
 
-  
+
         // بازگرداندن متن به 'Copy' بعد از دو ثانیه
         setTimeout(() => {
           setButtonText('Copy');
         }, 2000);
       });
     };
-  
+
     return (
       <OrButton
         layout='icon-text'
@@ -217,7 +239,6 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
       />
     );
   };
-  
 
   const downloadText = `Download ( ${selectedIcons.length} ) Icons`;
 
@@ -254,12 +275,12 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                 const svgData = svgContent[icon.name];
                 const isSelected = selectedIcons.some(selectedIcon => selectedIcon.name === icon.name);
                 return (
-                  <div 
-                    className={`item ${isSelected ? 'selected' : ''}`} 
-                    key={icon.path} 
+                  <div
+                    className={`item ${isSelected ? 'selected' : ''}`}
+                    key={icon.path}
                     onClick={() => toggleIconSelection(icon)}
                     // تنظیم رنگ از طریق CSS
-                    
+
                   >
                     {svgData ? (
                       <div className="icon-wrapper">
@@ -300,7 +321,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                   onClick={() => { setSelectedIcons([]); }}
                 />
               </div>
-              
+
               <div className='side-panel-body'>
                 {selectedIcons.length === 1 ? (
                   <div className='icon-preview'>
@@ -324,14 +345,14 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
 
                       </div> */}
 
-                    
+
                     <div className='single-download-box'>
                       <OrButton
                         layout='icon-text'
                         appearance='fill'
                         variant='secondary'
                         icon={<Icon.download />}
-                       
+
                         text='SVG'
                         onClick={() => downloadSingleIcon(selectedIcons[0])}
                       />
@@ -339,11 +360,11 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
 
                     </div>
                     </div>
-                    
+
 
                     <div className='svg-box'>
                       {/* <span className='b2'>SVG Code</span>
-                     
+
                        <div className="svg-code-box">
                       <textarea
                         className='b2'
