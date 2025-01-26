@@ -73,7 +73,7 @@ form{
 
 /* استایل منوی دراپ‌داون */
 .suggestion-list {
-    padding: 4px;
+    padding: 0px;
     position: absolute; /* موقعیت‌یابی مطلق */
     top: 100%; /* قرارگیری زیر ورودی */
     left: 0;
@@ -81,7 +81,7 @@ form{
     background-color: #fff; /* پس‌زمینه سفید */
     border: 1px solid #ccc; /* مرز منو */
     border-radius: 8px; /* گوشه‌های گرد */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* سایه */
+ 
     z-index: 1000; /* قرار دادن در بالای سایر عناصر */
     max-height: 200px; /* حداکثر ارتفاع */
     overflow-y: auto; /* قابلیت اسکرول برای محتوا */
@@ -111,7 +111,7 @@ form{
 .no-suggestions
 {
     padding: 16px;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
 }

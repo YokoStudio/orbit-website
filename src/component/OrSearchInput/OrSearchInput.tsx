@@ -56,20 +56,40 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
         fetchSuggestions();
     }, []);
 
-    // Filtered suggestions based on input value for both key and value
-    const filteredSuggestions = useMemo(() => {
-        const lowerCaseInput = inputValue.toLowerCase();
-        const matchingSuggestions: string[] = [];
+    // Function to remove numbers, replace hyphens with spaces, and trim extra spaces
+const removeNumbersAndHyphens = (str: string) => {
+    return str
+        .replace(/[\d]/g, '') // Remove numbers
+        .replace(/-/g, ' ') // Replace hyphens with spaces
+        .replace(/\s+/g, ' ') // Replace multiple spaces with a single space
+        .trim(); // Trim leading and trailing spaces
+};
 
-        // Search based on key
-        Object.entries(suggestions).forEach(([key, values]) => {
-            if (key.toLowerCase().includes(lowerCaseInput)) {
-                matchingSuggestions.push(key); // Add key if it matches the input value
-            }
-        });
+// Function to bold the matched part of the suggestion
+const boldMatchedText = (text: string, query: string) => {
+    const parts = text.split(new RegExp(`(${query})`, 'gi'));
+    return parts.map((part, index) =>
+        part.toLowerCase() === query.toLowerCase() ? <strong key={index}>{part}</strong> : part
+    );
+};
 
-        return matchingSuggestions;
-    }, [suggestions, inputValue]);
+// Filtered suggestions based on input value for both key and value
+const filteredSuggestions = useMemo(() => {
+    const lowerCaseInput = inputValue.toLowerCase().trim();
+    const matchingSuggestions: string[] = [];
+    const seenSuggestions = new Set<string>();
+
+    // Search based on key
+    Object.entries(suggestions).forEach(([key, values]) => {
+        const cleanedKey = removeNumbersAndHyphens(key.toLowerCase());
+        if (cleanedKey.includes(lowerCaseInput) && !seenSuggestions.has(cleanedKey)) {
+            matchingSuggestions.push(cleanedKey); // Add cleaned key if it matches the input value
+            seenSuggestions.add(cleanedKey); // Mark cleaned key as seen
+        }
+    });
+
+    return matchingSuggestions;
+}, [suggestions, inputValue]);
 
     // Handle input value change
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -180,14 +200,14 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
                                 onClick={() => handleSuggestionClick(value)}
                                 ref={el => suggestionRefs.current[index] = el}
                             >
-                                {value}
+                                  {boldMatchedText(value, inputValue)}
                             </div>
                         ))
                     ) : (
-                        <div className="b2-strong no-suggestions">No results found.</div>
+                        <div className="b2-strong no-suggestions"></div>
                     )}
                 </div>
-                )}
+            )}
         </div>
     );
 };
