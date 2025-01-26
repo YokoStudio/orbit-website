@@ -20,7 +20,26 @@
 
 .color-input{
     display: flex;
+    background-color: $neutral-bg-1-default;
     align-items: center;
+    border: 1px solid $neutral-border-6-default;
+    padding: $space1 $space2;
+    height: 32px;
+    border-radius: $radius1;
+    flex-grow: 1;
+    overflow: hidden;
+    gap: 4px;
+
+    &:hover{
+        border: 1px solid $neutral-border-6-hover;
+    }
+}
+.color-code{
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  cursor: pointer;
+  height: 100%;
 }
 .text-input{
     border: 1px solid $neutral-border-6-default;
@@ -29,6 +48,7 @@
     border-radius: $radius1;
     flex-grow: 1;
     overflow: hidden;
+    cursor: pointer;
     
 
     &:hover{
@@ -39,6 +59,19 @@
         appearance: none;
         outline: 2px solid $neutral-border-focus-dark;
     }
+}
+
+.recent-colors-list{
+  display: flex;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+}
+
+.recent-color-btn .active{
+padding: 0px;
+margin: 0px;
+
 }
 
 .color-picker{
@@ -74,10 +107,15 @@
   }
 
   .reset-div{
-    position: absolute;
-    right: 36px;
-    top: 4px;
+    position: relative;
+  width: 100%;
+  height: 0px;
 
+  }
+  .rest-btn{
+    position: absolute;
+    top: -32px;
+    right: 40px ;
   }
   .recent-colors{
     margin-top: 8px;
@@ -88,8 +126,6 @@
   .recent-color-btn{
     height: 16px;
     width: 16px;
-    margin-left: 4px;
-    
     border: solid 0px ;
     border-radius: $circular;
   }
@@ -99,3 +135,84 @@
     width: 0px;
 
   }
+
+.color-preview {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+
+}
+
+
+
+.color-picker-wrapper {
+  position: absolute;
+  z-index: 1000;
+  top: 80px; 
+  left: 24px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+
+  .sketch-picker {
+    box-shadow: none !important;
+    border-radius: 8px;
+    padding: 16px;
+  }
+}
+
+.flexbox-fix{
+  padding: 0px;
+
+  div{
+    border-radius: 24px;
+    div{
+    
+      div{
+        border-radius: 24px !important;
+        
+      }
+      input{
+        border-radius: 4px;
+        padding: 4px !important;
+        height: 24px;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+    }
+    span{
+      div{
+        border-radius: 24px !important;
+      }
+      
+    }
+  }
+}
+// /* استایل‌دهی به اسلایدر رنگ RGB */
+// // .react-color__picker .rgb-slider .slider {
+// //   width: 100% !important;
+// //   height: 6px !important;
+// //   border-radius: 5px !important;
+// //   background: #e0e0e0 !important; /* پس‌زمینه اسلایدر */
+// // }
+
+// // .react-color__picker .rgb-slider .slider::-webkit-slider-thumb {
+// //   width: 18px !important;
+// //   height: 18px !important;
+// //   border-radius: 50% !important;
+// //   background: #0078d4 !important; /* رنگ پس‌زمینه thumb */
+// //   border: 2px solid #fff !important;
+// //   cursor: pointer !important;
+// // }
+
+// // .react-color__picker .rgb-slider .slider::-moz-range-thumb {
+// //   width: 18px !important;
+// //   height: 18px !important;
+// //   border-radius: 50% !important;
+// //   background: #0078d4 !important;
+// //   border: 2px solid #fff !important;
+// //   cursor: pointer !important;
+// // }

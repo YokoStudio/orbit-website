@@ -261,10 +261,13 @@
 
 .xs{
     height: 24px;
-    
+
+    div{
+        padding: $space0;
+    }
+
     &.icon{
-        padding: $space2 $space2;
-        width: 24px;
+        padding: $space0 $space0;
     }
     &.text{
         padding: $space1 $space2;

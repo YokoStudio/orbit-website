@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import tinycolor from 'tinycolor2'; // tinycolor2 برای مدیریت رنگ‌ها
+import React, { useState, useEffect, useRef } from 'react';
+import { SketchPicker } from 'react-color';
 import './OrInput.scss';
 import OrButton from '../OrButton/OrButton';
+import Icon from '../../assets/Icon';
 
 interface OrInputProps {
   initialValue?: string;
@@ -10,130 +11,171 @@ interface OrInputProps {
   maxRecentColors?: number;
 }
 
-const OrInput: React.FC<OrInputProps> = ({ initialValue = '#ff0000', onColorChange, label, maxRecentColors = 3 }) => {
+const OrInput: React.FC<OrInputProps> = ({
+  initialValue = '#ff0000',
+  onColorChange,
+  label,
+  maxRecentColors = 7,
+}) => {
   const [color, setColor] = useState<string>(initialValue);
-  const [inputValue, setInputValue] = useState<string>(initialValue); // برای نگه‌داری مقدار ورودی بدون اعتبارسنجی فوری
+  const [pickerColor, setPickerColor] = useState<string>(initialValue);
   const [recentColors, setRecentColors] = useState<string[]>([]);
+  const [isPickerVisible, setIsPickerVisible] = useState<boolean>(false);
+  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
 
-  // افزودن رنگ به لیست رنگ‌های اخیر
+  const pickerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const storedColors = localStorage.getItem('recentColors');
+    if (storedColors) {
+      setRecentColors(JSON.parse(storedColors));
+    }
+  }, []);
+
   const addRecentColor = (newColor: string) => {
     setRecentColors((prevColors) => {
-      const updatedColors = prevColors.filter(c => c !== newColor);
-      return [newColor, ...updatedColors].slice(0, maxRecentColors);
+      const updatedColors = prevColors.filter((c) => c !== newColor);
+      const newColors = [newColor, ...updatedColors].slice(0, maxRecentColors);
+      localStorage.setItem('recentColors', JSON.stringify(newColors));
+      return newColors;
     });
   };
 
-  // هندل کردن تغییرات در ورودی متنی بدون محدودیت تایپ
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value); // به‌روزرسانی مقدار ورودی بدون محدودیت
-  };
-
-  // اعتبارسنجی رنگ هنگام خروج از ورودی (onBlur) یا فشردن Enter
-  const validateAndApplyColor = () => {
-    if (tinycolor(inputValue).isValid()) {
-      const validColor = tinycolor(inputValue).toHexString(); // تبدیل رنگ به فرمت هگزادسیمال
-      setColor(validColor); // تنظیم رنگ معتبر
+  const handleColorChange = (newColor: any) => {
+    setPickerColor(newColor.hex);
+    if (timer) {
+      clearTimeout(timer);
+    }
+    setTimer(setTimeout(() => {
+      setColor(newColor.hex);
       if (onColorChange) {
-        onColorChange(validColor);
+        onColorChange(newColor.hex);
       }
-      addRecentColor(validColor);
-    } else {
-      alert("کد رنگ وارد شده نامعتبر است!"); // پیام هشدار در صورت نامعتبر بودن
-      setInputValue(color); // بازگرداندن مقدار ورودی به رنگ معتبر قبلی
-    }
+    }, 1000)); // 1000 milliseconds = 1 second
   };
 
-  // هندل کردن فشردن Enter
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      validateAndApplyColor(); // فراخوانی تابع اعتبارسنجی وقتی کلید Enter فشرده شد
-    }
-  };
-
-  // هندل کردن تغییرات در ورودی color picker
-  const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setColor(value); // به‌روزرسانی رنگ
-    setInputValue(value); // به‌روزرسانی ورودی متنی با رنگ جدید
+  const handleColorChangeComplete = (newColor: any) => {
+    setColor(newColor.hex);
     if (onColorChange) {
-      onColorChange(value);
-    }
-    addRecentColor(value);
-  };
-
-  // ریست کردن رنگ به مشکی
-  const handleReset = () => {
-    const defaultColor = '#000000'; // رنگ مشکی
-    setColor(defaultColor);
-    setInputValue(defaultColor);
-    if (onColorChange) {
-      onColorChange(defaultColor);
+      onColorChange(newColor.hex);
     }
   };
 
-  // انتخاب رنگ از رنگ‌های اخیر
-  const handleRecentColorClick = (recentColor: string) => {
-    setColor(recentColor);
-    setInputValue(recentColor);
-    if (onColorChange) {
-      onColorChange(recentColor);
-    }
+  const handleResetColor = () => {
+    const blackColor = '#000000';
+    setColor(blackColor);
+    handleColorChange({ hex: blackColor });
   };
+
+  const handleAddToRecent = () => {
+    addRecentColor(color);
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (pickerRef.current && !pickerRef.current.contains(event.target as Node)) {
+        setIsPickerVisible(false);
+      }
+    };
+
+    if (isPickerVisible) {
+      document.addEventListener('mousedown', handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [isPickerVisible]);
+
+  const presetColors = [
+    '#ffffff', '#F5A623', '#F8E71C', '#8B572A', '#7ED321', '#417505', '#BD10E0',
+    '#9013FE', 
+  ];
 
   return (
-    <div className='field-input'>
-      <span className='b1-strong field-label'>{label}</span>
-      <div className="color-input">
-        {/* ورودی متنی بدون محدودیت تایپ */}
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleTextChange}
-          onBlur={validateAndApplyColor} // اعتبارسنجی هنگام خروج از ورودی
-          onKeyDown={handleKeyDown} // اعمال رنگ هنگام فشردن Enter
-          className="b1 text-input"
-          placeholder="#FFFFFF"
+    <div className="field-input">
+      <span className="b1-strong field-label">{label}</span>
+      <div onClick={() => setIsPickerVisible(!isPickerVisible)} className=" color-input" >
+        
+        <span className="color-code">{color}</span>
+        
+        <div
+          className="color-preview"
+          style={{ backgroundColor: color }}
+
         />
-        {/* ورودی color picker */}
-       <div className='input-action'>
-          <input
-              type="color"
-              value={color} // مقدار همگام‌شده با color picker
-              onChange={handleColorChange}
-              className="color-picker"
-            />
-            
-          <div className='reset-div'>
-            <OrButton
-              layout='text'
-              variant='secondary'
-              appearance='outline'
-              text='Reset' // تغییر متن دکمه به 'Reset'
-              onClick={handleReset}
-              size='xs'
-            />
-        </div>
       </div>
-      </div>
-
-
-
-      {/* نمایش رنگ‌های اخیر */}
-      <div className="recent-colors">
-        {recentColors.length > 0 && <span className='b1 recent-label'>Recent Colors</span>}
-        <div>
-        {recentColors.map((recentColor) => (
-          <button
-
-            key={recentColor}
-            style={{ backgroundColor: recentColor }}
-            className={`recent-color-btn ${recentColor === color ? 'active' : ''}`}
-            onClick={() => handleRecentColorClick(recentColor)}
-            title={recentColor}
+      <div className="reset-div">
+          <OrButton
+            layout="text"
+            variant="secondary"
+            appearance="outline"
+            text="Reset"
+            onClick={handleResetColor}
+            size="xs"
+            className='rest-btn'
           />
-        ))}
         </div>
-      </div>
+      {isPickerVisible && (
+        <div className="color-picker-wrapper" ref={pickerRef}>
+          <SketchPicker
+            color={pickerColor}
+            onChange={handleColorChange}
+            onChangeComplete={handleColorChangeComplete}
+            presetColors={presetColors}
+            className="sketch-picker"
+            styles={{
+              default: {
+                picker: {
+                  borderRadius: '0px',
+                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+                  padding: '0px'
+                },
+                saturation: {
+                  borderRadius: '4px',
+                },
+                hue: {
+                  borderRadius: '4px',
+                },
+                controls: {
+                  display: 'flex',
+                },
+                sliders: {
+                  padding: '4px 0',
+                },
+                color: {
+                  width: '24px',
+                  height: '24px',
+                  borderRadius: '50%',
+                },
+              },
+            }}
+          />
+          <div className="recent-colors-popup">
+            {recentColors.length > 0 && <span className="c1 recent-label">Saved Colors</span>}
+            <div className="recent-colors-list">
+              {recentColors.map((recentColor) => (
+                <button
+                  key={recentColor}
+                  style={{ backgroundColor: recentColor }}
+                  className={`recent-color-btn ${recentColor === color ? 'active' : ''}`}
+                  onClick={() => handleColorChange({ hex: recentColor })}
+                />
+              ))}
+              <div className="add-to-recent">
+                <OrButton
+                  layout="icon"
+                  variant="secondary"
+                  appearance="ghost"
+                  icon={<Icon.plus />}
+                  onClick={handleAddToRecent}
+                  size="xs"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
