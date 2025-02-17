@@ -31,7 +31,7 @@
     height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
-    z-index: 5;
+    z-index: 6;
     background: $neutral-bg-1-default;
     
     
@@ -93,7 +93,7 @@
 
     @media screen and (max-width: 1200px){
         position: fixed;
-        z-index: 1;
+        z-index: 5;
         top: 0;
         left: 0;
         width: 100%;

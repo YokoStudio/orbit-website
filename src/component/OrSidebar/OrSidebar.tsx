@@ -54,7 +54,7 @@ interface OrSidebarProps {
               </svg>
             )}
           </div>
-          <span className="b2 icon-button-label">Home</span>
+          <span className="c1 icon-button-label">Home</span>
         </button>
 
         <button 
@@ -102,7 +102,7 @@ interface OrSidebarProps {
                 </svg>
             )}
           </div>
-          <span className="b2 icon-button-label">Changelog</span>
+          <span className="c1 icon-button-label">Changelog</span>
         </button>
 
         <button 
@@ -126,7 +126,7 @@ interface OrSidebarProps {
 
             )}
           </div>
-          <span className="b2 icon-button-label">About</span>
+          <span className="c1 icon-button-label">About</span>
         </button>
         <button  className='sidebar-button' id='navigation-more-button' onClick={() => handleMenuToggle()}>
           <div className={`icon-wrapper`} >
@@ -146,20 +146,27 @@ interface OrSidebarProps {
       </div>
 
       <div className="sidebar-main-content">
-
-      <button className={`sidebar-button`}>
+      <button 
+      className={`sidebar-button`}
+      onClick={() => window.open('https://yoko.studio/contact-us/', '_blank', 'noopener,noreferrer')} 
+      >
+        
             <div className='icon-wrapper'>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M4.25205 9.82013C3.03174 10.1012 2.12183 11.1943 2.12183 12.5V14.5C2.12183 16.0188 3.35304 17.25 4.87183 17.25C6.39061 17.25 7.62183 16.0188 7.62183 14.5V12.5C7.62183 11.2886 6.83858 10.2602 5.75089 9.8935C5.80774 6.49085 8.58379 3.75 12 3.75C15.4404 3.75 18.2315 6.52972 18.2499 9.96574C17.2624 10.383 16.5695 11.3606 16.5695 12.5V14.5C16.5695 15.8235 17.5045 16.9287 18.75 17.191V17.5C18.75 18.7426 17.7426 19.75 16.5 19.75H15.0816C14.8007 19.1588 14.1981 18.75 13.5 18.75H12.5C11.5335 18.75 10.75 19.5335 10.75 20.5C10.75 21.4665 11.5335 22.25 12.5 22.25H13.5C14.1981 22.25 14.8007 21.8412 15.0816 21.25H16.5C18.5711 21.25 20.25 19.5711 20.25 17.5V17.0886C21.3108 16.7072 22.0695 15.6922 22.0695 14.5V12.5C22.0695 11.1267 21.0627 9.98843 19.747 9.78304C19.6321 5.60315 16.2076 2.25 12 2.25C7.77991 2.25 4.34763 5.623 4.25205 9.82013ZM13.75 20.5C13.75 20.3619 13.6381 20.25 13.5 20.25H12.5C12.3619 20.25 12.25 20.3619 12.25 20.5C12.25 20.6381 12.3619 20.75 12.5 20.75H13.5C13.6381 20.75 13.75 20.6381 13.75 20.5ZM19.3195 11.25C18.6291 11.25 18.0695 11.8096 18.0695 12.5V14.5C18.0695 15.1904 18.6291 15.75 19.3195 15.75C20.0098 15.75 20.5695 15.1904 20.5695 14.5V12.5C20.5695 11.8096 20.0098 11.25 19.3195 11.25ZM3.62183 14.5C3.62183 15.1904 4.18147 15.75 4.87183 15.75C5.56218 15.75 6.12183 15.1904 6.12183 14.5V12.5C6.12183 11.8096 5.56218 11.25 4.87183 11.25C4.18147 11.25 3.62183 11.8096 3.62183 12.5V14.5Z" fill="black"/>
             </svg>
 
             </div>
-            <span className='b2 icon-button-label'>
-              Contact
+            <span className='c1 icon-button-label'>
+            Contact us
             </span>
+            
         </button>
 
-        <button className={`sidebar-button`}>
+        <button
+        className={`sidebar-button`}
+        onClick={() => window.open('https://yoko.studio', '_blank', 'noopener,noreferrer')} 
+        >
             <div className='icon-wrapper'>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M17.9987 5L7.99532 15V19H11.9967L22 9V5H17.9987Z" fill="black"/>
@@ -167,7 +174,7 @@ interface OrSidebarProps {
                 </svg>
             </div>
             
-            <span className='b2 icon-button-label'>
+            <span className='c1 icon-button-label'>
               Yoko
             </span>
         </button>

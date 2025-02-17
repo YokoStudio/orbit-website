@@ -80,7 +80,7 @@
         &:active{
             div{
                 &.icon-wrapper{
-                    width: 64px;
+                    width: 44px;
                     
                     background-color: $neutral-bg-1-press; 
                     transition: width 0.1s ease-in-out;
@@ -92,7 +92,7 @@
         div{
             &.icon-wrapper{
                 &.active{
-                    width: 64px;
+                    width: 44px;
                     
                     background-color: $neutral-bg-1-select;
                     transition: width 0.1s ease-in-out;

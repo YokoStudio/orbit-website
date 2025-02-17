@@ -28,6 +28,7 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
     const [error, setError] = useState<string | null>(null);
     const suggestionRefs = useRef<(HTMLDivElement | null)[]>([]);
     const inputRef = useRef<HTMLInputElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
 
     // Fetch suggestions from API
     useEffect(() => {
@@ -56,7 +57,7 @@ const OrSearchInput: React.FC<OrSearchInputProps> = ({
         fetchSuggestions();
     }, []);
 
-    // Function to remove numbers, replace hyphens with spaces, and trim extra spaces
+      // Function to remove numbers, replace hyphens with spaces, and trim extra spaces
 const removeNumbersAndHyphens = (str: string) => {
     return str
         .replace(/[\d]/g, '') // Remove numbers
@@ -161,8 +162,22 @@ const filteredSuggestions = useMemo(() => {
         event.preventDefault();
     };
 
+    // Close suggestions when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+                setShowSuggestions(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     return (
-        <div className="search-container">
+        <div className="search-container" ref={containerRef}>
             <form onSubmit={handleSubmit}>
                 <img className={`input-icon-${size}`} src={SearchIcon} alt="search icon" />
                 <input
@@ -200,7 +215,7 @@ const filteredSuggestions = useMemo(() => {
                                 onClick={() => handleSuggestionClick(value)}
                                 ref={el => suggestionRefs.current[index] = el}
                             >
-                                  {boldMatchedText(value, inputValue)}
+                                {boldMatchedText(value, inputValue)}
                             </div>
                         ))
                     ) : (

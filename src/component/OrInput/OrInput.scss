@@ -4,6 +4,7 @@
 .field-input{
     display: flex;
     flex-direction: column;
+    
 
     span{
        
@@ -16,6 +17,7 @@
     margin-bottom: -8px;
     z-index: 2;
     padding: $space0 $space0-5 ;
+    
 }
 
 .color-input{
@@ -29,6 +31,7 @@
     flex-grow: 1;
     overflow: hidden;
     gap: 4px;
+    cursor: pointer;
 
     &:hover{
         border: 1px solid $neutral-border-6-hover;

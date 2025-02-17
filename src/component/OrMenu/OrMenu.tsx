@@ -19,11 +19,14 @@ const OrMenu: React.FunctionComponent<OrMenu> = ({
       <div className={`menu ${isOpen ? 'open' : ''}`}>
         <div className="menu-body">
           {itemMenu.map((item, index) => (
+            <a className='b2-strong' target="_blank" href={item.link}>
             <div className="b2-strong menu-item" key={index}>
               {/* آیکون به عنوان JSX رندر شود */}
+              
               {item.icon && <span className="menu-icon">{item.icon}</span>}
-              <a href={item.link}>{item.name}</a>
+              {item.name}
             </div>
+            </a>
           ))}
         </div>
       </div>
