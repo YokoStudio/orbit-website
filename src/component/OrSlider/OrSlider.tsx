@@ -12,7 +12,7 @@ const OrSlider: React.FC<OrSliderProps> = ({ value, onChange }) => {
     useEffect(() => {
         const sliderElement = document.querySelector('.slider') as HTMLInputElement;
         if (sliderElement) {
-            sliderElement.style.setProperty('--value', `${(value - 0.5) / (1.5 - 0.5) * 100}%`);
+            sliderElement.style.setProperty('--value', `${(value - 0.5) / (2 - 0.5) * 100}%`);
         }
     }, [value]);
 
@@ -27,19 +27,19 @@ const OrSlider: React.FC<OrSliderProps> = ({ value, onChange }) => {
     return (
         <div className="slider-container">
             <span className='b1-strong'>Stroke (PX)</span>
-            <div className="tooltip b1-strong" style={{ display: showTooltip ? 'block' : 'none', left: `${(value - 0.5) / (1.5 - 0.5) * 100}%` }}>
+            <div className="tooltip b1-strong" style={{ display: showTooltip ? 'block' : 'none', left: `${(value - 0.5) / (2 - 0.5) * 100}%` }}>
                 {value}
             </div>
             <input
                 type="range"
                 min="0.5"
-                max="1.5"
+                max="2"
                 step="0.1"
                 value={value}
                 onChange={(e) => {
                     const newValue = Number(e.target.value);
                     onChange(newValue);
-                    e.target.style.setProperty('--value', `${(newValue - 0.5) / (1.5 - 0.5) * 100}%`);
+                    e.target.style.setProperty('--value', `${(newValue - 0.5) / (2 - 0.5) * 100}%`);
                 }}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
