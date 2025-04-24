@@ -15,8 +15,14 @@
     width: 100%;
     box-sizing: border-box;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: auto;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    align-items: center;
+
+
 
     
 }
@@ -32,7 +38,6 @@
     justify-content: space-between;
     justify-content: center;
     gap: 8px;
-    overflow: hidden;
 
     @media screen and (max-width: 480px){
         grid-template-columns: repeat(auto-fill, 80px);
@@ -376,4 +381,38 @@
     grid-column-start: 1;
     grid-column-end: 14;
     height: 50vh;
+}
+.announcement-wrapper
+{
+    padding: 24px; 
+    width: 100%;
+    max-width: 1600px;
+    display: flex;
+    box-sizing: border-box;
+    background-color: transparent;
+    height: fit-content;
+
+    
+}
+.announcement
+{
+    background-color: $neutral-bg-10-default;
+    width: 100%;
+    border-radius: 16px;
+    padding: 24px;
+    color: #fff;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    cursor: pointer;
+    transition: padding 0.5s ease, gap 0.5s ease, border-radius 0.5s ease;
+
+    &:hover{
+        background-color: $neutral-bg-10-hover;
+        padding: 40px;
+        gap: 40px;
+        border-radius: 99px;
+        transition: padding 0.5s ease, gap 0.5s ease, border-radius 0.5s ease;
+        
+    }
 }

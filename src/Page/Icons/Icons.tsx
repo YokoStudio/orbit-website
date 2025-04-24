@@ -149,7 +149,7 @@ const Icons: React.FC = () => {
                                     </span>
                                 </div>
                         </div>
-
+                        <a href='https://s3.ir-thr-at1.arvanstorage.ir/orbit-beta/Yoko%20Orbit%20Icon%20pack%20v1.zip' target='_blank' rel='noopen'>
                         <OrButton
                             appearance='outline'
                             variant='secondary'
@@ -158,6 +158,7 @@ const Icons: React.FC = () => {
                             text='Download'
                             onClick={SwitchModal}
                         />
+                        </a>
                     </div>
 
                     {/* <div className='download-box'>
@@ -268,8 +269,8 @@ const Icons: React.FC = () => {
                     </div> */}
                    
                  </Modal>
-            
-
+                      
+                
                 {activeTab === 'Stroke' && (
                     <StrokeIcon 
                         searchTerm={searchTerm}
