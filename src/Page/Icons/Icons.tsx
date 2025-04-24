@@ -19,7 +19,7 @@ const Icons: React.FC = () => {
     const [activeTab, setActiveTab] = useState<string>('Shape');
     const [iconColor, setIconColor] = useState<string>('#000000');
     const [strokeColor, setStrokeColor] = useState<string>('#000000');
-    const [strokeWidth, setStrokeWidth] = useState<number>(1);
+    const [strokeWidth, setStrokeWidth] = useState<number>(1.2)
     const [isModalVisible, setisModalVisible] = useState<boolean>(false);
     const [isFilterOpen, setisFilterOpen] = useState<boolean>(false);
 
