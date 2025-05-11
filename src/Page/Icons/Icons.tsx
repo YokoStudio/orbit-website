@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Icons.scss'; 
+import './Icons.scss';
 import ShapeIcon from '../../component/IconList/ShapeIcon';
 import StrokeIcon from '../../component/IconList/StrokeIcon';
 import OrIconHeader from '../../component/OrIconHeader/OrIconHeader';
@@ -14,7 +14,7 @@ const Icons: React.FC = () => {
     const [borderSize, setBorderSize] = useState<number>(1);
     const [switchChecked, setSwitchChecked] = useState<boolean>(false);
     const [selectedFolders, setSelectedFolders] = useState<string[]>([]);
-    const [folders] = useState<string[]>(['Arrow', 'Devices','Document', 'Interface', 'Media', 'Editor', 'Maps', 'Shape', 'Weather']); 
+    const [folders] = useState<string[]>(['Arrow', 'Devices','Document', 'Interface', 'Media', 'Editor', 'Maps', 'Shape', 'Weather']);
     const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
     const [activeTab, setActiveTab] = useState<string>('Shape');
     const [iconColor, setIconColor] = useState<string>('#000000');
@@ -90,38 +90,36 @@ const Icons: React.FC = () => {
         setStrokeColor(color);
     };
 
-    
+
 
     return (
         <div className='main'>
-            {isFilterVisible && (
-                <OrFilter 
-                    borderSize={borderSize} 
-                    onSliderChange={handleSliderChange} 
-                    switchChecked={switchChecked} 
-                    onSwitchChange={handleSwitchChange} 
-                    folders={folders} 
-                    selectedFolders={selectedFolders} 
-                    onFolderChange={handleFolderChange} 
-                    onResetFilters={handleReset} 
-                    toggleFilter={toggleFilter} 
-                    isFilterVisible={isFilterVisible} 
-                    onTabChange={handleTabChange} 
-                    changeColor={iconColor}  
-                    onChangeColor={handleIconColorChange}  
-                    initialTab={activeTab}
-                />
-            )}
+            <OrFilter
+                borderSize={borderSize}
+                onSliderChange={handleSliderChange}
+                switchChecked={switchChecked}
+                onSwitchChange={handleSwitchChange}
+                folders={folders}
+                selectedFolders={selectedFolders}
+                onFolderChange={handleFolderChange}
+                onResetFilters={handleReset}
+                toggleFilter={toggleFilter}
+                isFilterVisible={isFilterVisible}
+                onTabChange={handleTabChange}
+                changeColor={iconColor}
+                onChangeColor={handleIconColorChange}
+                initialTab={activeTab}
+            />
 
-            <div className='view'>
-                <OrIconHeader 
+            <div className={`view ${isFilterVisible ? 'filter-open' : 'filter-closed'}`}>
+                <OrIconHeader
                 onSearch={handleSearch}
                 toggleFilter={toggleFilter}
                 isFilterVisible={isFilterVisible}
                 switchModal={SwitchModal}
                 isModalrVisible={isModalVisible}
                 filterOpen={isFilterVisible}
-              
+
                  />
 
                 <Modal
@@ -129,7 +127,7 @@ const Icons: React.FC = () => {
                 onClose={SwitchModal}
                 title='Download'
                 dis='Choose your preferred version.'
-                >  
+                >
                 <div className='download-box'>
                         <div className='box-wrapper'>
                             <div className='modal-item-icon'>
@@ -254,7 +252,7 @@ const Icons: React.FC = () => {
                     </div> */}
                     {/* <div className='download-box'>
                         <div className='box-wrapper'>
-                            
+
                                 <div className='title-wrapper'>
                                     <span className='b1-strong'>
                                     In the beta version, it is not possible to download all icons.
@@ -265,14 +263,14 @@ const Icons: React.FC = () => {
                                 </div>
                         </div>
 
-                        
+
                     </div> */}
-                   
+
                  </Modal>
-                      
-                
+
+
                 {activeTab === 'Stroke' && (
-                    <StrokeIcon 
+                    <StrokeIcon
                         searchTerm={searchTerm}
                         selectedFolders={selectedFolders}
                         strokeColor= {strokeColor}
@@ -281,11 +279,11 @@ const Icons: React.FC = () => {
                 )}
 
                 {activeTab === 'Shape' && (
-                    <ShapeIcon  
+                    <ShapeIcon
                         searchTerm={searchTerm}
                         switchChecked={switchChecked}
                         selectedFolders={selectedFolders}
-                        iconColor={iconColor}  
+                        iconColor={iconColor}
                     />
                 )}
             </div>

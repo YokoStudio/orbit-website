@@ -22,7 +22,7 @@ interface OrFilterProps {
     onFolderChange: (folders: string[]) => void;
     onResetFilters: () => void;
     toggleFilter: () => void;
-    isFilterVisible: boolean; 
+    isFilterVisible: boolean;
     onTabChange: (activeTab: string) => void;
     changeColor: string;
     onChangeColor: (color: string) => void; // ارسال رنگ به کامپوننت والد
@@ -45,8 +45,8 @@ const OrFilter: React.FC<OrFilterProps> = ({
     onChangeColor,
     initialTab
 }) => {
-    const [activeTab, setActiveTab] = useState<string>(initialTab || 'Shape'); 
-    const [itemMenu] = useState<string[]>(['Arrow', 'Devices', 'Interface', 'Media', 'Editor', 'Maps', 'Shape', 'Weather']); 
+    const [activeTab, setActiveTab] = useState<string>(initialTab || 'Shape');
+    const [itemMenu] = useState<string[]>(['Arrow', 'Devices', 'Interface', 'Media', 'Editor', 'Maps', 'Shape', 'Weather']);
     const handleColorChange = (color: string) => {
         onChangeColor(color); // ارسال رنگ به کامپوننت والد
     };
@@ -75,46 +75,46 @@ const OrFilter: React.FC<OrFilterProps> = ({
     };
 
     return (
-        <div className='or-filter'>
-            <div className='filter-header'>
-                <div>
-                    <img src={TuneIcon} alt='Tune' width='24px' height='24px' />
-                    <span className='t2-strong'>Customize</span>
+        <>
+            <div className={`or-filter ${isFilterVisible ? 'visible' : 'hidden'}`}>
+                <div className='filter-header'>
+                    <div>
+                        <img src={TuneIcon} alt='Tune' width='24px' height='24px' />
+                        <span className='t2-strong'>Customize</span>
+                    </div>
+                    <OrButton layout='icon' onClick={toggleFilter} appearance='ghost' variant='secondary' icon={<Icon.cross />} size='sm' />
                 </div>
-                <OrButton layout='icon' onClick={toggleFilter} appearance='ghost' variant='secondary' icon={<Icon.cross />} size='sm' />
-            </div>
-            <div className='filter-body'>
-            <div className='customize-section'>
-                <div>
-                <span className='b1-strong'>Mode</span>
-                <OrTab 
-                    tabs={tabs}
-                    initialTab={initialTab}
-                    onTabChange={(tab: string) => {
-                    setActiveTab(tab); // به روزرسانی تب داخلی
-                    onTabChange(tab); // به‌روزرسانی تب در والد (Icons)
-                    }} 
-                />  
-                </div> 
+                <div className='filter-body'>
+                    <div className='customize-section'>
+                        <div>
+                            <span className='b1-strong'>Mode</span>
+                            <OrTab
+                                tabs={tabs}
+                                initialTab={initialTab}
+                                onTabChange={(tab: string) => {
+                                    setActiveTab(tab); // به روزرسانی تب داخلی
+                                    onTabChange(tab); // به‌روزرسانی تب در والد (Icons)
+                                }}
+                            />
+                        </div>
 
-                {renderTabContent()}
-                
-            </div>
+                        {renderTabContent()}
+                    </div>
 
-           
-                <OrCheckboxFilter  
-                    folders={folders}
-                    selectedFolders={selectedFolders}
-                    onFolderChange={onFolderChange}
-                    onResetFilters={onResetFilters}
-                />
-          
+                    <OrCheckboxFilter
+                        folders={folders}
+                        selectedFolders={selectedFolders}
+                        onFolderChange={onFolderChange}
+                        onResetFilters={onResetFilters}
+                    />
+                </div>
             </div>
 
-            <div className='backdrop'
-            onClick={toggleFilter}
-             />
-        </div>
+            <div
+                className={`backdrop ${isFilterVisible ? 'visible' : 'hidden'}`}
+                onClick={toggleFilter}
+            />
+        </>
     );
 };
 

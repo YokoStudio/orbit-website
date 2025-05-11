@@ -34,6 +34,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [svgContent, setSvgContent] = useState<{ [key: string]: string }>({});
   const [filteredIcons, setFilteredIcons] = useState<Icon[]>([]);
+  // Always start with the side panel closed
   const [isSidePanelOpen, setIsSidePanelOpen] = useState<boolean>(false);
   const [selectedIcons, setSelectedIcons] = useState<Icon[]>([]);
   const [suggestions, setSuggestions] = useState<{ [key: string]: string[] }>({});
@@ -145,16 +146,43 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
 
   const toggleIconSelection = (icon: Icon) => {
     if (selectedIcons.some(selectedIcon => selectedIcon.name === icon.name)) {
+      // Deselecting an icon
       const updatedSelectedIcons = selectedIcons.filter(selectedIcon => selectedIcon.name !== icon.name);
-      setSelectedIcons(updatedSelectedIcons);
 
       if (updatedSelectedIcons.length === 0) {
+        // If no icons left, hide the panel with animation
         setIsSidePanelOpen(false);
+        // Then after animation completes, clear selected icons
+        setTimeout(() => {
+          setSelectedIcons([]);
+        }, 300); // Match this with the CSS transition duration
+      } else {
+        // If there are still selected icons, update the selection
+        // First hide the panel with animation
+        setIsSidePanelOpen(false);
+
+        // Then after a short delay, update the selection and show the panel again
+        setTimeout(() => {
+          setSelectedIcons(updatedSelectedIcons);
+          setIsSidePanelOpen(true);
+        }, 300); // Match this with the CSS transition duration
       }
     } else {
+      // Selecting a new icon
+      // First update the selected icons
       const updatedSelectedIcons = [...selectedIcons, icon];
       setSelectedIcons(updatedSelectedIcons);
-      setIsSidePanelOpen(true);
+
+      // If this is the first icon being selected, we need to handle the animation differently
+      if (selectedIcons.length === 0) {
+        // First render the panel with hidden class
+        setTimeout(() => {
+          // Then set it to visible to trigger the animation
+          setIsSidePanelOpen(true);
+        }, 10); // Small delay to ensure the DOM has updated
+      } else {
+        setIsSidePanelOpen(true);
+      }
     }
   };
 
@@ -173,7 +201,12 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
     setSelectedIcons(updatedIcons);
 
     if (updatedIcons.length === 0) {
+      // First hide the panel with animation
       setIsSidePanelOpen(false);
+      // Then after animation completes, clear selected icons
+      setTimeout(() => {
+        setSelectedIcons([]);
+      }, 300); // Match this with the CSS transition duration
     }
   };
 
@@ -203,8 +236,12 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
   };
 
   const handleClose = () => {
-    setSelectedIcons([]);
+    // First hide the panel with animation
     setIsSidePanelOpen(false);
+    // Then after animation completes, clear selected icons
+    setTimeout(() => {
+      setSelectedIcons([]);
+    }, 300); // Match this with the CSS transition duration
   };
 
   const CopyButton: React.FC<{ svg: string }> = ({ svg }) => {
@@ -284,8 +321,8 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                                 This is test text
                             </div>
                         </div>
-                    </a> 
-                </div> 
+                    </a>
+                </div>
 
 
           <div className="icon-list">
@@ -329,7 +366,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
       )}
 
           {selectedIcons.length > 0 && (
-            <div className="side-panel">
+            <div className={`side-panel ${isSidePanelOpen ? 'visible' : 'hidden'}`}>
               <div className='filter-header'>
                 <span className='b2-strong'>({selectedIcons.length}) Selected</span>
                 <OrButton
@@ -337,7 +374,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                   appearance='ghost'
                   variant='secondary'
                   icon={<Icon.cross />}
-                  onClick={() => { setSelectedIcons([]); }}
+                  onClick={handleClose}
                 />
               </div>
 

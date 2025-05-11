@@ -1,19 +1,42 @@
 @import '../../base/style.scss';
 
 .or-filter {
-    min-width: 320px;
     display: flex;
     flex-direction: column;
     z-index: 800;
     position: sticky;
     top: 0;
     border-right: 1px solid $neutral-border-7-default;
-    transition: background-color 0.3s ease-in-out;
     height: 100vh;
     overflow: hidden;
     background-color: $neutral-bg-1-default;
-   
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, width 0.3s ease-in-out;
 
+    &.visible {
+        transform: translateX(0);
+        opacity: 1;
+        width: 320px;
+
+        @media screen and (max-width: 600px){
+            transform: translatey(0);
+            position: fixed;
+            width: 100%;
+            opacity: 1;
+         }
+    }
+
+    &.hidden {
+        transform: translateX(-100%);
+        opacity: 0;
+        width: 0px;
+
+        @media screen and (max-width: 600px){
+            transform: translatey(+100%);
+            width: 100%;
+            opacity: 1;
+            
+         }
+    }
 
     @media screen and (max-width: 1200px){
         position: fixed;
@@ -23,9 +46,7 @@
     @media screen and (max-width: 600px){
        position: fixed;
        width: 100%;
-
     }
-   
 }
 .filter-body{
     height: 100vh;
@@ -33,10 +54,6 @@
     overflow-x: hidden;
     z-index: 6;
     background: $neutral-bg-1-default;
-    
-    
-
-    
 }
 
 .customize-section{
@@ -71,8 +88,6 @@
     display: flex;
     flex-direction: column;
     gap: $space4;
-
-
 }
 
 .category-section{
@@ -80,30 +95,34 @@
     display: flex;
     flex-direction: column;
     gap: $space2;
-    
-    
 }
 
-.checkbox-section{
-   
-}
-.backdrop{
-    background-color: #00000000;
-    transition: background-color 0.3s ease-in-out;
+.backdrop {
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.45);
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    opacity: 0;
+            visibility: hidden;
 
     @media screen and (max-width: 1200px){
-        position: fixed;
-        z-index: 5;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #00000075;
-        transition: background-color 0.3s ease-in-out;
-        
-    }
 
+        
+        &.visible {
+            opacity: 1;
+            visibility: visible;
+        }
     
+        &.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+   
 }
 
 .OrCheckboxFilter-body{
@@ -113,6 +132,4 @@
     z-index: 4;
     position: relative;
     background-color: $neutral-bg-1-default;
-
-    
 }
