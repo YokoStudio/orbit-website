@@ -8,14 +8,8 @@ import Fuse from 'fuse.js';
 import JSZip from 'jszip'; // import JSZip
 import OrButton from '../OrButton/OrButton';
 import Icon from '../../assets/Icon';
+import SidePanel from '../SidePanel';
 import ill from '../../assets/404.png'
-
-interface ShapeIconProps {
-  searchTerm: string;
-  switchChecked: boolean;
-  selectedFolders: string[];
-  iconColor: string;
-}
 
 interface Icon {
   name: string;
@@ -23,11 +17,20 @@ interface Icon {
   similarNames?: string[];
 }
 
+interface ShapeIconProps {
+  searchTerm: string;
+  switchChecked: boolean;
+  selectedFolders: string[];
+  iconColor: string;
+  onSelectIcon?: (icon: Icon, svgContent: string) => void;
+}
+
 const ShapeIcon: React.FC<ShapeIconProps> = ({
   searchTerm,
   switchChecked,
   selectedFolders,
   iconColor,
+  onSelectIcon,
 }) => {
   const [icons, setIcons] = useState<Icon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -145,6 +148,13 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
   }, [filteredIcons]);
 
   const toggleIconSelection = (icon: Icon) => {
+    // If onSelectIcon prop is provided, use it
+    if (onSelectIcon && svgContent[icon.name]) {
+      onSelectIcon(icon, svgContent[icon.name]);
+      return;
+    }
+
+    // Otherwise, use the original implementation
     if (selectedIcons.some(selectedIcon => selectedIcon.name === icon.name)) {
       // Deselecting an icon
       const updatedSelectedIcons = selectedIcons.filter(selectedIcon => selectedIcon.name !== icon.name);
@@ -305,7 +315,7 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
       ) : error ? (
         <p>{error}</p>
       ) : (
-        <div className='icon-list-main'>
+        <div className="icon-list-main">
 
 
                   <div className='announcement-wrapper'>
@@ -365,110 +375,68 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
         </div>
       )}
 
-          {selectedIcons.length > 0 && (
-            <div className={`side-panel ${isSidePanelOpen ? 'visible' : 'hidden'}`}>
-              <div className='filter-header'>
-                <span className='b2-strong'>({selectedIcons.length}) Selected</span>
-                <OrButton
-                  layout='icon'
-                  appearance='ghost'
-                  variant='secondary'
-                  icon={<Icon.cross />}
-                  onClick={handleClose}
-                />
-              </div>
-
-              <div className='side-panel-body'>
-                {selectedIcons.length === 1 ? (
-                  <div className='icon-preview'>
-
-                    <div className="svg-preview-box" >
-                      {/* نمایش کامل و بزرگ SVG */}
-                      <div className="t1-strong icon-sidepanel-name">
-                      {formatIconName(selectedIcons[0].name)} {/* فرمت نام آیکون برای نمایش زیبا */}
+          {/* Only render the SidePanel if onSelectIcon is not provided */}
+          {!onSelectIcon && selectedIcons.length > 0 && (
+            <SidePanel
+              isOpen={isSidePanelOpen}
+              onClose={handleClose}
+              title={`(${selectedIcons.length}) Selected`}
+              downloadButton={selectedIcons.length > 1 ? {
+                text: downloadText,
+                onClick: downloadSelectedIconsAsZip
+              } : undefined}
+            >
+              {selectedIcons.length === 1 ? (
+                <div className='icon-preview'>
+                  <div className="svg-preview-box">
+                    <div className="t1-strong icon-sidepanel-name">
+                      {formatIconName(selectedIcons[0].name)}
                     </div>
-                      <div
-                        className="svg-preview"
-                        dangerouslySetInnerHTML={{ __html: svgContent[selectedIcons[0].name] }}
-                        style={{
-                          color: iconColor, // استفاده از رنگ انتخابی
-                        }}
-                      />
-                      {/* <div>
-
-                        {iconColor}
-
-
-                      </div> */}
-
-
+                    <div
+                      className="svg-preview"
+                      dangerouslySetInnerHTML={{ __html: svgContent[selectedIcons[0].name] }}
+                      style={{
+                        color: iconColor,
+                      }}
+                    />
                     <div className='single-download-box'>
                       <OrButton
                         layout='icon-text'
                         appearance='fill'
                         variant='secondary'
                         icon={<Icon.download />}
-
                         text='SVG'
                         onClick={() => downloadSingleIcon(selectedIcons[0])}
                       />
                       <CopyButton svg={svgContent[selectedIcons[0].name]} />
-
                     </div>
-                    </div>
-
-
-                    <div className='svg-box'>
-                      {/* <span className='b2'>SVG Code</span>
-
-                       <div className="svg-code-box">
-                      <textarea
-                        className='b2'
-                        value={svgContent[selectedIcons[0].name]}
-                        readOnly
-                        onClick={(e) => (e.currentTarget as HTMLTextAreaElement).select()} // انتخاب کل متن هنگام کلیک
-                      />
-                    </div> */}
-                      </div>
                   </div>
-                ) : (
-                  // نمایش لیست آیکون‌ها زمانی که بیشتر از یک آیکون انتخاب‌شده
-                  selectedIcons.map((icon) => (
-                    <div className='side-panel-item' key={icon.name}>
-                      <div className='side-panel-item-body'>
-                        <div
-                          className="sidepabel-svg-container"
-                          style={{ color: iconColor }} // اعمال رنگ CSS برای آیکون‌های انتخابی
-                          dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
-                        />
-                        <span className='b2'>{formatIconName(icon.name)}</span>
-                        <OrButton
-                          variant='error'
-                          appearance='ghost'
-                          size='sm'
-                          layout='icon'
-                          icon={<Icon.trash />}
-                          onClick={() => removeSelectedIcon(icon.name)}
-                        />
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-
-              {selectedIcons.length > 1 && (
-                <div className='dowload-button-box'>
-                  <OrButton
-                    layout='icon-text'
-                    appearance='fill'
-                    variant='secondary'
-                    icon={<Icon.download />}
-                    text={downloadText}
-                    onClick={downloadSelectedIconsAsZip}
-                  />
+                  <div className='svg-box'></div>
                 </div>
+              ) : (
+                // Display list of icons when more than one is selected
+                selectedIcons.map((icon) => (
+                  <div className='side-panel-item' key={icon.name}>
+                    <div className='side-panel-item-body'>
+                      <div
+                        className="sidepabel-svg-container"
+                        style={{ color: iconColor }}
+                        dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
+                      />
+                      <span className='b2'>{formatIconName(icon.name)}</span>
+                      <OrButton
+                        variant='error'
+                        appearance='ghost'
+                        size='sm'
+                        layout='icon'
+                        icon={<Icon.trash />}
+                        onClick={() => removeSelectedIcon(icon.name)}
+                      />
+                    </div>
+                  </div>
+                ))
               )}
-            </div>
+            </SidePanel>
           )}
 
     </div>

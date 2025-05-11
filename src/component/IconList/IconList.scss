@@ -7,8 +7,8 @@
     box-sizing: border-box;
     overflow: hidden;
     height: 100vh;
-
-
+    position: relative;
+    transition: all 0.3s ease-in-out;
 }
 
 .icon-list-main{
@@ -21,10 +21,10 @@
     overflow-x: hidden;
     overflow-y: auto;
     align-items: center;
-
-
-
-
+    position: relative;
+    flex: 1;
+    transition: all 0.3s ease-in-out;
+    margin-right: 0;
 }
 
 .icon-list{
@@ -38,6 +38,7 @@
     justify-content: space-between;
     justify-content: center;
     gap: 8px;
+    transition: all 0.3s ease-in-out;
 
     @media screen and (max-width: 480px){
         grid-template-columns: repeat(auto-fill, 80px);
@@ -148,7 +149,7 @@
     border-radius: $radius3;
     cursor: pointer;
     gap: 8px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, width ease-in-out 0.3;
 
     @media screen and (max-width: 480px){
         padding: $space1;
@@ -204,179 +205,9 @@
     outline: 2px solid blue; // رنگ یا استایل دلخواه
   }
 
-.side-panel{
-    width: 320px;
-    min-width: 320px;
-    display: flex;
-    flex-direction: column;
-    z-index: 999;
-    position: sticky;
-    top: 0;
-    border-left: 1px solid $neutral-border-7-default;
-    overflow-y: auto;
-    overflow-x: hidden;
-    background-color: $neutral-bg-1-default;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-
-    &.visible {
-        transform: translateX(0);
-        opacity: 1;
-    }
-
-    &.hidden {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-
-    @media screen and (max-width: 780px){
-        position: fixed;
-        top: 0px;
-        height: 100vh;
-        width: 100%;
-    }
-}
-.side-panel-item{
-    z-index: 2;
-    background: $neutral-bg-1-default;
-
-    padding: 16px 24px;
-    gap: 24px;
-
-    display: flex;
-    flex-direction: row;
-    border-bottom: 1px solid $neutral-border-7-default;
-
-}
-
-.sidepabel-svg-container{
-    padding: 0px;
-    background-color: $neutral-bg-4-default;
-    border-radius: $radius3;
-    width: 40px;
-    height: 40px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-
-    svg{
-        width: 24px;
-        height: 24px;
-    }
-
-}
-.side-panel-item-body{
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-
-    span{
-        flex-grow: 1;
-    }
-}
-
-.side-panel-body{
-
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow-x: auto;
-
-}
-
-.dowload-button-box{
-    border-top: 1px solid $neutral-border-7-default ;
-    width: 100%;
-    padding: 24px;
-    box-sizing: border-box;
-
-
-    button{
-        width: 100%;
-    }
-}
-
-.icon-preview{
-    display: flex;
-    flex-direction: column;
-    padding: $space6;
-    overflow: hidden;
-    gap: 16px;
-}
-.svg-code-box{
-
-    width: 100%;
-
-
-    box-sizing: border-box;
-
-    textarea{
-        height: 240px;
-        min-width: 100%;
-        max-width: 100%;
-        max-height: 320px;
-        min-height: 80px;
-
-        box-sizing: border-box;
-        width: 100%;
-        border: 1px solid $neutral-border-7-default;
-        border-radius: $radius2;
-        overflow-y: auto;
-        padding: $space3;
-        background-color: $neutral-bg-3-default;
-    }
-}
-.single-download-box{
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-
-    button{
-        width: 100%;
-    }
-
-}
-
-.side-panel-body-shape{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: auto;
-}
-
-.svg-preview{
-    width: 100%;
-    height: 264px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $neutral-bg-4-default;
-    border-radius: $radius1;
-
-    svg{
-        width: 80px;
-        height: 80px;
-    }
-}
-
-.icon-name{
-    text-align: center;
-    color: rgb(119, 119, 119);
-}
-
-.svg-box{
-    flex-direction: column;
-    display: flex;
-    gap: 4px;
-}
-
-.svg-preview-box{
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
+/* Side panel styles moved to SidePanel.scss */
+/* Side panel related styles moved to SidePanel.scss */
+/* Side panel related styles moved to SidePanel.scss */
 
 .not-found
 {

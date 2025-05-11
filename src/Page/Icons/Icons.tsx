@@ -9,6 +9,24 @@ import Modal from '../../component/OrDownloadModal/OrModal';
 import OrButton from '../../component/OrButton/OrButton';
 import figmaIcon from '../../assets/modalIcon/Figma.png'
 import Icon from '../../assets/Icon';
+import SidePanel from '../../component/SidePanel';
+import JSZip from 'jszip';
+// Define the Icon interface
+interface Icon {
+    name: string;
+    path: string;
+    type: 'shape' | 'stroke';
+    similarNames?: string[];
+    // Styling information
+    style: {
+        color: string;
+        strokeWidth?: number;
+        fillMode?: boolean; // true for fill, false for outline (for shape icons)
+    };
+    // Unique identifier for the icon (combination of name, type, and styling)
+    id?: string;
+}
+
 const Icons: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [borderSize, setBorderSize] = useState<number>(1);
@@ -21,14 +39,114 @@ const Icons: React.FC = () => {
     const [strokeColor, setStrokeColor] = useState<string>('#000000');
     const [strokeWidth, setStrokeWidth] = useState<number>(1.2)
     const [isModalVisible, setisModalVisible] = useState<boolean>(false);
-    const [isFilterOpen, setisFilterOpen] = useState<boolean>(false);
 
+    // Selected icons state
+    const [selectedIcons, setSelectedIcons] = useState<Icon[]>([]);
+    const [isSidePanelOpen, setIsSidePanelOpen] = useState<boolean>(false);
+    const [svgContent, setSvgContent] = useState<{ [key: string]: string }>({});
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // State for modal
 
 
-    const toggleModal = () => {
-        setIsModalOpen(!isModalOpen); // Toggle modal open/close
+    // Functions for handling selected icons
+    const addIconToSelection = (icon: Icon, iconSvgContent: string) => {
+        // Generate a unique ID for the icon based on name, type, and styling
+        const generateIconId = (icon: Icon) => {
+            const { name, type, style } = icon;
+            const styleString = JSON.stringify(style);
+            return `${name}-${type}-${styleString}`;
+        };
+
+        // Add styling information to the icon based on its type
+        const iconWithStyle = {
+            ...icon,
+            style: {
+                color: icon.type === 'shape' ? iconColor : strokeColor,
+                strokeWidth: icon.type === 'stroke' ? strokeWidth : undefined,
+                fillMode: icon.type === 'shape' ? switchChecked : undefined
+            },
+        };
+
+        // Generate a unique ID for the icon
+        iconWithStyle.id = generateIconId(iconWithStyle);
+
+        // Check if the icon with the same ID (same name, type, and styling) is already selected
+        if (!selectedIcons.some(selectedIcon => selectedIcon.id === iconWithStyle.id)) {
+            // Store the icon with a unique key in svgContent to handle same-named icons
+            const contentKey = iconWithStyle.id;
+
+            setSelectedIcons([...selectedIcons, iconWithStyle]);
+            setSvgContent(prev => ({
+                ...prev,
+                [contentKey]: iconSvgContent
+            }));
+
+            // Open the side panel if it's the first icon
+            if (selectedIcons.length === 0) {
+                setTimeout(() => {
+                    setIsSidePanelOpen(true);
+                }, 10);
+            } else {
+                setIsSidePanelOpen(true);
+            }
+        }
+    };
+
+    const removeIconFromSelection = (iconId: string) => {
+        const updatedIcons = selectedIcons.filter(icon => icon.id !== iconId);
+        setSelectedIcons(updatedIcons);
+
+        if (updatedIcons.length === 0) {
+            // Close the side panel if no icons left
+            setIsSidePanelOpen(false);
+        }
+    };
+
+    const clearSelectedIcons = () => {
+        setIsSidePanelOpen(false);
+        setTimeout(() => {
+            setSelectedIcons([]);
+        }, 300); // Match transition duration
+    };
+
+    // Function to download all selected icons
+    const downloadSelectedIcons = () => {
+        const zip = new JSZip();
+
+        selectedIcons.forEach(icon => {
+            // Use the icon's ID as the key to get the correct SVG content
+            let svg = svgContent[icon.id || ''];
+
+            if (svg) {
+                // Apply the icon's stored styling (not the current filter settings)
+                if (icon.type === 'shape') {
+                    svg = svg.replace(/fill="currentColor"/g, `fill="${icon.style.color}"`);
+                } else if (icon.type === 'stroke') {
+                    svg = svg
+                        .replace(/stroke="currentColor"/g, `stroke="${icon.style.color}"`)
+                        .replace(/stroke-width="currentWidth"/g, `stroke-width="${icon.style.strokeWidth}px"`);
+                }
+
+                // Add a suffix to the filename for icons with the same name but different styling
+                const fileNameParts = icon.name.split('.');
+                const extension = fileNameParts.pop() || 'svg';
+                const baseName = fileNameParts.join('.');
+                const uniqueFileName = `${baseName}-${icon.type}${icon.style.strokeWidth ? `-${icon.style.strokeWidth}px` : ''}${icon.style.fillMode !== undefined ? `-${icon.style.fillMode ? 'fill' : 'outline'}` : ''}.${extension}`;
+
+                zip.file(uniqueFileName, svg);
+            }
+        });
+
+        zip.generateAsync({ type: 'blob' }).then(content => {
+            const url = URL.createObjectURL(content);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'YOKO Orbit v1 (selected_icons).zip';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
     };
 
 
@@ -111,23 +229,24 @@ const Icons: React.FC = () => {
                 initialTab={activeTab}
             />
 
-            <div className={`view ${isFilterVisible ? 'filter-open' : 'filter-closed'}`}>
-                <OrIconHeader
-                onSearch={handleSearch}
-                toggleFilter={toggleFilter}
-                isFilterVisible={isFilterVisible}
-                switchModal={SwitchModal}
-                isModalrVisible={isModalVisible}
-                filterOpen={isFilterVisible}
+            <div className="main-content-area">
+                <div className={`content-wrapper ${isSidePanelOpen ? 'side-panel-open' : ''}`}>
+                    <div className={`view ${isFilterVisible ? 'filter-open' : 'filter-closed'}`}>
+                    <OrIconHeader
+                    onSearch={handleSearch}
+                    toggleFilter={toggleFilter}
+                    isFilterVisible={isFilterVisible}
+                    switchModal={SwitchModal}
+                    isModalrVisible={isModalVisible}
+                    filterOpen={isFilterVisible}
+                    />
 
-                 />
-
-                <Modal
-                isOpen={isModalVisible}
-                onClose={SwitchModal}
-                title='Download'
-                dis='Choose your preferred version.'
-                >
+                    <Modal
+                    isOpen={isModalVisible}
+                    onClose={SwitchModal}
+                    title='Download'
+                    dis='Choose your preferred version.'
+                    >
                 <div className='download-box'>
                         <div className='box-wrapper'>
                             <div className='modal-item-icon'>
@@ -273,8 +392,18 @@ const Icons: React.FC = () => {
                     <StrokeIcon
                         searchTerm={searchTerm}
                         selectedFolders={selectedFolders}
-                        strokeColor= {strokeColor}
+                        strokeColor={strokeColor}
                         strokeWidth={strokeWidth}
+                        onSelectIcon={(icon, svgContent) =>
+                            addIconToSelection({
+                                ...icon,
+                                type: 'stroke',
+                                style: {
+                                    color: strokeColor,
+                                    strokeWidth: strokeWidth
+                                }
+                            }, svgContent)
+                        }
                     />
                 )}
 
@@ -284,8 +413,141 @@ const Icons: React.FC = () => {
                         switchChecked={switchChecked}
                         selectedFolders={selectedFolders}
                         iconColor={iconColor}
+                        onSelectIcon={(icon, svgContent) =>
+                            addIconToSelection({
+                                ...icon,
+                                type: 'shape',
+                                style: {
+                                    color: iconColor,
+                                    fillMode: switchChecked
+                                }
+                            }, svgContent)
+                        }
                     />
                 )}
+
+                {/* Shared SidePanel for both icon types */}
+                {selectedIcons.length > 0 && (
+                    <SidePanel
+                        isOpen={isSidePanelOpen}
+                        onClose={clearSelectedIcons}
+                        title={`(${selectedIcons.length}) Selected Icons`}
+                        downloadButton={selectedIcons.length > 0 ? {
+                            text: `Download (${selectedIcons.length}) Icons`,
+                            onClick: downloadSelectedIcons
+                        } : undefined}
+                    >
+                        {selectedIcons.length === 1 ? (
+                            <div className='icon-preview'>
+                                <div className="svg-preview-box">
+                                    <div className="t1-strong icon-sidepanel-name">
+                                        {selectedIcons[0].name.replace('.svg', '').replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                                    </div>
+                                    <div
+                                        className="svg-preview"
+                                        dangerouslySetInnerHTML={{ __html: svgContent[selectedIcons[0].id || ''] }}
+                                        style={{
+                                            color: selectedIcons[0].style.color,
+                                            strokeWidth: selectedIcons[0].style.strokeWidth
+                                        }}
+                                    />
+                                    <div className='single-download-box'>
+                                        <OrButton
+                                            layout='icon-text'
+                                            appearance='fill'
+                                            variant='secondary'
+                                            icon={<Icon.download />}
+                                            text='SVG'
+                                            onClick={() => {
+                                                const icon = selectedIcons[0];
+                                                let svg = svgContent[icon.id || ''];
+
+                                                if (icon.type === 'shape') {
+                                                    svg = svg.replace(/fill="currentColor"/g, `fill="${icon.style.color}"`);
+                                                } else if (icon.type === 'stroke') {
+                                                    svg = svg
+                                                        .replace(/stroke="currentColor"/g, `stroke="${icon.style.color}"`)
+                                                        .replace(/stroke-width="currentWidth"/g, `stroke-width="${icon.style.strokeWidth}px"`);
+                                                }
+
+                                                // Create a unique filename based on styling
+                                                const fileNameParts = icon.name.split('.');
+                                                const extension = fileNameParts.pop() || 'svg';
+                                                const baseName = fileNameParts.join('.');
+                                                const uniqueFileName = `${baseName}-${icon.type}${icon.style.strokeWidth ? `-${icon.style.strokeWidth}px` : ''}${icon.style.fillMode !== undefined ? `-${icon.style.fillMode ? 'fill' : 'outline'}` : ''}.${extension}`;
+
+                                                const blob = new Blob([svg], { type: 'image/svg+xml' });
+                                                const url = URL.createObjectURL(blob);
+                                                const a = document.createElement('a');
+                                                a.href = url;
+                                                a.download = uniqueFileName;
+                                                document.body.appendChild(a);
+                                                a.click();
+                                                document.body.removeChild(a);
+                                                URL.revokeObjectURL(url);
+                                            }}
+                                        />
+                                        <OrButton
+                                            layout='icon-text'
+                                            appearance='outline'
+                                            variant='secondary'
+                                            icon={<Icon.copy />}
+                                            text='Copy SVG'
+                                            onClick={() => {
+                                                const icon = selectedIcons[0];
+                                                let svg = svgContent[icon.id || ''];
+
+                                                if (icon.type === 'shape') {
+                                                    svg = svg.replace(/fill="currentColor"/g, `fill="${icon.style.color}"`);
+                                                } else if (icon.type === 'stroke') {
+                                                    svg = svg
+                                                        .replace(/stroke="currentColor"/g, `stroke="${icon.style.color}"`)
+                                                        .replace(/stroke-width="currentWidth"/g, `stroke-width="${icon.style.strokeWidth}px"`);
+                                                }
+
+                                                navigator.clipboard.writeText(svg);
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            selectedIcons.map((icon) => (
+                                <div className='side-panel-item' key={icon.id}>
+                                    <div className='side-panel-item-body'>
+                                        <div
+                                            className="sidepabel-svg-container"
+                                            dangerouslySetInnerHTML={{ __html: svgContent[icon.id || ''] }}
+                                            style={{
+                                                color: icon.style.color,
+                                                strokeWidth: icon.style.strokeWidth
+                                            }}
+                                        />
+                                        <span className='b2'>
+                                            {icon.name.replace('.svg', '').replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                                            {icon.type === 'shape' && (
+                                                <span className="icon-type-badge shape">{icon.style.fillMode ? 'Fill' : 'Outline'}</span>
+                                            )}
+                                            {icon.type === 'stroke' && (
+                                                <span className="icon-type-badge stroke">{icon.style.strokeWidth}px</span>
+                                            )}
+                                        </span>
+                                        <OrButton
+                                            variant='error'
+                                            appearance='ghost'
+                                            size='sm'
+                                            layout='icon'
+                                            icon={<Icon.trash />}
+                                            onClick={() => removeIconFromSelection(icon.id || '')}
+                                        />
+                                    </div>
+                                </div>
+                            ))
+                        )}
+                    </SidePanel>
+                )}
+                    </div>
+                </div>
             </div>
         </div>
     );

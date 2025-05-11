@@ -7,14 +7,8 @@ import OrButton from '../OrButton/OrButton';
 import Fuse from 'fuse.js';
 import JSZip from 'jszip';
 import Icon from '../../assets/Icon';
+import SidePanel from '../SidePanel';
 import ill from '../../assets/404.png'
-
-interface StrokeIconProps {
-  searchTerm: string;
-  selectedFolders: string[];
-  strokeColor: string;
-  strokeWidth: number;
-}
 
 interface Icon {
   name: string;
@@ -22,13 +16,22 @@ interface Icon {
   similarNames?: string[];
 }
 
-const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, strokeColor, strokeWidth }) => {
+interface StrokeIconProps {
+  searchTerm: string;
+  selectedFolders: string[];
+  strokeColor: string;
+  strokeWidth: number;
+  onSelectIcon?: (icon: Icon, svgContent: string) => void;
+}
+
+const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, strokeColor, strokeWidth, onSelectIcon }) => {
   const [icons, setIcons] = useState<Icon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [svgContent, setSvgContent] = useState<{ [key: string]: string }>({});
   const [copyMessages, setCopyMessages] = useState<{ [key: string]: string | null }>({});
   const [selectedIcons, setSelectedIcons] = useState<Icon[]>([]);
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchIcons = async () => {
@@ -153,22 +156,22 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
       const iconFolder = icon.path.split('/')[2];
       return selectedFolders.length === 0 || selectedFolders.includes(iconFolder);
     })
-    .sort((a, b) => a.name.localeCompare(b.name)); 
+    .sort((a, b) => a.name.localeCompare(b.name));
 
     // const copyToClipboard = (iconName: string, svgContent: string) => {
     //   let svg = svgContent;
-    
+
     //   // تنظیم مقدار stroke و stroke-width قبل از کپی
     //   svg = svg
     //     .replace(/stroke="currentColor"/g, `stroke="${strokeColor}"`)
     //     .replace(/stroke-width="currentWidth"/g, `stroke-width="${strokeWidth}px"`);
-    
+
     //   navigator.clipboard.writeText(svg).then(() => {
     //     setCopyMessages((prev) => ({
     //       ...prev,
     //       [iconName]: 'Copied!!',
     //     }));
-    
+
     //     setTimeout(() => {
     //       setCopyMessages((prev) => ({
     //         ...prev,
@@ -182,24 +185,24 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
 
     const CopyButton: React.FC<{ svg: string, strokeColor: string, strokeWidth: number }> = ({ svg, strokeColor, strokeWidth }) => {
       const [buttonText, setButtonText] = useState('Copy SVG');
-    
+
       const handleCopySvg = () => {
-       
+
         let svgContentLocal = svg
           .replace(/stroke="currentColor"/g, `stroke="${strokeColor}"`)
           .replace(/stroke-width="currentWidth"/g, `stroke-width="${strokeWidth}px"`);
-    
-     
+
+
         navigator.clipboard.writeText(svgContentLocal).then(() => {
           setButtonText('Copied');
-    
-          
+
+
           setTimeout(() => {
             setButtonText('Copy');
           }, 2000);
         });
       };
-    
+
       return (
         <OrButton
           layout='icon-text'
@@ -215,15 +218,59 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
 
 
   const toggleSelectIcon = (icon: Icon) => {
+    // If onSelectIcon prop is provided, use it
+    if (onSelectIcon && svgContent[icon.name]) {
+      onSelectIcon(icon, svgContent[icon.name]);
+      return;
+    }
+
+    // Otherwise, use the original implementation
     if (selectedIcons.includes(icon)) {
-      setSelectedIcons(selectedIcons.filter((i) => i !== icon));
+      // Deselecting an icon
+      const updatedSelectedIcons = selectedIcons.filter((i) => i !== icon);
+
+      if (updatedSelectedIcons.length === 0) {
+        // If no icons left, hide the panel with animation
+        setIsSidePanelOpen(false);
+        // Then after animation completes, clear selected icons
+        setTimeout(() => {
+          setSelectedIcons([]);
+        }, 300); // Match this with the CSS transition duration
+      } else {
+        // If there are still selected icons, update the selection
+        setSelectedIcons(updatedSelectedIcons);
+      }
     } else {
-      setSelectedIcons([...selectedIcons, icon]);
+      // Selecting a new icon
+      const updatedSelectedIcons = [...selectedIcons, icon];
+      setSelectedIcons(updatedSelectedIcons);
+
+      // If this is the first icon being selected, we need to handle the animation differently
+      if (selectedIcons.length === 0) {
+        // First render the panel with hidden class
+        setTimeout(() => {
+          // Then set it to visible to trigger the animation
+          setIsSidePanelOpen(true);
+        }, 10); // Small delay to ensure the DOM has updated
+      } else {
+        setIsSidePanelOpen(true);
+      }
     }
   };
 
   const removeSelectedIcon = (icon: Icon) => {
-    setSelectedIcons(selectedIcons.filter((i) => i !== icon));
+    const updatedIcons = selectedIcons.filter((i) => i !== icon);
+
+    if (updatedIcons.length === 0) {
+      // First hide the panel with animation
+      setIsSidePanelOpen(false);
+      // Then after animation completes, clear selected icons
+      setTimeout(() => {
+        setSelectedIcons([]);
+      }, 300); // Match this with the CSS transition duration
+    } else {
+      setSelectedIcons(updatedIcons);
+    }
   };
 
   const downloadText = `Download ( ${selectedIcons.length} ) Icons`;
@@ -238,17 +285,17 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
       ) : error ? (
         <p>{error}</p>
       ) : (
-        <div className='icon-list-main'>
+        <div className="icon-list-main">
           <div className="icon-list">
           {finalIcons.length > 0 ? (
             finalIcons.map((icon) => (
-              <div 
-                className={`item ${selectedIcons.includes(icon) ? 'selected' : ''}`} 
-                key={icon.path} 
+              <div
+                className={`item ${selectedIcons.includes(icon) ? 'selected' : ''}`}
+                key={icon.path}
                 onClick={() => toggleSelectIcon(icon)}
                 // تنظیم استایل CSS با متغیرهای سفارشی
-                // style={{ 
-                //   color: strokeColor, 
+                // style={{
+                //   color: strokeColor,
                 //   '--stroke-width': `${strokeWidth}px` } as CSSProperties}
               >
                 {svgContent[icon.name] ? (
@@ -284,46 +331,38 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
         </div>
         </div>
       )}
-      
-      {selectedIcons.length > 0 && (
-  <div className="side-panel">
-    <div className='filter-header'>
 
-      <span className='b2-strong'>({selectedIcons.length}) Selected</span> 
-
-      <OrButton
-        layout='icon'
-        appearance='ghost'
-        variant='secondary'
-        icon={<Icon.cross />}
-        onClick={() => { setSelectedIcons([]); }}
-      />
-    </div>
-
-    <div className='side-panel-body'>
-      {/* نمایش متفاوت برای حالت انتخاب یک آیکون */}
-      {selectedIcons.length === 1 ? (
-        <div className='icon-preview'>
-          
-
-          <div className="svg-preview-box" >
+      {/* Only render the SidePanel if onSelectIcon is not provided */}
+      {!onSelectIcon && selectedIcons.length > 0 && (
+  <SidePanel
+    isOpen={isSidePanelOpen}
+    onClose={() => {
+      setIsSidePanelOpen(false);
+      setTimeout(() => {
+        setSelectedIcons([]);
+      }, 300);
+    }}
+    title={`(${selectedIcons.length}) Selected`}
+    downloadButton={selectedIcons.length > 1 ? {
+      text: downloadText,
+      onClick: downloadSelectedIcons
+    } : undefined}
+  >
+    {selectedIcons.length === 1 ? (
+      <div className='icon-preview'>
+        <div className="svg-preview-box">
           <div className="b1-strong icon-sidepanel-name">
-            {formatIconName(selectedIcons[0].name)} {/* فرمت نام آیکون برای نمایش زیبا */}
+            {formatIconName(selectedIcons[0].name)}
           </div>
-            {/* نمایش بزرگ SVG */}
-            <div
-              className="svg-preview"
-              dangerouslySetInnerHTML={{ __html: svgContent[selectedIcons[0].name] }}
-              style={{
-                color: strokeColor,
-                strokeWidth: strokeWidth,
-              }}
-            />
-                  {/* <div>
-                    <div>Stroke color: {strokeColor}</div>
-                    <div>Stroke width: {strokeWidth}</div>
-                </div> */}
-           <div className='single-download-box'>
+          <div
+            className="svg-preview"
+            dangerouslySetInnerHTML={{ __html: svgContent[selectedIcons[0].name] }}
+            style={{
+              color: strokeColor,
+              strokeWidth: strokeWidth,
+            }}
+          />
+          <div className='single-download-box'>
             <OrButton
               layout='icon-text'
               appearance='fill'
@@ -332,76 +371,41 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
               text='SVG'
               onClick={() => downloadSvg(selectedIcons[0].name, svgContent[selectedIcons[0].name])}
             />
-            {/* <OrButton
-              layout='icon-text'
-              text='Copy'
-              appearance='outline'
-              variant='secondary'
-              icon={<Icon.copy />}
-              onClick={() => copyToClipboard(selectedIcons[0].name, svgContent[selectedIcons[0].name])}
-            /> */}
-             <CopyButton 
-                svg={svgContent[selectedIcons[0].name]} 
-                strokeColor={strokeColor}  
-                strokeWidth={strokeWidth}         
-              />
-
-          </div>
-          </div>
-          
-          <div className='svg-box'>
-            {/* <span className='b2'>SVG Code:</span> */}
-            {/* نمایش کد SVG */}
-            {/* <div className="svg-code-box">
-                <textarea
-                  
-                  value={svgContent[selectedIcons[0].name]}
-                  readOnly
-                  onClick={(e) => (e.currentTarget as HTMLTextAreaElement).select()} // انتخاب کل متن هنگام کلیک
-                />
-            </div> */}
+            <CopyButton
+              svg={svgContent[selectedIcons[0].name]}
+              strokeColor={strokeColor}
+              strokeWidth={strokeWidth}
+            />
           </div>
         </div>
-      ) : (
-        selectedIcons.map((icon) => (
-          <div className='side-panel-item' key={icon.name}>
-            <div className='side-panel-item-body'>
-              <div
-                className="sidepabel-svg-container"
-                dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
-                style={{
-                  color: strokeColor,
-                  strokeWidth: strokeWidth,
-                }}
-              />
-              <span className='b2'>{formatIconName(icon.name)}</span>
-              <OrButton
-                variant='error'
-                appearance='ghost'
-                size='sm'
-                layout='icon'
-                icon={<Icon.trash />}
-                onClick={() => removeSelectedIcon(icon)} 
-              />
-            </div>
-          </div>
-        ))
-      )}
-    </div>
-
-    {selectedIcons.length > 1 && (
-      <div className='dowload-button-box'>
-        <OrButton
-          layout='icon-text'
-          appearance='fill'
-          variant='secondary'
-          icon={<Icon.download />}
-          text={downloadText}
-          onClick={downloadSelectedIcons}
-        />
+        <div className='svg-box'></div>
       </div>
+    ) : (
+      selectedIcons.map((icon) => (
+        <div className='side-panel-item' key={icon.name}>
+          <div className='side-panel-item-body'>
+            <div
+              className="sidepabel-svg-container"
+              dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
+              style={{
+                color: strokeColor,
+                strokeWidth: strokeWidth,
+              }}
+            />
+            <span className='b2'>{formatIconName(icon.name)}</span>
+            <OrButton
+              variant='error'
+              appearance='ghost'
+              size='sm'
+              layout='icon'
+              icon={<Icon.trash />}
+              onClick={() => removeSelectedIcon(icon)}
+            />
+          </div>
+        </div>
+      ))
     )}
-  </div>
+  </SidePanel>
 )}
 
     </div>

@@ -10,17 +10,18 @@
     height: 100vh;
     overflow: hidden;
     background-color: $neutral-bg-1-default;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, width 0.3s ease-in-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, width;
 
     &.visible {
         transform: translateX(0);
         opacity: 1;
-        width: 320px;
+        min-width: 320px;
 
         @media screen and (max-width: 600px){
             transform: translatey(0);
-            position: fixed;
-            width: 100%;
+            // position: fixed;
+            min-width: 100%;
             opacity: 1;
          }
     }
@@ -28,11 +29,12 @@
     &.hidden {
         transform: translateX(-100%);
         opacity: 0;
+        min-width: 0px;
         width: 0px;
 
         @media screen and (max-width: 600px){
             transform: translatey(+100%);
-            width: 100%;
+            min-width: 100%;
             opacity: 1;
             
          }
