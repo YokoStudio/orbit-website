@@ -1,0 +1,182 @@
+@import '../../base/style.scss';
+
+.or-split-button {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  .split-button-container {
+    display: flex;
+    width: 100%;
+
+    .main-button {
+      flex-grow: 1;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      margin-right: 1px;
+      width: 100%;
+
+      button {
+        width: 100%;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+
+    .dropdown-toggle {
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 $space2;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: $radius1;
+      border-bottom-right-radius: $radius1;
+      transition: background-color 0.3s ease;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      &.primary {
+        &.fill {
+          background-color: $brand-bg-1-default;
+          color: $neutral-fg-10-default;
+          &:hover {
+            background-color: $brand-bg-1-hover;
+          }
+        }
+        &.outline {
+          background-color: transparent;
+          border: 1px solid $brand-border-1-default;
+          color: $brand-fg-1-default;
+          &:hover {
+            background-color: $brand-bg-1-hover;
+            color: $neutral-fg-10-default;
+          }
+        }
+      }
+
+      &.secondary {
+        &.fill {
+          background-color: $neutral-bg-5-default;
+          color: $neutral-fg-1-default;
+          &:hover {
+            background-color: $neutral-bg-5-hover;
+          }
+        }
+        &.outline {
+          background-color: transparent;
+          border: 1px solid $neutral-border-1-default;
+          color: $neutral-fg-1-default;
+          &:hover {
+            background-color: $neutral-bg-5-hover;
+          }
+        }
+      }
+
+      &.error {
+        &.fill {
+          background-color: $neutral-bg-1-default;
+          color: $neutral-fg-10-default;
+          &:hover {
+            background-color: $neutral-bg-1-hover;
+          }
+        }
+        &.outline {
+          background-color: transparent;
+          border: 1px solid $neutral-border-1-default;
+          color: $neutral-fg-1-default;
+          &:hover {
+            background-color: $neutral-bg-1-hover;
+            color: $neutral-fg-10-default;
+          }
+        }
+      }
+
+      &.sm {
+        height: 32px;
+      }
+      &.md {
+        height: 40px;
+      }
+      &.lg {
+        height: 48px;
+      }
+    }
+  }
+
+  // Dropdown menu styles moved to .dropdown-menu-container
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-overlay {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.dropdown-menu-container {
+  animation: fadeIn 0.3s ease-in-out;
+
+  .dropdown-menu {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    background-color: $neutral-bg-1-default;
+    border-radius: $radius1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    border: 1px solid $neutral-border-7-default;
+    overflow: hidden;
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: $space3;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      text-align: left;
+      color: $neutral-fg-1-default;
+      transition: background-color 0.2s ease;
+      font-size: 14px;
+
+      &:hover {
+        background-color: $neutral-bg-3-default;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid $neutral-border-7-default;
+      }
+
+      .dropdown-item-icon {
+        display: flex;
+        align-items: center;
+        margin-right: $space2;
+        width: 20px;
+        height: 20px;
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .dropdown-item-label {
+        font-weight: 500;
+      }
+    }
+  }
+}

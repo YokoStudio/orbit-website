@@ -142,9 +142,24 @@
     box-sizing: border-box;
 }
 
+.code-tabs-section {
+    padding: $space6;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: solid 1px $neutral-border-7-default ;
+}
+
+.code-tabs-header {
+    margin-bottom: $space3;
+    display: flex;
+    flex-direction: column;
+    gap: $space2;
+}
+
 .svg-code-box{
     width: 100%;
     box-sizing: border-box;
+    margin-top: $space3;
 
     textarea{
         height: 240px;
@@ -159,6 +174,19 @@
         overflow-y: auto;
         padding: $space3;
         background-color: $neutral-bg-3-default;
+        font-family: monospace;
+        font-size: 12px;
+        line-height: 1.5;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $neutral-bg-4-default;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: $brand-border-1-default;
+        }
     }
 }
 

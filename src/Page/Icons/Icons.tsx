@@ -10,6 +10,7 @@ import OrButton from '../../component/OrButton/OrButton';
 import figmaIcon from '../../assets/modalIcon/Figma.png'
 import Icon from '../../assets/Icon';
 import SidePanel from '../../component/SidePanel';
+import OrSplitButton from '../../component/OrSplitButton/OrSplitButton';
 import JSZip from 'jszip';
 // Define the Icon interface
 interface Icon {
@@ -436,6 +437,20 @@ const Icons: React.FC = () => {
                             text: `Download (${selectedIcons.length}) Icons`,
                             onClick: downloadSelectedIcons
                         } : undefined}
+                        svgContent={selectedIcons.length === 1 ? (() => {
+                            const icon = selectedIcons[0];
+                            let svg = svgContent[icon.id || ''];
+
+                            if (icon.type === 'shape') {
+                                svg = svg.replace(/fill="currentColor"/g, `fill="${icon.style.color}"`);
+                            } else if (icon.type === 'stroke') {
+                                svg = svg
+                                    .replace(/stroke="currentColor"/g, `stroke="${icon.style.color}"`)
+                                    .replace(/stroke-width="currentWidth"/g, `stroke-width="${icon.style.strokeWidth}px"`);
+                            }
+
+                            return svg;
+                        })() : undefined}
                     >
                         {selectedIcons.length === 1 ? (
                             <div className='icon-preview'>
@@ -452,13 +467,10 @@ const Icons: React.FC = () => {
                                         }}
                                     />
                                     <div className='single-download-box'>
-                                        <OrButton
-                                            layout='icon-text'
-                                            appearance='fill'
-                                            variant='secondary'
-                                            icon={<Icon.download />}
-                                            text='SVG'
-                                            onClick={() => {
+                                        <OrSplitButton
+                                            mainText="SVG"
+                                            mainIcon={<Icon.download />}
+                                            mainOnClick={() => {
                                                 const icon = selectedIcons[0];
                                                 let svg = svgContent[icon.id || ''];
 
@@ -486,6 +498,144 @@ const Icons: React.FC = () => {
                                                 document.body.removeChild(a);
                                                 URL.revokeObjectURL(url);
                                             }}
+                                            variant="secondary"
+                                            appearance="fill"
+                                            menuItems={[
+                                                {
+                                                    label: "PNG",
+                                                    icon: <Icon.download />,
+                                                    onClick: () => {
+                                                        const icon = selectedIcons[0];
+                                                        let svg = svgContent[icon.id || ''];
+
+                                                        if (icon.type === 'shape') {
+                                                            svg = svg.replace(/fill="currentColor"/g, `fill="${icon.style.color}"`);
+                                                        } else if (icon.type === 'stroke') {
+                                                            svg = svg
+                                                                .replace(/stroke="currentColor"/g, `stroke="${icon.style.color}"`)
+                                                                .replace(/stroke-width="currentWidth"/g, `stroke-width="${icon.style.strokeWidth}px"`);
+                                                        }
+
+                                                        // Create a temporary SVG element
+                                                        const svgElement = document.createElement('div');
+                                                        svgElement.innerHTML = svg;
+                                                        const svgNode = svgElement.querySelector('svg');
+
+                                                        if (!svgNode) return;
+
+                                                        // Get the base name for the file
+                                                        const fileNameParts = icon.name.split('.');
+                                                        fileNameParts.pop(); // Remove extension
+                                                        const baseName = fileNameParts.join('.');
+
+                                                        // Set width and height if not present
+                                                        if (!svgNode.getAttribute('width')) svgNode.setAttribute('width', '200');
+                                                        if (!svgNode.getAttribute('height')) svgNode.setAttribute('height', '200');
+
+                                                        // Create a canvas element
+                                                        const canvas = document.createElement('canvas');
+                                                        const ctx = canvas.getContext('2d');
+
+                                                        // Set canvas dimensions
+                                                        const width = parseInt(svgNode.getAttribute('width') || '200');
+                                                        const height = parseInt(svgNode.getAttribute('height') || '200');
+                                                        canvas.width = width;
+                                                        canvas.height = height;
+
+                                                        // Create an image from the SVG
+                                                        const img = new Image();
+                                                        const svgBlob = new Blob([svgElement.innerHTML], { type: 'image/svg+xml;charset=utf-8' });
+                                                        const url = URL.createObjectURL(svgBlob);
+
+                                                        img.onload = () => {
+                                                            if (ctx) {
+                                                                ctx.drawImage(img, 0, 0, width, height);
+                                                                URL.revokeObjectURL(url);
+
+                                                                // Convert canvas to PNG and download
+                                                                const pngUrl = canvas.toDataURL('image/png');
+                                                                const a = document.createElement('a');
+                                                                a.href = pngUrl;
+                                                                a.download = `${baseName}.png`;
+                                                                document.body.appendChild(a);
+                                                                a.click();
+                                                                document.body.removeChild(a);
+                                                            }
+                                                        };
+
+                                                        img.src = url;
+                                                    }
+                                                },
+                                                {
+                                                    label: "JPG",
+                                                    icon: <Icon.download />,
+                                                    onClick: () => {
+                                                        const icon = selectedIcons[0];
+                                                        let svg = svgContent[icon.id || ''];
+
+                                                        if (icon.type === 'shape') {
+                                                            svg = svg.replace(/fill="currentColor"/g, `fill="${icon.style.color}"`);
+                                                        } else if (icon.type === 'stroke') {
+                                                            svg = svg
+                                                                .replace(/stroke="currentColor"/g, `stroke="${icon.style.color}"`)
+                                                                .replace(/stroke-width="currentWidth"/g, `stroke-width="${icon.style.strokeWidth}px"`);
+                                                        }
+
+                                                        // Create a temporary SVG element
+                                                        const svgElement = document.createElement('div');
+                                                        svgElement.innerHTML = svg;
+                                                        const svgNode = svgElement.querySelector('svg');
+
+                                                        if (!svgNode) return;
+
+                                                        // Get the base name for the file
+                                                        const fileNameParts = icon.name.split('.');
+                                                        fileNameParts.pop(); // Remove extension
+                                                        const baseName = fileNameParts.join('.');
+
+                                                        // Set width and height if not present
+                                                        if (!svgNode.getAttribute('width')) svgNode.setAttribute('width', '200');
+                                                        if (!svgNode.getAttribute('height')) svgNode.setAttribute('height', '200');
+
+                                                        // Create a canvas element
+                                                        const canvas = document.createElement('canvas');
+                                                        const ctx = canvas.getContext('2d');
+
+                                                        // Set canvas dimensions
+                                                        const width = parseInt(svgNode.getAttribute('width') || '200');
+                                                        const height = parseInt(svgNode.getAttribute('height') || '200');
+                                                        canvas.width = width;
+                                                        canvas.height = height;
+
+                                                        // Create an image from the SVG
+                                                        const img = new Image();
+                                                        const svgBlob = new Blob([svgElement.innerHTML], { type: 'image/svg+xml;charset=utf-8' });
+                                                        const url = URL.createObjectURL(svgBlob);
+
+                                                        img.onload = () => {
+                                                            if (ctx) {
+                                                                // Fill with white background for JPG
+                                                                ctx.fillStyle = 'white';
+                                                                ctx.fillRect(0, 0, width, height);
+
+                                                                ctx.drawImage(img, 0, 0, width, height);
+                                                                URL.revokeObjectURL(url);
+
+                                                                // Convert canvas to JPG and download
+                                                                const jpgUrl = canvas.toDataURL('image/jpeg', 0.9);
+                                                                const a = document.createElement('a');
+                                                                a.href = jpgUrl;
+                                                                a.download = `${baseName}.jpg`;
+                                                                document.body.appendChild(a);
+                                                                a.click();
+                                                                document.body.removeChild(a);
+                                                            }
+                                                        };
+
+                                                        img.src = url;
+                                                    }
+                                                }
+                                            ]}
                                         />
                                         <OrButton
                                             layout='icon-text'

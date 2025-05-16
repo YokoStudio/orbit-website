@@ -345,8 +345,52 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                     className={`item ${isSelected ? 'selected' : ''}`}
                     key={icon.path}
                     onClick={() => toggleIconSelection(icon)}
-                    // تنظیم رنگ از طریق CSS
+                    draggable={true}
+                    onDragStart={(e) => {
+                      // Prepare the SVG content with customized color
+                      let customizedSvg = svgData
+                        .replace(/fill="currentColor"/g, `fill="${iconColor}"`)
+                        .replace(/stroke="currentColor"/g, `stroke="${iconColor}"`);
 
+                      // Create a blob from the SVG content
+                      const blob = new Blob([customizedSvg], { type: 'image/svg+xml' });
+
+                      // Create a URL for the blob
+                      const url = URL.createObjectURL(blob);
+
+                      // Set the drag data for different targets
+                      // For general web applications
+                      e.dataTransfer.setData('text/plain', customizedSvg);
+                      e.dataTransfer.setData('text/html', customizedSvg);
+
+                      // For browsers and file system
+                      e.dataTransfer.setData('text/uri-list', url);
+                      e.dataTransfer.setData('DownloadURL', `image/svg+xml:${icon.name}:${url}`);
+
+                      // For Figma and design applications
+                      // Create a File object from the blob
+                      const file = new File([blob], icon.name, { type: 'image/svg+xml' });
+
+                      // Try to use the items API for better compatibility with design apps
+                      try {
+                        e.dataTransfer.items.add(file);
+                      } catch (err) {
+                        console.log('DataTransfer items API not supported');
+                      }
+
+                      // Set the drag image
+                      const dragIcon = document.createElement('div');
+                      dragIcon.innerHTML = svgData;
+                      dragIcon.style.color = iconColor;
+                      document.body.appendChild(dragIcon);
+                      e.dataTransfer.setDragImage(dragIcon, 25, 25);
+                      setTimeout(() => {
+                        document.body.removeChild(dragIcon);
+                      }, 0);
+
+                      // Set effectAllowed to all to ensure compatibility
+                      e.dataTransfer.effectAllowed = 'all';
+                    }}
                   >
                     {svgData ? (
                       <div className="icon-wrapper">
@@ -385,6 +429,9 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                 text: downloadText,
                 onClick: downloadSelectedIconsAsZip
               } : undefined}
+              svgContent={selectedIcons.length === 1 ?
+                svgContent[selectedIcons[0].name].replace(/fill="currentColor"/g, `fill="${iconColor}"`)
+                : undefined}
             >
               {selectedIcons.length === 1 ? (
                 <div className='icon-preview'>
@@ -397,6 +444,42 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                       dangerouslySetInnerHTML={{ __html: svgContent[selectedIcons[0].name] }}
                       style={{
                         color: iconColor,
+                      }}
+                      draggable={true}
+                      onDragStart={(e) => {
+                        // Prepare the SVG content with customized color
+                        let customizedSvg = svgContent[selectedIcons[0].name]
+                          .replace(/fill="currentColor"/g, `fill="${iconColor}"`)
+                          .replace(/stroke="currentColor"/g, `stroke="${iconColor}"`);
+
+                        // Create a blob from the SVG content
+                        const blob = new Blob([customizedSvg], { type: 'image/svg+xml' });
+
+                        // Create a URL for the blob
+                        const url = URL.createObjectURL(blob);
+
+                        // Set the drag data for different targets
+                        // For general web applications
+                        e.dataTransfer.setData('text/plain', customizedSvg);
+                        e.dataTransfer.setData('text/html', customizedSvg);
+
+                        // For browsers and file system
+                        e.dataTransfer.setData('text/uri-list', url);
+                        e.dataTransfer.setData('DownloadURL', `image/svg+xml:${selectedIcons[0].name}:${url}`);
+
+                        // For Figma and design applications
+                        // Create a File object from the blob
+                        const file = new File([blob], selectedIcons[0].name, { type: 'image/svg+xml' });
+
+                        // Try to use the items API for better compatibility with design apps
+                        try {
+                          e.dataTransfer.items.add(file);
+                        } catch (err) {
+                          console.log('DataTransfer items API not supported');
+                        }
+
+                        // Set effectAllowed to all to ensure compatibility
+                        e.dataTransfer.effectAllowed = 'all';
                       }}
                     />
                     <div className='single-download-box'>
@@ -422,6 +505,45 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
                         className="sidepabel-svg-container"
                         style={{ color: iconColor }}
                         dangerouslySetInnerHTML={{ __html: svgContent[icon.name] }}
+                        draggable={true}
+                        onDragStart={(e) => {
+                          // Prepare the SVG content with customized color
+                          let customizedSvg = svgContent[icon.name]
+                            .replace(/fill="currentColor"/g, `fill="${iconColor}"`)
+                            .replace(/stroke="currentColor"/g, `stroke="${iconColor}"`);
+
+                          // Create a blob from the SVG content
+                          const blob = new Blob([customizedSvg], { type: 'image/svg+xml' });
+
+                          // Create a URL for the blob
+                          const url = URL.createObjectURL(blob);
+
+                          // Set the drag data for different targets
+                          // For general web applications
+                          e.dataTransfer.setData('text/plain', customizedSvg);
+                          e.dataTransfer.setData('text/html', customizedSvg);
+
+                          // For browsers and file system
+                          e.dataTransfer.setData('text/uri-list', url);
+                          e.dataTransfer.setData('DownloadURL', `image/svg+xml:${icon.name}:${url}`);
+
+                          // For Figma and design applications
+                          // Create a File object from the blob
+                          const file = new File([blob], icon.name, { type: 'image/svg+xml' });
+
+                          // Try to use the items API for better compatibility with design apps
+                          try {
+                            e.dataTransfer.items.add(file);
+                          } catch (err) {
+                            console.log('DataTransfer items API not supported');
+                          }
+
+                          // Set effectAllowed to all to ensure compatibility
+                          e.dataTransfer.effectAllowed = 'all';
+
+                          // Stop propagation to prevent the click event from firing
+                          e.stopPropagation();
+                        }}
                       />
                       <span className='b2'>{formatIconName(icon.name)}</span>
                       <OrButton

@@ -110,7 +110,12 @@
     background-color: rgba(0, 0, 0, 0.45);
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     opacity: 0;
-            visibility: hidden;
+    visibility: hidden;
+
+@media screen and (max-width: 600px){
+            opacity: 1;
+            visibility: visible;
+}
 
     @media screen and (max-width: 1200px){
 

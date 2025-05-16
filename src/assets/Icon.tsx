@@ -8,6 +8,7 @@ import { ReactComponent as CopyIcon} from './icons/copy.svg';
 import { ReactComponent as TrashIcon} from './icons/trash-2.svg';
 import { ReactComponent as EternalLinkIcon} from './icons/external-link.svg';
 import { ReactComponent as PlusIcon} from './icons/plus.svg';
+import { ReactComponent as ChevronDownIcon} from './icons/chevron-down.svg';
 
 
 
@@ -21,6 +22,7 @@ const Icon = {
     trash: TrashIcon,
     externalLink: EternalLinkIcon,
     plus: PlusIcon,
+    chevronDown: ChevronDownIcon,
 };
 
 export default Icon;

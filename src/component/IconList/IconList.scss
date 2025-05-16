@@ -149,7 +149,15 @@
     border-radius: $radius3;
     cursor: pointer;
     gap: 8px;
-    transition: background-color 0.3s, width ease-in-out 0.3;
+    transition: background-color 0.3s, width ease-in-out 0.3s, transform 0.2s;
+
+    &[draggable=true] {
+        cursor: pointer;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
 
     @media screen and (max-width: 480px){
         padding: $space1;
@@ -208,6 +216,21 @@
 /* Side panel styles moved to SidePanel.scss */
 /* Side panel related styles moved to SidePanel.scss */
 /* Side panel related styles moved to SidePanel.scss */
+
+/* Draggable SVG styles */
+.svg-preview[draggable=true],
+.sidepabel-svg-container[draggable=true] {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+  }
+}
 
 .not-found
 {

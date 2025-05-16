@@ -9,26 +9,24 @@ import Modal from '../OrModal/OrModal';
 interface OrIconHeaderProps {
     children?: ReactNode;
     onSearch: (searchTerm: string) => void;
-    toggleFilter: () => void; 
+    toggleFilter: () => void;
     isFilterVisible: boolean;
     switchModal?: () => void;
     isModalrVisible: boolean
     filterOpen: boolean;
 }
 
-const OrIconHeader: React.FC<OrIconHeaderProps> = ({ 
-    children, 
+const OrIconHeader: React.FC<OrIconHeaderProps> = ({
+    children,
     onSearch,
-    toggleFilter, 
-    isFilterVisible, 
+    toggleFilter,
+    isFilterVisible,
     switchModal,
     isModalrVisible,
     filterOpen
 
-}) => { 
+}) => {
     const [iconCount, setIconCount] = useState<number>(123);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // State for modal
-    const [isFilterOpen, setIsFilterOpen] = useState<boolean>(true); // State for filter
 
     const fetchIconCount = async () => {
         try {
@@ -46,106 +44,7 @@ const OrIconHeader: React.FC<OrIconHeaderProps> = ({
         }
     };
 
-    const initialFilter = () => {
 
-        switch (filterOpen) {
-            case true:
-                return (
-                    <div>   
-                    <div className="header-filter-action">
-                    <OrButton 
-                    layout="icon-text" 
-                    variant='secondary' 
-                    appearance="outline" 
-                    size="lg" 
-                    text="Filter"
-                    icon={<Icon.cross/>}
-                    onClick={toggleFilter} // Open modal on click
-                    />
-                    <OrButton 
-                        layout="icon-text" 
-                        variant='primary' 
-                        appearance="fill" 
-                        size="lg" 
-                        text="Download all"
-                        icon={<Icon.download/>}
-                        onClick={switchModal} // Open modal on click
-                    />
-                    </div>
-
-                    <div className="mobile-actions">
-                    <OrButton 
-                        layout="icon-text" 
-                        variant='secondary' 
-                        appearance="outline" 
-                        size="md" 
-                        text="Filter"
-                        icon={<Icon.cross/>}
-                        onClick={toggleFilter} // Open modal on click
-                    />
-                    <OrButton 
-                        layout="icon" 
-                        variant='secondary' 
-                        appearance="outline" 
-                        size="md" 
-                        icon={<Icon.download/>}
-                        onClick={switchModal} // Open modal on click
-                    />
-                    </div>
-
-                    </div>
-                );
-            case false:
-                return (
-                    <div>   
-                        <div className="header-filter-action">
-                        <OrButton 
-                        layout="icon-text" 
-                        variant='secondary' 
-                        appearance="fill" 
-                        size="lg" 
-                        text="Filter"
-                        icon={<Icon.tune/>}
-                        onClick={toggleFilter} // Open modal on click
-                         />
-                         <OrButton 
-                        layout="icon-text" 
-                        variant='primary' 
-                        appearance="fill" 
-                        size="lg" 
-                        text="Download all"
-                        icon={<Icon.download/>}
-                        onClick={switchModal} // Open modal on click
-                    />
-                        </div>
-                        
-                        <div className="mobile-actions">
-                        <OrButton 
-                        layout="icon-text" 
-                        variant='secondary' 
-                        appearance="fill" 
-                        size="md" 
-                        text="Filter"
-                        icon={<Icon.tune/>}
-                        onClick={toggleFilter} // Open modal on click
-                         />
-                         <OrButton 
-                        layout="icon" 
-                        variant='primary' 
-                        appearance="fill" 
-                        size="md" 
-                        icon={<Icon.download/>}
-                        onClick={switchModal} // Open modal on click
-                    />
-                        </div>
-                        
-                    </div>
-                );
-            default:
-                return null;
-        }
-
-    };
 
     useEffect(() => {
         fetchIconCount();
@@ -155,12 +54,102 @@ const OrIconHeader: React.FC<OrIconHeaderProps> = ({
         onSearch(event.target.value);
     };
 
-    const toggleModal = () => {
-        setIsModalOpen(!isModalOpen); // Toggle modal open/close
 
-    };
-    
+
     const iconCountNumber = `Search on ${iconCount} icons ...`;
+
+    // Function to render only the download button
+    const renderDownloadButton = () => {
+        return (
+            <OrButton
+                layout="icon-text"
+                variant='primary'
+                appearance="fill"
+                size="lg"
+                text="Download all"
+                icon={<Icon.download/>}
+                onClick={switchModal}
+            />
+        );
+    };
+
+    // Function to render only the filter button
+    const renderFilterButton = () => {
+        if (filterOpen) {
+            return (
+                <OrButton
+                    layout="icon-text"
+                    variant='secondary'
+                    appearance="outline"
+                    size="sm"
+                    text="Filter"
+                    icon={<Icon.cross/>}
+                    onClick={toggleFilter}
+                />
+            );
+        } else {
+            return (
+                <OrButton
+                    layout="icon-text"
+                    variant='secondary'
+                    appearance="fill"
+                    size="sm"
+                    text="Filter"
+                    icon={<Icon.tune/>}
+                    onClick={toggleFilter}
+                />
+            );
+        }
+    };
+
+    // Function to render mobile buttons
+    const renderMobileButtons = () => {
+        if (filterOpen) {
+            return (
+                <div className="mobile-actions">
+                    <OrButton
+                        layout="icon-text"
+                        variant='secondary'
+                        appearance="outline"
+                        size="md"
+                        text="Filter"
+                        icon={<Icon.cross/>}
+                        onClick={toggleFilter}
+                    />
+                    <OrButton
+                        layout="icon"
+                        variant='secondary'
+                        appearance="outline"
+                        size="md"
+                        icon={<Icon.download/>}
+                        onClick={switchModal}
+                    />
+                </div>
+            );
+        } else {
+            return (
+                <div className="mobile-actions">
+                    <OrButton
+                        layout="icon-text"
+                        variant='secondary'
+                        appearance="fill"
+                        size="md"
+                        text="Filter"
+                        icon={<Icon.tune/>}
+                        onClick={toggleFilter}
+                    />
+                    <OrButton
+                        layout="icon"
+                        variant='primary'
+                        appearance="fill"
+                        size="md"
+                        icon={<Icon.download/>}
+                        onClick={switchModal}
+                    />
+                </div>
+            );
+        }
+    };
 
     return (
         <div className="main-header">
@@ -173,30 +162,35 @@ const OrIconHeader: React.FC<OrIconHeaderProps> = ({
                     </a>
                     <span className="c1">beta</span>
                 </div>
-                
+
                 <div className="search-div">
                     <OrSearchInput onChange={handleSearchChange} placeholder={iconCountNumber} size="lg" />
                 </div>
                 {children && <div className="children-container">{children}</div>}
                 <div className="header-action">
-                    
-
-                    {initialFilter()}
-
+                    <div className="header-filter-action">
+                        {renderDownloadButton()}
+                    </div>
+                    <div className="header-mobile-actions">
+                        {renderMobileButtons()}
+                    </div>
                 </div>
-                
             </div>
+
             <div className="search-div-mobile">
                 <OrSearchInput onChange={handleSearchChange} placeholder={iconCountNumber} size="sm" />
-
-                {/* {initialFilter()}
-                <OrButton onClick={switchModal} layout="icon" variant='secondary' appearance="outline" size="md" icon={<Icon.download/>} /> */}
             </div>
 
-            {/* Modal component */}
-            
-        </div>
+            {/* Sub-header with filter button */}
+            <div className="sub-header">
+                <div className="sub-header-content">
+                    <div className="filter-button-container">
+                        {renderFilterButton()}
+                    </div>
+                </div>
+            </div>
 
+        </div>
     );
 };
 
