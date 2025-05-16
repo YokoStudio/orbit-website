@@ -5,7 +5,7 @@ import StrokeIcon from '../../component/IconList/StrokeIcon';
 import OrIconHeader from '../../component/OrIconHeader/OrIconHeader';
 import OrFilter from '../../component/OrFilter/OrFilter';
 import '../../base/style.scss';
-import Modal from '../../component/OrDownloadModal/OrModal';
+import Modal from '../../component/OrModal/OrModal';
 import OrButton from '../../component/OrButton/OrButton';
 import figmaIcon from '../../assets/modalIcon/Figma.png'
 import Icon from '../../assets/Icon';

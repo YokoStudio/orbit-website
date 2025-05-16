@@ -4,7 +4,7 @@ import './OrIconHeader.scss';
 import OrButton from "../OrButton/OrButton";
 import OrSearchInput from "../OrSearchInput/OrSearchInput";
 import Icon from '../../assets/Icon';
-import Modal from '../OrDownloadModal/OrModal';
+import Modal from '../OrModal/OrModal';
 
 interface OrIconHeaderProps {
     children?: ReactNode;

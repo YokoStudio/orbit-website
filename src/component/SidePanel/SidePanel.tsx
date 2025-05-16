@@ -34,22 +34,20 @@ const SidePanel: React.FC<SidePanelProps> = ({
           onClick={onClose}
         />
       </div>
-      
+
       <div className="side-panel-body">
         {children}
       </div>
-      
-      {downloadButton && (
-        <div className="dowload-button-box">
+
+      {downloadButton && title && title.includes('Selected') && (
+        <div className={`dowload-button-box ${title.includes('(1)') ? 'hidden' : ''}`}>
           <OrButton
             layout='icon'
             variant='primary'
             onClick={downloadButton.onClick}
             disabled={downloadButton.disabled}
-            text= {downloadButton.text}
+            text={downloadButton.text}
           />
-           
-          
         </div>
       )}
     </div>
