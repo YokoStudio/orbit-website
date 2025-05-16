@@ -25,10 +25,10 @@ const SidePanel: React.FC<SidePanelProps> = ({
   return (
     <div className={`side-panel ${isOpen ? 'visible' : 'hidden'}`}>
       <div className='filter-header'>
-        <h3 className='t2-strong'>{title || 'Selected Items'}</h3>
+        <h2 className='t2-strong'>{title || 'Selected Items'}</h2>
         <OrButton
           layout='icon'
-          appearance='ghost'
+          appearance='outline'
           variant='secondary'
           icon={<Icon.cross />}
           onClick={onClose}

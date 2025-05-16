@@ -286,6 +286,21 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
         <p>{error}</p>
       ) : (
         <div className="icon-list-main">
+          <div className='announcement-wrapper'>
+                    <a className='announcement '>
+                        <div>
+                              <b>Logo</b>
+                        </div>
+                        <div>
+                            <div className='b2-strong'>
+                                Yoko Space Design System v1.2
+                            </div>
+                            <div className='b2'>
+                                This is test text
+                            </div>
+                        </div>
+                    </a>
+                </div>
           <div className="icon-list">
           {finalIcons.length > 0 ? (
             finalIcons.map((icon) => (

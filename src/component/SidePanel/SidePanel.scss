@@ -114,14 +114,12 @@
     flex-direction: column;
     height: 100vh;
     overflow-x: hidden;
-    min-width: 320px;
-    width: 320px;
+    width: 100%;
 }
 
 .dowload-button-box{
     border-top: 1px solid $neutral-border-7-default;
-    width: 320px;
-    min-width: 320px;
+    width: 100%;
     padding: 24px;
     box-sizing: border-box;
 
@@ -134,10 +132,9 @@
     display: flex;
     flex-direction: column;
     padding: $space6;
-    overflow: hidden;
     gap: 16px;
-    min-width: 320px;
-    width: 320px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .svg-code-box{
@@ -175,6 +172,7 @@
     flex-direction: column;
     height: 100vh;
     overflow: auto;
+    width: 100%;
 }
 
 .svg-preview{
