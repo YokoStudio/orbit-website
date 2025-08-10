@@ -266,15 +266,21 @@
     display: flex;
     gap: 16px;
     align-items: center;
+    text-decoration: none;
     cursor: pointer;
-    transition: padding 0.5s ease, gap 0.5s ease, border-radius 0.5s ease;
+    transition: padding 0.5s ease, gap 0.5s ease, border-radius 0.5s ease, background-color 0.5s ease;
 
     &:hover{
-        background-color: $neutral-bg-10-hover;
+        background-color: $brand-bg-1-default;
         padding: 40px;
         gap: 40px;
         border-radius: 99px;
-        transition: padding 0.5s ease, gap 0.5s ease, border-radius 0.5s ease;
+        transition: padding 0.5s ease, gap 0.5s ease, border-radius 0.5s ease, background-color 0.5s ease;
 
     }
+}
+
+.space-logo{
+    width: 64px;
+    // height: 24px;
 }

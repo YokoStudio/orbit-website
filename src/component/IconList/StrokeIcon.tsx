@@ -8,7 +8,9 @@ import Fuse from 'fuse.js';
 import JSZip from 'jszip';
 import Icon from '../../assets/Icon';
 import SidePanel from '../SidePanel';
-import ill from '../../assets/404.png'
+import ill from '../../assets/404.png';
+import spaceLogo from '../../assets/space-logo.png'
+
 
 interface Icon {
   name: string;
@@ -287,16 +289,16 @@ const StrokeIcon: React.FC<StrokeIconProps> = ({ searchTerm, selectedFolders, st
       ) : (
         <div className="icon-list-main">
           <div className='announcement-wrapper'>
-                    <a className='announcement '>
+                    <a className='announcement' href='https://www.figma.com/@yokostudio' target="_blank">
                         <div>
-                              <b>Logo</b>
+                              <img className='space-logo' src={spaceLogo}/>
                         </div>
                         <div>
                             <div className='b2-strong'>
                                 Yoko Space Design System v1.2
                             </div>
                             <div className='b2'>
-                                This is test text
+                                Build with Space — where design meets accessibility. Enabling organizations to Creativity.
                             </div>
                         </div>
                     </a>

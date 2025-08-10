@@ -9,7 +9,8 @@ import JSZip from 'jszip'; // import JSZip
 import OrButton from '../OrButton/OrButton';
 import Icon from '../../assets/Icon';
 import SidePanel from '../SidePanel';
-import ill from '../../assets/404.png'
+import ill from '../../assets/404.png';
+import spaceLogo from '../../assets/space-logo.png';
 
 interface Icon {
   name: string;
@@ -319,16 +320,16 @@ const ShapeIcon: React.FC<ShapeIconProps> = ({
 
 
                   <div className='announcement-wrapper'>
-                    <a className='announcement '>
+                    <a className='announcement' href='https://www.figma.com/@yokostudio' target="_blank">
                         <div>
-                              <b>Logo</b>
+                              <img className='space-logo' src={spaceLogo}/>
                         </div>
                         <div>
                             <div className='b2-strong'>
                                 Yoko Space Design System v1.2
                             </div>
                             <div className='b2'>
-                                This is test text
+                                Build with Space — where design meets accessibility. Enabling organizations to Creativity.
                             </div>
                         </div>
                     </a>
