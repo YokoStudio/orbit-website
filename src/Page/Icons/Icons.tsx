@@ -47,8 +47,7 @@ const Icons: React.FC = () => {
     const [svgContent, setSvgContent] = useState<{ [key: string]: string }>({});
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // State for modal
-
-
+   
     // Functions for handling selected icons
     const addIconToSelection = (icon: Icon, iconSvgContent: string) => {
         // Generate a unique ID for the icon based on name, type, and styling
@@ -251,6 +250,85 @@ const Icons: React.FC = () => {
                 <div className='download-box'>
                         <div className='box-wrapper'>
                             <div className='modal-item-icon'>
+                            <svg width="1667" height="2500" viewBox="0 0 1667 2500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_103_182)">
+                                <path d="M416.834 2500C646.834 2500 833.5 2313.33 833.5 2083.33V1666.67H416.834C186.834 1666.67 0.166992 1853.33 0.166992 2083.33C0.166992 2313.33 186.834 2500 416.834 2500Z" fill="#0ACF83"/>
+                                <path d="M0.166992 1250C0.166992 1020 186.834 833.333 416.834 833.333H833.5V1666.67H416.834C186.834 1666.67 0.166992 1480 0.166992 1250Z" fill="#A259FF"/>
+                                <path d="M0.166992 416.667C0.166992 186.667 186.834 0 416.834 0H833.5V833.333H416.834C186.834 833.333 0.166992 646.667 0.166992 416.667Z" fill="#F24E1E"/>
+                                <path d="M833.5 0H1250.17C1480.17 0 1666.83 186.667 1666.83 416.667C1666.83 646.667 1480.17 833.333 1250.17 833.333H833.5V0Z" fill="#FF7262"/>
+                                <path d="M1666.83 1250C1666.83 1480 1480.17 1666.67 1250.17 1666.67C1020.17 1666.67 833.5 1480 833.5 1250C833.5 1020 1020.17 833.333 1250.17 833.333C1480.17 833.333 1666.83 1020 1666.83 1250Z" fill="#1ABCFE"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_103_182">
+                                <rect width="1667" height="2500" fill="white"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+
+                            </div>
+                                <div className='title-wrapper'>
+                                    <span className='b1-strong'>
+                                        Figma (Comunity)
+                                    </span>
+                                    <span className='b1'>
+                                       Use all icon in fimga 
+                                    </span>
+                                </div>
+                        </div>
+                    
+                        <OrButton
+                            appearance='outline'
+                            variant='secondary'
+                            layout='icon-text'
+                            icon={<Icon.externalLink/>}
+                            text='Comunity'
+                            id='Comunity'
+                            onClick={() => window.open('https://www.figma.com/community/file/1572538024465217723', '_blank', 'noopener,noreferrer')} 
+                        />
+                        
+                    </div>
+                    {/* <div className='download-box'>
+                        <div className='box-wrapper'>
+                            <div className='modal-item-icon'>
+                            <svg width="1667" height="2500" viewBox="0 0 1667 2500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_103_182)">
+                                <path d="M416.834 2500C646.834 2500 833.5 2313.33 833.5 2083.33V1666.67H416.834C186.834 1666.67 0.166992 1853.33 0.166992 2083.33C0.166992 2313.33 186.834 2500 416.834 2500Z" fill="#0ACF83"/>
+                                <path d="M0.166992 1250C0.166992 1020 186.834 833.333 416.834 833.333H833.5V1666.67H416.834C186.834 1666.67 0.166992 1480 0.166992 1250Z" fill="#A259FF"/>
+                                <path d="M0.166992 416.667C0.166992 186.667 186.834 0 416.834 0H833.5V833.333H416.834C186.834 833.333 0.166992 646.667 0.166992 416.667Z" fill="#F24E1E"/>
+                                <path d="M833.5 0H1250.17C1480.17 0 1666.83 186.667 1666.83 416.667C1666.83 646.667 1480.17 833.333 1250.17 833.333H833.5V0Z" fill="#FF7262"/>
+                                <path d="M1666.83 1250C1666.83 1480 1480.17 1666.67 1250.17 1666.67C1020.17 1666.67 833.5 1480 833.5 1250C833.5 1020 1020.17 833.333 1250.17 833.333C1480.17 833.333 1666.83 1020 1666.83 1250Z" fill="#1ABCFE"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_103_182">
+                                <rect width="1667" height="2500" fill="white"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+
+                            </div>
+                                <div className='title-wrapper'>
+                                    <span className='b1-strong'>
+                                        Figma (file)
+                                    </span>
+                                    <span className='b1'>
+                                        Download Figma file .fig
+                                    </span>
+                                </div>
+                        </div>
+                        <a href='https://orbit-website.s3.ir-thr-at1.arvanstorage.ir/Yoko%20Orbit%20Icon%20Pack%20v1.fig?versionId=' target='_blank' rel='noopen'>
+                        <OrButton
+                            appearance='outline'
+                            variant='secondary'
+                            layout='icon-text'
+                            icon={<Icon.download/>}
+                            text='Download'
+                            onClick={SwitchModal}
+                        />
+                        </a>
+                    </div> */}
+                     <div className='download-box'>
+                        <div className='box-wrapper'>
+                            <div className='modal-item-icon'>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 12C3.72386 12 3.5 12.2239 3.5 12.5C3.5 12.7761 3.72386 13 4 13H5.19098L3.55279 16.2764C3.47529 16.4314 3.48357 16.6155 3.57468 16.7629C3.66578 16.9103 3.82671 17 4 17H6C6.27614 17 6.5 16.7761 6.5 16.5C6.5 16.2239 6.27614 16 6 16H4.80902L6.44721 12.7236C6.52471 12.5686 6.51643 12.3845 6.42533 12.2371C6.33422 12.0897 6.17329 12 6 12H4Z" fill="black"/>
                                 <path d="M8.5 12.5C8.5 12.2239 8.27614 12 8 12C7.72386 12 7.5 12.2239 7.5 12.5V16.5C7.5 16.7761 7.72386 17 8 17C8.27614 17 8.5 16.7761 8.5 16.5V12.5Z" fill="black"/>
@@ -267,16 +345,19 @@ const Icons: React.FC = () => {
                                     </span>
                                 </div>
                         </div>
-                        <a href='https://s3.ir-thr-at1.arvanstorage.ir/orbit-beta/Yoko%20Orbit%20Icon%20pack%20v1.zip' target='_blank' rel='noopen'>
+                       
                         <OrButton
                             appearance='outline'
                             variant='secondary'
                             layout='icon-text'
                             icon={<Icon.download/>}
+                            id='download-all-svg'
                             text='Download'
-                            onClick={SwitchModal}
+                            onClick={() => window.open('https://orbit-website.s3.ir-thr-at1.arvanstorage.ir/Yoko%20Orbit%20Icon%20pack%20v1.zip?versionId=', '_blank', 'noopener,noreferrer')} 
+                           
                         />
-                        </a>
+                        
+                    
                     </div>
 
                     {/* <div className='download-box'>
@@ -500,6 +581,7 @@ const Icons: React.FC = () => {
                                             }}
                                             variant="secondary"
                                             appearance="fill"
+                                            id= {selectedIcons[0].name.replace('.svg', '').replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') + ` Donwload-SVG`}
                                             menuItems={[
                                                 {
                                                     label: "PNG",
@@ -569,6 +651,7 @@ const Icons: React.FC = () => {
                                                 {
                                                     label: "JPG",
                                                     icon: <Icon.download />,
+
                                                     onClick: () => {
                                                         const icon = selectedIcons[0];
                                                         let svg = svgContent[icon.id || ''];
@@ -637,12 +720,15 @@ const Icons: React.FC = () => {
                                                 }
                                             ]}
                                         />
+                                        
                                         <OrButton
                                             layout='icon-text'
                                             appearance='outline'
                                             variant='secondary'
                                             icon={<Icon.copy />}
                                             text='Copy SVG'
+                                            id= {selectedIcons[0].name.replace('.svg', '').replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') + ` copy-svg`}
+
                                             onClick={() => {
                                                 const icon = selectedIcons[0];
                                                 let svg = svgContent[icon.id || ''];

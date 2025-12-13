@@ -19,6 +19,7 @@ interface OrSplitButtonProps {
   appearance?: 'fill' | 'outline' | 'ghost';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   disabled?: boolean;
+  id?: string;
 }
 
 const OrSplitButton: React.FC<OrSplitButtonProps> = ({
@@ -30,6 +31,7 @@ const OrSplitButton: React.FC<OrSplitButtonProps> = ({
   appearance = 'fill',
   size = 'md',
   disabled = false,
+  id,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
@@ -166,6 +168,7 @@ const OrSplitButton: React.FC<OrSplitButtonProps> = ({
       portalElement
     );
   };
+ const splitButtonId = `${id}`;
 
   return (
     <>
@@ -181,6 +184,7 @@ const OrSplitButton: React.FC<OrSplitButtonProps> = ({
             disabled={disabled}
             layout="icon-text"
             className="main-button"
+            id = {splitButtonId}
           />
           <button
             className={`dropdown-toggle ${variant} ${appearance} ${size}`}

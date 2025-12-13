@@ -13,6 +13,7 @@ interface OrButtonProps {
     className?: string; 
     layout?: 'icon' | 'text' | 'icon-text';
     fillBlock?: boolean;
+    id?: string;
 
 }
 
@@ -27,19 +28,21 @@ const OrButton: React.FC<OrButtonProps> = ({
         className,
         layout = 'text',
         fillBlock=false,
+        id,
 
 
     }) => { 
         
     const buttonClassName = `button ${layout} ${variant} ${appearance} ${size} ${className} ${fillBlock? 'fill-block' : ''} ${size === 'xs' ? 'c1' : 'b1'}`;
-
+    const buttonId = `${id}`;
     return (
         <button 
             className={buttonClassName} 
             onClick={onClick} 
             disabled={disabled}
+            id = {buttonId}
             >
-                <div className="div-button">
+                <div className="div-button" >
                 {icon  && <span className='icon'>{icon}</span>}
                 {text}
                 </div>

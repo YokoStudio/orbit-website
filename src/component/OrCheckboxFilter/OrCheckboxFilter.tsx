@@ -130,7 +130,7 @@ const OrCheckboxFilter: React.FC<OrCheckboxFilterProps> = ({
                             </svg>
                             
                             <div className='rel-box'><img className='folder-icon' src={catIcon} alt={folder} /></div>
-                            <label className='b1 checkmark' htmlFor={folder}>{folder}</label>
+                            <label id={`category` + `+` + folder} className='b1 checkmark' htmlFor={folder}>{folder}</label>
                             <div className='rel-box'><label className='icon-count'>{iconCounts[folder] || 0}</label></div>
                         </label>
                     </div>

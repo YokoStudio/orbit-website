@@ -4,6 +4,7 @@ form{
     flex-grow: 1;
     display: flex;
     
+    
 }
 .search-input{
     background-color: $neutral-bg-1-default;
@@ -82,7 +83,7 @@ form{
     border: 1px solid #ccc; /* مرز منو */
     border-radius: 8px; /* گوشه‌های گرد */
  
-    z-index: 1000; /* قرار دادن در بالای سایر عناصر */
+    z-index: 99; /* قرار دادن در بالای سایر عناصر */
     max-height: 200px; /* حداکثر ارتفاع */
     overflow-y: auto; /* قابلیت اسکرول برای محتوا */
     margin-top: 5px; /* فاصله از ورودی */
