@@ -79,6 +79,7 @@ import Home from './Page/Home/Home';
 import Icons from './Page/Icons/Icons'; // فراخوانی کامپوننت جدید Icons
 import Changelog from './Page/Changelog/Changelog';
 import About from './Page/About/About';
+import Contribute from './Page/Contribute/Contribute';
 
 import OrMenu from './component/OrMenu/OrMenu';
 import Icon from './assets/Icon';
@@ -121,6 +122,9 @@ const App: React.FC = () => {
 
         case 'Changelog':
             return <Changelog />;
+        
+        case 'Contribute':
+            return <Contribute/>;
       
         case 'About':
             return <About />;
@@ -146,6 +150,7 @@ const App: React.FC = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/icons" element={<Icons />} />
           <Route path="/changelog" element={<Changelog />} />
+          <Route path="/contribute" element={<Contribute />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </div>
