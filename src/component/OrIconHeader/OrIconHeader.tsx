@@ -12,7 +12,7 @@ interface OrIconHeaderProps {
     toggleFilter: () => void;
     isFilterVisible: boolean;
     switchModal?: () => void;
-    isModalrVisible: boolean
+    isModalrVisible: boolean;
     filterOpen: boolean;
 }
 
@@ -24,38 +24,60 @@ const OrIconHeader: React.FC<OrIconHeaderProps> = ({
     switchModal,
     isModalrVisible,
     filterOpen
-
 }) => {
-    const [iconCount, setIconCount] = useState<number>(123);
+    const [iconCount, setIconCount] = useState<number>(0);
 
     const fetchIconCount = async () => {
+        let totalSvgs = 0;
+        let isTruncated = true;
+        let continuationToken: string | undefined = undefined;
+
         try {
-            const response = await axios.get('https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir?list-type=2');
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(response.data, "application/xml");
-            const keys = xmlDoc.getElementsByTagName("Key");
-            const svgIcons = Array.from(keys).filter((key: Element) => {
-                const filePath = key.textContent || '';
-                return filePath.endsWith('.svg'); // Only SVG files
-            });
-            setIconCount(svgIcons.length);
+            while (isTruncated) {
+                // ساخت URL با استفاده از continuation-token در صورت وجود
+                let url = 'https://orbit-icon.s3.ir-thr-at1.arvanstorage.ir?list-type=2';
+                if (continuationToken) {
+                    url += `&continuation-token=${encodeURIComponent(continuationToken)}`;
+                }
+
+                const response = await axios.get(url);
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(response.data, "application/xml");
+
+                // شمارش فایل‌های svg در صفحه فعلی
+                const keys = xmlDoc.getElementsByTagName("Key");
+                for (let i = 0; i < keys.length; i++) {
+                    if (keys[i].textContent?.endsWith('.svg')) {
+                        totalSvgs++;
+                    }
+                }
+
+                // بررسی اینکه آیا هنوز فایل دیگری باقی مانده است یا خیر
+                const truncatedNode = xmlDoc.getElementsByTagName("IsTruncated")[0];
+                isTruncated = truncatedNode?.textContent === "true";
+
+                // دریافت توکن صفحه بعدی
+                if (isTruncated) {
+                    continuationToken = xmlDoc.getElementsByTagName("NextContinuationToken")[0]?.textContent || undefined;
+                }
+            }
+            
+            setIconCount(totalSvgs);
         } catch (error) {
             console.error('Error fetching icon count:', error);
         }
     };
 
-
-
     useEffect(() => {
         fetchIconCount();
     }, []);
 
+    // این تابع حالا به درستی بسته شده است
     const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
         onSearch(event.target.value);
     };
 
-
-
+    // این متغیر باید در سطح خود کامپوننت باشد تا به JSX پاس داده شود
     const iconCountNumber = `Search on ${iconCount} icons ...`;
 
     // Function to render only the download button
